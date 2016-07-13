@@ -1,0 +1,15 @@
+@import "../valo/valo";
+
+.butterflyeffect {
+    
+    @include valo;	
+    
+    .v-slot .v-slot-menuleft {
+    	background-color: #E2E2E2;
+    }
+    
+    .v-caption v-caption-menuleft {
+    	background-color: #E2E2E2;
+    }
+    
+}
