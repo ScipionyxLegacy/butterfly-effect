@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
 
+	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>com.scipionyx</groupId>
@@ -22,38 +22,6 @@
 			<artifactId>vaadin-spring-boot-starter</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-
-		<dependency>
-			<groupId>com.scipionyx</groupId>
-			<artifactId>butterfly-effect-plugin</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.scipionyx</groupId>
-			<artifactId>butterfly-effect-frontend-configuration</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.scipionyx</groupId>
-			<artifactId>butterfly-effect-frontend-model</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.scipionyx</groupId>
-			<artifactId>butterfly-effect-frontend-cluster</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.scipionyx</groupId>
-			<artifactId>butterfly-effect-frontend-security</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
-		</dependency>
-
-		<!-- Vaadin Stuff -->
 
 	</dependencies>
 
@@ -87,7 +55,5 @@
 			<url>http://maven.vaadin.com/vaadin-addons</url>
 		</repository>
 	</repositories>
-
-
 
 </project>

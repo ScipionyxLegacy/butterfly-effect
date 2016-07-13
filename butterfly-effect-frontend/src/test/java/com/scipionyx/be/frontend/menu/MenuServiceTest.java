@@ -4,8 +4,6 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import com.scipionyx.butterflyeffect.frontend.services.MenuService;
-
 /**
  * 
  * @author Renato Mendes
@@ -20,8 +18,8 @@ public class MenuServiceTest {
 	@Test
 	public void test() throws IOException {
 
-		MenuService menuService = new MenuService();
-		menuService.init();
+		// MenuService menuService = new MenuService();
+		// menuService.init();
 
 		/*
 		 * Menu menu1 = new Menu(); menu1.setId("menu1");
