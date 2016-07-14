@@ -1,0 +1,13 @@
+[	
+
+	{
+		"id":"root",			
+		"label":"Home",
+		"view":"",
+		"parent":null,
+		"separator": false,
+		"visible": true
+	}
+	
+
+]
