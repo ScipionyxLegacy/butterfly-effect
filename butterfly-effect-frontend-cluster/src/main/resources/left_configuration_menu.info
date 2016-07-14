@@ -1,0 +1,22 @@
+[
+	
+	{
+		"id":"cluster_root",	
+		"label":"Cluster",
+		"view": null,
+		"parent": null,
+		"separator": false,
+		"visible": true
+	},
+
+
+	{
+		"id":"cluster_nodes",	
+		"label":"Nodes",
+		"view":"clusterNodesConfigurationView",
+		"parent": "cluster_root",
+		"separator": false,
+		"visible": true
+	}
+	
+]

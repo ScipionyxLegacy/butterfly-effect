@@ -1,0 +1,31 @@
+[
+	
+	{
+		"id":"datamodel_root",	
+		"label":"Data Model",
+		"view": null,
+		"parent": null,
+		"separator": false,
+		"visible": true
+	},
+
+
+	{
+		"id":"datamodel_configuration",	
+		"label":"Data Model Configuration",
+		"view":"dataModelConfigurationView",
+		"parent": "datamodel_root",
+		"separator": false,
+		"visible": true
+	},
+	
+	{
+		"id":"datasource_configuration",	
+		"label":"Data Source Configuration",
+		"view":"dataSourceConfigurationView",
+		"parent": "datamodel_root",
+		"separator": true,
+		"visible": true
+	}
+	
+]
