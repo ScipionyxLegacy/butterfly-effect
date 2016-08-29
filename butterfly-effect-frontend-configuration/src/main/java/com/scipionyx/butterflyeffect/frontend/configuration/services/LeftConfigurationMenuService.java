@@ -40,6 +40,8 @@ public class LeftConfigurationMenuService extends AbstractConfigurationMenuServi
 			LeftConfigurationMenuItem[] menuGroups = objectMapper.readValue(inputStream,
 					LeftConfigurationMenuItem[].class);
 
+			// Add Navigation
+
 			Collections.addAll(getConfigurations(), menuGroups);
 		}
 

@@ -3,8 +3,6 @@ package com.scipionyx.butterflyeffect.frontend.ui.panel.left;
 import com.scipionyx.butterflyeffect.frontend.model.Title;
 import com.scipionyx.butterflyeffect.frontend.ui.view.configuration.ViewConfigurationInformation;
 import com.vaadin.server.FontAwesome;
-import com.vaadin.shared.ui.MarginInfo;
-import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -45,16 +43,16 @@ class LeftPanelTop extends VerticalLayout {
 
 		this.information = information;
 
-		this.setMargin(new MarginInfo(true, false, false, true));
+		// this.setMargin(new MarginInfo(true, false, false, true));
 
 		// Title Icon
 		wrapper = new HorizontalLayout();
 		wrapper.setSpacing(true);
-		this.addComponent(wrapper);
+		// this.addComponent(wrapper);
 
 		//
 		image = new Label();
-		image.setContentMode(ContentMode.HTML);
+		// image.setContentMode(ContentMode.HTML);
 		if (information.getLeftTitle() != null && information.getLeftTitle().getIcon() != null) {
 			image.setValue(((FontAwesome) information.getLeftTitle().getIcon()).getHtml());
 		} else {
@@ -88,7 +86,7 @@ class LeftPanelTop extends VerticalLayout {
 
 		Title titleInformation = information.getLeftTitle();
 
-		this.setComponentAlignment(wrapper, Alignment.TOP_LEFT);
+		// this.setAComponentAlignment(wrapper, Alignment.TOP_LEFT);
 
 		if (titleInformation != null) {
 
@@ -102,13 +100,13 @@ class LeftPanelTop extends VerticalLayout {
 			//
 			if (titleInformation.getTitle() != null) {
 				title.setValue(titleInformation.getTitle());
-				title.setWidth(190, Unit.PIXELS);
+				// title.setWidth(190, Unit.PIXELS);
 			}
 
 			//
 			if (titleInformation.getSubTitle() != null) {
 				subTitle.setValue(titleInformation.getSubTitle());
-				subTitle.setWidth(190, Unit.PIXELS);
+				// subTitle.setWidth(190, Unit.PIXELS);
 			}
 
 		}
@@ -123,7 +121,7 @@ class LeftPanelTop extends VerticalLayout {
 
 		Title titleInformation = information.getLeftTitle();
 
-		this.setComponentAlignment(wrapper, Alignment.TOP_CENTER);
+		// this.setComponentAlignment(wrapper, Alignment.TOP_CENTER);
 
 		if (titleInformation != null) {
 
@@ -133,13 +131,13 @@ class LeftPanelTop extends VerticalLayout {
 
 			//
 			if (titleInformation.getTitle() != null) {
-				title.setWidth(0, Unit.PIXELS);
+				// title.setWidth(0, Unit.PIXELS);
 			}
 
 			//
 			if (titleInformation.getSubTitle() != null) {
 				image.setDescription(titleInformation.getSubTitle());
-				subTitle.setWidth(0, Unit.PIXELS);
+				// subTitle.setWidth(0, Unit.PIXELS);
 			}
 
 		}

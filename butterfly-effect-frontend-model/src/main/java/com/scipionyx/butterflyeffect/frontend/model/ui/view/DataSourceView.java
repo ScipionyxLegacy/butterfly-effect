@@ -1,8 +1,5 @@
 package com.scipionyx.butterflyeffect.frontend.model.ui.view;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.scipionyx.butterflyeffect.frontend.model.services.DataSourceService;
 import com.scipionyx.butterflyeffect.frontend.ui.view.configuration.ViewConfiguration;
 import com.scipionyx.butterflyeffect.model.model.datasource.AbstractDataSource;
 import com.scipionyx.butterflyeffect.model.model.datasource.ORMDataSource;
@@ -53,20 +50,14 @@ public class DataSourceView extends AbstractDataModelView {
 
 	private TabSheet sheet;
 
-	@Autowired
-	private DataSourceService datasourceService;
+	private
+
+	// @Autowired
+	// private DataSourceService datasourceService;
 
 	/**
 	 * 
 	 */
-	@Override
-	public void doBuild() {
-	}
-
-	/**
-	 * 
-	 */
-	@Override
 	public void doBuildWorkArea(VerticalLayout workAreaPanel) {
 
 		// Setting up the title
@@ -282,6 +273,12 @@ public class DataSourceView extends AbstractDataModelView {
 
 		window.center();
 		UI.getCurrent().addWindow(window);
+	}
+
+	@Override
+	public void doBuild() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
