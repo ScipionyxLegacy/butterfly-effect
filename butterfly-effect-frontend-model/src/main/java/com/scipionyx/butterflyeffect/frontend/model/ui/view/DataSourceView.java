@@ -53,20 +53,13 @@ public class DataSourceView extends AbstractDataModelView {
 
 	private TabSheet sheet;
 
-	@Autowired
-	private DataSourceService datasourceService;
+	private
+
+	@Autowired private DataSourceService datasourceService;
 
 	/**
 	 * 
 	 */
-	@Override
-	public void doBuild() {
-	}
-
-	/**
-	 * 
-	 */
-	@Override
 	public void doBuildWorkArea(VerticalLayout workAreaPanel) {
 
 		// Setting up the title

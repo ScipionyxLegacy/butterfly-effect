@@ -13,7 +13,6 @@ import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.FontAwesome;
-import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.shared.ui.window.WindowMode;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;
@@ -102,17 +101,17 @@ public class DataModelConfigurationView extends AbstractDataModelView {
 		doBuildTab(referenceTablesPanel);
 
 		List<Entity> dataModel = readDataModel();
-		sheet.addTab(entitiesPanel, "Entities");
+		// sheet.addTab(entitiesPanel, "Entities");
 		loadEntities(dataModel);
-		sheet.addTab(eventsPanel, "Events");
+		// sheet.addTab(eventsPanel, "Events");
 		loadEvents(dataModel);
-		sheet.addTab(factsPanel, "Facts");
+		// sheet.addTab(factsPanel, "Facts");
 		loadFacts(dataModel);
-		sheet.addTab(incidentsPanel, "Incidents");
+		// sheet.addTab(incidentsPanel, "Incidents");
 		loadIncidetns(dataModel);
-		sheet.addTab(referenceTablesPanel, "Reference Tables");
+		// sheet.addTab(referenceTablesPanel, "Reference Tables");
 
-		workAreaPanel.addComponent(sheet);
+		// workAreaPanel.addComponent(sheet);
 
 	}
 
@@ -150,7 +149,7 @@ public class DataModelConfigurationView extends AbstractDataModelView {
 	 * @param layout
 	 */
 	private Grid doBuildTab(VerticalLayout layout) {
-		layout.setMargin(new MarginInfo(true, false, false, false));
+		// layout.setMargin(new MarginInfo(true, false, false, false));
 		Grid grid = new Grid();
 		layout.addComponent(grid);
 		return grid;
@@ -177,7 +176,7 @@ public class DataModelConfigurationView extends AbstractDataModelView {
 		if (entity == null) {
 			entity = new Entity();
 			entity.setName("");
-			//entity.setDescription("");
+			// entity.setDescription("");
 			entity.setLabel("");
 		}
 

@@ -22,6 +22,8 @@ public class LeftConfigurationMenuItem implements Serializable {
 
 	private String parent;
 
+	// private String description;
+
 	private boolean separator;
 
 	private boolean visible;

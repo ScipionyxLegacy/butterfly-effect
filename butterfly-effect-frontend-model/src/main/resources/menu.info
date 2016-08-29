@@ -2,11 +2,11 @@
 	
 	{
 		"id":"datamodel_configuration",	
-		"label":"Data Source Configuration",
+		"label":"Data Model Configuration",
 		"view":"dataModelConfigurationView",
 		"parent": "configuration_root",
 		"separator": false,
 		"visible": true
 	}
-	
+		
 ]
