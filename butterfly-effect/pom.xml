@@ -25,7 +25,7 @@
 		<nexus.port>8081</nexus.port>
 		<spring.cloud.netflix.version>1.1.2.RELEASE</spring.cloud.netflix.version>
 		<spring.cloud.version>1.1.2.RELEASE</spring.cloud.version>
-		<vaadin.version>7.6.8</vaadin.version>
+		<vaadin.version>7.7.0</vaadin.version>
 	</properties>
 
 	<organization>
