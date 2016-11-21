@@ -1,8 +1,5 @@
 package com.scipionyx.butterflyeffect.frontend.model.ui.view;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.scipionyx.butterflyeffect.frontend.model.services.DataSourceService;
 import com.scipionyx.butterflyeffect.frontend.ui.view.configuration.ViewConfiguration;
 import com.scipionyx.butterflyeffect.model.model.datasource.AbstractDataSource;
 import com.scipionyx.butterflyeffect.model.model.datasource.ORMDataSource;
@@ -53,9 +50,14 @@ public class DataSourceConfigurationView extends AbstractDataModelView {
 
 	private TabSheet sheet;
 
-	@Autowired
-	private DataSourceService datasourceService;
+	private
 
+<<<<<<< HEAD:butterfly-effect-frontend-model/src/main/java/com/scipionyx/butterflyeffect/frontend/model/ui/view/DataSourceConfigurationView.java
+=======
+	// @Autowired
+	// private DataSourceService datasourceService;
+
+>>>>>>> origin/0.1.0:butterfly-effect-frontend-model/src/main/java/com/scipionyx/butterflyeffect/frontend/model/ui/view/DataSourceView.java
 	/**
 	 * 
 	 */
@@ -278,6 +280,10 @@ public class DataSourceConfigurationView extends AbstractDataModelView {
 
 	@Override
 	public void doBuild() {
+<<<<<<< HEAD:butterfly-effect-frontend-model/src/main/java/com/scipionyx/butterflyeffect/frontend/model/ui/view/DataSourceConfigurationView.java
+=======
+		// TODO Auto-generated method stub
+>>>>>>> origin/0.1.0:butterfly-effect-frontend-model/src/main/java/com/scipionyx/butterflyeffect/frontend/model/ui/view/DataSourceView.java
 		
 	}
 

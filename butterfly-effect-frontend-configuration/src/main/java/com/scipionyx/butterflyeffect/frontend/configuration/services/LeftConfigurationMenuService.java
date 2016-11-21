@@ -23,8 +23,31 @@ public class LeftConfigurationMenuService extends AbstractConfigurationMenuServi
 	 * 
 	 */
 	@Override
+<<<<<<< HEAD
 	public Class<LeftConfigurationMenuItem[]> getArrayJavaType() {
 		return LeftConfigurationMenuItem[].class;
+=======
+	public void readConfigurations() throws IOException {
+		//
+		List<InputStream> configurations = loadResources("left_configuration_menu.info", null);
+		//
+		LOGGER.info("loading configuration menus, {} found", configurations.size());
+		//
+		for (InputStream inputStream : configurations) {
+
+			LeftConfigurationMenuItem[] menuGroups = objectMapper.readValue(inputStream,
+					LeftConfigurationMenuItem[].class);
+
+			// Add Navigation
+
+			Collections.addAll(getConfigurations(), menuGroups);
+		}
+
+		// Sort Menu
+		// Collections.sort(getConfigurations(), new
+		// ConfigurationMenuGroupComparator());
+
+>>>>>>> origin/0.1.0
 	}
 
 }
