@@ -52,7 +52,7 @@ public abstract class AbstractConfigurationMenuService<T> {
 	 * 
 	 * @throws IOException
 	 */
-	protected final void readConfigurations() throws IOException {
+	protected void readConfigurations() throws IOException {
 		//
 		List<InputStream> configurations = loadResources("left_configuration_menu.info", null);
 		//

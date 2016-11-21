@@ -1,5 +1,10 @@
 package com.scipionyx.butterflyeffect.frontend.configuration.services;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collections;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -23,10 +28,6 @@ public class LeftConfigurationMenuService extends AbstractConfigurationMenuServi
 	 * 
 	 */
 	@Override
-<<<<<<< HEAD
-	public Class<LeftConfigurationMenuItem[]> getArrayJavaType() {
-		return LeftConfigurationMenuItem[].class;
-=======
 	public void readConfigurations() throws IOException {
 		//
 		List<InputStream> configurations = loadResources("left_configuration_menu.info", null);
@@ -46,8 +47,12 @@ public class LeftConfigurationMenuService extends AbstractConfigurationMenuServi
 		// Sort Menu
 		// Collections.sort(getConfigurations(), new
 		// ConfigurationMenuGroupComparator());
+	}
 
->>>>>>> origin/0.1.0
+	@Override
+	public Class<LeftConfigurationMenuItem[]> getArrayJavaType() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
