@@ -4,10 +4,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -18,16 +22,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public abstract class AbstractConfigurationMenuService<T> {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractConfigurationMenuService.class);
+
 	protected ObjectMapper objectMapper;
 
 	private List<T> configurations;
 
 	/**
 	 * @throws IOException
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
 	 * 
 	 */
 	@PostConstruct
-	public void init() throws IOException {
+	public final void init() throws IOException, InstantiationException, IllegalAccessException {
+
 		//
 		objectMapper = new ObjectMapper();
 		//
@@ -39,10 +48,23 @@ public abstract class AbstractConfigurationMenuService<T> {
 	}
 
 	/**
-	 * @throws IOException
+	 * This function will read the main menu configuration for all services.
 	 * 
+	 * @throws IOException
 	 */
-	public abstract void readConfigurations() throws IOException;
+	protected final void readConfigurations() throws IOException {
+		//
+		List<InputStream> configurations = loadResources("left_configuration_menu.info", null);
+		//
+		LOGGER.info("loading configuration menus, {} found", configurations.size());
+		//
+		for (InputStream inputStream : configurations) {
+			T[] menuGroups = objectMapper.readValue(inputStream, getArrayJavaType());
+			// Add Navigation
+			Collections.addAll(getConfigurations(), menuGroups);
+		}
+
+	}
 
 	/**
 	 * Read a resource from the class path or from within a jar.<br>
@@ -54,7 +76,8 @@ public abstract class AbstractConfigurationMenuService<T> {
 	 * @return
 	 * @throws IOException
 	 */
-	protected List<InputStream> loadResources(final String name, final ClassLoader classLoader) throws IOException {
+	protected final List<InputStream> loadResources(final String name, final ClassLoader classLoader)
+			throws IOException {
 		final List<InputStream> list = new ArrayList<InputStream>();
 		final Enumeration<URL> systemResources = (classLoader == null ? ClassLoader.getSystemClassLoader()
 				: classLoader).getResources(name);
@@ -68,8 +91,6 @@ public abstract class AbstractConfigurationMenuService<T> {
 		return configurations;
 	}
 
-	public void setConfigurations(List<T> configurations) {
-		this.configurations = configurations;
-	}
+	public abstract Class<T[]> getArrayJavaType();
 
 }

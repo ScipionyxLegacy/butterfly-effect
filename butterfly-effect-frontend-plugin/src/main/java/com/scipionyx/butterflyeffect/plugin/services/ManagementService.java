@@ -22,7 +22,7 @@ import com.scipionyx.butterflyeffect.plugin.model.Plugin;
  *
  */
 @Service("PluginManagementService")
-public class ManagementService extends AbstractConfigurationService<Plugin>implements Serializable {
+public class ManagementService extends AbstractConfigurationService<Plugin> implements Serializable {
 
 	/**
 	 * 
@@ -65,9 +65,7 @@ public class ManagementService extends AbstractConfigurationService<Plugin>imple
 	 */
 	public void writePlugin(OutputStream out, Plugin plugin)
 			throws JsonGenerationException, JsonMappingException, IOException {
-
 		// Define Output Stream
-
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.writeValue(out, plugin);
 	}

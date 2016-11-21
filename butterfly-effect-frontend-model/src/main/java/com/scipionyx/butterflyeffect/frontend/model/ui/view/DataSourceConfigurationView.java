@@ -44,7 +44,7 @@ import com.vaadin.ui.themes.ValoTheme;
 @SpringComponent("dataSourceConfigurationView")
 @UIScope()
 @ViewConfiguration(configurationFile = "DataSourceView.info")
-public class DataSourceView extends AbstractDataModelView {
+public class DataSourceConfigurationView extends AbstractDataModelView {
 
 	/**
 	 * 
@@ -53,9 +53,8 @@ public class DataSourceView extends AbstractDataModelView {
 
 	private TabSheet sheet;
 
-	private
-
-	@Autowired private DataSourceService datasourceService;
+	@Autowired
+	private DataSourceService datasourceService;
 
 	/**
 	 * 
@@ -275,6 +274,11 @@ public class DataSourceView extends AbstractDataModelView {
 
 		window.center();
 		UI.getCurrent().addWindow(window);
+	}
+
+	@Override
+	public void doBuild() {
+		
 	}
 
 }

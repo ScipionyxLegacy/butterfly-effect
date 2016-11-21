@@ -36,6 +36,7 @@ public abstract class AbstractConfigurationService<T> {
 		}
 		//
 		readConfigurations();
+
 	}
 
 	/**

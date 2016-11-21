@@ -52,11 +52,11 @@ public class NavigationService extends AbstractConfigurationService<Navigation> 
 		LOGGER.info("loading navigation files, {} found", configurations.size());
 		//
 		for (InputStream inputStream : configurations) {
-			
+
 			Navigation[] navigation = getObjectMapper().readValue(inputStream, Navigation[].class);
-			
+
 			// init
-			
+
 			Collections.addAll(getConfigurations(), navigation);
 		}
 
