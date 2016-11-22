@@ -35,6 +35,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>stackpanel-extension-for-vaadin</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.scipionyx</groupId>
 			<artifactId>butterfly-effect-frontend-configuration</artifactId>
 			<version>0.1.0-SNAPSHOT</version>

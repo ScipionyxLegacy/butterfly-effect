@@ -42,8 +42,6 @@ public class LeftPanel extends VerticalLayout {
 		this.setSizeFull();
 		this.setSpacing(false);
 		this.setMargin(false);
-		this.setWidth(2.5f, Unit.INCH);
-		this.setStyleName(ValoTheme.PANEL_WELL);
 		this.addStyleName(ValoTheme.PANEL_BORDERLESS);
 
 		// Top Margin
@@ -92,11 +90,11 @@ public class LeftPanel extends VerticalLayout {
 		this.setComponentAlignment(internal, Alignment.TOP_LEFT);
 		this.setExpandRatio(internal, 10);
 
-		// LeftPanelBottom bottom = new LeftPanelBottom();
-		// bottom.setStyleName(ValoTheme.PANEL_WELL);
-		// bottom.buid(leftPanelTop);
-		// this.addComponent(bottom);
-		// this.setComponentAlignment(bottom, Alignment.BOTTOM_CENTER);
+		LeftPanelBottom bottom = new LeftPanelBottom();
+		bottom.setStyleName(ValoTheme.PANEL_WELL);
+		//bottom.buid(leftPanelTop);
+		this.addComponent(bottom);
+		this.setComponentAlignment(bottom, Alignment.BOTTOM_CENTER);
 
 	}
 

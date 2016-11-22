@@ -18,6 +18,8 @@ public class LeftConfigurationMenuItem implements Serializable {
 
 	private String label;
 
+	private String shortLabel;
+
 	private String view;
 
 	private String parent;
@@ -84,6 +86,14 @@ public class LeftConfigurationMenuItem implements Serializable {
 
 	public void setParentItem(LeftConfigurationMenuItem parentItem) {
 		this.parentItem = parentItem;
+	}
+
+	public String getShortLabel() {
+		return shortLabel;
+	}
+
+	public void setShortLabel(String shortLabel) {
+		this.shortLabel = shortLabel;
 	}
 
 }

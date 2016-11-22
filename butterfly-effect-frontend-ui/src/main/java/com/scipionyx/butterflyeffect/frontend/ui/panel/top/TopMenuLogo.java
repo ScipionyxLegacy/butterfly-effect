@@ -23,7 +23,7 @@ class TopMenuLogo extends HorizontalLayout {
 	private static final long serialVersionUID = 7676337878819401061L;
 
 	// 2 inches
-	public static final float WIDTH = 2.5f;
+	public static final float WIDTH = 250;
 
 	// @Autowired
 	// private SystemConfiguration systemConfiguration;
@@ -38,7 +38,7 @@ class TopMenuLogo extends HorizontalLayout {
 		this.setStyleName(ValoTheme.MENU_TITLE);
 		this.setMargin(false);
 		this.setSpacing(false);
-		this.setWidth(WIDTH, Unit.INCH);
+		this.setWidth(WIDTH, Unit.PIXELS);
 
 		Label label = new Label("ButterFlyEffect");
 

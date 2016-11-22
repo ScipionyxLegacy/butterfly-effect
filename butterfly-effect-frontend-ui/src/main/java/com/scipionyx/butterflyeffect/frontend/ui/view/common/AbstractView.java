@@ -24,8 +24,12 @@ import com.scipionyx.butterflyeffect.frontend.ui.view.configuration.ViewConfigur
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.shared.ui.MarginInfo;
+import com.vaadin.ui.AbstractSplitPanel.SplitPositionChangeEvent;
+import com.vaadin.ui.AbstractSplitPanel.SplitPositionChangeListener;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.HorizontalSplitPanel;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 
 /**
@@ -96,8 +100,11 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 		this.addComponent(topFactory.instance(), 0);
 
 		// Main work Area
-		HorizontalLayout mainWorkArea = new HorizontalLayout();
+		HorizontalSplitPanel mainWorkArea = new HorizontalSplitPanel();
 		mainWorkArea.setSizeFull();
+		mainWorkArea.setMaxSplitPosition(500, Unit.PIXELS);
+		mainWorkArea.setMinSplitPosition(50, Unit.PIXELS);
+		mainWorkArea.setSplitPosition(250, Unit.PIXELS);
 		this.addComponent(mainWorkArea);
 		this.setComponentAlignment(mainWorkArea, Alignment.TOP_CENTER);
 		this.setExpandRatio(mainWorkArea, 2);
@@ -114,8 +121,26 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 		workAreaPanel = new WorkAreaPanel();
 		workAreaPanel.build();
 		mainWorkArea.addComponent(workAreaPanel);
-		mainWorkArea.setExpandRatio(workAreaPanel, 10);
+		// mainWorkArea.setExpandRatio(workAreaPanel, 10);
 
+		
+		mainWorkArea.addSplitPositionChangeListener(new SplitPositionChangeListener() {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onSplitPositionChanged(SplitPositionChangeEvent event) {
+				if (event.getSplitPosition() == mainWorkArea.getMinSplitPosition()) {
+					Notification.show("Min");
+				} else if (event.getSplitPosition() == mainWorkArea.getMaxSplitPosition()) {
+					Notification.show("Max");
+				}
+			}
+		});
+		
 		// Read Configuration
 
 		if (viewConfigurationInformation != null) {
