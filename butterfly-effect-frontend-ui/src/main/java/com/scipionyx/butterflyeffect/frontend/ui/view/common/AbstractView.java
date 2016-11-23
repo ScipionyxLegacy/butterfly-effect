@@ -123,7 +123,6 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 		mainWorkArea.addComponent(workAreaPanel);
 		// mainWorkArea.setExpandRatio(workAreaPanel, 10);
 
-		
 		mainWorkArea.addSplitPositionChangeListener(new SplitPositionChangeListener() {
 
 			/**
@@ -140,7 +139,7 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 				}
 			}
 		});
-		
+
 		// Read Configuration
 
 		if (viewConfigurationInformation != null) {

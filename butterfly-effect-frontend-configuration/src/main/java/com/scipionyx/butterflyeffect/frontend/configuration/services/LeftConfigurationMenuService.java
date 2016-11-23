@@ -44,14 +44,10 @@ public class LeftConfigurationMenuService extends AbstractConfigurationMenuServi
 			Collections.addAll(getConfigurations(), menuGroups);
 		}
 
-		// Sort Menu
-		// Collections.sort(getConfigurations(), new
-		// ConfigurationMenuGroupComparator());
 	}
 
 	@Override
 	public Class<LeftConfigurationMenuItem[]> getArrayJavaType() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

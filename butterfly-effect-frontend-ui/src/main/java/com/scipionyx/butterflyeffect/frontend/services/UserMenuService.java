@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
+import com.scipionyx.butterflyeffect.configuration.model.leftmenu.LeftConfigurationMenuItem;
+import com.scipionyx.butterflyeffect.frontend.configuration.services.LeftConfigurationMenuService;
 import com.scipionyx.butterflyeffect.frontend.model.Navigation;
 import com.scipionyx.butterflyeffect.frontend.ui.view.root.RootView;
 import com.scipionyx.butterflyeffect.ui.model.ButterflyView;
@@ -46,6 +48,9 @@ public class UserMenuService implements Serializable {
 
 	@Autowired
 	private NavigationService navigationService;
+
+	@Autowired
+	private LeftConfigurationMenuService leftConfigurationMenuService;
 
 	private Navigator navigator;
 
@@ -90,6 +95,23 @@ public class UserMenuService implements Serializable {
 				}
 			} else {
 				LOGGER.error("Navigation View Bean ({}) not found", navigation.getView());
+			}
+		}
+
+		for (LeftConfigurationMenuItem navigation : leftConfigurationMenuService.getConfigurations()) {
+			if (navigation.getView() == null)
+				continue;
+			if (applicationContext.containsBean(navigation.getView())) {
+				Object viewObject = applicationContext.getBean(navigation.getView());
+				if (viewObject != null) {
+					navigator.addView(navigation.getId(), (View) viewObject);
+					if (viewObject instanceof ButterflyView) {
+						ButterflyView view = (ButterflyView) viewObject;
+						view.doBuild();
+					}
+				} else {
+					LOGGER.error("Navigation View Bean ({}) not found", navigation.getView());
+				}
 			}
 		}
 

@@ -13,7 +13,7 @@
 	{
 		"id":"datamodel_configuration",	
 		"label":"Data Model Configuration",
-		"view":"dataModelConfigurationView",
+		"view":"butterfly-effect-frontend-model:DataModelConfigurationView",
 		"parent": "datamodel_root",
 		"separator": false,
 		"visible": true
@@ -22,7 +22,7 @@
 	{
 		"id":"datasource_configuration",	
 		"label":"Data Source Configuration",
-		"view":"dataSourceConfigurationView",
+		"view":"butterfly-effect-frontend-model:DataSourceConfigurationView",
 		"parent": "datamodel_root",
 		"separator": true,
 		"visible": true

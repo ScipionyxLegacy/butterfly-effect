@@ -42,10 +42,10 @@ import com.vaadin.ui.themes.ValoTheme;
  * @author Renato Mendes
  *
  */
-@SpringComponent("butterfly-effect-frontend-model:DataModelConfigurationView")
+@SpringComponent("butterfly-effect-frontend-model:DataSourceConfigurationView")
 @UIScope()
-@ViewConfiguration(configurationFile = "DataModelConfigurationView.info")
-public class DataModelConfigurationView extends AbstractDataModelView {
+@ViewConfiguration(configurationFile = "DataSourceConfigurationView.info")
+public class DataSourceConfigurationView extends AbstractDataModelView {
 
 	/**
 	 * 

@@ -13,6 +13,7 @@ import com.scipionyx.butterflyeffect.configuration.model.leftmenu.LeftConfigurat
 import com.scipionyx.butterflyeffect.frontend.configuration.services.LeftConfigurationMenuService;
 import com.scipionyx.butterflyeffect.frontend.services.UserMenuService;
 import com.scipionyx.butterflyeffect.frontend.ui.view.common.AbstractView;
+import com.scipionyx.butterflyeffect.frontend.ui.view.common.NavigationCommand;
 import com.scipionyx.butterflyeffect.ui.model.ButterflyView;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
@@ -62,7 +63,7 @@ public abstract class AbstractConfigurationView extends AbstractView implements 
 
 			if (item.getParent() == null) {
 
-				Panel panel = new SectionPanel(item.getLabel());
+				Panel panel = new SectionPanel(item.getLabel(), userMenuService);
 				panel.setIcon(FontAwesome.ADJUST);
 
 				StackPanel stackPanel = StackPanel.extend(panel);
@@ -106,11 +107,14 @@ public abstract class AbstractConfigurationView extends AbstractView implements 
 
 		private Map<LeftConfigurationMenuItem, Button> buttons;
 
+		private UserMenuService userMenuService;
+
 		/**
 		 * 
 		 * @param caption
 		 */
-		SectionPanel(String caption) {
+		SectionPanel(String caption, UserMenuService userMenuService) {
+			this.userMenuService = userMenuService;
 			buttons = new HashMap<>();
 			setCaption(caption);
 			setContent(new VerticalLayout() {
@@ -148,7 +152,10 @@ public abstract class AbstractConfigurationView extends AbstractView implements 
 			Button button = new Button(item.getLabel());
 
 			buttons.put(item, button);
-			
+
+			NavigationCommand command = (item.getView() != null)
+					? new NavigationCommand(userMenuService, item.getView()) : null;
+
 			button.setStyleName(ValoTheme.BUTTON_LINK);
 			button.addStyleName(ValoTheme.BUTTON_BORDERLESS);
 			button.addStyleName(ValoTheme.BUTTON_SMALL);
@@ -162,9 +169,7 @@ public abstract class AbstractConfigurationView extends AbstractView implements 
 				@Override
 				public void buttonClick(ClickEvent event) {
 					Notification.show("Pressed:" + item.getLabel());
-					// NavigationCommand command = new
-					// NavigationCommand(userMenuService, item.getView());
-					// command.navigate();
+					command.navigate();
 				}
 			});
 
