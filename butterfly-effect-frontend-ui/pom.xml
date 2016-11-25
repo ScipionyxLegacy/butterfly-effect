@@ -10,43 +10,18 @@
 		<version>0.1.0-SNAPSHOT</version>
 	</parent>
 
-
-	<repositories>
-
-		<repository>
-			<id>vaadin-addons</id>
-			<url>http://maven.vaadin.com/vaadin-addons</url>
-		</repository>
-
-	</repositories>
-
 	<dependencies>
 
-		<dependency>
-			<groupId>com.scipionyx</groupId>
-			<artifactId>butterfly-effect-frontend-core</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
-		</dependency>
+		<!-- Vaadin & Spring -->
 
 		<dependency>
-			<groupId>org.vaadin.addon</groupId>
-			<artifactId>confirmdialog</artifactId>
-			<version>2.1.3</version>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-spring-boot-starter</artifactId>
+			<version>1.0.0</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.vaadin.addons</groupId>
-			<artifactId>stackpanel-extension-for-vaadin</artifactId>
-			<version>1.0.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.scipionyx</groupId>
-			<artifactId>butterfly-effect-frontend-configuration</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
-		</dependency>
-
+		
 	</dependencies>
+
 </project>
 
 

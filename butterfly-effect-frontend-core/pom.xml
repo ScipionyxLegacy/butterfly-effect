@@ -1,27 +1,75 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>com.scipionyx</groupId>
 		<artifactId>butterfly-effect</artifactId>
 		<version>0.1.0-SNAPSHOT</version>
 	</parent>
+
 	<artifactId>butterfly-effect-frontend-core</artifactId>
 
 	<dependencies>
+
 		<!-- Vaadin Stuff -->
 		<dependency>
 			<groupId>org.vaadin.icons</groupId>
 			<artifactId>vaadin-icons</artifactId>
 			<version>1.0.1</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.vaadin.addon</groupId>
+			<artifactId>confirmdialog</artifactId>
+			<version>2.1.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.scipionyx</groupId>
+			<artifactId>butterfly-effect-api-ui</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.scipionyx</groupId>
+			<artifactId>butterfly-effect-api-model</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>confirmdialog</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.scipionyx</groupId>
+			<artifactId>butterfly-effect-api-configuration</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>stackpanel-extension-for-vaadin</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+
 	</dependencies>
 
 	<repositories>
+
 		<repository>
 			<id>vaadin-addons</id>
 			<url>http://maven.vaadin.com/vaadin-addons</url>
 		</repository>
+
 	</repositories>
 
 </project>
