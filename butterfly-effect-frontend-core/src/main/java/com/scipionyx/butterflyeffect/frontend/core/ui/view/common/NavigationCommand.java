@@ -1,11 +1,11 @@
-package com.scipionyx.butterflyeffect.frontend.ui.view.common;
+package com.scipionyx.butterflyeffect.frontend.core.ui.view.common;
 
 import java.io.Serializable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.scipionyx.butterflyeffect.frontend.services.UserMenuService;
+import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
 import com.vaadin.navigator.Navigator;
 
 /**

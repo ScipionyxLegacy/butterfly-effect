@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.frontend.services;
+package com.scipionyx.butterflyeffect.frontend.core.services;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
 import com.scipionyx.butterflyeffect.frontend.model.MenuComparator;
+import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
+import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 
 /**
  * 
@@ -45,18 +47,24 @@ public class MenuService extends AbstractConfigurationService<Menu> {
 	 */
 	@Override
 	public void readConfigurations() throws IOException {
-		//
-		List<InputStream> configurations = loadResources("menu.info", null);
-		//
-		LOGGER.info("loading menus, {} found", configurations.size());
-		//
-		for (InputStream inputStream : configurations) {
-			Menu[] _menus = getObjectMapper().readValue(inputStream, Menu[].class);
-			Collections.addAll(getConfigurations(), _menus);
-		}
 
-		// Sort Menu
-		Collections.sort(getConfigurations(), new MenuComparator());
+		// Scan for all classes under UI.VIEW that has the @MenuConfiguration
+		// annotation
+
+		
+		
+//		//
+//		List<InputStream> configurations = loadResources("menu.info", null);
+//		//
+//		LOGGER.info("loading menus, {} found", configurations.size());
+//		//
+//		for (InputStream inputStream : configurations) {
+//			Menu[] _menus = getObjectMapper().readValue(inputStream, Menu[].class);
+//			Collections.addAll(getConfigurations(), _menus);
+//		}
+//
+//		// Sort Menu
+//		Collections.sort(getConfigurations(), new MenuComparator());
 
 	}
 

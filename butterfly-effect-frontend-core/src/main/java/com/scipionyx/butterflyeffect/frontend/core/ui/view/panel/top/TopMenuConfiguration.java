@@ -1,7 +1,7 @@
-package com.scipionyx.butterflyeffect.frontend.ui.panel.top;
+package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top;
 
-import com.scipionyx.butterflyeffect.frontend.services.UserMenuService;
-import com.scipionyx.butterflyeffect.frontend.ui.view.common.NavigationCommand;
+import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
+import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.NavigationCommand;
 import com.scipionyx.butterflyeffect.ui.model.ITopMenuComponent;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.MenuBar;

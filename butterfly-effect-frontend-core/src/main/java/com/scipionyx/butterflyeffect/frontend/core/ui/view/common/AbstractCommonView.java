@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.frontend.configuration.ui.view;
+package com.scipionyx.butterflyeffect.frontend.core.ui.view.common;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,10 +12,10 @@ import org.vaadin.addons.stackpanel.StackPanel;
 import com.scipionyx.butterflyeffect.configuration.model.leftmenu.LeftConfigurationMenuItem;
 import com.scipionyx.butterflyeffect.frontend.configuration.services.LeftConfigurationMenuService;
 import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
-import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractView;
-import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.NavigationCommand;
-import com.scipionyx.butterflyeffect.ui.model.ButterflyView;
+import com.scipionyx.butterflyeffect.frontend.model.Menu;
+import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.vaadin.server.FontAwesome;
+import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Component;
@@ -32,12 +32,14 @@ import com.vaadin.ui.themes.ValoTheme;
  * @author Renato Mendes
  *
  */
-public abstract class AbstractConfigurationView extends AbstractView implements ButterflyView {
+public abstract class AbstractCommonView extends AbstractView {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	private final static Logger LOGGER = LoggerFactory.getLogger(AbstractCommonView.class);
 
 	@Autowired
 	private LeftConfigurationMenuService leftConfigurationMenuService;
@@ -45,7 +47,47 @@ public abstract class AbstractConfigurationView extends AbstractView implements 
 	@Autowired
 	private UserMenuService userMenuService;
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(AbstractConfigurationView.class);
+	void changeToShort() {
+
+	}
+
+	void changeToLong() {
+
+	}
+
+	void changeToMinimal() {
+
+	}
+
+	/**
+	 * Adds Menu<br>
+	 * Adds Navigation
+	 */
+	@Override
+	public void doBuildMenu() {
+
+		// Read the annotation
+		if (!this.getClass().isAnnotationPresent(MenuConfiguration.class))
+			return;
+
+		MenuConfiguration menuConfiguration = (MenuConfiguration) this.getClass()
+				.getAnnotation(MenuConfiguration.class);
+
+		SpringComponent springComponent = (SpringComponent) this.getClass().getAnnotation(SpringComponent.class);
+
+		Menu menu = new Menu();
+		menu.setId(springComponent.value());
+		menu.setLabel(menuConfiguration.label());
+		menu.setParent(null);
+		menu.setSeparator(false);
+		menu.setView(springComponent.value());
+		menu.setVisible(true);
+
+		if (!userMenuService.getMenuService().getConfigurations().contains(menu)) {
+			userMenuService.getMenuService().getConfigurations().add(menu);
+		}
+
+	}
 
 	/**
 	 * 
@@ -129,18 +171,6 @@ public abstract class AbstractConfigurationView extends AbstractView implements 
 					setSpacing(true);
 				}
 			});
-		}
-
-		void changeToShort() {
-
-		}
-
-		void changeToLong() {
-
-		}
-
-		void changeToMinimal() {
-
 		}
 
 		/**

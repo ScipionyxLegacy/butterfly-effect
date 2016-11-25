@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.frontend.ui.panel.bottom;
+package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.bottom;
 
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;

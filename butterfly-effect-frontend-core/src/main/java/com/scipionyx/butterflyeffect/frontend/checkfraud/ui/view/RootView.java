@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.frontend.core.ui.view.root;
+package com.scipionyx.butterflyeffect.frontend.checkfraud.ui.view;
 
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractCommonView;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
@@ -7,7 +7,6 @@ import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
 import com.vaadin.annotations.DesignRoot;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringComponent;
-import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
@@ -21,15 +20,12 @@ import com.vaadin.ui.VerticalLayout;
  *
  */
 @DesignRoot()
-@SpringComponent(value = RootView.VIEW_NAME)
-@SpringView(name = RootView.VIEW_NAME)
-@UIScope
+@SpringComponent("butterfly-effect-frontend-checkfraud:root")
+@UIScope()
 //
-@ViewConfiguration(configurationFile = "RootView.info")
-@MenuConfiguration(position = Position.TOP_MAIN, label = "Home", group = "")
+@ViewConfiguration(configurationFile = "CheckFraudRootView.info")
+@MenuConfiguration(position = Position.TOP_MAIN, label = "Check Fraud", group = "")
 public class RootView extends AbstractCommonView {
-
-	public static final String VIEW_NAME = "butterfly-effect-frontend-core:root";
 
 	/**
 	 * 
@@ -43,6 +39,9 @@ public class RootView extends AbstractCommonView {
 	public void doEnter(ViewChangeEvent event) {
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void doBuild() {
 	}
@@ -51,7 +50,7 @@ public class RootView extends AbstractCommonView {
 	 * 
 	 */
 	@Override
-	public void doBuildWorkArea(VerticalLayout workAreaPanel) {
+	public void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception {
 	}
 
 	@Override

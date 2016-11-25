@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.frontend.ui.panel.common;
+package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.common;
 
 import com.vaadin.ui.VerticalLayout;
 

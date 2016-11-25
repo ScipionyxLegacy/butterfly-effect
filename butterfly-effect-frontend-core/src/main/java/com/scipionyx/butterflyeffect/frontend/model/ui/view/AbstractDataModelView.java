@@ -1,6 +1,6 @@
 package com.scipionyx.butterflyeffect.frontend.model.ui.view;
 
-import com.scipionyx.butterflyeffect.frontend.ui.view.configuration.AbstractConfigurationView;
+import com.scipionyx.butterflyeffect.frontend.configuration.ui.view.AbstractConfigurationView;
 
 /**
  * 

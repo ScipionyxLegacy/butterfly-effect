@@ -1,10 +1,10 @@
-package com.scipionyx.butterflyeffect.frontend.ui.panel.top;
+package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top;
 
 import java.io.Serializable;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.scipionyx.butterflyeffect.frontend.services.UserMenuService;
+import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.VaadinSessionScope;
 import com.vaadin.ui.Component;
@@ -26,6 +26,7 @@ public class TopFactory implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	@Autowired
 	private UserMenuService userMenuService;
 

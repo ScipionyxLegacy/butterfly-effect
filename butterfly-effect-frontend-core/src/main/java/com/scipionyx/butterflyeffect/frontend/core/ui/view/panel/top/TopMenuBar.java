@@ -1,11 +1,8 @@
-package com.scipionyx.butterflyeffect.frontend.ui.panel.top;
+package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
+import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.NavigationCommand;
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
-import com.scipionyx.butterflyeffect.frontend.services.UserMenuService;
-import com.scipionyx.butterflyeffect.frontend.ui.view.common.NavigationCommand;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -23,27 +20,29 @@ class TopMenuBar extends MenuBar {
 	 */
 	private static final long serialVersionUID = -2071225172270929556L;
 
+	private UserMenuService userMenuService;
+
 	/**
 	 * 
 	 */
 	void build(UserMenuService userMenuService) {
 		this.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
-		buildMainMenuBar(userMenuService);
+		this.userMenuService = userMenuService;
+		buildMainMenuBar();
 	}
 
 	/**
 	 * 
 	 * @param menuBar
 	 */
-	@SuppressWarnings("unused")
-	private void buildMainMenuBar(UserMenuService userMenuService) {
+	private void buildMainMenuBar() {
 		//
 
-		Map<String, NavigationCommand> menus = new HashMap<>();
+		// Map<String, NavigationCommand> menus = new HashMap<>();
 
 		for (Menu menu : userMenuService.getMenuService().getConfigurations()) {
 
-			String id = (menu.getId() != null) ? menu.getId() : "NO-LABEL";
+			// String id = (menu.getId() != null) ? menu.getId() : "NO-LABEL";
 			String label = (menu.getLabel() != null) ? menu.getLabel() : "NO-LABEL";
 
 			NavigationCommand command = (menu.getView() != null)

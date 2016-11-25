@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.frontend.services;
+package com.scipionyx.butterflyeffect.frontend.core.services;
 
 import java.io.IOException;
 import java.io.InputStream;

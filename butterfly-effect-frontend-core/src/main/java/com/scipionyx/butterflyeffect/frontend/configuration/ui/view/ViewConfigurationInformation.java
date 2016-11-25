@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.frontend.ui.view.configuration;
+package com.scipionyx.butterflyeffect.frontend.configuration.ui.view;
 
 import com.scipionyx.butterflyeffect.frontend.model.Title;
 

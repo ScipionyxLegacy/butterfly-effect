@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.frontend.ui.panel.left;
+package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.left;
 
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Alignment;

@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.frontend.ui.panel.top;
+package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top;
 
 import org.vaadin.teemu.VaadinIcons;
 

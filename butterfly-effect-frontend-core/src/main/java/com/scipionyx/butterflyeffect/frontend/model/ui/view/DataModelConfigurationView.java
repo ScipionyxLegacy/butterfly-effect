@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.dialogs.ConfirmDialog;
 
 import com.scipionyx.butterflyeffect.frontend.model.services.EntityClientRESTConfigurationService;
-import com.scipionyx.butterflyeffect.frontend.ui.view.configuration.ViewConfiguration;
 import com.scipionyx.butterflyeffect.model.model.datamodel.Entity;
+import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -45,6 +45,7 @@ import com.vaadin.ui.themes.ValoTheme;
 @SpringComponent("butterfly-effect-frontend-model:DataModelConfigurationView")
 @UIScope()
 @ViewConfiguration(configurationFile = "DataModelConfigurationView.info")
+@SuppressWarnings("unused")
 public class DataModelConfigurationView extends AbstractDataModelView {
 
 	/**
@@ -56,6 +57,7 @@ public class DataModelConfigurationView extends AbstractDataModelView {
 
 	// private VerticalLayout workAreaPanel;
 
+	
 	private TabSheet sheet;
 
 	@Autowired

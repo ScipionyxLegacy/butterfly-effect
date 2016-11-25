@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.frontend.ui.view.common;
+package com.scipionyx.butterflyeffect.frontend.core.ui.view.common;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,12 +15,13 @@ import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.scipionyx.butterflyeffect.frontend.services.UserMenuService;
-import com.scipionyx.butterflyeffect.frontend.ui.panel.left.LeftPanel;
-import com.scipionyx.butterflyeffect.frontend.ui.panel.top.TopFactory;
-import com.scipionyx.butterflyeffect.frontend.ui.panel.workarea.WorkAreaPanel;
-import com.scipionyx.butterflyeffect.frontend.ui.view.configuration.ViewConfiguration;
-import com.scipionyx.butterflyeffect.frontend.ui.view.configuration.ViewConfigurationInformation;
+import com.scipionyx.butterflyeffect.frontend.configuration.ui.view.ViewConfigurationInformation;
+import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
+import com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.left.LeftPanel;
+import com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top.TopFactory;
+import com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.workarea.WorkAreaPanel;
+import com.scipionyx.butterflyeffect.ui.model.ButterflyView;
+import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.shared.ui.MarginInfo;
@@ -40,7 +41,7 @@ import com.vaadin.ui.VerticalLayout;
  * @author Renato Mendes
  *
  */
-public abstract class AbstractView extends VerticalLayout implements View, BeanNameAware {
+public abstract class AbstractView extends VerticalLayout implements View, BeanNameAware, ButterflyView {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractView.class);
 
@@ -66,6 +67,9 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 	private String beanName;
 
 	private ObjectMapper objectMapper;
+
+	public void doBuildMenu() {
+	}
 
 	public abstract void doBuildLeftMenu(VerticalLayout leftMenuPanel);
 
@@ -95,6 +99,9 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 		this.setMargin(new MarginInfo(false, false, false, false));
 		this.setSizeFull();
 		this.setSpacing(false);
+
+		// Top Menu
+		doBuildMenu();
 
 		// Top panel
 		this.addComponent(topFactory.instance(), 0);

@@ -1,6 +1,6 @@
-package com.scipionyx.butterflyeffect.frontend.ui.panel.top;
+package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top;
 
-import com.scipionyx.butterflyeffect.frontend.services.UserMenuService;
+import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.GridLayout;

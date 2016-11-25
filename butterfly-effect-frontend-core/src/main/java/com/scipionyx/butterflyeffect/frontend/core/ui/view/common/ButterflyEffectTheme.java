@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.frontend.ui.view.common;
+package com.scipionyx.butterflyeffect.frontend.core.ui.view.common;
 
 import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.themes.ValoTheme;

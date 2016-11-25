@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.frontend.services;
+package com.scipionyx.butterflyeffect.frontend.core.services;
 
 import java.io.Serializable;
 
@@ -9,8 +9,8 @@ import org.springframework.context.ApplicationContext;
 
 import com.scipionyx.butterflyeffect.configuration.model.leftmenu.LeftConfigurationMenuItem;
 import com.scipionyx.butterflyeffect.frontend.configuration.services.LeftConfigurationMenuService;
+import com.scipionyx.butterflyeffect.frontend.core.ui.view.root.RootView;
 import com.scipionyx.butterflyeffect.frontend.model.Navigation;
-import com.scipionyx.butterflyeffect.frontend.ui.view.root.RootView;
 import com.scipionyx.butterflyeffect.ui.model.ButterflyView;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
@@ -83,37 +83,38 @@ public class UserMenuService implements Serializable {
 
 		// Add root view to the Navigator.
 		navigator.addView("", rootView);
+		navigator.addView("butterfly-effect-frontend-core:root", rootView);
 
 		//
-		for (Navigation navigation : navigationService.getConfigurations()) {
-			Object viewObject = applicationContext.getBean(navigation.getView());
-			if (viewObject != null) {
-				navigator.addView(navigation.getId(), (View) viewObject);
-				if (viewObject instanceof ButterflyView) {
-					ButterflyView view = (ButterflyView) viewObject;
-					view.doBuild();
-				}
-			} else {
-				LOGGER.error("Navigation View Bean ({}) not found", navigation.getView());
-			}
-		}
-
-		for (LeftConfigurationMenuItem navigation : leftConfigurationMenuService.getConfigurations()) {
-			if (navigation.getView() == null)
-				continue;
-			if (applicationContext.containsBean(navigation.getView())) {
-				Object viewObject = applicationContext.getBean(navigation.getView());
-				if (viewObject != null) {
-					navigator.addView(navigation.getId(), (View) viewObject);
-					if (viewObject instanceof ButterflyView) {
-						ButterflyView view = (ButterflyView) viewObject;
-						view.doBuild();
-					}
-				} else {
-					LOGGER.error("Navigation View Bean ({}) not found", navigation.getView());
-				}
-			}
-		}
+//		for (Navigation navigation : navigationService.getConfigurations()) {
+//			Object viewObject = applicationContext.getBean(navigation.getView());
+//			if (viewObject != null) {
+//				navigator.addView(navigation.getId(), (View) viewObject);
+//				if (viewObject instanceof ButterflyView) {
+//					ButterflyView view = (ButterflyView) viewObject;
+//					view.doBuild();
+//				}
+//			} else {
+//				LOGGER.error("Navigation View Bean ({}) not found", navigation.getView());
+//			}
+//		}
+//
+//		for (LeftConfigurationMenuItem navigation : leftConfigurationMenuService.getConfigurations()) {
+//			if (navigation.getView() == null)
+//				continue;
+//			if (applicationContext.containsBean(navigation.getView())) {
+//				Object viewObject = applicationContext.getBean(navigation.getView());
+//				if (viewObject != null) {
+//					navigator.addView(navigation.getId(), (View) viewObject);
+//					if (viewObject instanceof ButterflyView) {
+//						ButterflyView view = (ButterflyView) viewObject;
+//						view.doBuild();
+//					}
+//				} else {
+//					LOGGER.error("Navigation View Bean ({}) not found", navigation.getView());
+//				}
+//			}
+//		}
 
 		//
 

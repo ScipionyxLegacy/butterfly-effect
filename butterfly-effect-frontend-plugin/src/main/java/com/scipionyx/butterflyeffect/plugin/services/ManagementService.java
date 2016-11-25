@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.scipionyx.butterflyeffect.frontend.services.AbstractConfigurationService;
+import com.scipionyx.butterflyeffect.frontend.core.services.AbstractConfigurationService;
 import com.scipionyx.butterflyeffect.plugin.model.Plugin;
 
 /**

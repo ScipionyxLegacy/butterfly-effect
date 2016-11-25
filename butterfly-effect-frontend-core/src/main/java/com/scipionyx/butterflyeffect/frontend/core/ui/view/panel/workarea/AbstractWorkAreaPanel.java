@@ -1,6 +1,6 @@
-package com.scipionyx.butterflyeffect.frontend.ui.panel.workarea;
+package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.workarea;
 
-import com.scipionyx.butterflyeffect.frontend.ui.panel.common.AbstractPanel;
+import com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.common.AbstractPanel;
 
 /**
  * 

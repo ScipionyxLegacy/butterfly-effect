@@ -1,7 +1,7 @@
-package com.scipionyx.butterflyeffect.frontend.ui.panel.left;
+package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.left;
 
+import com.scipionyx.butterflyeffect.frontend.configuration.ui.view.ViewConfigurationInformation;
 import com.scipionyx.butterflyeffect.frontend.model.Title;
-import com.scipionyx.butterflyeffect.frontend.ui.view.configuration.ViewConfigurationInformation;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;

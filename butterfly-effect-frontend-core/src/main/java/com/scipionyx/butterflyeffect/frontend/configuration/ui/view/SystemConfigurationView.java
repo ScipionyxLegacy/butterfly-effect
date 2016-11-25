@@ -1,6 +1,7 @@
-package com.scipionyx.butterflyeffect.frontend.ui.view.configuration;
+package com.scipionyx.butterflyeffect.frontend.configuration.ui.view;
 
 import com.scipionyx.butterflyeffect.configuration.model.SystemConfiguration;
+import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
 import com.vaadin.annotations.DesignRoot;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
