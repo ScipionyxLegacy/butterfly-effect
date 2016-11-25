@@ -23,8 +23,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<vaadin.version>7.7.4</vaadin.version>
-		<version.vaadin-spring>1.1.0</version.vaadin-spring>
+		<vaadin.version>7.7.5</vaadin.version>
+		<vaadin.spring>1.1.1</vaadin.spring>
+		<vaadin.icons>2.0.0</vaadin.icons>
 
 		<java.version>1.8</java.version>
 		<nexus.ip>172.16.37.128</nexus.ip>
@@ -110,13 +111,13 @@
 			<dependency>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-spring</artifactId>
-				<version>${version.vaadin-spring}</version>
+				<version>${vaadin.spring}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-spring-boot-starter</artifactId>
-				<version>${version.vaadin-spring}</version>
+				<version>${vaadin.spring}</version>
 			</dependency>
 
 			<dependency>

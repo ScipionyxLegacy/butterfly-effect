@@ -43,8 +43,23 @@
 			<artifactId>stackpanel-extension-for-vaadin</artifactId>
 		</dependency>
 
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.vaadin.spring.extensions</groupId> -->
+<!-- 			<artifactId>vaadin-spring-ext-core</artifactId> -->
+<!-- 		</dependency> -->
+
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-themes</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-client-compiled</artifactId>
+		</dependency>
+
 		<!-- Butterfly Effect -->
-		
+
 		<dependency>
 			<groupId>com.scipionyx</groupId>
 			<artifactId>butterfly-effect-frontend-core</artifactId>

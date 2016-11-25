@@ -14,9 +14,8 @@ import org.springframework.context.annotation.Configuration;
  *
  */
 @SpringBootApplication
-// @ComponentScan(basePackages = {
-// "${butterflyeffect.system.componentscan.basepackages}", })
-@ComponentScan(basePackages = { "com.scipionyx" })
+@ComponentScan(basePackages = { "${butterflyeffect.system.componentscan.basepackages}", })
+// @ComponentScan(basePackages = { "com.scipionyx" })
 
 @Configuration
 @EnableAutoConfiguration
