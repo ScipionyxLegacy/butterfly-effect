@@ -15,6 +15,14 @@
  */
 package com.scipionyx.butterflyeffect.frontend.core.ui;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+//import org.vaadin.spring.annotation.PrototypeScope;
+
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.shared.ui.label.ContentMode;
@@ -22,16 +30,10 @@ import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-//import org.vaadin.spring.annotation.PrototypeScope;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 
 /**
- * Example of a view that uses the {@link org.vaadin.spring.annotation.PrototypeScope}.
+ * Example of a view that uses the
+ * {@link org.vaadin.spring.annotation.PrototypeScope}.
  *
  * @author Petter Holmström (petter@vaadin.com)
  */
@@ -39,37 +41,42 @@ import javax.annotation.PreDestroy;
 @SpringView(name = PrototypeScopedView.VIEW_NAME)
 public class PrototypeScopedView extends VerticalLayout implements View {
 
-    public static final String VIEW_NAME = "prototype";
-    private static final Logger LOGGER = LoggerFactory.getLogger(PrototypeScopedView.class);
-    @Autowired
-    UIScopedBusinessObject uiScopedBusinessObject; // You can inject UI scoped beans into a prototype scoped bean
+	public static final String VIEW_NAME = "prototype";
+	private static final Logger LOGGER = LoggerFactory.getLogger(PrototypeScopedView.class);
+	@Autowired
+	UIScopedBusinessObject uiScopedBusinessObject; // You can inject UI scoped
+													// beans into a prototype
+													// scoped bean
 
-    @PostConstruct
-    void init() {
-        LOGGER.info("I'm being created: {}", this);
-        setMargin(true);
-        setSpacing(true);
+	@PostConstruct
+	void init() {
+		LOGGER.info("I'm being created: {}", this);
+		setMargin(true);
+		setSpacing(true);
 
-        final Label label = new Label(String.format("This is a prototype scoped view. A new instance is created every time this view is shown. " +
-                "This particular instance is <b>%s</b>. If you navigate away from this view and back, you'll notice that the instance changes every time.", this));
-        label.setContentMode(ContentMode.HTML);
-        addComponent(label);
+		final Label label = new Label(String.format(
+				"This is a prototype scoped view. A new instance is created every time this view is shown. "
+						+ "This particular instance is <b>%s</b>. If you navigate away from this view and back, you'll notice that the instance changes every time.",
+				this));
+		label.setContentMode(ContentMode.HTML);
+		addComponent(label);
 
-        addComponent(new Button("Invoke a UI scoped business object", new Button.ClickListener() {
-            @Override
-            public void buttonClick(Button.ClickEvent event) {
-                addComponent(new Label(uiScopedBusinessObject.sayHello()));
-            }
-        }));
-    }
+		addComponent(new Button("Invoke a UI scoped business object", new Button.ClickListener() {
+			@Override
+			public void buttonClick(Button.ClickEvent event) {
+				addComponent(new Label(uiScopedBusinessObject.sayHello()));
+			}
+		}));
+	}
 
-    @PreDestroy
-    void destroy() {
-        // This method will never get called since this view is prototype scoped and hence not lifecycle managed.
-        LOGGER.info("I will never get destroyed :-( : {}", this);
-    }
+	@PreDestroy
+	void destroy() {
+		// This method will never get called since this view is prototype scoped
+		// and hence not lifecycle managed.
+		LOGGER.info("I will never get destroyed :-( : {}", this);
+	}
 
-    @Override
-    public void enter(ViewChangeListener.ViewChangeEvent event) {
-    }
+	@Override
+	public void enter(ViewChangeListener.ViewChangeEvent event) {
+	}
 }

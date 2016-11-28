@@ -1,7 +1,6 @@
 package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top;
 
 import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
-import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.NavigationCommand;
 import com.scipionyx.butterflyeffect.ui.model.ITopMenuComponent;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.MenuBar;
@@ -34,9 +33,6 @@ class TopMenuConfiguration extends MenuBar implements ITopMenuComponent {
 
 		MenuItem root = this.addItem("", FontAwesome.GEAR, null);
 
-		NavigationCommand command = new NavigationCommand(userMenuService,
-				"butterfly-effect-frontend-configuration:root");
-
 		root.setCheckable(true);
 
 		root.setCommand(new Command() {
@@ -49,7 +45,7 @@ class TopMenuConfiguration extends MenuBar implements ITopMenuComponent {
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
 				root.setChecked(true);
-				command.navigate();
+
 			}
 
 		});

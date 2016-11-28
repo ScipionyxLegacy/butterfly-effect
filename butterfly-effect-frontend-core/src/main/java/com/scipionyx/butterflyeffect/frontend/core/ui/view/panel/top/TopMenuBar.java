@@ -1,7 +1,6 @@
 package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top;
 
 import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
-import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.NavigationCommand;
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.themes.ValoTheme;
@@ -40,13 +39,13 @@ class TopMenuBar extends MenuBar {
 
 		// Map<String, NavigationCommand> menus = new HashMap<>();
 
-		for (Menu menu : userMenuService.getMenuService().getConfigurations()) {
+		for (Menu menu : userMenuService.getMenus()) {
 
 			// String id = (menu.getId() != null) ? menu.getId() : "NO-LABEL";
 			String label = (menu.getLabel() != null) ? menu.getLabel() : "NO-LABEL";
 
-			NavigationCommand command = (menu.getView() != null)
-					? new NavigationCommand(userMenuService, menu.getView()) : null;
+			// NavigationCommand command = (menu.getView() != null)
+			// ? new NavigationCommand(userMenuService, menu.getView()) : null;
 
 			if (menu.getParent() == null) {
 
@@ -61,7 +60,7 @@ class TopMenuBar extends MenuBar {
 					public void menuSelected(MenuItem selectedItem) {
 						//
 						selectedItem.setChecked(true);
-						command.navigate();
+						// command.navigate();
 					}
 				});
 

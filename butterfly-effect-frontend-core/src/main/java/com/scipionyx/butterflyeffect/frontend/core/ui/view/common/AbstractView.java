@@ -164,13 +164,6 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 			doBuildBottomArea(workAreaPanel.getBottomPanel());
 		}
 
-		if (!getBeanName().equalsIgnoreCase("rootView")) {
-			LOGGER.info(getBeanName());
-			if (userMenuService.getNavigator() != null) {
-				userMenuService.getNavigator().addView(getBeanName(), this);
-			}
-		}
-
 		doBuild();
 
 	}

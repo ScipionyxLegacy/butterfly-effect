@@ -83,9 +83,7 @@ public abstract class AbstractCommonView extends AbstractView {
 		menu.setView(springComponent.value());
 		menu.setVisible(true);
 
-		if (!userMenuService.getMenuService().getConfigurations().contains(menu)) {
-			userMenuService.getMenuService().getConfigurations().add(menu);
-		}
+		
 
 	}
 
@@ -183,9 +181,7 @@ public abstract class AbstractCommonView extends AbstractView {
 
 			buttons.put(item, button);
 
-			NavigationCommand command = (item.getView() != null)
-					? new NavigationCommand(userMenuService, item.getView()) : null;
-
+			
 			button.setStyleName(ValoTheme.BUTTON_LINK);
 			button.addStyleName(ValoTheme.BUTTON_BORDERLESS);
 			button.addStyleName(ValoTheme.BUTTON_SMALL);
@@ -199,7 +195,7 @@ public abstract class AbstractCommonView extends AbstractView {
 				@Override
 				public void buttonClick(ClickEvent event) {
 					Notification.show("Pressed:" + item.getLabel());
-					command.navigate();
+					//command.navigate();
 				}
 			});
 

@@ -121,6 +121,12 @@
 			</dependency>
 
 			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-icons</artifactId>
+				<version>${vaadin.icons}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>org.vaadin.spring.extensions</groupId>
 				<artifactId>vaadin-spring-ext-boot</artifactId>
 				<version>0.0.7.RELEASE</version>
