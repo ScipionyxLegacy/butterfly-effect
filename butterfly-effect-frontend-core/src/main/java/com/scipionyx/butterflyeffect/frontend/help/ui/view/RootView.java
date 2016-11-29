@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.frontend.checkfraud.ui.view;
+package com.scipionyx.butterflyeffect.frontend.help.ui.view;
 
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractCommonView;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
@@ -19,15 +19,15 @@ import com.vaadin.ui.VerticalLayout;
  * @author Renato Mendes
  *
  */
-@SpringComponent(value = RootView.VIEW_NAME)
+@SpringComponent(RootView.VIEW_NAME)
 @SpringView(name = RootView.VIEW_NAME)
-@UIScope
+@UIScope()
 //
 @ViewConfiguration(configurationFile = "CheckFraudRootView.info")
-@MenuConfiguration(position = Position.TOP_MAIN, label = "Check Fraud", group = "", order = 1)
+@MenuConfiguration(position = Position.TOP_RIGHT, label = "Help", group = "", order = 10)
 public class RootView extends AbstractCommonView {
 
-	public static final String VIEW_NAME = "butterfly-effect-frontend-checkfraud:root";
+	public static final String VIEW_NAME = "butterfly-effect-frontend-core-help:root";
 
 	/**
 	 * 

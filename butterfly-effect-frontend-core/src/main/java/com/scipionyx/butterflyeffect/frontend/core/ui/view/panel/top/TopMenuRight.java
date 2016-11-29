@@ -28,19 +28,23 @@ public class TopMenuRight extends MenuBar {
 	 * 
 	 */
 	public void build(Menu menu, UserMenuService userMenuService) {
-
 		this.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
-
 		List<Menu> list = userMenuService.getMenus();
 		MenuItem root = addRoot(menu, list);
-		addChildren(root, menu, list);
+		// addChildren(root, menu, list);
 	}
 
+	/**
+	 * 
+	 * @param menu
+	 * @param list
+	 * @return
+	 */
 	private MenuItem addRoot(Menu menu, List<Menu> list) {
 
 		Command command = null;
 
-		if (menu.getView() != null) {
+		if (menu.getView() != null && !hasChildren(menu, list)) {
 			command = new Command() {
 
 				/**
@@ -94,6 +98,21 @@ public class TopMenuRight extends MenuBar {
 			}
 		}
 
+	}
+
+	/**
+	 * 
+	 * @param list
+	 * @param menu
+	 * @return
+	 */
+	private boolean hasChildren(Menu menu, List<Menu> list) {
+		for (Menu menu2 : list) {
+			if (menu.getId().equals(menu2.getParent())){
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

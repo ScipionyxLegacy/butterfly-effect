@@ -2,7 +2,6 @@ package com.scipionyx.butterflyeffect.frontend.configuration.ui.view;
 
 import com.scipionyx.butterflyeffect.configuration.model.SystemConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
-import com.vaadin.annotations.DesignRoot;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.FontAwesome;
@@ -28,9 +27,9 @@ import com.vaadin.ui.VerticalLayout;
  * @author Renato Mendes
  *
  */
-@DesignRoot()
 @SpringComponent("SystemConfigurationView")
 @UIScope()
+
 @ViewConfiguration(configurationFile = "SystemConfigurationView.info")
 public class SystemConfigurationView extends AbstractConfigurationView {
 

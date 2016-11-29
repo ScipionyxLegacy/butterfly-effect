@@ -19,7 +19,7 @@ public @interface MenuConfiguration {
 	public static final String NULL = null;
 
 	public enum Position {
-		TOP_MAIN, TOP_RIGHT, LEFT_MAIN, LEFT_BOTTOM
+		IGNORE, TOP_MAIN, TOP_RIGHT, LEFT_MAIN, LEFT_BOTTOM
 	}
 
 	/**

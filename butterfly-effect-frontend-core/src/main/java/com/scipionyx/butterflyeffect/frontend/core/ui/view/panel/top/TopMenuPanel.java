@@ -45,10 +45,6 @@ class TopMenuPanel extends GridLayout {
 		topMenuLogo.build();
 		layout.addComponent(topMenuLogo);
 
-		TopAlert topAlert = new TopAlert();
-		topAlert.build();
-		layout.addComponent(topAlert);
-
 		// Menu
 		TopMenuBar topMenuBar = new TopMenuBar();
 		topMenuBar.build(userMenuService);
@@ -67,7 +63,7 @@ class TopMenuPanel extends GridLayout {
 		topMenuSearch.build();
 		topRight.addComponent(topMenuSearch);
 
-		//
+		// Adding Dynamic Menus on the right panel
 		for (Menu menu : userMenuService.getMenus()) {
 			if (menu.getPosition() == Position.TOP_RIGHT && menu.getParent() == null) {
 				TopMenuRight panel = new TopMenuRight();
@@ -75,22 +71,6 @@ class TopMenuPanel extends GridLayout {
 				topRight.addComponent(panel);
 			}
 		}
-
-		// Help
-		// TopMenuHelp topHelpMenu = new TopMenuHelp();
-		// topHelpMenu.build();
-		// topRight.addComponent(topHelpMenu);
-
-		// System Configuration
-		// TopMenuConfiguration topMenuConfiguration = new
-		// TopMenuConfiguration();
-		// topMenuConfiguration.build();
-		// topRight.addComponent(topMenuConfiguration);
-
-		// User
-		// TopMenuUser topMenuUser = new TopMenuUser();
-		// topMenuUser.build();
-		// topRight.addComponent(topMenuUser);
 
 	}
 

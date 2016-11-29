@@ -24,9 +24,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
-import com.scipionyx.butterflyeffect.frontend.core.ui.PrototypeScopedView;
-import com.scipionyx.butterflyeffect.frontend.core.ui.UIScopedView;
-import com.scipionyx.butterflyeffect.frontend.core.ui.ViewScopedView;
+import com.scipionyx.butterflyeffect.frontend.core.ui.view.templates.PrototypeScopedView;
+import com.scipionyx.butterflyeffect.frontend.core.ui.view.templates.UIScopedView;
+import com.scipionyx.butterflyeffect.frontend.core.ui.view.templates.ViewScopedView;
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
@@ -35,6 +35,7 @@ import com.vaadin.data.Property;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.spring.access.ViewAccessControl;
+import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.CheckBox;
@@ -50,11 +51,12 @@ import com.vaadin.ui.VerticalLayout;
  *
  * @author Petter Holmström (petter@vaadin.com)
  */
-@UIScope
+@SpringComponent(value = AccessControlView.VIEW_NAME)
 @SpringView(name = AccessControlView.VIEW_NAME)
+@UIScope
 //
 @ViewConfiguration(configurationFile = "ConfigurationRootView.info")
-@MenuConfiguration(position = Position.TOP_RIGHT, label = "Configuration", group = "", order = 1, parent = RootView.VIEW_NAME)
+@MenuConfiguration(position = Position.TOP_RIGHT, label = "Access", group = "", order = 1, parent = RootView.VIEW_NAME)
 public class AccessControlView extends VerticalLayout implements View, ViewAccessControl {
 
 	/**

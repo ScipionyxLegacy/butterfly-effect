@@ -1,6 +1,7 @@
 package com.scipionyx.butterflyeffect.frontend.core.services;
 
 import java.io.Serializable;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -12,10 +13,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractCommonView;
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
+import com.vaadin.navigator.View;
 import com.vaadin.spring.annotation.SpringComponent;
+import com.vaadin.spring.annotation.SpringView;
 
 import io.github.lukehutch.fastclasspathscanner.FastClasspathScanner;
 
@@ -45,12 +47,12 @@ public class UserMenuService implements Serializable {
 	 */
 	@PostConstruct
 	private void init() {
-		List<Class<? extends AbstractCommonView>> views = new ArrayList<>();
+		List<Class<? extends View>> views = new ArrayList<>();
 		new FastClasspathScanner("com.scipionyx.butterflyeffect.frontend")
-				.matchSubclassesOf(AbstractCommonView.class, views::add).scan();
+				.matchClassesImplementing(View.class, views::add).scan();
 		readMenus(views);
 		sortMenus();
-		LOGGER.info("# of Views read: [{}], # of menus read: [{}]", views.size(), menus.size());
+		LOGGER.info("Number of menus read: [{}]", menus.size());
 	}
 
 	/**
@@ -73,29 +75,38 @@ public class UserMenuService implements Serializable {
 	 * 
 	 * @param views
 	 */
-	private void readMenus(List<Class<? extends AbstractCommonView>> views) {
+	private void readMenus(List<Class<? extends View>> views) {
 		menus = new ArrayList<>();
-		for (Class<? extends AbstractCommonView> clazz : views) {
-			if (clazz.isAnnotationPresent(MenuConfiguration.class)
-					&& clazz.isAnnotationPresent(SpringComponent.class)) {
-				SpringComponent component = clazz.getAnnotation(SpringComponent.class);
-				MenuConfiguration annotation = clazz.getAnnotation(MenuConfiguration.class);
-				Menu menu = new Menu();
-				menu.setId(component.value());
-				menu.setLabel(annotation.label());
-				// menu.setTooltip(annotation.toolTip());
-				menu.setView(component.value());
-				menu.setVisible(true);
-				menu.setSeparator(false);
-				menu.setOrder(annotation.order());
-				menu.setPosition(annotation.position());
-				menu.setParent(annotation.parent().equals("") ? null : annotation.parent());
-				menus.add(menu);
-			} else {
-				LOGGER.error(
-						"Menu Configuraiton could not be read from the Class[{}] Annotations: @SpringComponent Present[{}], @MenuConfiguration Present[{}]",
-						clazz.getName(), clazz.isAnnotationPresent(SpringComponent.class),
-						clazz.isAnnotationPresent(MenuConfiguration.class));
+		for (Class<? extends View> clazz : views) {
+			if (!Modifier.isAbstract(clazz.getModifiers())) {
+
+				if (clazz.isAnnotationPresent(MenuConfiguration.class) && (clazz.isAnnotationPresent(SpringView.class)
+						|| clazz.isAnnotationPresent(SpringComponent.class))) {
+
+					SpringView springView = clazz.getAnnotation(SpringView.class);
+					SpringComponent springComponent = clazz.getAnnotation(SpringComponent.class);
+					MenuConfiguration annotation = clazz.getAnnotation(MenuConfiguration.class);
+
+					String beanName = springView != null ? springView.name() : springComponent.value();
+
+					Menu menu = new Menu();
+					menu.setId(beanName);
+					menu.setLabel(annotation.label());
+					// menu.setTooltip(annotation.toolTip());
+					menu.setView(beanName);
+					menu.setVisible(true);
+					menu.setSeparator(false);
+					menu.setOrder(annotation.order());
+					menu.setPosition(annotation.position());
+					menu.setParent(annotation.parent().equals("") ? null : annotation.parent());
+					menus.add(menu);
+
+				} else {
+					LOGGER.error(
+							"Menu configuration could not be read from the class's[{}] annotations: @SpringComponent present[{}], @MenuConfiguration present[{}]",
+							clazz.getName(), clazz.isAnnotationPresent(SpringComponent.class),
+							clazz.isAnnotationPresent(MenuConfiguration.class));
+				}
 			}
 		}
 	}

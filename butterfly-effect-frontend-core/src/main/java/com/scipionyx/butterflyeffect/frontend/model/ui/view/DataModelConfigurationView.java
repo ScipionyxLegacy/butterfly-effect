@@ -7,13 +7,15 @@ import org.vaadin.dialogs.ConfirmDialog;
 
 import com.scipionyx.butterflyeffect.frontend.model.services.EntityClientRESTConfigurationService;
 import com.scipionyx.butterflyeffect.model.model.datamodel.Entity;
+import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
+import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.window.WindowMode;
-import com.vaadin.spring.annotation.SpringComponent;
+import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -42,9 +44,12 @@ import com.vaadin.ui.themes.ValoTheme;
  * @author Renato Mendes
  *
  */
-@SpringComponent("butterfly-effect-frontend-model:DataModelConfigurationView")
-@UIScope()
+@SpringView(name = DataModelConfigurationView.VIEW_NAME)
+@UIScope
+//
 @ViewConfiguration(configurationFile = "DataModelConfigurationView.info")
+@MenuConfiguration(group = "DataModelConfiguration", label = "Data Model Configuration", position = Position.TOP_RIGHT, parent = RootView.VIEW_NAME)
+//
 @SuppressWarnings("unused")
 public class DataModelConfigurationView extends AbstractDataModelView {
 
@@ -53,11 +58,12 @@ public class DataModelConfigurationView extends AbstractDataModelView {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public static final String VIEW_NAME = "butterfly-effect-frontend-model:DataModelConfigurationView";
+
 	private boolean editing;
 
 	// private VerticalLayout workAreaPanel;
 
-	
 	private TabSheet sheet;
 
 	@Autowired

@@ -19,8 +19,6 @@ import com.vaadin.ui.VerticalLayout;
  * @author Renato Mendes
  *
  */
-
-// @DesignRoot()
 @SpringComponent(value = RootView.VIEW_NAME)
 @SpringView(name = RootView.VIEW_NAME)
 @UIScope
