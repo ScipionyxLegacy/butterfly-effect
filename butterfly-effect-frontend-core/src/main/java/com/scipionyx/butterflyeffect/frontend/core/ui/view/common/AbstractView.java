@@ -17,19 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scipionyx.butterflyeffect.frontend.configuration.ui.view.ViewConfigurationInformation;
 import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
-import com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.left.LeftPanel;
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.workarea.WorkAreaPanel;
 import com.scipionyx.butterflyeffect.ui.model.ButterflyView;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.shared.ui.MarginInfo;
-import com.vaadin.ui.AbstractSplitPanel.SplitPositionChangeEvent;
-import com.vaadin.ui.AbstractSplitPanel.SplitPositionChangeListener;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.HorizontalSplitPanel;
-import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 
 /**
@@ -54,7 +48,7 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 	protected UserMenuService userMenuService;
 
 	//
-	protected WorkAreaPanel workAreaPanel;
+	private WorkAreaPanel workAreaPanel;
 
 	//
 	protected boolean built;
@@ -65,8 +59,6 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 
 	public void doBuildMenu() {
 	}
-
-	public abstract void doBuildLeftMenu(VerticalLayout leftMenuPanel);
 
 	public abstract void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception;
 
@@ -99,44 +91,20 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 		doBuildMenu();
 
 		// Main work Area
-		HorizontalSplitPanel mainWorkArea = new HorizontalSplitPanel();
+		VerticalLayout mainWorkArea = new VerticalLayout();
 		mainWorkArea.setSizeFull();
-		mainWorkArea.setMaxSplitPosition(500, Unit.PIXELS);
-		mainWorkArea.setMinSplitPosition(50, Unit.PIXELS);
-		mainWorkArea.setSplitPosition(250, Unit.PIXELS);
+
 		this.addComponent(mainWorkArea);
 		this.setComponentAlignment(mainWorkArea, Alignment.TOP_CENTER);
 		this.setExpandRatio(mainWorkArea, 2);
 
 		ViewConfigurationInformation viewConfigurationInformation = read();
 
-		// Left Menu
-		LeftPanel left = new LeftPanel();
-		left.build(viewConfigurationInformation);
-		doBuildLeftMenu(left.getInternal());
-		mainWorkArea.addComponent(left);
-
 		// Work Area
 		workAreaPanel = new WorkAreaPanel();
+		workAreaPanel.setSizeFull();
 		workAreaPanel.build();
 		mainWorkArea.addComponent(workAreaPanel);
-
-		mainWorkArea.addSplitPositionChangeListener(new SplitPositionChangeListener() {
-
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void onSplitPositionChanged(SplitPositionChangeEvent event) {
-				if (event.getSplitPosition() == mainWorkArea.getMinSplitPosition()) {
-					Notification.show("Min");
-				} else if (event.getSplitPosition() == mainWorkArea.getMaxSplitPosition()) {
-					Notification.show("Max");
-				}
-			}
-		});
 
 		// Read Configuration
 
@@ -151,7 +119,6 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 				workAreaPanel.setSubTitle(viewConfigurationInformation.getTitle().getSubTitle());
 			}
 
-			// workAreaPanel.getBottomPanel().setCaption("Bottom Panel"); ;
 			doBuildBottomArea(workAreaPanel.getBottomPanel());
 		}
 

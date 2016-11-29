@@ -5,9 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import javax.validation.executable.ValidateOnExecution;
-
-import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractCommonView;
+import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractView;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
@@ -53,7 +51,7 @@ import com.vaadin.ui.themes.ValoTheme;
 //
 @ViewConfiguration(configurationFile = "CheckFraudLoadImagesView.info")
 @MenuConfiguration(position = Position.TOP_MAIN, label = "Load Check Images", group = "", order = 1, parent = RootView.VIEW_NAME)
-public class LoadImagesView extends AbstractCommonView {
+public class LoadImagesView extends AbstractView {
 
 	public static final String VIEW_NAME = "butterfly-effect-frontend-checkfraud:loadImagesView";
 
@@ -77,6 +75,13 @@ public class LoadImagesView extends AbstractCommonView {
 	@Override
 	public void doBuild() {
 
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception {
 		Label infoLabel = new Label("Drop the Check images Here");
 
 		VerticalLayout dropPane = new VerticalLayout(infoLabel);
@@ -94,14 +99,6 @@ public class LoadImagesView extends AbstractCommonView {
 		dropPane.addComponent(progress);
 
 		workAreaPanel.addComponent(dropBox);
-
-	}
-
-	/**
-	 * 
-	 */
-	@Override
-	public void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception {
 	}
 
 	@Override

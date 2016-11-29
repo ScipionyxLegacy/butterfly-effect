@@ -1,6 +1,6 @@
 package com.scipionyx.butterflyeffect.frontend.core.ui.view.root;
 
-import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractCommonView;
+import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractView;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
@@ -27,7 +27,7 @@ import com.vaadin.ui.VerticalLayout;
 //
 @ViewConfiguration(configurationFile = "RootView.info")
 @MenuConfiguration(position = Position.TOP_MAIN, label = "Home", group = "", order = -1)
-public class RootView extends AbstractCommonView {
+public class RootView extends AbstractView {
 
 	public static final String VIEW_NAME = "butterfly-effect-frontend-core:root";
 

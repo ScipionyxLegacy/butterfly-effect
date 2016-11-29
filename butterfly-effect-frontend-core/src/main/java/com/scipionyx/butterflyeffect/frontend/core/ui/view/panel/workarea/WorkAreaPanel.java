@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.springframework.util.StringUtils;
 
-import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.AbstractLayout;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.GridLayout;
@@ -46,7 +45,7 @@ public class WorkAreaPanel extends VerticalLayout {
 		GridLayout gridLayout = new GridLayout(2, 2);
 		gridLayout.setSizeFull();
 		gridLayout.setSpacing(false);
-		gridLayout.setMargin(new MarginInfo(false, true, false, true));
+		// gridLayout.setMargin(new MarginInfo(false, true, false, true));
 		gridLayout.setColumnExpandRatio(0, 1);
 		gridLayout.setColumnExpandRatio(1, 1);
 		gridLayout.setRowExpandRatio(0, 1);
@@ -93,7 +92,7 @@ public class WorkAreaPanel extends VerticalLayout {
 	private AbstractLayout buildTitleLayout() {
 
 		VerticalLayout titleLayout = new VerticalLayout();
-		titleLayout.setMargin(new MarginInfo(true, false, true, false));
+		// titleLayout.setMargin(new MarginInfo(true, false, true, false));
 		titleLayout.setSpacing(false);
 
 		//
