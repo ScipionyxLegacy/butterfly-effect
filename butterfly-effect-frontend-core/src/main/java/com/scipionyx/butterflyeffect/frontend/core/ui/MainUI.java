@@ -17,6 +17,7 @@ package com.scipionyx.butterflyeffect.frontend.core.ui;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.scipionyx.butterflyeffect.frontend.configuration.ui.view.AccessControlView;
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top.TopFactory;
 import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.Navigator;
@@ -101,6 +102,11 @@ public class MainUI extends UI {
 		Button button = new Button(caption);
 		button.addStyleName(ValoTheme.BUTTON_SMALL);
 		button.addClickListener(new Button.ClickListener() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void buttonClick(Button.ClickEvent event) {
 				getUI().getNavigator().navigateTo(viewName);
@@ -111,17 +117,23 @@ public class MainUI extends UI {
 
 	private class ErrorView extends VerticalLayout implements View {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private Label message;
 
 		ErrorView() {
 			setMargin(true);
-			message = new Label("Please click one of the buttons at the top of the screen.");
-			addComponent(message);
+			message = new Label("ErrorView");
 			message.addStyleName(ValoTheme.LABEL_COLORED);
+			addComponent(message);
 		}
 
 		@Override
 		public void enter(ViewChangeListener.ViewChangeEvent event) {
+			message.setCaption("Error:" + event.getViewName());
+
 		}
 	}
 

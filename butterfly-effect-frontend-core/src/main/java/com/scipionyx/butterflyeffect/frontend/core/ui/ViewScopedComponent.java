@@ -36,7 +36,12 @@ import javax.annotation.PreDestroy;
 @SpringComponent
 public class ViewScopedComponent extends Label {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ViewScopedComponent.class);
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(ViewScopedComponent.class);
 
     @Autowired
     ViewScopedBusinessObject viewScopedBusinessObject;

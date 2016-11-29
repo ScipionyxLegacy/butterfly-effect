@@ -16,16 +16,55 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface MenuConfiguration {
 
+	public static final String NULL = null;
+
 	public enum Position {
-		TOP_MAIN, TOP_RIGHT
+		TOP_MAIN, TOP_RIGHT, LEFT_MAIN, LEFT_BOTTOM
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String label();
 
+	/**
+	 * 
+	 * @return
+	 */
+	public String toolTip() default "";
+
+	/**
+	 * Defines the position for the menu defined on the View
+	 * 
+	 * @return
+	 */
 	public Position position();
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String group();
 
-	public int order() default 0;
+	/**
+	 * Defines the priority order for the menu
+	 * 
+	 * @return
+	 */
+	public int order() default -1;
+
+	/**
+	 * Defines that the children menus are sorted
+	 * 
+	 * @return
+	 */
+	public boolean sortChildren() default true;
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String parent() default "";
 
 }

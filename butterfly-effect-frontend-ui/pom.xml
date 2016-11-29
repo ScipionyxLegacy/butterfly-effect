@@ -17,8 +17,7 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-spring-boot-starter</artifactId>
-			<version>1.0.0</version>
-		</dependency>
+			</dependency>
 		
 	</dependencies>
 

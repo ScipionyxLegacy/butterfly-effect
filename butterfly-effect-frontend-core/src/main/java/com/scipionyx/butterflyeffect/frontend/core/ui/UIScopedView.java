@@ -39,7 +39,11 @@ import javax.annotation.PreDestroy;
 @SpringView(name = UIScopedView.VIEW_NAME)
 public class UIScopedView extends VerticalLayout implements View {
 
-    public static final String VIEW_NAME = "ui";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2219058319796724222L;
+	public static final String VIEW_NAME = "ui";
     private static final Logger LOGGER = LoggerFactory.getLogger(UIScopedView.class);
     @Autowired
     UIScopedBusinessObject uiScopedBusinessObject; // You can inject other UI scoped beans into a UI scoped bean
@@ -56,7 +60,12 @@ public class UIScopedView extends VerticalLayout implements View {
         addComponent(label);
 
         addComponent(new Button("Invoke a UI scoped business object", new Button.ClickListener() {
-            @Override
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 6615406583616450958L;
+
+			@Override
             public void buttonClick(Button.ClickEvent event) {
                 addComponent(new Label(uiScopedBusinessObject.sayHello()));
             }

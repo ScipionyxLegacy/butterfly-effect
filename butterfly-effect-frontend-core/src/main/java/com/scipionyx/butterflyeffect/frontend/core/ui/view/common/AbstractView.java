@@ -18,7 +18,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scipionyx.butterflyeffect.frontend.configuration.ui.view.ViewConfigurationInformation;
 import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.left.LeftPanel;
-import com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top.TopFactory;
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.workarea.WorkAreaPanel;
 import com.scipionyx.butterflyeffect.ui.model.ButterflyView;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
@@ -53,10 +52,6 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 	// Services
 	@Autowired
 	protected UserMenuService userMenuService;
-
-	// Main Panels
-	@Autowired
-	protected TopFactory topFactory;
 
 	//
 	protected WorkAreaPanel workAreaPanel;
@@ -102,9 +97,6 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 
 		// Top Menu
 		doBuildMenu();
-
-		// Top panel
-		this.addComponent(topFactory.instance(), 0);
 
 		// Main work Area
 		HorizontalSplitPanel mainWorkArea = new HorizontalSplitPanel();

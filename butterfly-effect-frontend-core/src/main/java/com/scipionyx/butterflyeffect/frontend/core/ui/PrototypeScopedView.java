@@ -41,6 +41,10 @@ import com.vaadin.ui.VerticalLayout;
 @SpringView(name = PrototypeScopedView.VIEW_NAME)
 public class PrototypeScopedView extends VerticalLayout implements View {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final String VIEW_NAME = "prototype";
 	private static final Logger LOGGER = LoggerFactory.getLogger(PrototypeScopedView.class);
 	@Autowired
@@ -62,6 +66,11 @@ public class PrototypeScopedView extends VerticalLayout implements View {
 		addComponent(label);
 
 		addComponent(new Button("Invoke a UI scoped business object", new Button.ClickListener() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void buttonClick(Button.ClickEvent event) {
 				addComponent(new Label(uiScopedBusinessObject.sayHello()));

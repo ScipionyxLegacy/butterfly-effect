@@ -29,7 +29,12 @@ import java.io.Serializable;
 @Component
 public class UIScopedBusinessObject implements Serializable {
 
-    public String sayHello() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public String sayHello() {
         return String.format("Hello, I'm %s and I'm UI scoped! I will take care of you myself during the lifecycle of the UI.", this);
     }
 }

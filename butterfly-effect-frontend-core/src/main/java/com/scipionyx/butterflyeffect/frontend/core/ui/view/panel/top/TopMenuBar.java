@@ -2,6 +2,7 @@ package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top;
 
 import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
+import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -27,6 +28,7 @@ class TopMenuBar extends MenuBar {
 	void build(UserMenuService userMenuService) {
 		this.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
 		this.userMenuService = userMenuService;
+		this.setEnabled(true);
 		buildMainMenuBar();
 	}
 
@@ -35,34 +37,29 @@ class TopMenuBar extends MenuBar {
 	 * @param menuBar
 	 */
 	private void buildMainMenuBar() {
-		//
-
-		// Map<String, NavigationCommand> menus = new HashMap<>();
 
 		for (Menu menu : userMenuService.getMenus()) {
 
-			// String id = (menu.getId() != null) ? menu.getId() : "NO-LABEL";
-			String label = (menu.getLabel() != null) ? menu.getLabel() : "NO-LABEL";
+			if (menu.getPosition() == Position.TOP_MAIN) {
 
-			// NavigationCommand command = (menu.getView() != null)
-			// ? new NavigationCommand(userMenuService, menu.getView()) : null;
+				String label = (menu.getLabel() != null) ? menu.getLabel() : "NO-LABEL";
 
-			if (menu.getParent() == null) {
+				if (menu.getParent() == null) {
 
-				this.addItem(label, new Command() {
+					this.addItem(label, new Command() {
 
-					/**
-					 * 
-					 */
-					private static final long serialVersionUID = 1L;
+						/**
+						 * 
+						 */
+						private static final long serialVersionUID = 1L;
 
-					@Override
-					public void menuSelected(MenuItem selectedItem) {
-						//
-						selectedItem.setChecked(true);
-						// command.navigate();
-					}
-				});
+						@Override
+						public void menuSelected(MenuItem selectedItem) {
+							getUI().getNavigator().navigateTo(menu.getView());
+						}
+					});
+
+				}
 
 			}
 		}

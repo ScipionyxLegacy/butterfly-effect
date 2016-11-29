@@ -1,6 +1,8 @@
 package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top;
 
 import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
+import com.scipionyx.butterflyeffect.frontend.model.Menu;
+import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.GridLayout;
@@ -65,21 +67,30 @@ class TopMenuPanel extends GridLayout {
 		topMenuSearch.build();
 		topRight.addComponent(topMenuSearch);
 
+		//
+		for (Menu menu : userMenuService.getMenus()) {
+			if (menu.getPosition() == Position.TOP_RIGHT && menu.getParent() == null) {
+				TopMenuRight panel = new TopMenuRight();
+				panel.build(menu, userMenuService);
+				topRight.addComponent(panel);
+			}
+		}
+
 		// Help
-		TopMenuHelp topHelpMenu = new TopMenuHelp();
-		topHelpMenu.build();
-		topRight.addComponent(topHelpMenu);
+		// TopMenuHelp topHelpMenu = new TopMenuHelp();
+		// topHelpMenu.build();
+		// topRight.addComponent(topHelpMenu);
 
 		// System Configuration
-		TopMenuConfiguration topMenuConfiguration = new TopMenuConfiguration();
-		topMenuConfiguration.setUserMenuService(userMenuService);
-		topMenuConfiguration.build();
-		topRight.addComponent(topMenuConfiguration);
+		// TopMenuConfiguration topMenuConfiguration = new
+		// TopMenuConfiguration();
+		// topMenuConfiguration.build();
+		// topRight.addComponent(topMenuConfiguration);
 
 		// User
-		TopMenuUser topMenuUser = new TopMenuUser();
-		topMenuUser.build();
-		topRight.addComponent(topMenuUser);
+		// TopMenuUser topMenuUser = new TopMenuUser();
+		// topMenuUser.build();
+		// topRight.addComponent(topMenuUser);
 
 	}
 

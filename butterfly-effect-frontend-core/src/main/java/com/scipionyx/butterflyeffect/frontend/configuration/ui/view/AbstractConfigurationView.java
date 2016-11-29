@@ -106,14 +106,11 @@ public abstract class AbstractConfigurationView extends AbstractView implements 
 
 		private Map<LeftConfigurationMenuItem, Button> buttons;
 
-		private UserMenuService userMenuService;
-
 		/**
 		 * 
 		 * @param caption
 		 */
 		SectionPanel(String caption, UserMenuService userMenuService) {
-			this.userMenuService = userMenuService;
 			buttons = new HashMap<>();
 			setCaption(caption);
 			setContent(new VerticalLayout() {

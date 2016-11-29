@@ -26,7 +26,7 @@ import com.vaadin.ui.VerticalLayout;
 @UIScope
 //
 @ViewConfiguration(configurationFile = "RootView.info")
-@MenuConfiguration(position = Position.TOP_MAIN, label = "Home", group = "")
+@MenuConfiguration(position = Position.TOP_MAIN, label = "Home", group = "", order = -1)
 public class RootView extends AbstractCommonView {
 
 	public static final String VIEW_NAME = "butterfly-effect-frontend-core:root";

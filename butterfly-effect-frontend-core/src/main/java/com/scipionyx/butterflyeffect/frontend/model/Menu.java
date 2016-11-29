@@ -2,6 +2,8 @@ package com.scipionyx.butterflyeffect.frontend.model;
 
 import java.io.Serializable;
 
+import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
+
 /**
  * 
  * @author Renato Mendes
@@ -25,6 +27,10 @@ public class Menu implements Serializable {
 	private boolean separator;
 
 	private boolean visible;
+
+	private int order;
+
+	private MenuConfiguration.Position position;
 
 	@Override
 	public int hashCode() {
@@ -97,6 +103,22 @@ public class Menu implements Serializable {
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+	}
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
+	public MenuConfiguration.Position getPosition() {
+		return position;
+	}
+
+	public void setPosition(MenuConfiguration.Position position) {
+		this.position = position;
 	}
 
 }

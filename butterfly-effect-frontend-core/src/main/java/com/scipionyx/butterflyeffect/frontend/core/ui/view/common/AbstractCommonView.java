@@ -83,8 +83,6 @@ public abstract class AbstractCommonView extends AbstractView {
 		menu.setView(springComponent.value());
 		menu.setVisible(true);
 
-		
-
 	}
 
 	/**
@@ -147,14 +145,11 @@ public abstract class AbstractCommonView extends AbstractView {
 
 		private Map<LeftConfigurationMenuItem, Button> buttons;
 
-		private UserMenuService userMenuService;
-
 		/**
 		 * 
 		 * @param caption
 		 */
 		SectionPanel(String caption, UserMenuService userMenuService) {
-			this.userMenuService = userMenuService;
 			buttons = new HashMap<>();
 			setCaption(caption);
 			setContent(new VerticalLayout() {
@@ -181,7 +176,6 @@ public abstract class AbstractCommonView extends AbstractView {
 
 			buttons.put(item, button);
 
-			
 			button.setStyleName(ValoTheme.BUTTON_LINK);
 			button.addStyleName(ValoTheme.BUTTON_BORDERLESS);
 			button.addStyleName(ValoTheme.BUTTON_SMALL);
@@ -195,7 +189,7 @@ public abstract class AbstractCommonView extends AbstractView {
 				@Override
 				public void buttonClick(ClickEvent event) {
 					Notification.show("Pressed:" + item.getLabel());
-					//command.navigate();
+					// command.navigate();
 				}
 			});
 
