@@ -47,7 +47,7 @@ class TopMenuPanel extends GridLayout {
 
 		// Menu
 		TopMenuBar topMenuBar = new TopMenuBar();
-		topMenuBar.build(userMenuService);
+		topMenuBar.build(userMenuService.getMenus());
 		layout.addComponent(topMenuBar);
 		layout.setComponentAlignment(topMenuBar, Alignment.MIDDLE_LEFT);
 
@@ -67,7 +67,7 @@ class TopMenuPanel extends GridLayout {
 		for (Menu menu : userMenuService.getMenus()) {
 			if (menu.getPosition() == Position.TOP_RIGHT && menu.getParent() == null) {
 				TopMenuRight panel = new TopMenuRight();
-				panel.build(menu, userMenuService);
+				panel.build(menu, userMenuService.getMenus());
 				topRight.addComponent(panel);
 			}
 		}

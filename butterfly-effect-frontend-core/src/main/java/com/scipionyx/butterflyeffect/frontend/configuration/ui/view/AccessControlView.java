@@ -51,9 +51,10 @@ import com.vaadin.ui.VerticalLayout;
  *
  * @author Petter Holmström (petter@vaadin.com)
  */
+@UIScope
 @SpringComponent(value = AccessControlView.VIEW_NAME)
 @SpringView(name = AccessControlView.VIEW_NAME)
-@UIScope
+
 //
 @ViewConfiguration(configurationFile = "ConfigurationRootView.info")
 @MenuConfiguration(position = Position.TOP_RIGHT, label = "Access", group = "", order = 1, parent = RootView.VIEW_NAME)

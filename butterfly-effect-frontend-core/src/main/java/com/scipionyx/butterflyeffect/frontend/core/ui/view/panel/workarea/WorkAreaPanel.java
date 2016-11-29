@@ -41,7 +41,6 @@ public class WorkAreaPanel extends VerticalLayout {
 
 		//
 		this.setSizeFull();
-		// this.setStyleName(ValoTheme.MENU_ROOT);
 
 		// Main layout for the work area
 		GridLayout gridLayout = new GridLayout(2, 2);
@@ -73,6 +72,7 @@ public class WorkAreaPanel extends VerticalLayout {
 	 */
 	private Component buildWorkAreaLayout() {
 		workPanel = new VerticalLayout();
+		workPanel.setMargin(true);
 		workPanel.setSizeFull();
 		return workPanel;
 	}
@@ -105,7 +105,6 @@ public class WorkAreaPanel extends VerticalLayout {
 		//
 		subTitleLabel = new Label();
 		subTitleLabel.addStyleName(ValoTheme.LABEL_TINY);
-		// subTitleLabel.addStyleName(ValoTheme.LABEL_NO_MARGIN);
 		titleLayout.addComponent(subTitleLabel);
 
 		return titleLayout;
@@ -124,7 +123,6 @@ public class WorkAreaPanel extends VerticalLayout {
 		if (!StringUtils.isEmpty(title)) {
 			titleLabel.setValue(title);
 		} else {
-			// titleGridLayout.removeComponent(this.titleLabel);
 		}
 	}
 
@@ -136,7 +134,6 @@ public class WorkAreaPanel extends VerticalLayout {
 		if (!StringUtils.isEmpty(subTitle)) {
 			subTitleLabel.setValue(subTitle);
 		} else {
-			// titleGridLayout.removeComponent(this.subTitleLabel);
 		}
 
 	}

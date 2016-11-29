@@ -91,9 +91,9 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 	@PostConstruct
 	private void init() throws Exception {
 
-		this.setMargin(new MarginInfo(false, false, false, false));
+		this.setMargin(true);
 		this.setSizeFull();
-		this.setSpacing(false);
+		this.setSpacing(true);
 
 		// Top Menu
 		doBuildMenu();
@@ -120,7 +120,6 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 		workAreaPanel = new WorkAreaPanel();
 		workAreaPanel.build();
 		mainWorkArea.addComponent(workAreaPanel);
-		// mainWorkArea.setExpandRatio(workAreaPanel, 10);
 
 		mainWorkArea.addSplitPositionChangeListener(new SplitPositionChangeListener() {
 

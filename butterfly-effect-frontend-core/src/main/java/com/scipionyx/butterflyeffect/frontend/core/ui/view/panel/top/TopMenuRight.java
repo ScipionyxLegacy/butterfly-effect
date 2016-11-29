@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.vaadin.teemu.VaadinIcons;
 
-import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.MenuBar;
@@ -27,9 +26,9 @@ public class TopMenuRight extends MenuBar {
 	 * @param userMenuService
 	 * 
 	 */
-	public void build(Menu menu, UserMenuService userMenuService) {
+	public void build(Menu menu, List<Menu> list) {
 		this.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
-		List<Menu> list = userMenuService.getMenus();
+		@SuppressWarnings("unused")
 		MenuItem root = addRoot(menu, list);
 		// addChildren(root, menu, list);
 	}
@@ -108,7 +107,7 @@ public class TopMenuRight extends MenuBar {
 	 */
 	private boolean hasChildren(Menu menu, List<Menu> list) {
 		for (Menu menu2 : list) {
-			if (menu.getId().equals(menu2.getParent())){
+			if (menu.getId().equals(menu2.getParent())) {
 				return true;
 			}
 		}
