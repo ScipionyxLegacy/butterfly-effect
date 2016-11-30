@@ -1,5 +1,7 @@
 package com.scipionyx.butterflyeffect.frontend.checkfraud.services;
 
+import com.scipionyx.butterflyeffect.checkfraud.model.CheckImage;
+
 /**
  * 
  * 
@@ -8,8 +10,8 @@ package com.scipionyx.butterflyeffect.frontend.checkfraud.services;
  */
 public interface ICheckImageService {
 
-	public void analyze();
+	public CheckImage analyze();
 
-	public void ping();
+	public String ping();
 
 }

@@ -13,10 +13,10 @@ import org.springframework.context.annotation.Configuration;
  * @author Renato Mendes
  *
  */
-@SpringBootApplication
+@SpringBootApplication()
 @ComponentScan(basePackages = { "${butterflyeffect.system.componentscan.basepackages}", })
 
-@Configuration
+@Configuration()
 @EnableAutoConfiguration
 // @EnableEurekaClient
 public class FrontEndApplication {

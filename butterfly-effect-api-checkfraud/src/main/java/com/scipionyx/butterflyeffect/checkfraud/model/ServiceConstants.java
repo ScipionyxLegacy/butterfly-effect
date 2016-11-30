@@ -7,6 +7,10 @@ package com.scipionyx.butterflyeffect.checkfraud.model;
  */
 public class ServiceConstants {
 
-	public final static String CHECK_IMAGE_ANALYZE = "/bottomline/checkfraud/analyzeimage";
+	public final static String REST_BASE = "REST_SERVICES/checkfraud/checkimage/";
+
+	public final static String REST_IMAGE_PING = REST_BASE + "ping/";
+
+	public final static String REST_IMAGE_ANALYZE = REST_BASE + "analyze/";
 
 }

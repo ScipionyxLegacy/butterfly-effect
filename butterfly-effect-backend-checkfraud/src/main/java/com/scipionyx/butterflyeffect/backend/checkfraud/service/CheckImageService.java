@@ -3,6 +3,8 @@ package com.scipionyx.butterflyeffect.backend.checkfraud.service;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.scipionyx.butterflyeffect.checkfraud.model.CheckImage;
+
 /**
  * 
  * @author Renato Mendes - rmendes@bottomline.com / renato.mendes.1123@gmail.com
@@ -15,11 +17,14 @@ public class CheckImageService {
 
 	/**
 	 * 
+	 * @param bs
 	 * @return
 	 */
-	public final String analyze() {
+	public final CheckImage analyze(byte[] bs) {
 		LOGGER.info("Analyze executed");
-		return null;
+		CheckImage checkImage = new CheckImage();
+		checkImage.setImage(bs);
+		return checkImage;
 	}
 
 }

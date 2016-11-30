@@ -13,6 +13,8 @@ public class CheckImage {
 
 	private String name;
 
+	private byte[] image;
+
 	public String getId() {
 		return id;
 	}
@@ -35,6 +37,14 @@ public class CheckImage {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 }

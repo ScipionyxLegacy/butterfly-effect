@@ -12,4 +12,11 @@
 	<artifactId>butterfly-effect-backend-bootstrap</artifactId>
 
 
+	<dependencies>
+		<dependency>
+			<groupId>com.scipionyx</groupId>
+			<artifactId>butterfly-effect-backend-checkfraud</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>
