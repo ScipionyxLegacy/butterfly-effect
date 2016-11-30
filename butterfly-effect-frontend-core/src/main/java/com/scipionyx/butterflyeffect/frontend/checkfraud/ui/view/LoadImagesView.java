@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
+import org.springframework.context.annotation.Scope;
+
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractView;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
@@ -21,7 +23,6 @@ import com.vaadin.server.StreamResource.StreamSource;
 import com.vaadin.server.StreamVariable;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
-import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DragAndDropWrapper;
@@ -47,7 +48,9 @@ import com.vaadin.ui.themes.ValoTheme;
  */
 @SpringComponent(value = LoadImagesView.VIEW_NAME)
 @SpringView(name = LoadImagesView.VIEW_NAME)
-@UIScope
+// @UIScope
+@Scope(scopeName = "session")
+
 //
 @ViewConfiguration(configurationFile = "CheckFraudLoadImagesView.info")
 @MenuConfiguration(position = Position.TOP_MAIN, label = "Load Check Images", group = "", order = 1, parent = RootView.VIEW_NAME)
@@ -63,7 +66,7 @@ public class LoadImagesView extends AbstractView {
 	ProgressBar progress;
 
 	Table resultTable;
-	
+
 	VerticalLayout workAreaPanel;
 
 	/**
@@ -86,9 +89,9 @@ public class LoadImagesView extends AbstractView {
 	 */
 	@Override
 	public void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception {
-		
+
 		this.workAreaPanel = workAreaPanel;
-		
+
 		Label infoLabel = new Label("Drop the Check images Here");
 		infoLabel.addStyleName(ValoTheme.LABEL_COLORED);
 		// infoLabel.setSizeFull();
@@ -112,11 +115,14 @@ public class LoadImagesView extends AbstractView {
 
 		// Results Table
 		resultTable = new Table("Result Table");
+		resultTable.setSizeFull();
 
 		resultTable.addContainerProperty("Id", String.class, UUID.randomUUID().toString());
 		resultTable.addContainerProperty("File Name", String.class, null);
+		resultTable.addContainerProperty("File Type", String.class, null);
 		resultTable.addContainerProperty("Status", String.class, null);
 		resultTable.addContainerProperty("Description", String.class, null);
+		resultTable.addContainerProperty("File", Embedded.class, null);
 
 		workAreaPanel.addComponent(resultTable);
 
@@ -222,7 +228,7 @@ public class LoadImagesView extends AbstractView {
 		 * @param text
 		 */
 		private void showText(final String text) {
-			showComponent(new Label(text), "Wrapped text content");
+			Notification.show("Please upload only image files", Notification.Type.ERROR_MESSAGE);
 		}
 
 		/**
@@ -252,26 +258,33 @@ public class LoadImagesView extends AbstractView {
 
 			// show the file contents - images only for now
 			final Embedded embedded = new Embedded(name, resource);
-			showComponent(embedded, name);
+			showComponent(embedded, name, type);
 		}
 
 		/**
 		 * 
 		 * @param c
 		 * @param name
+		 * @param type
 		 */
 		@SuppressWarnings("unchecked")
-		private void showComponent(final Component c, final String name) {
+		private void showComponent(final Component c, final String name, String type) {
+
+			if (!type.startsWith("image")) {
+				Notification.show("File type [" + type + "] are not permitted.", "Only image files are permitted",
+						Notification.Type.ERROR_MESSAGE);
+				return;
+			}
 
 			Object newItemId = resultTable.addItem();
 
 			Item row1 = resultTable.getItem(newItemId);
 			// row1.getItemProperty("Id").setValue();
 			row1.getItemProperty("File Name").setValue(name);
-			row1.getItemProperty("Status").setValue("uploading");
+			row1.getItemProperty("File Type").setValue(type);
+			row1.getItemProperty("Status").setValue("New");
 			row1.getItemProperty("Description").setValue("..");
-			
-			workAreaPanel.addComponent(c);
+			row1.getItemProperty("File").setValue(c);
 
 		}
 
