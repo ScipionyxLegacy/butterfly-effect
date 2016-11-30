@@ -6,7 +6,7 @@
 		<groupId>com.scipionyx</groupId>
 		<artifactId>butterfly-effect-backend</artifactId>
 		<version>0.1.0-SNAPSHOT</version>
-		<relativePath>../../../../../Git/ButterflyEffect/butterfly-effect-backend</relativePath>
+		<relativePath>../butterfly-effect-backend</relativePath>
 	</parent>
 
 	<artifactId>butterfly-effect-backend-bootstrap</artifactId>
