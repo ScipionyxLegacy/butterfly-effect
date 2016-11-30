@@ -4,6 +4,8 @@ Implementation-Version: 0.1.0-SNAPSHOT
 Built-By: rmendes
 Implementation-Vendor-Id: com.scipionyx
 Build-Jdk: 1.8.0_45
+Implementation-URL: www.scipionyx.com/butteflyeffect/butterfly-effect-
+ frontend-plugin
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Scipionyx
 

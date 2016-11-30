@@ -10,4 +10,6 @@ public interface ICheckImageService {
 
 	public void analyze();
 
+	public void ping();
+
 }

@@ -21,4 +21,10 @@ public class CheckImageService extends AbstractCheckFraudRESTService<CheckImage>
 
 	}
 
+	@Override
+	public void ping() {
+		// TODO Auto-generated method stub
+
+	}
+
 }

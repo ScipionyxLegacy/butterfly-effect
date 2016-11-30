@@ -26,19 +26,19 @@
 
 	<dependencies>
 
-		<!-- Vaadin -->
-
-
+		<!-- Spring Boot -->
 
 		<dependency>
-			<groupId>org.vaadin.addons</groupId>
-			<artifactId>stackpanel-extension-for-vaadin</artifactId>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-spring-boot-starter</artifactId>
 		</dependency>
 
-		<!-- <dependency> -->
-		<!-- <groupId>org.vaadin.spring.extensions</groupId> -->
-		<!-- <artifactId>vaadin-spring-ext-core</artifactId> -->
-		<!-- </dependency> -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+		</dependency>
+
+		<!-- Vaadin -->
 
 		<dependency>
 			<groupId>com.vaadin</groupId>
@@ -55,18 +55,17 @@
 			<artifactId>vaadin-client-compiled</artifactId>
 		</dependency>
 
-
-		<!-- Vaadin Stuff -->
-
 		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-spring-boot-starter</artifactId>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>stackpanel-extension-for-vaadin</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>org.vaadin.addon</groupId>
 			<artifactId>confirmdialog</artifactId>
 		</dependency>
+
+		<!-- Vaadin Stuff -->
 
 		<dependency>
 			<groupId>io.github.lukehutch</groupId>
@@ -84,9 +83,6 @@
 
 
 		<!-- Components -->
-
-
-
 
 	</dependencies>
 
