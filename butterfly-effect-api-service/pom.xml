@@ -3,7 +3,8 @@
   <artifactId>butterfly-effect-api-service</artifactId>
   <parent>
   	<groupId>com.scipionyx</groupId>
-  	<artifactId>butterfly-effect</artifactId>
+  	<artifactId>butterfly-effect-api</artifactId>
   	<version>0.1.0-SNAPSHOT</version>
+  	<relativePath>../butterfly-effect-api</relativePath>
   </parent>
 </project>

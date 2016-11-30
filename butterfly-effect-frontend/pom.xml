@@ -28,15 +28,7 @@
 
 		<!-- Vaadin -->
 
-		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-spring-boot-starter</artifactId>
-		</dependency>
 
-		<dependency>
-			<groupId>org.vaadin.addon</groupId>
-			<artifactId>confirmdialog</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.vaadin.addons</groupId>
@@ -63,42 +55,38 @@
 			<artifactId>vaadin-client-compiled</artifactId>
 		</dependency>
 
+
+		<!-- Vaadin Stuff -->
+
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.vaadin.addon</groupId>
+			<artifactId>confirmdialog</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>io.github.lukehutch</groupId>
 			<artifactId>fast-classpath-scanner</artifactId>
 			<version>LATEST</version>
 		</dependency>
 
-		<!-- Butterfly Effect -->
-
 		<dependency>
 			<groupId>com.scipionyx</groupId>
-			<artifactId>butterfly-effect-frontend-core</artifactId>
+			<artifactId>butterfly-effect-api-ui</artifactId>
 			<version>0.1.0-SNAPSHOT</version>
 		</dependency>
+
+		<!-- Butterfly Effect -->
+
 
 		<!-- Components -->
 
-		<dependency>
-			<groupId>com.scipionyx</groupId>
-			<artifactId>butterfly-effect-frontend-configuration</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
 
-		<dependency>
-			<groupId>com.scipionyx</groupId>
-			<artifactId>butterfly-effect-frontend-model</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
 
-		<dependency>
-			<groupId>com.scipionyx</groupId>
-			<artifactId>butterfly-effect-frontend-checkfraud</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
 
 	</dependencies>
 
@@ -131,4 +119,17 @@
 		</plugins>
 	</build>
 
+	<packaging>pom</packaging>
+	<modules>
+
+		<module>../butterfly-effect-frontend-checkfraud</module>
+		<module>../butterfly-effect-frontend-cluster</module>
+		<module>../butterfly-effect-frontend-configuration</module>
+		<module>../butterfly-effect-frontend-core</module>
+		<module>../butterfly-effect-frontend-model</module>
+		<module>../butterfly-effect-frontend-plugin</module>
+		<module>../butterfly-effect-frontend-security</module>
+		<module>../butterfly-effect-frontend-ui</module>
+		<module>../butterfly-effect-frontend-bootstrap</module>
+	</modules>
 </project>
