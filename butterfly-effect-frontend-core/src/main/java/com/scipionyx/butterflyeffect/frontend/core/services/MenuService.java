@@ -33,9 +33,9 @@ import io.github.lukehutch.fastclasspathscanner.FastClasspathScanner;
  */
 @SpringComponent("userMenuService")
 @Scope(scopeName = WebApplicationContext.SCOPE_SESSION)
-public class UserMenuService implements Serializable {
+public class MenuService implements Serializable {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(UserMenuService.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(MenuService.class);
 
 	private List<Menu> menus;
 

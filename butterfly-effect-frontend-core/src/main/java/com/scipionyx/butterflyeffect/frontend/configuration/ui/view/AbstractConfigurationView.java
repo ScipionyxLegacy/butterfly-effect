@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.scipionyx.butterflyeffect.configuration.model.leftmenu.LeftConfigurationMenuItem;
-import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
+import com.scipionyx.butterflyeffect.frontend.core.services.MenuService;
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractView;
 import com.scipionyx.butterflyeffect.ui.model.ButterflyView;
 import com.vaadin.ui.Button;
@@ -55,7 +55,7 @@ public abstract class AbstractConfigurationView extends AbstractView implements 
 		 * 
 		 * @param caption
 		 */
-		SectionPanel(String caption, UserMenuService userMenuService) {
+		SectionPanel(String caption, MenuService userMenuService) {
 			buttons = new HashMap<>();
 			setCaption(caption);
 			setContent(new VerticalLayout() {

@@ -2,7 +2,7 @@ package com.scipionyx.butterflyeffect.frontend.core.ui.view.common;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
+import com.scipionyx.butterflyeffect.frontend.core.services.MenuService;
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.bottom.BottomPanel;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
@@ -25,7 +25,7 @@ public abstract class AbstractDialogView extends VerticalLayout implements View 
 
 	// Services
 	@Autowired
-	protected UserMenuService userMenuService;
+	protected MenuService userMenuService;
 
 	protected Navigator navigator;
 
@@ -57,11 +57,11 @@ public abstract class AbstractDialogView extends VerticalLayout implements View 
 	//
 	public abstract void doBuild();
 
-	public UserMenuService getUserMenuService() {
+	public MenuService getUserMenuService() {
 		return userMenuService;
 	}
 
-	public void setUserMenuService(UserMenuService userMenuService) {
+	public void setUserMenuService(MenuService userMenuService) {
 		this.userMenuService = userMenuService;
 	}
 

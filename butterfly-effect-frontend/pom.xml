@@ -125,10 +125,10 @@
 		<module>../butterfly-effect-frontend-checkfraud</module>
 		<module>../butterfly-effect-frontend-cluster</module>
 		<module>../butterfly-effect-frontend-configuration</module>
-		<module>../butterfly-effect-frontend-core</module>
 		<module>../butterfly-effect-frontend-model</module>
 		<module>../butterfly-effect-frontend-plugin</module>
 		<module>../butterfly-effect-frontend-security</module>
 		<module>../butterfly-effect-frontend-ui</module>
+		<module>../butterfly-effect-frontend-core</module>
 	</modules>
 </project>

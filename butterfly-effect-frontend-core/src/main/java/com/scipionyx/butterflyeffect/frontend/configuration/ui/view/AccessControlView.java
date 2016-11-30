@@ -23,7 +23,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
-import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
+import com.scipionyx.butterflyeffect.frontend.core.services.MenuService;
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.templates.PrototypeScopedView;
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.templates.UIScopedView;
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.templates.ViewScopedView;
@@ -72,7 +72,7 @@ public class AccessControlView extends VerticalLayout implements View, ViewAcces
 	ApplicationContext applicationContext;
 
 	@Autowired
-	private UserMenuService userMenuService;
+	private MenuService userMenuService;
 
 	@PostConstruct
 	private void init() {

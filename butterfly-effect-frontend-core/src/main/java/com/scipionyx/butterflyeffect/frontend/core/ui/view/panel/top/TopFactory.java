@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
+import com.scipionyx.butterflyeffect.frontend.core.services.MenuService;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.VaadinSessionScope;
 import com.vaadin.ui.Component;
@@ -28,7 +28,7 @@ public class TopFactory implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	private UserMenuService userMenuService;
+	private MenuService userMenuService;
 
 	/**
 	 * 

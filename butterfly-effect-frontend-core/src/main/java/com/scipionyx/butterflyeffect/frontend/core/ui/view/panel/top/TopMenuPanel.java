@@ -1,6 +1,6 @@
 package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top;
 
-import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
+import com.scipionyx.butterflyeffect.frontend.core.services.MenuService;
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 import com.vaadin.shared.ui.MarginInfo;
@@ -25,7 +25,7 @@ class TopMenuPanel extends GridLayout {
 	 * @param userMenuService
 	 * 
 	 */
-	public void build(UserMenuService userMenuService) {
+	public void build(MenuService userMenuService) {
 
 		// Defines look & feel and layout
 		this.setColumns(2);
