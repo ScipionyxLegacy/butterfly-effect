@@ -16,27 +16,19 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>com.scipionyx</groupId>
-			<artifactId>butterfly-effect-backend-configuration</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-server</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>com.scipionyx</groupId>
-			<artifactId>butterfly-effect-backend-checkfraud</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka-server</artifactId>
 		</dependency>
-
-		<!-- <dependency> -->
-		<!-- <groupId>com.scipionyx</groupId> -->
-		<!-- <artifactId>butterfly-effect-backend-model</artifactId> -->
-		<!-- <version>0.1.0-SNAPSHOT</version> -->
-		<!-- </dependency> -->
-
 
 	</dependencies>
 
 	<build>
+
 		<plugins>
 
 			<plugin>
@@ -58,7 +50,26 @@
 				</executions>
 			</plugin>
 
-
 		</plugins>
+
 	</build>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>../butterfly-effect-backend-checkfraud</module>
+		<module>../butterfly-effect-backend-communication</module>
+		<module>../butterfly-effect-backend-configuration</module>
+		<module>../butterfly-effect-backend-model</module>
+		
+		<module>
+			../../../Documents/workspace/neon/scipionyx/butterfly-effect-backend-bootstrap
+		</module>
+	</modules>
+
+	<name>Butterfly Effect - Backend</name>
+
+	<organization>
+		<name>Scipionyx Software</name>
+	</organization>
+
 </project>

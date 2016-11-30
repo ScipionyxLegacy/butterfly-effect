@@ -4,20 +4,13 @@
 
 	<parent>
 		<groupId>com.scipionyx</groupId>
-		<artifactId>butterfly-effect</artifactId>
+		<artifactId>butterfly-effect-backend</artifactId>
 		<version>0.1.0-SNAPSHOT</version>
+		<relativePath>../../../../../Git/ButterflyEffect/butterfly-effect-backend</relativePath>
 	</parent>
 
-	<artifactId>butterfly-effect-backend-checkfraud</artifactId>
-	
-	<dependencies>
-	
-		<dependency>
-			<groupId>com.scipionyx</groupId>
-			<artifactId>butterfly-effect-api-checkfraud</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
-		</dependency>
-		
-	</dependencies>
-	
+	<artifactId>butterfly-effect-backend-bootstrap</artifactId>
+
+	<version>0.0.1-SNAPSHOT</version>
+
 </project>
