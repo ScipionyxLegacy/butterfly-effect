@@ -12,11 +12,9 @@ import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanNameAware;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scipionyx.butterflyeffect.frontend.configuration.ui.view.ViewConfigurationInformation;
-import com.scipionyx.butterflyeffect.frontend.core.services.UserMenuService;
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.workarea.WorkAreaPanel;
 import com.scipionyx.butterflyeffect.ui.model.ButterflyView;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
@@ -43,28 +41,16 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 	 */
 	private static final long serialVersionUID = 1L;
 
-	// Services
-	@Autowired
-	protected UserMenuService userMenuService;
-
 	//
 	private WorkAreaPanel workAreaPanel;
-
-	//
-	protected boolean built;
 
 	private String beanName;
 
 	private ObjectMapper objectMapper;
 
-	public void doBuildMenu() {
-	}
-
 	public abstract void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception;
 
 	public abstract void doBuildBottomArea(HorizontalLayout buttomAreaPanel);
-
-	public abstract void doBuild();
 
 	public abstract void doEnter(ViewChangeEvent event);
 
@@ -86,9 +72,6 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 		this.setMargin(true);
 		this.setSizeFull();
 		this.setSpacing(true);
-
-		// Top Menu
-		doBuildMenu();
 
 		// Main work Area
 		VerticalLayout mainWorkArea = new VerticalLayout();
@@ -112,8 +95,6 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 
 			doBuildWorkArea(workAreaPanel.getWorkPanel());
 
-			workAreaPanel.getWorkPanel().setCaption("WorkPanel");
-
 			if (viewConfigurationInformation.getTitle() != null) {
 				workAreaPanel.setTitle(viewConfigurationInformation.getTitle().getTitle());
 				workAreaPanel.setSubTitle(viewConfigurationInformation.getTitle().getSubTitle());
@@ -121,8 +102,6 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 
 			doBuildBottomArea(workAreaPanel.getBottomPanel());
 		}
-
-		doBuild();
 
 	}
 

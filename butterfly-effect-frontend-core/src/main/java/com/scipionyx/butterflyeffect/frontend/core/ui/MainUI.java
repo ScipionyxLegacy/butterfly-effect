@@ -76,15 +76,16 @@ public class MainUI extends UI {
 
 		final Panel viewContainer = new Panel();
 		viewContainer.setSizeFull();
+		// viewContainer.addStyleName(ValoTheme.PANEL_SCROLL_INDICATOR);
+
+		//
 		root.addComponent(viewContainer);
 		root.setExpandRatio(viewContainer, 1.0f);
 
 		viewProvider.setAccessDeniedViewClass(AccessDeniedView.class);
 
 		Navigator navigator = new Navigator(this, viewContainer);
-		navigator.setErrorView(new ErrorView()); // You can still create the
-													// error view yourself if
-													// you want to.
+		navigator.setErrorView(new ErrorView());
 		navigator.addProvider(viewProvider);
 	}
 

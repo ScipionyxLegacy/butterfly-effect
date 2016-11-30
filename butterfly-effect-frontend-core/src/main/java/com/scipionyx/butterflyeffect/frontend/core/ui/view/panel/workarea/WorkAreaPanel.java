@@ -39,13 +39,12 @@ public class WorkAreaPanel extends VerticalLayout {
 	public final void build() throws IOException {
 
 		//
-		this.setSizeFull();
+		
 
 		// Main layout for the work area
 		GridLayout gridLayout = new GridLayout(2, 2);
 		gridLayout.setSizeFull();
 		gridLayout.setSpacing(false);
-		// gridLayout.setMargin(new MarginInfo(false, true, false, true));
 		gridLayout.setColumnExpandRatio(0, 1);
 		gridLayout.setColumnExpandRatio(1, 1);
 		gridLayout.setRowExpandRatio(0, 1);
@@ -71,8 +70,8 @@ public class WorkAreaPanel extends VerticalLayout {
 	 */
 	private Component buildWorkAreaLayout() {
 		workPanel = new VerticalLayout();
+		workPanel.setSpacing(true);
 		workPanel.setMargin(true);
-		workPanel.setSizeFull();
 		return workPanel;
 	}
 
@@ -92,7 +91,6 @@ public class WorkAreaPanel extends VerticalLayout {
 	private AbstractLayout buildTitleLayout() {
 
 		VerticalLayout titleLayout = new VerticalLayout();
-		// titleLayout.setMargin(new MarginInfo(true, false, true, false));
 		titleLayout.setSpacing(false);
 
 		//

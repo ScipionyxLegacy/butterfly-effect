@@ -4,12 +4,13 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.UUID;
 
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractView;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
-import com.vaadin.annotations.StyleSheet;
+import com.vaadin.data.Item;
 import com.vaadin.event.dd.DragAndDropEvent;
 import com.vaadin.event.dd.DropHandler;
 import com.vaadin.event.dd.acceptcriteria.AcceptAll;
@@ -30,9 +31,8 @@ import com.vaadin.ui.Html5File;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.ProgressBar;
-import com.vaadin.ui.UI;
+import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.ValoTheme;
 
 /**
@@ -62,6 +62,10 @@ public class LoadImagesView extends AbstractView {
 
 	ProgressBar progress;
 
+	Table resultTable;
+	
+	VerticalLayout workAreaPanel;
+
 	/**
 	 * 
 	 */
@@ -82,12 +86,18 @@ public class LoadImagesView extends AbstractView {
 	 */
 	@Override
 	public void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception {
+		
+		this.workAreaPanel = workAreaPanel;
+		
 		Label infoLabel = new Label("Drop the Check images Here");
+		infoLabel.addStyleName(ValoTheme.LABEL_COLORED);
+		// infoLabel.setSizeFull();
 
 		VerticalLayout dropPane = new VerticalLayout(infoLabel);
+		dropPane.setMargin(true);
 		dropPane.setComponentAlignment(infoLabel, Alignment.MIDDLE_CENTER);
-		dropPane.setWidth(280.0f, Unit.PIXELS);
-		dropPane.setHeight(200.0f, Unit.PIXELS);
+		dropPane.setWidth(300f, Unit.PIXELS);
+		dropPane.setHeight(100f, Unit.PIXELS);
 		dropPane.addStyleName(ValoTheme.PANEL_WELL);
 		//
 		final ImageDropBox dropBox = new ImageDropBox(dropPane);
@@ -99,13 +109,29 @@ public class LoadImagesView extends AbstractView {
 		dropPane.addComponent(progress);
 
 		workAreaPanel.addComponent(dropBox);
+
+		// Results Table
+		resultTable = new Table("Result Table");
+
+		resultTable.addContainerProperty("Id", String.class, UUID.randomUUID().toString());
+		resultTable.addContainerProperty("File Name", String.class, null);
+		resultTable.addContainerProperty("Status", String.class, null);
+		resultTable.addContainerProperty("Description", String.class, null);
+
+		workAreaPanel.addComponent(resultTable);
+
 	}
 
 	@Override
 	public void doBuildBottomArea(HorizontalLayout buttomAreaPanel) {
 	}
 
-	@StyleSheet("dragndropexample.css")
+	/**
+	 * 
+	 * @author Renato Mendes - rmendes@bottomline.com /
+	 *         renato.mendes.1123@gmail.com
+	 *
+	 */
 	private class ImageDropBox extends DragAndDropWrapper implements DropHandler {
 		/**
 		 * 
@@ -124,6 +150,7 @@ public class LoadImagesView extends AbstractView {
 			// expecting this to be an html5 drag
 			final WrapperTransferable tr = (WrapperTransferable) dropEvent.getTransferable();
 			final Html5File[] files = tr.getFiles();
+
 			if (files != null) {
 				for (final Html5File html5File : files) {
 					final String fileName = html5File.getFileName();
@@ -175,8 +202,10 @@ public class LoadImagesView extends AbstractView {
 								return false;
 							}
 						};
+
 						html5File.setStreamVariable(streamVariable);
 						progress.setVisible(true);
+
 					}
 				}
 
@@ -188,10 +217,20 @@ public class LoadImagesView extends AbstractView {
 			}
 		}
 
+		/**
+		 * 
+		 * @param text
+		 */
 		private void showText(final String text) {
 			showComponent(new Label(text), "Wrapped text content");
 		}
 
+		/**
+		 * 
+		 * @param name
+		 * @param type
+		 * @param bas
+		 */
 		private void showFile(final String name, final String type, final ByteArrayOutputStream bas) {
 			// resource for serving the file contents
 			final StreamSource streamSource = new StreamSource() {
@@ -216,17 +255,23 @@ public class LoadImagesView extends AbstractView {
 			showComponent(embedded, name);
 		}
 
+		/**
+		 * 
+		 * @param c
+		 * @param name
+		 */
+		@SuppressWarnings("unchecked")
 		private void showComponent(final Component c, final String name) {
-			final VerticalLayout layout = new VerticalLayout();
-			layout.setSizeUndefined();
-			layout.setMargin(true);
-			final Window w = new Window(name, layout);
-			w.addStyleName("dropdisplaywindow");
-			w.setSizeUndefined();
-			w.setResizable(false);
-			c.setSizeUndefined();
-			layout.addComponent(c);
-			UI.getCurrent().addWindow(w);
+
+			Object newItemId = resultTable.addItem();
+
+			Item row1 = resultTable.getItem(newItemId);
+			// row1.getItemProperty("Id").setValue();
+			row1.getItemProperty("File Name").setValue(name);
+			row1.getItemProperty("Status").setValue("uploading");
+			row1.getItemProperty("Description").setValue("..");
+			
+			workAreaPanel.addComponent(c);
 
 		}
 

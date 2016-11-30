@@ -3,6 +3,7 @@ package com.scipionyx.butterflyeffect.frontend.model;
 import java.io.Serializable;
 
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
+import com.vaadin.server.Resource;
 
 /**
  * 
@@ -31,6 +32,8 @@ public class Menu implements Serializable {
 	private int order;
 
 	private MenuConfiguration.Position position;
+
+	private Resource icon;
 
 	@Override
 	public int hashCode() {
@@ -119,6 +122,14 @@ public class Menu implements Serializable {
 
 	public void setPosition(MenuConfiguration.Position position) {
 		this.position = position;
+	}
+
+	public Resource getIcon() {
+		return icon;
+	}
+
+	public void setIcon(Resource icon) {
+		this.icon = icon;
 	}
 
 }

@@ -5,6 +5,7 @@ import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
@@ -24,7 +25,7 @@ import com.vaadin.ui.VerticalLayout;
 @UIScope
 //
 @ViewConfiguration(configurationFile = "CheckFraudRootView.info")
-@MenuConfiguration(position = Position.TOP_MAIN, label = "Alert", group = "", order = -99)
+@MenuConfiguration(position = Position.TOP_MAIN, label = "Alert", group = "", order = -99, font = FontAwesome.BELL)
 public class RootView extends AbstractView {
 
 	public static final String VIEW_NAME = "butterfly-effect-frontend-core-alert:root";
