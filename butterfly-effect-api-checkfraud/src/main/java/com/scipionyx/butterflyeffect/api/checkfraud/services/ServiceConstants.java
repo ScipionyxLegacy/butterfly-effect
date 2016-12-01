@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.checkfraud.model;
+package com.scipionyx.butterflyeffect.api.checkfraud.services;
 
 /**
  * 

@@ -2,12 +2,15 @@ package com.scipionyx.butterflyeffect.frontend.checkfraud.ui.view;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
-import org.springframework.context.annotation.Scope;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.scipionyx.butterflyeffect.api.checkfraud.model.CheckImage;
+import com.scipionyx.butterflyeffect.api.checkfraud.services.CheckFraudServiceFactory;
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractView;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
@@ -23,6 +26,7 @@ import com.vaadin.server.StreamResource.StreamSource;
 import com.vaadin.server.StreamVariable;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
+import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DragAndDropWrapper;
@@ -48,8 +52,8 @@ import com.vaadin.ui.themes.ValoTheme;
  */
 @SpringComponent(value = LoadImagesView.VIEW_NAME)
 @SpringView(name = LoadImagesView.VIEW_NAME)
-// @UIScope
-@Scope(scopeName = "session")
+@UIScope
+// @Scope(scopeName = "session")
 
 //
 @ViewConfiguration(configurationFile = "CheckFraudLoadImagesView.info")
@@ -68,6 +72,9 @@ public class LoadImagesView extends AbstractView {
 	Table resultTable;
 
 	VerticalLayout workAreaPanel;
+
+	@Autowired
+	private CheckFraudServiceFactory checkFraudServiceFactory;
 
 	/**
 	 * 
@@ -94,7 +101,6 @@ public class LoadImagesView extends AbstractView {
 
 		Label infoLabel = new Label("Drop the Check images Here");
 		infoLabel.addStyleName(ValoTheme.LABEL_COLORED);
-		// infoLabel.setSizeFull();
 
 		VerticalLayout dropPane = new VerticalLayout(infoLabel);
 		dropPane.setMargin(true);
@@ -122,7 +128,15 @@ public class LoadImagesView extends AbstractView {
 		resultTable.addContainerProperty("File Type", String.class, null);
 		resultTable.addContainerProperty("Status", String.class, null);
 		resultTable.addContainerProperty("Description", String.class, null);
+		resultTable.addContainerProperty("Color Space", String.class, null);
 		resultTable.addContainerProperty("File", Embedded.class, null);
+		resultTable.addContainerProperty("File Processed", Embedded.class, null);
+
+		Object[] visibleColumns = { "File Name", "File Type", "Status", "Description", "Color Space", "File",
+				"File Processed" };
+		resultTable.setVisibleColumns(visibleColumns);
+		resultTable.setColumnExpandRatio("File", 1f);
+		resultTable.setColumnExpandRatio("File Processed", 1f);
 
 		workAreaPanel.addComponent(resultTable);
 
@@ -158,12 +172,16 @@ public class LoadImagesView extends AbstractView {
 			final Html5File[] files = tr.getFiles();
 
 			if (files != null) {
+
 				for (final Html5File html5File : files) {
+
 					final String fileName = html5File.getFileName();
 
 					if (html5File.getFileSize() > FILE_SIZE_LIMIT) {
+
 						Notification.show("File rejected. Max 2Mb files are accepted by Sampler",
-								Notification.Type.WARNING_MESSAGE);
+								Notification.Type.ERROR_MESSAGE);
+
 					} else {
 
 						final ByteArrayOutputStream bas = new ByteArrayOutputStream();
@@ -194,8 +212,14 @@ public class LoadImagesView extends AbstractView {
 
 							@Override
 							public void streamingFinished(final StreamingEndEvent event) {
-								progress.setVisible(false);
-								showFile(fileName, html5File.getType(), bas);
+								try {
+									progress.setVisible(false);
+									byte[] bs = bas.toByteArray();
+									CheckImage analyze = checkFraudServiceFactory.instance().analyze(fileName, bs);
+									showFile(fileName, html5File.getType(), bs, analyze);
+								} catch (IOException e) {
+									Notification.show(e.getMessage(), Notification.Type.ERROR_MESSAGE);
+								}
 							}
 
 							@Override
@@ -210,6 +234,7 @@ public class LoadImagesView extends AbstractView {
 						};
 
 						html5File.setStreamVariable(streamVariable);
+
 						progress.setVisible(true);
 
 					}
@@ -235,9 +260,10 @@ public class LoadImagesView extends AbstractView {
 		 * 
 		 * @param name
 		 * @param type
+		 * @param analyze
 		 * @param bas
 		 */
-		private void showFile(final String name, final String type, final ByteArrayOutputStream bas) {
+		private void showFile(final String name, final String type, final byte[] bs, CheckImage analyze) {
 			// resource for serving the file contents
 			final StreamSource streamSource = new StreamSource() {
 				/**
@@ -247,28 +273,50 @@ public class LoadImagesView extends AbstractView {
 
 				@Override
 				public InputStream getStream() {
-					if (bas != null) {
-						final byte[] byteArray = bas.toByteArray();
+					if (bs != null) {
+						final byte[] byteArray = bs;
 						return new ByteArrayInputStream(byteArray);
 					}
 					return null;
 				}
 			};
 			final StreamResource resource = new StreamResource(streamSource, name);
+			final Embedded embedded_original = new Embedded(name, resource);
 
-			// show the file contents - images only for now
-			final Embedded embedded = new Embedded(name, resource);
-			showComponent(embedded, name, type);
+			//
+
+			final StreamSource streamSource_modified = new StreamSource() {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public InputStream getStream() {
+					if (analyze.getImage() != null) {
+						final byte[] byteArray = analyze.getImage();
+						return new ByteArrayInputStream(byteArray);
+					}
+					return null;
+				}
+			};
+			final StreamResource resource_modified = new StreamResource(streamSource_modified, "anl_" + name);
+			final Embedded embedded_modified = new Embedded("anl_" + name, resource_modified);
+
+			showComponent(embedded_original, embedded_modified, name, type, analyze);
 		}
 
 		/**
 		 * 
 		 * @param c
+		 * @param embedded_modified
 		 * @param name
 		 * @param type
+		 * @param analyze
 		 */
 		@SuppressWarnings("unchecked")
-		private void showComponent(final Component c, final String name, String type) {
+		private void showComponent(final Component c, Embedded embedded_modified, final String name, String type,
+				CheckImage analyze) {
 
 			if (!type.startsWith("image")) {
 				Notification.show("File type [" + type + "] are not permitted.", "Only image files are permitted",
@@ -284,7 +332,9 @@ public class LoadImagesView extends AbstractView {
 			row1.getItemProperty("File Type").setValue(type);
 			row1.getItemProperty("Status").setValue("New");
 			row1.getItemProperty("Description").setValue("..");
+			row1.getItemProperty("Color Space").setValue(analyze.getColourSpace().toString());
 			row1.getItemProperty("File").setValue(c);
+			row1.getItemProperty("File Processed").setValue(embedded_modified);
 
 		}
 

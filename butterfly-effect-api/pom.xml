@@ -12,6 +12,11 @@
 
 	<dependencies>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+		</dependency>
+
 		<!-- Vaadin Stuff -->
 
 		<dependency>
@@ -26,9 +31,9 @@
 		</dependency>
 
 	</dependencies>
-	
+
 	<packaging>pom</packaging>
-	
+
 	<modules>
 		<module>../butterfly-effect-api-checkfraud</module>
 		<module>../butterfly-effect-api-configuration</module>

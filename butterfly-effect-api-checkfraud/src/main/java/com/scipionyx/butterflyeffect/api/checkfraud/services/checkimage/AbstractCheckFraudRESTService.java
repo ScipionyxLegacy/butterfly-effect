@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.frontend.checkfraud.services;
+package com.scipionyx.butterflyeffect.api.checkfraud.services.checkimage;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.client.RestTemplate;

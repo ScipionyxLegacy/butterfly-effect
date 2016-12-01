@@ -1,8 +1,9 @@
-package com.scipionyx.butterflyeffect.checkfraud.model;
+package com.scipionyx.butterflyeffect.api.checkfraud.model;
 
 import java.io.Serializable;
 
 import org.openimaj.image.colour.ColourSpace;
+import org.openimaj.math.statistics.distribution.Histogram;
 
 /**
  * 
@@ -31,6 +32,8 @@ public class CheckImage implements Serializable {
 	private byte[] image;
 
 	private ColourSpace colourSpace;
+
+	private Histogram histogram;
 
 	public String getId() {
 		return id;
@@ -94,6 +97,14 @@ public class CheckImage implements Serializable {
 
 	public void setColourSpace(ColourSpace colourSpace) {
 		this.colourSpace = colourSpace;
+	}
+
+	public Histogram getHistogram() {
+		return histogram;
+	}
+
+	public void setHistogram(Histogram histogram) {
+		this.histogram = histogram;
 	}
 
 }
