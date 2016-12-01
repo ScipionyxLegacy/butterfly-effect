@@ -7,4 +7,5 @@
   	<groupId>com.scipionyx</groupId>
   	<relativePath>../butterfly-effect-api</relativePath>
   </parent>
+  <name>Butterfly Effect - API - Plugin</name>
 </project>

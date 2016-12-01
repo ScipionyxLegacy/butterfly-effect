@@ -51,7 +51,8 @@ public class CheckImageRESTService {
 	 */
 	@RequestMapping(value = ServiceConstants.REST_IMAGE_ANALYZE, method = RequestMethod.POST)
 	public ResponseEntity<CheckImage> analyze(@RequestParam("image") MultipartFile image) throws IOException {
-		CheckImage analyze = service.analyze(image.getBytes());
+		CheckImage analyze = service.analyze(image.getBytes(), image.getOriginalFilename(), image.getSize(),
+				image.getContentType());
 		return new ResponseEntity<>(analyze, HttpStatus.OK);
 	}
 

@@ -26,4 +26,5 @@
 			<version>0.1.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
+	<name>Butterfly Effect - Frontend - Bootstrap</name>
 </project>

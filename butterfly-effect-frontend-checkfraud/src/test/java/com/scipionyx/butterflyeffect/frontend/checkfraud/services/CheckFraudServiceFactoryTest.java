@@ -1,5 +1,7 @@
 package com.scipionyx.butterflyeffect.frontend.checkfraud.services;
 
+import java.io.File;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,10 +41,15 @@ public class CheckFraudServiceFactoryTest {
 
 	@Test
 	public void analyze() {
+		String fileName = "CHECK_01.png";
 		ICheckImageService service = checkFraudServiceFactory.instance();
-		CheckImage a = service.analyze();
+		ClassLoader classLoader = getClass().getClassLoader();
+		File file = new File(classLoader.getResource(fileName).getFile());
+		CheckImage a = service.analyze(file);
 		Assert.assertNotNull(a);
-		LOGGER.info("Test Analyze:" + a);
+		Assert.assertEquals(fileName, a.getOriginalFileName());
+		Assert.assertEquals(28841, a.getSize());
+		LOGGER.info("Test Analyze:" + a.getSize());
 	}
 
 }

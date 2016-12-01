@@ -1,11 +1,10 @@
 Manifest-Version: 1.0
-Implementation-Title: butterfly-effect-api-plugin
+Implementation-Title: Butterfly Effect - API - Plugin
 Implementation-Version: 0.1.0-SNAPSHOT
 Built-By: rmendes
 Implementation-Vendor-Id: com.scipionyx
 Build-Jdk: 1.8.0_45
-Implementation-URL: www.scipionyx.com/butteflyeffect/butterfly-effect-
- api-plugin
+Implementation-URL: www.scipionyx.com/butterfly-effect-api-plugin
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Scipionyx
 

@@ -18,12 +18,24 @@ public class CheckImageService {
 	/**
 	 * 
 	 * @param bs
+	 * @param originalFileName
+	 * @param contentType
+	 * @param size
 	 * @return
 	 */
-	public final CheckImage analyze(byte[] bs) {
+	public final CheckImage analyze(byte[] bs, String originalFileName, long size, String contentType) {
 		LOGGER.info("Analyze executed");
+
 		CheckImage checkImage = new CheckImage();
+
 		checkImage.setImage(bs);
+		checkImage.setOriginalFileName(originalFileName);
+		checkImage.setSize(size);
+		checkImage.setContentType(contentType);
+		
+		// 
+		
+
 		return checkImage;
 	}
 

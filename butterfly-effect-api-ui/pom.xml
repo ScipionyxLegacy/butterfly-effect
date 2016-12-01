@@ -12,4 +12,5 @@
 		<relativePath>../butterfly-effect-api</relativePath>
 	</parent>
 
+	<name>Butterfly Effect - API - UI</name>
 </project>

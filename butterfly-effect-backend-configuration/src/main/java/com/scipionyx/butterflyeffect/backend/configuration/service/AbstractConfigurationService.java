@@ -15,7 +15,6 @@ import java.util.UUID;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.io.FileUtils;
-import org.jasypt.util.text.BasicTextEncryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -244,10 +243,14 @@ public abstract class AbstractConfigurationService<T extends IConfiguration>
 								Object simpleProperty = PropertyUtils.getSimpleProperty(t, field.getName());
 								if (simpleProperty != null) {
 									String encryptString = null;
-									if (encrypt_)
-										encryptString = createBasicTextEncrptor(salt).encrypt((String) simpleProperty);
-									else
-										encryptString = createBasicTextEncrptor(salt).decrypt((String) simpleProperty);
+									// if (encrypt_)
+									// encryptString =
+									// createBasicTextEncrptor(salt).encrypt((String)
+									// simpleProperty);
+									// else
+									// encryptString =
+									// createBasicTextEncrptor(salt).decrypt((String)
+									// simpleProperty);
 									PropertyUtils.setSimpleProperty(t, field.getName(), encryptString);
 								}
 
@@ -273,19 +276,19 @@ public abstract class AbstractConfigurationService<T extends IConfiguration>
 	 * @param salt
 	 * @return
 	 */
-	private BasicTextEncryptor createBasicTextEncrptor(String salt) {
-
-		String password = (systemConfiguration.getEncryptionPhrase() != null)
-				? systemConfiguration.getEncryptionPhrase() : "secret";
-
-		if (salt != null)
-			password = password + salt;
-
-		BasicTextEncryptor encryptor = new BasicTextEncryptor();
-		encryptor.setPassword(password);
-
-		return encryptor;
-	}
+	// private BasicTextEncryptor createBasicTextEncrptor(String salt) {
+	//
+	// String password = (systemConfiguration.getEncryptionPhrase() != null)
+	// ? systemConfiguration.getEncryptionPhrase() : "secret";
+	//
+	// if (salt != null)
+	// password = password + salt;
+	//
+	// BasicTextEncryptor encryptor = new BasicTextEncryptor();
+	// encryptor.setPassword(password);
+	//
+	// return encryptor;
+	// }
 
 	/**
 	 * 

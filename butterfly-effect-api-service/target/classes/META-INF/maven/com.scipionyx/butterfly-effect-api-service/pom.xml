@@ -7,4 +7,5 @@
   	<version>0.1.0-SNAPSHOT</version>
   	<relativePath>../butterfly-effect-api</relativePath>
   </parent>
+  <name>Butterfly Effect - API - Service</name>
 </project>

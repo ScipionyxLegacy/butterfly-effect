@@ -11,4 +11,5 @@
 		<relativePath>../butterfly-effect-api</relativePath>
 	</parent>
 
+	<name>Butterfly Effect - API - Check Fraud</name>
 </project>
