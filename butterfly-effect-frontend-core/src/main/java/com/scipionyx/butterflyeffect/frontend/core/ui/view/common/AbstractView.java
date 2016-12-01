@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanNameAware;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.scipionyx.butterflyeffect.frontend.configuration.ui.view.ViewConfigurationInformation;
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.workarea.WorkAreaPanel;
+import com.scipionyx.butterflyeffect.frontend.model.ViewConfigurationInformation;
 import com.scipionyx.butterflyeffect.ui.model.ButterflyView;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
 import com.vaadin.navigator.View;

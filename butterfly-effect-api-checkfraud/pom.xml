@@ -11,5 +11,15 @@
 		<relativePath>../butterfly-effect-api</relativePath>
 	</parent>
 
+	<dependencies>
+
+		<dependency>
+			<artifactId>image-processing</artifactId>
+			<groupId>org.openimaj</groupId>
+			<version>1.3.5</version>
+		</dependency>
+
+	</dependencies>
+
 	<name>Butterfly Effect - API - Check Fraud</name>
 </project>

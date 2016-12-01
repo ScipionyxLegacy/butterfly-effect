@@ -24,7 +24,7 @@ public class CheckImageRESTService extends AbstractCheckFraudRESTService<CheckIm
 	@Override
 	public CheckImage analyze(File file) {
 
-		final String uri = baseUrl + ServiceConstants.REST_IMAGE_ANALYZE;
+		final String uri = baseUrl + ServiceConstants.REST_MAPPING_IMAGE_ANALYZE;
 
 		FileSystemResource fileSystemResource = new FileSystemResource(file);
 
@@ -41,7 +41,7 @@ public class CheckImageRESTService extends AbstractCheckFraudRESTService<CheckIm
 	 */
 	@Override
 	public String ping() {
-		final String uri = baseUrl + ServiceConstants.REST_IMAGE_PING;
+		final String uri = baseUrl + ServiceConstants.REST_MAPPING_IMAGE_PING;
 		return restTemplate.getForObject(uri, String.class);
 	}
 

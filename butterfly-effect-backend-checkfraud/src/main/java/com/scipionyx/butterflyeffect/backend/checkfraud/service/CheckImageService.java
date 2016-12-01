@@ -1,5 +1,11 @@
 package com.scipionyx.butterflyeffect.backend.checkfraud.service;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.openimaj.image.ImageUtilities;
+import org.openimaj.image.MBFImage;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
@@ -22,8 +28,12 @@ public class CheckImageService {
 	 * @param contentType
 	 * @param size
 	 * @return
+	 * @throws IOException
+	 * @throws ImgIOException
 	 */
-	public final CheckImage analyze(byte[] bs, String originalFileName, long size, String contentType) {
+	public final CheckImage analyze(byte[] bs, String originalFileName, long size, String contentType)
+			throws IOException {
+
 		LOGGER.info("Analyze executed");
 
 		CheckImage checkImage = new CheckImage();
@@ -32,11 +42,14 @@ public class CheckImageService {
 		checkImage.setOriginalFileName(originalFileName);
 		checkImage.setSize(size);
 		checkImage.setContentType(contentType);
-		
-		// 
-		
+
+		InputStream input = new ByteArrayInputStream(bs);
+		MBFImage image = ImageUtilities.readMBF(input);
+
+		checkImage.setColourSpace(image.getColourSpace());
 
 		return checkImage;
+
 	}
 
 }

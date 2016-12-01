@@ -38,7 +38,7 @@ public class CheckImageRESTService {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = ServiceConstants.REST_IMAGE_PING, method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = ServiceConstants.REST_MAPPING_IMAGE_PING, method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity<String> ping() {
 		LOGGER.info("Ping request.");
 		return (new ResponseEntity<>("Hello", HttpStatus.OK));
@@ -49,8 +49,9 @@ public class CheckImageRESTService {
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping(value = ServiceConstants.REST_IMAGE_ANALYZE, method = RequestMethod.POST)
+	@RequestMapping(value = ServiceConstants.REST_MAPPING_IMAGE_ANALYZE, method = RequestMethod.POST)
 	public ResponseEntity<CheckImage> analyze(@RequestParam("image") MultipartFile image) throws IOException {
+		LOGGER.info("Analyze request.");
 		CheckImage analyze = service.analyze(image.getBytes(), image.getOriginalFilename(), image.getSize(),
 				image.getContentType());
 		return new ResponseEntity<>(analyze, HttpStatus.OK);

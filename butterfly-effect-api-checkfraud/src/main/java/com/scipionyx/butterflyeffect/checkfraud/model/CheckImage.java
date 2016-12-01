@@ -2,6 +2,8 @@ package com.scipionyx.butterflyeffect.checkfraud.model;
 
 import java.io.Serializable;
 
+import org.openimaj.image.colour.ColourSpace;
+
 /**
  * 
  * @author Renato Mendes - rmendes@bottomline.com / renato.mendes.1123@gmail.com
@@ -27,6 +29,8 @@ public class CheckImage implements Serializable {
 	private long size;
 
 	private byte[] image;
+
+	private ColourSpace colourSpace;
 
 	public String getId() {
 		return id;
@@ -82,6 +86,14 @@ public class CheckImage implements Serializable {
 
 	public void setSize(long size) {
 		this.size = size;
+	}
+
+	public ColourSpace getColourSpace() {
+		return colourSpace;
+	}
+
+	public void setColourSpace(ColourSpace colourSpace) {
+		this.colourSpace = colourSpace;
 	}
 
 }

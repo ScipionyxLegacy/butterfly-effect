@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.scipionyx.butterflyeffect.frontend.system.ui.view;
+package com.scipionyx.butterflyeffect.frontend.configuration.ui.view;
 
 import java.text.DecimalFormat;
 
 import javax.annotation.PostConstruct;
 
-import com.scipionyx.butterflyeffect.frontend.configuration.ui.view.RootView;
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractView;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;

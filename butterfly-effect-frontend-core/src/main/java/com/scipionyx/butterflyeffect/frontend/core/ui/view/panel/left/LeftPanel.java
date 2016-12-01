@@ -1,6 +1,6 @@
 package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.left;
 
-import com.scipionyx.butterflyeffect.frontend.configuration.ui.view.ViewConfigurationInformation;
+import com.scipionyx.butterflyeffect.frontend.model.ViewConfigurationInformation;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
@@ -92,7 +92,7 @@ public class LeftPanel extends VerticalLayout {
 
 		LeftPanelBottom bottom = new LeftPanelBottom();
 		bottom.setStyleName(ValoTheme.PANEL_WELL);
-		//bottom.buid(leftPanelTop);
+		// bottom.buid(leftPanelTop);
 		this.addComponent(bottom);
 		this.setComponentAlignment(bottom, Alignment.BOTTOM_CENTER);
 

@@ -38,18 +38,8 @@ public class SystemConfigurationView extends AbstractConfigurationView {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	// @Autowired(required = true)
-	// private SystemConfigurationService systemConfigurationService;
-
 	// @Autowired
 	private SystemConfiguration systemConfiguration;
-
-	/**
-	 * 
-	 */
-	@Override
-	public void doEnter(ViewChangeEvent event) {
-	}
 
 	/**
 	 * 
@@ -58,16 +48,10 @@ public class SystemConfigurationView extends AbstractConfigurationView {
 	public void doBuild() {
 	}
 
-	@Override
-	public void doBuildBottomArea(HorizontalLayout buttomAreaPanel) {
-
-	}
-
 	/**
 	 * @throws Exception
 	 * 
 	 */
-	@Override
 	public void doBuildWorkArea(VerticalLayout workPanel) throws Exception {
 
 		// systemConfiguration = systemConfigurationService.readAll().get(0);
@@ -156,6 +140,18 @@ public class SystemConfigurationView extends AbstractConfigurationView {
 				}
 			}
 		}));
+
+	}
+
+	@Override
+	public void doBuildBottomArea(HorizontalLayout buttomAreaPanel) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void doEnter(ViewChangeEvent event) {
+		// TODO Auto-generated method stub
 
 	}
 
