@@ -29,7 +29,6 @@ import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.AbstractSelect;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.Align;
 import com.vaadin.ui.VerticalLayout;
@@ -110,12 +109,6 @@ public class AboutView extends AbstractView {
 	private void addItem(String property, long value, String description, AbstractSelect table) {
 		DecimalFormat format = new DecimalFormat("###,###.###");
 		addItem(property, format.format(value), description, table);
-	}
-
-	@Override
-	public void doBuildBottomArea(HorizontalLayout buttomAreaPanel) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

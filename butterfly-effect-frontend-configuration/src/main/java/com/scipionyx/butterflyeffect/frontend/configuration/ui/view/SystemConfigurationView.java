@@ -144,12 +144,6 @@ public class SystemConfigurationView extends AbstractConfigurationView {
 	}
 
 	@Override
-	public void doBuildBottomArea(HorizontalLayout buttomAreaPanel) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void doEnter(ViewChangeEvent event) {
 		// TODO Auto-generated method stub
 

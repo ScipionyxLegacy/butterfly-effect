@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.commons.io.FilenameUtils;
 import org.openimaj.image.ImageUtilities;
 import org.openimaj.image.MBFImage;
 import org.openimaj.image.analysis.algorithm.histogram.HistogramAnalyser;
@@ -12,12 +13,16 @@ import org.openimaj.image.colour.RGBColour;
 import org.openimaj.image.processing.resize.ResizeProcessor;
 import org.openimaj.math.geometry.shape.Rectangle;
 import org.openimaj.math.statistics.distribution.Histogram;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.scipionyx.butterflyeffect.api.checkfraud.model.CheckImage;
 
 /**
+ * 
+ * 
  * 
  * @author Renato Mendes - rmendes@bottomline.com / renato.mendes.1123@gmail.com
  *
@@ -25,12 +30,10 @@ import com.scipionyx.butterflyeffect.api.checkfraud.model.CheckImage;
 @Component
 public class CheckImageService {
 
-	private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(CheckImageService.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(CheckImageService.class);
 
-	private long SIGNATURE_X = 210;
-	private long SIGNATURE_Y = 120;
-	private long SIGNATURE_W = 190;
-	private long SIGNATURE_H = 50;
+	@Autowired
+	private CheckImageServiceConfiguration configuration;
 
 	/**
 	 * 
@@ -61,11 +64,11 @@ public class CheckImageService {
 
 		MBFImage resize = resize(image);
 		drawSignatureRetangle(resize);
-		checkImage.setHistogram(histogram(resize));
+		checkImage.setHistogram(histogram(resize.clone()));
 
 		//
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
-		ImageUtilities.write(resize, "png", output);
+		ImageUtilities.write(resize, FilenameUtils.getExtension(originalFileName), output);
 
 		checkImage.setImage(output.toByteArray());
 
@@ -82,23 +85,18 @@ public class CheckImageService {
 	private MBFImage resize(MBFImage current) {
 
 		// Correct size do nothing
-		if (current.getWidth() == 419)
+		if (current.getWidth() == configuration.getCheckMaxWidth()) {
 			return current;
-
-		// Shrink
-		if (current.getWidth() > 419) {
-			ResizeProcessor resize = new ResizeProcessor(419);
-
-			MBFImage tmp = new MBFImage(419, 189, current.getColourSpace());
-			tmp.fill(RGBColour.WHITE);
-
-			MBFImage small = current.process(resize).normalise();
-
-			return small;
-
 		}
 
-		return current;
+		// Shrink
+		ResizeProcessor resize = new ResizeProcessor(configuration.getCheckMaxWidth());
+
+		MBFImage tmp = new MBFImage(configuration.getCheckMaxWidth(), configuration.getCheckMaxHeight(),
+				current.getColourSpace());
+		tmp.fill(RGBColour.WHITE);
+
+		return current.process(resize).normalise();
 
 	}
 
@@ -110,7 +108,9 @@ public class CheckImageService {
 	private MBFImage drawSignatureRetangle(MBFImage image) {
 
 		Rectangle rectangle = new Rectangle();
-		rectangle.setBounds(SIGNATURE_X, SIGNATURE_Y, SIGNATURE_W, SIGNATURE_H);
+
+		rectangle.setBounds(configuration.getSignaturePosX(), configuration.getSignaturePosY(),
+				configuration.getSignaturePosW(), configuration.getSignaturePosH());
 
 		image.drawShape(rectangle, 3, RGBColour.BLACK);
 
@@ -122,13 +122,14 @@ public class CheckImageService {
 	 * @param image
 	 * @return
 	 */
-	private Histogram histogram(MBFImage image) {
+	private double[] histogram(MBFImage image) {
 
-		HistogramAnalyser analyser = new HistogramAnalyser(64);
+		HistogramAnalyser analyser = new HistogramAnalyser(configuration.getHistogramSize());
 		analyser.analyseImage(image.flatten());
 		Histogram histogram = analyser.getHistogram();
 
-		return histogram;
+		return histogram.values;
+
 	}
 
 }

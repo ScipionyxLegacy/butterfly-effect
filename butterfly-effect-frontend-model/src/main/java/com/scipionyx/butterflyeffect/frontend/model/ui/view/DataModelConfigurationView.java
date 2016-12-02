@@ -3,7 +3,6 @@ package com.scipionyx.butterflyeffect.frontend.model.ui.view;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.vaadin.dialogs.ConfirmDialog;
 
 import com.scipionyx.butterflyeffect.frontend.model.services.EntityClientRESTConfigurationService;
 import com.scipionyx.butterflyeffect.model.model.datamodel.Entity;
@@ -13,11 +12,9 @@ import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.window.WindowMode;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -34,7 +31,6 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.renderers.NumberRenderer;
 import com.vaadin.ui.renderers.TextRenderer;
-import com.vaadin.ui.themes.ValoTheme;
 
 /**
  * 
@@ -296,55 +292,6 @@ public class DataModelConfigurationView extends AbstractDataModelView {
 
 	@Override
 	public void doEnter(ViewChangeEvent event) {
-	}
-
-	/**
-	 * 
-	 */
-	@Override
-	public void doBuildBottomArea(HorizontalLayout buttomAreaPanel) {
-		// Add new button
-
-		Button button = new Button("Add new");
-		button.setIcon(FontAwesome.PLUS);
-		button.setStyleName(ValoTheme.BUTTON_BORDERLESS);
-		buttomAreaPanel.addComponent(button);
-		buttomAreaPanel.setComponentAlignment(button, Alignment.MIDDLE_RIGHT);
-
-		button.addClickListener(new Button.ClickListener() {
-
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void buttonClick(ClickEvent event) {
-
-				if (editing) {
-					ConfirmDialog.show(event.getComponent().getUI(),
-							"This will cancel the edition of the Entity, continue ?", new ConfirmDialog.Listener() {
-
-								private static final long serialVersionUID = 1L;
-
-								@Override
-								public void onClose(ConfirmDialog dialog) {
-
-									if (dialog.isConfirmed()) {
-										createWorkingAreaPanel(null);
-										editing = true;
-									}
-
-								}
-							});
-				} else {
-					createWorkingAreaPanel(null);
-					editing = true;
-				}
-
-			}
-		});
-
 	}
 
 }

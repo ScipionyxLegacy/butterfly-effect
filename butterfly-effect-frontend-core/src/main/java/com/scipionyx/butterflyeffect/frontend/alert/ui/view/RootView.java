@@ -9,7 +9,6 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 
 /**
@@ -54,10 +53,6 @@ public class RootView extends AbstractView {
 	 */
 	@Override
 	public void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception {
-	}
-
-	@Override
-	public void doBuildBottomArea(HorizontalLayout buttomAreaPanel) {
 	}
 
 }

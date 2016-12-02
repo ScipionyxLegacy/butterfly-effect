@@ -20,8 +20,6 @@ import com.scipionyx.butterflyeffect.ui.model.ButterflyView;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 
 /**
@@ -50,8 +48,6 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 
 	public abstract void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception;
 
-	public abstract void doBuildBottomArea(HorizontalLayout buttomAreaPanel);
-
 	public abstract void doEnter(ViewChangeEvent event);
 
 	/**
@@ -69,17 +65,9 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 	@PostConstruct
 	private void init() throws Exception {
 
-		this.setMargin(true);
+		this.setMargin(false);
 		this.setSizeFull();
 		this.setSpacing(true);
-
-		// Main work Area
-		VerticalLayout mainWorkArea = new VerticalLayout();
-		mainWorkArea.setSizeFull();
-
-		this.addComponent(mainWorkArea);
-		this.setComponentAlignment(mainWorkArea, Alignment.TOP_CENTER);
-		this.setExpandRatio(mainWorkArea, 2);
 
 		ViewConfigurationInformation viewConfigurationInformation = read();
 
@@ -87,7 +75,7 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 		workAreaPanel = new WorkAreaPanel();
 		workAreaPanel.setSizeFull();
 		workAreaPanel.build();
-		mainWorkArea.addComponent(workAreaPanel);
+		this.addComponent(workAreaPanel);
 
 		// Read Configuration
 
@@ -100,7 +88,6 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 				workAreaPanel.setSubTitle(viewConfigurationInformation.getTitle().getSubTitle());
 			}
 
-			doBuildBottomArea(workAreaPanel.getBottomPanel());
 		}
 
 	}

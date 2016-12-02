@@ -38,9 +38,6 @@ public class WorkAreaPanel extends VerticalLayout {
 	 */
 	public final void build() throws IOException {
 
-		//
-		
-
 		// Main layout for the work area
 		GridLayout gridLayout = new GridLayout(2, 2);
 		gridLayout.setSizeFull();

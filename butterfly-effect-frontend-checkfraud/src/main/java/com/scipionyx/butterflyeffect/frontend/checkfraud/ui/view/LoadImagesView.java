@@ -31,7 +31,6 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DragAndDropWrapper;
 import com.vaadin.ui.Embedded;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Html5File;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
@@ -140,10 +139,6 @@ public class LoadImagesView extends AbstractView {
 
 		workAreaPanel.addComponent(resultTable);
 
-	}
-
-	@Override
-	public void doBuildBottomArea(HorizontalLayout buttomAreaPanel) {
 	}
 
 	/**
