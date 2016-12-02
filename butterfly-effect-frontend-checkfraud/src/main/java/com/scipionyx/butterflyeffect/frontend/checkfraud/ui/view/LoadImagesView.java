@@ -120,7 +120,8 @@ public class LoadImagesView extends AbstractView {
 
 		// Results Table
 		resultTable = new Table("Result Table");
-		resultTable.setSizeFull();
+		resultTable.setWidth(100, Unit.PERCENTAGE);
+		resultTable.setHeightUndefined();
 
 		resultTable.addContainerProperty("Id", String.class, UUID.randomUUID().toString());
 		resultTable.addContainerProperty("File Name", String.class, null);

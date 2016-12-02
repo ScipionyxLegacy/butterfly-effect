@@ -14,13 +14,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanNameAware;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.workarea.WorkAreaPanel;
 import com.scipionyx.butterflyeffect.frontend.model.ViewConfigurationInformation;
 import com.scipionyx.butterflyeffect.ui.model.ButterflyView;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.shared.ui.MarginInfo;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 
 /**
  * 
@@ -40,13 +43,13 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 	private static final long serialVersionUID = 1L;
 
 	//
-	private WorkAreaPanel workAreaPanel;
+	private VerticalLayout workArea;
 
 	private String beanName;
 
 	private ObjectMapper objectMapper;
 
-	public abstract void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception;
+	public abstract void doBuildWorkArea(VerticalLayout workArea) throws Exception;
 
 	public abstract void doEnter(ViewChangeEvent event);
 
@@ -69,26 +72,26 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 		this.setSizeFull();
 		this.setSpacing(true);
 
+		//
 		ViewConfigurationInformation viewConfigurationInformation = read();
 
-		// Work Area
-		workAreaPanel = new WorkAreaPanel();
-		workAreaPanel.setSizeFull();
-		workAreaPanel.build();
-		this.addComponent(workAreaPanel);
+		//
+		buildTitleLayout(viewConfigurationInformation);
 
-		// Read Configuration
+		//
 
-		if (viewConfigurationInformation != null) {
+		workArea = new VerticalLayout();
+		workArea.setMargin(new MarginInfo(false, true, false, true));
+		workArea.setSpacing(true);
 
-			doBuildWorkArea(workAreaPanel.getWorkPanel());
+		Panel panel = new Panel(workArea);
+		panel.setStyleName(ValoTheme.PANEL_BORDERLESS);
+		panel.setSizeFull();
 
-			if (viewConfigurationInformation.getTitle() != null) {
-				workAreaPanel.setTitle(viewConfigurationInformation.getTitle().getTitle());
-				workAreaPanel.setSubTitle(viewConfigurationInformation.getTitle().getSubTitle());
-			}
+		this.addComponent(panel);
 
-		}
+		this.setExpandRatio(panel, 1);
+		doBuildWorkArea(workArea);
 
 	}
 
@@ -145,6 +148,34 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 			list.add(systemResources.nextElement().openStream());
 		}
 		return list;
+	}
+
+	/**
+	 * @param viewConfigurationInformation
+	 * 
+	 */
+	private void buildTitleLayout(ViewConfigurationInformation viewConfigurationInformation) {
+
+		VerticalLayout titleLayout = new VerticalLayout();
+		// titleLayout.setStyleName(ValoTheme.PANEL_WELL, true);
+		// titleLayout.setStyleName(ValoTheme.PANEL_BORDERLESS, true);
+		titleLayout.setMargin(new MarginInfo(false, true, false, true));
+		titleLayout.setSpacing(false);
+
+		//
+		Label titleLabel = new Label(viewConfigurationInformation.getTitle().getTitle());
+		titleLabel.addStyleName(ValoTheme.LABEL_H2);
+		// titleLabel.addStyleName(ValoTheme.LABEL_NO_MARGIN);
+		titleLayout.addComponent(titleLabel);
+
+		//
+		// Label subTitleLabel = new
+		// Label(viewConfigurationInformation.getTitle().getSubTitle());
+		// subTitleLabel.addStyleName(ValoTheme.LABEL_TINY);
+		// titleLayout.addComponent(subTitleLabel);
+
+		this.addComponent(titleLayout);
+
 	}
 
 	public String getBeanName() {

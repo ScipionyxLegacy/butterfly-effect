@@ -24,6 +24,7 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.navigator.SpringViewProvider;
 import com.vaadin.ui.Label;
@@ -65,9 +66,8 @@ public class MainUI extends UI {
 		// Top Menu
 
 		final VerticalLayout root = new VerticalLayout();
-
 		root.setSizeFull();
-		root.setMargin(true);
+		root.setMargin(new MarginInfo(false, true, true, true));
 		root.setSpacing(true);
 
 		root.addComponent(topFactory.instance());
@@ -76,17 +76,18 @@ public class MainUI extends UI {
 
 		final Panel viewContainer = new Panel();
 		viewContainer.setSizeFull();
-		// viewContainer.addStyleName(ValoTheme.PANEL_SCROLL_INDICATOR);
 
-		//
 		root.addComponent(viewContainer);
 		root.setExpandRatio(viewContainer, 1.0f);
 
+		// Define the access denied view
 		viewProvider.setAccessDeniedViewClass(AccessDeniedView.class);
 
+		// Defining Navigation Component
 		Navigator navigator = new Navigator(this, viewContainer);
 		navigator.setErrorView(new ErrorView());
 		navigator.addProvider(viewProvider);
+
 	}
 
 	private class ErrorView extends VerticalLayout implements View {
