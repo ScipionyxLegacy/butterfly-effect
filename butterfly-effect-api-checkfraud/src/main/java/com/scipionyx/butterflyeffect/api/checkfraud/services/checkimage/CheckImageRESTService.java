@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.core.io.AbstractResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+import com.google.common.io.Files;
 import com.scipionyx.butterflyeffect.api.checkfraud.model.CheckImage;
 import com.scipionyx.butterflyeffect.api.checkfraud.services.ServiceConstants;
 
@@ -45,7 +45,9 @@ public class CheckImageRESTService extends AbstractCheckFraudRESTService<CheckIm
 
 		try {
 
-			tmpFile = File.createTempFile(FilenameUtils.getBaseName(fileName), FilenameUtils.getExtension(fileName));
+			File tempDir = Files.createTempDir();
+			tmpFile = new File(tempDir.getAbsolutePath() + File.pathSeparator + fileName);
+			
 			FileUtils.writeByteArrayToFile(tmpFile, bs);
 
 			FileSystemResource fileSystemResource = new FileSystemResource(tmpFile);

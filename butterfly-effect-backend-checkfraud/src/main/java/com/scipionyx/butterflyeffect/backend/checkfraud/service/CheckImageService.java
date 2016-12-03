@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
 import org.openimaj.image.ImageUtilities;
@@ -48,12 +50,15 @@ public class CheckImageService {
 	public final CheckImage analyze(byte[] bs, String originalFileName, long size, String contentType)
 			throws IOException {
 
+		List<byte[]> processedImages = new ArrayList<>();
+		String originalFileExtension = FilenameUtils.getExtension(originalFileName);
+
 		LOGGER.info("Analyze executed");
 
 		CheckImage checkImage = new CheckImage();
-
-		checkImage.setImage(bs);
+		checkImage.setProcessedImages(processedImages);
 		checkImage.setOriginalFileName(originalFileName);
+		checkImage.setOriginalFileExtension(originalFileExtension);
 		checkImage.setSize(size);
 		checkImage.setContentType(contentType);
 
@@ -68,9 +73,9 @@ public class CheckImageService {
 
 		//
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
-		ImageUtilities.write(resize, FilenameUtils.getExtension(originalFileName), output);
+		ImageUtilities.write(resize, originalFileExtension, output);
 
-		checkImage.setImage(output.toByteArray());
+		processedImages.add(output.toByteArray());
 
 		return checkImage;
 

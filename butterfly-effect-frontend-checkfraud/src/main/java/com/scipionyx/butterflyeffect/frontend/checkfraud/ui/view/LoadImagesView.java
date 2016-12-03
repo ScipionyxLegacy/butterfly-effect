@@ -5,6 +5,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -278,40 +280,48 @@ public class LoadImagesView extends AbstractView {
 			};
 			final StreamResource resource = new StreamResource(streamSource, name);
 			final Embedded embedded_original = new Embedded(name, resource);
-
+			embedded_original.setHeight(150, Unit.POINTS);
 			//
 
-			final StreamSource streamSource_modified = new StreamSource() {
-				/**
-				 * 
-				 */
-				private static final long serialVersionUID = 1L;
+			List<Embedded> modifiedImages = new ArrayList<>();
 
-				@Override
-				public InputStream getStream() {
-					if (analyze.getImage() != null) {
-						final byte[] byteArray = analyze.getImage();
+			for (byte[] processedImage : analyze.getProcessedImages()) {
+
+				final StreamSource streamSource_modified = new StreamSource() {
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					@Override
+					public InputStream getStream() {
+						final byte[] byteArray = processedImage;
 						return new ByteArrayInputStream(byteArray);
 					}
-					return null;
-				}
-			};
-			final StreamResource resource_modified = new StreamResource(streamSource_modified, "anl_" + name);
-			final Embedded embedded_modified = new Embedded("anl_" + name, resource_modified);
+				};
 
-			showComponent(embedded_original, embedded_modified, name, type, analyze);
+				String processedImageName = UUID.randomUUID().toString() + "." + analyze.getOriginalFileExtension();
+
+				final Embedded embedded = new Embedded(processedImageName,
+						new StreamResource(streamSource_modified, processedImageName));
+
+				modifiedImages.add(embedded);
+
+			}
+
+			showComponent(embedded_original, modifiedImages, name, type, analyze);
 		}
 
 		/**
 		 * 
 		 * @param c
-		 * @param embedded_modified
+		 * @param modifiedImages
 		 * @param name
 		 * @param type
 		 * @param analyze
 		 */
 		@SuppressWarnings("unchecked")
-		private void showComponent(final Component c, Embedded embedded_modified, final String name, String type,
+		private void showComponent(final Component c, List<Embedded> modifiedImages, final String name, String type,
 				CheckImage analyze) {
 
 			if (!type.startsWith("image")) {
@@ -330,7 +340,7 @@ public class LoadImagesView extends AbstractView {
 			row1.getItemProperty("Description").setValue("..");
 			row1.getItemProperty("Color Space").setValue(analyze.getColourSpace().toString());
 			row1.getItemProperty("File").setValue(c);
-			row1.getItemProperty("File Processed").setValue(embedded_modified);
+			row1.getItemProperty("File Processed").setValue(modifiedImages.get(0));
 
 		}
 

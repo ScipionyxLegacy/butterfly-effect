@@ -1,6 +1,7 @@
 package com.scipionyx.butterflyeffect.api.checkfraud.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.openimaj.image.colour.ColourSpace;
 
@@ -22,13 +23,15 @@ public class CheckImage implements Serializable {
 
 	private String originalFileName;
 
+	private String originalFileExtension;
+
 	private String source;
 
 	private String contentType;
 
 	private long size;
 
-	private byte[] image;
+	private List<byte[]> processedImages;
 
 	private ColourSpace colourSpace;
 
@@ -48,14 +51,6 @@ public class CheckImage implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public byte[] getImage() {
-		return image;
-	}
-
-	public void setImage(byte[] image) {
-		this.image = image;
 	}
 
 	public String getOriginalFileName() {
@@ -104,6 +99,22 @@ public class CheckImage implements Serializable {
 
 	public void setHistogram(double[] histogram) {
 		this.histogram = histogram;
+	}
+
+	public List<byte[]> getProcessedImages() {
+		return processedImages;
+	}
+
+	public void setProcessedImages(List<byte[]> processedImages) {
+		this.processedImages = processedImages;
+	}
+
+	public String getOriginalFileExtension() {
+		return originalFileExtension;
+	}
+
+	public void setOriginalFileExtension(String originalFileExtension) {
+		this.originalFileExtension = originalFileExtension;
 	}
 
 }

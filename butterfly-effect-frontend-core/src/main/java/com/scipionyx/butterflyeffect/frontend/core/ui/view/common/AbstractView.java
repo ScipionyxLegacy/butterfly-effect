@@ -20,6 +20,9 @@ import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.shared.ui.MarginInfo;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Component;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
@@ -44,6 +47,8 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 
 	//
 	private VerticalLayout workArea;
+
+	private HorizontalLayout buttonPanel;
 
 	private String beanName;
 
@@ -156,26 +161,34 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 	 */
 	private void buildTitleLayout(ViewConfigurationInformation viewConfigurationInformation) {
 
-		VerticalLayout titleLayout = new VerticalLayout();
-		// titleLayout.setStyleName(ValoTheme.PANEL_WELL, true);
-		// titleLayout.setStyleName(ValoTheme.PANEL_BORDERLESS, true);
-		titleLayout.setMargin(new MarginInfo(false, true, false, true));
-		titleLayout.setSpacing(false);
-
 		//
 		Label titleLabel = new Label(viewConfigurationInformation.getTitle().getTitle());
-		titleLabel.addStyleName(ValoTheme.LABEL_H2);
-		// titleLabel.addStyleName(ValoTheme.LABEL_NO_MARGIN);
-		titleLayout.addComponent(titleLabel);
+		titleLabel.addStyleName(ValoTheme.LABEL_H1);
+
+		buttonPanel = new HorizontalLayout();
+		buttonPanel.setSpacing(true);
+		buttonPanel.setMargin(false);
 
 		//
-		// Label subTitleLabel = new
-		// Label(viewConfigurationInformation.getTitle().getSubTitle());
-		// subTitleLabel.addStyleName(ValoTheme.LABEL_TINY);
-		// titleLayout.addComponent(subTitleLabel);
+		HorizontalLayout titleLayout = new HorizontalLayout(titleLabel, buttonPanel);
+		titleLayout.setWidth(100, Unit.PERCENTAGE);
+		titleLayout.setMargin(new MarginInfo(false, true, false, true));
+		titleLayout.setSpacing(false);
+		titleLayout.setComponentAlignment(buttonPanel, Alignment.MIDDLE_RIGHT);
 
 		this.addComponent(titleLayout);
 
+	}
+
+	/**
+	 * 
+	 * @param buttonFriendly
+	 * @param component
+	 */
+	protected Component addButton(String theme, Component component) {
+		component.setStyleName(theme);
+		buttonPanel.addComponent(component);
+		return component;
 	}
 
 	public String getBeanName() {
