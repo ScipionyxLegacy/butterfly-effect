@@ -18,6 +18,10 @@ public class TrainCheckImage implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private String fileName;
+
+	private byte[] analyzed;
+
 	@NotNull
 	@Min(1)
 	@Max(400)
@@ -176,6 +180,22 @@ public class TrainCheckImage implements Serializable {
 
 	public void setAccountOwnerH(int accountOwnerH) {
 		this.accountOwnerH = accountOwnerH;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public byte[] getAnalyzed() {
+		return analyzed;
+	}
+
+	public void setAnalyzed(byte[] analyzed) {
+		this.analyzed = analyzed;
 	}
 
 }

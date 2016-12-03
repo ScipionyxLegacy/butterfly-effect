@@ -21,8 +21,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.scipionyx.butterflyeffect.api.checkfraud.model.CheckImage;
+import com.scipionyx.butterflyeffect.api.checkfraud.model.TrainCheckImage;
 
 /**
+ * 
+ * 
  * 
  * 
  * 
@@ -134,6 +137,55 @@ public class CheckImageService {
 		Histogram histogram = analyser.getHistogram();
 
 		return histogram.values;
+
+	}
+
+	/**
+	 * @throws IOException
+	 * 
+	 */
+	public TrainCheckImage previewTrain(byte[] bs, TrainCheckImage trainCheckImage, String originalFileName)
+			throws IOException {
+		//
+		InputStream input = new ByteArrayInputStream(bs);
+		MBFImage image = ImageUtilities.readMBF(input);
+
+		MBFImage resize = resize(image);
+		MBFImage drawRetangles = drawRetangles(resize, trainCheckImage);
+
+		//
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
+		ImageUtilities.write(drawRetangles, FilenameUtils.getExtension(originalFileName), output);
+
+		trainCheckImage.setAnalyzed(output.toByteArray());
+
+		return trainCheckImage;
+
+	}
+
+	/**
+	 * 
+	 * @param resize
+	 * @param trainCheckImage
+	 */
+	private MBFImage drawRetangles(MBFImage image, TrainCheckImage trainCheckImage) {
+
+		Rectangle rectangleSignature = new Rectangle();
+		Rectangle rectangleBottomline = new Rectangle();
+		Rectangle rectangleAccountOwner = new Rectangle();
+
+		rectangleSignature.setBounds(trainCheckImage.getSignatureX(), trainCheckImage.getSignatureY(),
+				trainCheckImage.getSignatureW(), trainCheckImage.getSignatureH());
+		rectangleBottomline.setBounds(trainCheckImage.getBottomlineX(), trainCheckImage.getBottomlineY(),
+				trainCheckImage.getBottomlineW(), trainCheckImage.getBottomlineH());
+		rectangleAccountOwner.setBounds(trainCheckImage.getAccountOwnerX(), trainCheckImage.getAccountOwnerY(),
+				trainCheckImage.getAccountOwnerW(), trainCheckImage.getAccountOwnerH());
+
+		image.drawShape(rectangleSignature, 3, RGBColour.RED);
+		image.drawShape(rectangleAccountOwner, 3, RGBColour.GREEN);
+		image.drawShape(rectangleBottomline, 3, RGBColour.BLUE);
+
+		return image;
 
 	}
 

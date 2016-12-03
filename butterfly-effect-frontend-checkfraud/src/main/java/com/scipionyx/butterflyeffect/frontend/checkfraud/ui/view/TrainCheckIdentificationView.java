@@ -2,9 +2,13 @@ package com.scipionyx.butterflyeffect.frontend.checkfraud.ui.view;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.UUID;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.scipionyx.butterflyeffect.api.checkfraud.model.TrainCheckImage;
@@ -81,9 +85,14 @@ public class TrainCheckIdentificationView extends AbstractView {
 	@Autowired
 	private CheckFraudServiceFactory checkFraudServiceFactory;
 
+	private BeanItem<TrainCheckImage> item;
+	private FieldGroup binder;
+
 	private Button btnPreview;
 	private Button btnReset;
 	private Button btnAccept;
+
+	private byte[] originalCheckImageByteArray;
 
 	private Panel originalCheckImage;
 
@@ -112,7 +121,7 @@ public class TrainCheckIdentificationView extends AbstractView {
 
 		//
 		TrainCheckImage bean = new TrainCheckImage();
-		BeanItem<TrainCheckImage> item = new BeanItem<TrainCheckImage>(bean);
+		item = new BeanItem<TrainCheckImage>(bean);
 
 		//
 		FormLayout formSignature = new FormLayout();
@@ -187,7 +196,7 @@ public class TrainCheckIdentificationView extends AbstractView {
 		formAccountOwner.addComponent(accountOwnerColorPicker);
 
 		//
-		FieldGroup binder = new FieldGroup(item);
+		binder = new FieldGroup(item);
 		binder.setBuffered(true);
 
 		//
@@ -251,7 +260,7 @@ public class TrainCheckIdentificationView extends AbstractView {
 		});
 		acceptButton.setEnabled(false);
 
-		final Button previewButton = new Button("Preview", new Button.ClickListener() {
+		Button previewButton = new Button("Preview", new Button.ClickListener() {
 
 			/**
 			 * 
@@ -260,14 +269,21 @@ public class TrainCheckIdentificationView extends AbstractView {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
+
 				try {
 					binder.commit();
-					Notification.show("SignatureX" + item.getBean().getSignatureX());
-				} catch (CommitException e) {
-					Notification.show(e.getMessage(), Notification.Type.ERROR_MESSAGE);
+					TrainCheckImage analyzed = checkFraudServiceFactory.instance()
+							.trainPreview(item.getBean().getFileName(), originalCheckImageByteArray, item.getBean());
+					showImage(null, FilenameUtils.getExtension(analyzed.getFileName()), analyzed.getAnalyzed(),
+							analizedCheckImage);
+				} catch (CommitException | IOException e) {
+					Notification.show(e.getMessage(), Type.ERROR_MESSAGE);
+					e.printStackTrace();
 				}
+
 			}
 		});
+
 		previewButton.setEnabled(false);
 
 		final Button resetButton = new Button("Reset", new Button.ClickListener() {
@@ -302,6 +318,41 @@ public class TrainCheckIdentificationView extends AbstractView {
 
 	/**
 	 * 
+	 * @param name
+	 * @param type
+	 * @param bas
+	 */
+	protected void showImage(String name, final String type, final byte[] bs, Panel panel) {
+		if (StringUtils.isBlank(name)) {
+			name = UUID.randomUUID().toString() + "." + type;
+		}
+		// resource for serving the file contents
+		final StreamSource streamSource = new StreamSource() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public InputStream getStream() {
+				if (bs != null) {
+					final byte[] byteArray = bs;
+					return new ByteArrayInputStream(byteArray);
+				}
+				return null;
+			}
+		};
+		final StreamResource resource = new StreamResource(streamSource, name);
+		final Embedded embedded = new Embedded(name, resource);
+		embedded.setHeight(150, Unit.POINTS);
+		//
+		panel.setContent(embedded);
+		panel.setVisible(true);
+
+	}
+
+	/**
+	 * 
 	 * @author Renato Mendes - rmendes@bottomline.com /
 	 *         renato.mendes.1123@gmail.com
 	 *
@@ -311,17 +362,19 @@ public class TrainCheckIdentificationView extends AbstractView {
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-		private static final long FILE_SIZE_LIMIT = 2 * 1024 * 1024; // 2MB
+		private static final long FILE_SIZE_LIMIT = 2 * 1024 * 1024;
 
 		public ImageDropBox(Component root) {
 			super(root);
 			setDropHandler(this);
 		}
 
+		/**
+		 * 
+		 */
 		@Override
 		public void drop(final DragAndDropEvent dropEvent) {
 
-			// expecting this to be an html5 drag
 			final WrapperTransferable tr = (WrapperTransferable) dropEvent.getTransferable();
 			final Html5File[] files = tr.getFiles();
 
@@ -332,121 +385,88 @@ public class TrainCheckIdentificationView extends AbstractView {
 					return;
 				}
 
-				for (final Html5File html5File : files) {
+				Html5File html5File = files[0];
+				final String fileName = html5File.getFileName();
 
-					final String fileName = html5File.getFileName();
+				if (html5File.getFileSize() > FILE_SIZE_LIMIT) {
+					Notification.show("File rejected. Max 2Mb files are accepted by Sampler",
+							Notification.Type.ERROR_MESSAGE);
+					return;
+				}
 
-					if (html5File.getFileSize() > FILE_SIZE_LIMIT) {
+				final ByteArrayOutputStream bas = new ByteArrayOutputStream();
+				final StreamVariable streamVariable = new StreamVariable() {
 
-						Notification.show("File rejected. Max 2Mb files are accepted by Sampler",
-								Notification.Type.ERROR_MESSAGE);
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
 
-					} else {
+					@Override
+					public OutputStream getOutputStream() {
+						return bas;
+					}
 
-						final ByteArrayOutputStream bas = new ByteArrayOutputStream();
-						final StreamVariable streamVariable = new StreamVariable() {
+					@Override
+					public boolean listenProgress() {
+						return false;
+					}
 
-							/**
-							 * 
-							 */
-							private static final long serialVersionUID = 1L;
+					@Override
+					public void streamingStarted(final StreamingStartEvent event) {
+					}
 
-							@Override
-							public OutputStream getOutputStream() {
-								return bas;
+					@Override
+					public void streamingFinished(final StreamingEndEvent event) {
+						try {
+
+							item.getBean().setFileName(fileName);
+
+							progress.setVisible(false);
+							originalCheckImageByteArray = bas.toByteArray();
+							showImage(fileName, html5File.getType(), originalCheckImageByteArray, originalCheckImage);
+
+							// Arrange the buttons
+							btnPreview.setEnabled(true);
+							btnAccept.setEnabled(true);
+							btnReset.setEnabled(true);
+
+							if (binder.isValid()) {
+
+								TrainCheckImage analyzed = checkFraudServiceFactory.instance().trainPreview(
+										item.getBean().getFileName(), originalCheckImageByteArray, item.getBean());
+								showImage(null, FilenameUtils.getExtension(analyzed.getFileName()),
+										analyzed.getAnalyzed(), analizedCheckImage);
+
 							}
 
-							@Override
-							public boolean listenProgress() {
-								return false;
-							}
-
-							@Override
-							public void onProgress(final StreamingProgressEvent event) {
-							}
-
-							@Override
-							public void streamingStarted(final StreamingStartEvent event) {
-							}
-
-							@Override
-							public void streamingFinished(final StreamingEndEvent event) {
-								progress.setVisible(false);
-								byte[] bs = bas.toByteArray();
-								showFile(fileName, html5File.getType(), bs);
-								btnPreview.setEnabled(true);
-								btnAccept.setEnabled(true);
-								btnReset.setEnabled(true);
-							}
-
-							@Override
-							public void streamingFailed(final StreamingErrorEvent event) {
-								progress.setVisible(false);
-							}
-
-							@Override
-							public boolean isInterrupted() {
-								return false;
-							}
-						};
-
-						html5File.setStreamVariable(streamVariable);
-
-						progress.setVisible(true);
+						} catch (IOException e) {
+							e.printStackTrace();
+							Notification.show(e.getMessage(), Type.ERROR_MESSAGE);
+						}
 
 					}
-				}
 
-			} else {
-				final String text = tr.getText();
-				if (text != null) {
-					showText(text);
-				}
+					@Override
+					public void streamingFailed(final StreamingErrorEvent event) {
+						progress.setVisible(false);
+					}
+
+					@Override
+					public boolean isInterrupted() {
+						return false;
+					}
+
+					@Override
+					public void onProgress(StreamingProgressEvent event) {
+					}
+				};
+
+				html5File.setStreamVariable(streamVariable);
+				progress.setVisible(true);
+
 			}
-		}
 
-		/**
-		 * 
-		 * @param text
-		 */
-		private void showText(final String text) {
-			Notification.show("Please upload only image files", Notification.Type.ERROR_MESSAGE);
-		}
-
-		/**
-		 * 
-		 * @param name
-		 * @param type
-		 * @param bas
-		 */
-		private void showFile(final String name, final String type, final byte[] bs) {
-			// resource for serving the file contents
-			final StreamSource streamSource = new StreamSource() {
-				/**
-				 * 
-				 */
-				private static final long serialVersionUID = 1L;
-
-				@Override
-				public InputStream getStream() {
-					if (bs != null) {
-						final byte[] byteArray = bs;
-						return new ByteArrayInputStream(byteArray);
-					}
-					return null;
-				}
-			};
-			final StreamResource resource = new StreamResource(streamSource, name);
-			final Embedded embedded_original = new Embedded(name, resource);
-			embedded_original.setHeight(150, Unit.POINTS);
-			//
-
-			// TODO
-			originalCheckImage.setContent(embedded_original);
-			originalCheckImage.setVisible(true);
-
-			// showComponent(embedded_original, modifiedImages, name, type,
-			// analyze);
 		}
 
 		@Override

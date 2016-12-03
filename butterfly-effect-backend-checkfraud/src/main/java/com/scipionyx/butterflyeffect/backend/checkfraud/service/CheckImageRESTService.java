@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.scipionyx.butterflyeffect.api.checkfraud.model.CheckImage;
+import com.scipionyx.butterflyeffect.api.checkfraud.model.TrainCheckImage;
 import com.scipionyx.butterflyeffect.api.checkfraud.services.ServiceConstants;
 
 /**
@@ -38,7 +39,8 @@ public class CheckImageRESTService {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = ServiceConstants.REST_MAPPING_IMAGE_PING, method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = ServiceConstants.REST_MAPPING_IMAGE_PING, method = { RequestMethod.GET,
+			RequestMethod.POST })
 	public ResponseEntity<String> ping() {
 		LOGGER.info("Ping request.");
 		return (new ResponseEntity<>("Hello", HttpStatus.OK));
@@ -54,6 +56,19 @@ public class CheckImageRESTService {
 		LOGGER.info("Analyze request.");
 		CheckImage analyze = service.analyze(image.getBytes(), image.getOriginalFilename(), image.getSize(),
 				image.getContentType());
+		return new ResponseEntity<>(analyze, HttpStatus.OK);
+	}
+
+	/**
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value = ServiceConstants.REST_MAPPING_IMAGE_TRAIN_PREVIEW, method = RequestMethod.POST)
+	public ResponseEntity<TrainCheckImage> previewTrain(@RequestParam("image") MultipartFile image,
+			@RequestParam("trainInformation") TrainCheckImage trainCheckImage) throws IOException {
+		LOGGER.info("Analyze request.");
+		TrainCheckImage analyze = service.previewTrain(image.getBytes(), trainCheckImage, image.getOriginalFilename());
 		return new ResponseEntity<>(analyze, HttpStatus.OK);
 	}
 

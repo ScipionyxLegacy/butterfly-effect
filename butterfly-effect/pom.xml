@@ -34,6 +34,8 @@
 		<spring.cloud.netflix.version>1.1.2.RELEASE</spring.cloud.netflix.version>
 		<spring.cloud.version>Camden.SR3</spring.cloud.version>
 
+		<docker.image.prefix>scipionyx</docker.image.prefix>
+
 	</properties>
 
 	<organization>
@@ -214,6 +216,6 @@
 		<module>../butterfly-effect-backend</module>
 		<module>../butterfly-effect-frontend</module>
 	</modules>
-	
+
 	<description>Butterfly Effect - Backend</description>
 </project>

@@ -13,6 +13,7 @@ import org.springframework.util.MultiValueMap;
 
 import com.google.common.io.Files;
 import com.scipionyx.butterflyeffect.api.checkfraud.model.CheckImage;
+import com.scipionyx.butterflyeffect.api.checkfraud.model.TrainCheckImage;
 import com.scipionyx.butterflyeffect.api.checkfraud.services.ServiceConstants;
 
 /**
@@ -41,18 +42,30 @@ public class CheckImageRESTService extends AbstractCheckFraudRESTService<CheckIm
 	@Override
 	public CheckImage analyze(String fileName, byte[] bs) throws IOException {
 
+		FileSystemResource fileSystemResource = createResource(fileName, bs);
+		return analyzeDo(fileSystemResource);
+
+	}
+
+	/**
+	 * 
+	 * @param fileName
+	 * @param bs
+	 * @return
+	 * @throws IOException
+	 */
+	private FileSystemResource createResource(String fileName, byte[] bs) throws IOException {
+
 		File tmpFile = null;
 
 		try {
 
 			File tempDir = Files.createTempDir();
 			tmpFile = new File(tempDir.getAbsolutePath() + File.pathSeparator + fileName);
-			
+
 			FileUtils.writeByteArrayToFile(tmpFile, bs);
 
-			FileSystemResource fileSystemResource = new FileSystemResource(tmpFile);
-
-			return analyzeDo(fileSystemResource);
+			return new FileSystemResource(tmpFile);
 
 		} catch (Exception e) {
 
@@ -96,6 +109,29 @@ public class CheckImageRESTService extends AbstractCheckFraudRESTService<CheckIm
 	public String ping() {
 		final String uri = baseUrl + ServiceConstants.REST_MAPPING_IMAGE_PING;
 		return restTemplate.getForObject(uri, String.class);
+	}
+
+	/**
+	 * 
+	 * @param file
+	 * @return
+	 * @throws IOException
+	 */
+	@Override
+	public TrainCheckImage trainPreview(String fileName, byte[] bs, TrainCheckImage trainCheckImage)
+			throws IOException {
+
+		final String uri = baseUrl + ServiceConstants.REST_MAPPING_IMAGE_TRAIN_PREVIEW;
+
+		// MultipartRequest
+		MultiValueMap<String, Object> parts = new LinkedMultiValueMap<>();
+		parts.add("image", createResource(fileName, bs));
+		parts.add("trainInformation", trainCheckImage);
+
+		ResponseEntity<TrainCheckImage> postForEntity = restTemplate.postForEntity(uri, parts, TrainCheckImage.class);
+
+		return postForEntity.getBody();
+
 	}
 
 }

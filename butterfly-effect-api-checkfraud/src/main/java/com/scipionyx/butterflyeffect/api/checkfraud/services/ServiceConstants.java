@@ -13,4 +13,6 @@ public class ServiceConstants {
 
 	public final static String REST_MAPPING_IMAGE_ANALYZE = REST_BASE + "analyze/";
 
+	public final static String REST_MAPPING_IMAGE_TRAIN_PREVIEW = REST_BASE + "train_preview/";
+
 }

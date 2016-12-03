@@ -16,12 +16,10 @@
 	</properties>
 
 	<repositories>
-
 		<repository>
 			<id>vaadin-addons</id>
 			<url>http://maven.vaadin.com/vaadin-addons</url>
 		</repository>
-
 	</repositories>
 
 	<dependencies>
@@ -102,16 +100,35 @@
 					</execution>
 				</executions>
 			</plugin>
+
 			<plugin>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-maven-plugin</artifactId>
 				<version>${vaadin.version}</version>
 			</plugin>
+
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.4.11</version>
+				<configuration>
+					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+					<dockerDirectory>src/main/docker</dockerDirectory>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 
 	<packaging>pom</packaging>
-	
+
 	<modules>
 		<module>../butterfly-effect-frontend-bootstrap</module>
 		<module>../butterfly-effect-frontend-ui</module>
@@ -123,5 +140,8 @@
 		<module>../butterfly-effect-frontend-security</module>
 		<module>../butterfly-effect-frontend-checkfraud</module>
 	</modules>
+
 	<name>Butterfly Effect - Frontend</name>
+
+
 </project>
