@@ -60,15 +60,16 @@ public class CheckImageRESTService {
 	}
 
 	/**
+	 * @RequestParam("image") MultipartFile image,
+	 * 
 	 * 
 	 * @return
 	 * @throws IOException
 	 */
 	@RequestMapping(value = ServiceConstants.REST_MAPPING_IMAGE_TRAIN_PREVIEW, method = RequestMethod.POST)
-	public ResponseEntity<TrainCheckImage> previewTrain(@RequestParam("image") MultipartFile image,
-			@RequestParam("trainInformation") TrainCheckImage trainCheckImage) throws IOException {
-		LOGGER.info("Analyze request.");
-		TrainCheckImage analyze = service.previewTrain(image.getBytes(), trainCheckImage, image.getOriginalFilename());
+	public ResponseEntity<TrainCheckImage> previewTrain(TrainCheckImage image) throws IOException {
+		LOGGER.info("Start {}", ServiceConstants.REST_MAPPING_IMAGE_TRAIN_PREVIEW);
+		TrainCheckImage analyze = service.previewTrain(image);
 		return new ResponseEntity<>(analyze, HttpStatus.OK);
 	}
 

@@ -144,22 +144,22 @@ public class CheckImageService {
 	 * @throws IOException
 	 * 
 	 */
-	public TrainCheckImage previewTrain(byte[] bs, TrainCheckImage trainCheckImage, String originalFileName)
-			throws IOException {
+	public TrainCheckImage previewTrain(TrainCheckImage checkImage) throws IOException {
 		//
-		InputStream input = new ByteArrayInputStream(bs);
+		InputStream input = new ByteArrayInputStream(checkImage.getOriginal());
 		MBFImage image = ImageUtilities.readMBF(input);
 
+		//
 		MBFImage resize = resize(image);
-		MBFImage drawRetangles = drawRetangles(resize, trainCheckImage);
+		MBFImage drawRetangles = drawRetangles(resize, checkImage);
 
 		//
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
-		ImageUtilities.write(drawRetangles, FilenameUtils.getExtension(originalFileName), output);
+		ImageUtilities.write(drawRetangles, FilenameUtils.getExtension(checkImage.getFileName()), output);
 
-		trainCheckImage.setAnalyzed(output.toByteArray());
+		checkImage.setAnalyzed(output.toByteArray());
 
-		return trainCheckImage;
+		return checkImage;
 
 	}
 

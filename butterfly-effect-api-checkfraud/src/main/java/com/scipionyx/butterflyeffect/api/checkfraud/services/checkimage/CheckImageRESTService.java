@@ -118,17 +118,11 @@ public class CheckImageRESTService extends AbstractCheckFraudRESTService<CheckIm
 	 * @throws IOException
 	 */
 	@Override
-	public TrainCheckImage trainPreview(String fileName, byte[] bs, TrainCheckImage trainCheckImage)
-			throws IOException {
+	public TrainCheckImage trainPreview(TrainCheckImage trainCheckImage) throws IOException {
 
 		final String uri = baseUrl + ServiceConstants.REST_MAPPING_IMAGE_TRAIN_PREVIEW;
-
-		// MultipartRequest
-		MultiValueMap<String, Object> parts = new LinkedMultiValueMap<>();
-		parts.add("image", createResource(fileName, bs));
-		parts.add("trainInformation", trainCheckImage);
-
-		ResponseEntity<TrainCheckImage> postForEntity = restTemplate.postForEntity(uri, parts, TrainCheckImage.class);
+		ResponseEntity<TrainCheckImage> postForEntity = restTemplate.postForEntity(uri, trainCheckImage,
+				TrainCheckImage.class);
 
 		return postForEntity.getBody();
 

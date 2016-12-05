@@ -5,8 +5,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -272,8 +274,9 @@ public class TrainCheckIdentificationView extends AbstractView {
 
 				try {
 					binder.commit();
-					TrainCheckImage analyzed = checkFraudServiceFactory.instance()
-							.trainPreview(item.getBean().getFileName(), originalCheckImageByteArray, item.getBean());
+					TrainCheckImage checkImage = item.getBean();
+					checkImage.setOriginal(originalCheckImageByteArray);
+					TrainCheckImage analyzed = checkFraudServiceFactory.instance().trainPreview(checkImage);
 					showImage(null, FilenameUtils.getExtension(analyzed.getFileName()), analyzed.getAnalyzed(),
 							analizedCheckImage);
 				} catch (CommitException | IOException e) {
@@ -420,7 +423,11 @@ public class TrainCheckIdentificationView extends AbstractView {
 					public void streamingFinished(final StreamingEndEvent event) {
 						try {
 
-							item.getBean().setFileName(fileName);
+							final TrainCheckImage checkImage = new TrainCheckImage();
+							BeanUtils.copyProperties(checkImage, item.getBean());
+
+							checkImage.setFileName(fileName);
+							checkImage.setOriginal(bas.toByteArray());
 
 							progress.setVisible(false);
 							originalCheckImageByteArray = bas.toByteArray();
@@ -433,14 +440,13 @@ public class TrainCheckIdentificationView extends AbstractView {
 
 							if (binder.isValid()) {
 
-								TrainCheckImage analyzed = checkFraudServiceFactory.instance().trainPreview(
-										item.getBean().getFileName(), originalCheckImageByteArray, item.getBean());
+								TrainCheckImage analyzed = checkFraudServiceFactory.instance().trainPreview(checkImage);
 								showImage(null, FilenameUtils.getExtension(analyzed.getFileName()),
 										analyzed.getAnalyzed(), analizedCheckImage);
 
 							}
 
-						} catch (IOException e) {
+						} catch (IOException | IllegalAccessException | InvocationTargetException e) {
 							e.printStackTrace();
 							Notification.show(e.getMessage(), Type.ERROR_MESSAGE);
 						}

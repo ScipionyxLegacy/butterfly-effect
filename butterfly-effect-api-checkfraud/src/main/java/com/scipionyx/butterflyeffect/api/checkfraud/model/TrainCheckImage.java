@@ -20,6 +20,8 @@ public class TrainCheckImage implements Serializable {
 
 	private String fileName;
 
+	private byte[] original;
+
 	private byte[] analyzed;
 
 	@NotNull
@@ -196,6 +198,14 @@ public class TrainCheckImage implements Serializable {
 
 	public void setAnalyzed(byte[] analyzed) {
 		this.analyzed = analyzed;
+	}
+
+	public byte[] getOriginal() {
+		return original;
+	}
+
+	public void setOriginal(byte[] original) {
+		this.original = original;
 	}
 
 }

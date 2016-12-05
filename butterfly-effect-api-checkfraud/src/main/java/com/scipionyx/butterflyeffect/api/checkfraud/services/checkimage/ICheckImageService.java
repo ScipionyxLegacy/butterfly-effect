@@ -20,6 +20,6 @@ public interface ICheckImageService {
 
 	public CheckImage analyze(String fileName, byte[] bs) throws IOException;
 
-	public TrainCheckImage trainPreview(String fileName, byte[] bs, TrainCheckImage trainCheckImage) throws IOException;
+	public TrainCheckImage trainPreview(TrainCheckImage trainCheckImage) throws IOException;
 
 }
