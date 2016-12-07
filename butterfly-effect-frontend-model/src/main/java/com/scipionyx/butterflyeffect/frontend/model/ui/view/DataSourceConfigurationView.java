@@ -43,7 +43,7 @@ import com.vaadin.ui.renderers.TextRenderer;
 @SpringView(name = DataSourceConfigurationView.VIEW_NAME)
 @UIScope
 //
-@ViewConfiguration(configurationFile = "DataSourceConfigurationView.info")
+@ViewConfiguration(title = "Data Source Configuration")
 @MenuConfiguration(group = "DataModelConfiguration", label = "Data Source Configuration", position = Position.TOP_RIGHT, parent = RootView.VIEW_NAME)
 //
 @SuppressWarnings("unused")

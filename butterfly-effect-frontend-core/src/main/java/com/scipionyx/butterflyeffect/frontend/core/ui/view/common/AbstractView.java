@@ -9,12 +9,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanNameAware;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.scipionyx.butterflyeffect.frontend.model.ViewConfigurationInformation;
 import com.scipionyx.butterflyeffect.ui.model.ButterflyView;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
 import com.vaadin.navigator.View;
@@ -38,7 +34,8 @@ import com.vaadin.ui.themes.ValoTheme;
  */
 public abstract class AbstractView extends VerticalLayout implements View, BeanNameAware, ButterflyView {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractView.class);
+	// private static final Logger LOGGER =
+	// LoggerFactory.getLogger(AbstractView.class);
 
 	/**
 	 * 
@@ -52,7 +49,7 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 
 	private String beanName;
 
-	private ObjectMapper objectMapper;
+	// private ObjectMapper objectMapper;
 
 	public abstract void doBuildWorkArea(VerticalLayout workArea) throws Exception;
 
@@ -78,7 +75,7 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 		this.setSpacing(true);
 
 		//
-		ViewConfigurationInformation viewConfigurationInformation = read();
+		ViewConfiguration viewConfigurationInformation = read();
 
 		//
 		buildTitleLayout(viewConfigurationInformation);
@@ -105,30 +102,11 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 	 * @return
 	 * @throws IOException
 	 */
-	private ViewConfigurationInformation read() throws IOException {
+	private ViewConfiguration read() throws IOException {
 
 		// Get the name of the configuration File.
 		if (this.getClass().isAnnotationPresent(ViewConfiguration.class)) {
-
-			ViewConfiguration viewConfiguration = this.getClass().getAnnotation(ViewConfiguration.class);
-			String configurationFile = viewConfiguration.configurationFile();
-
-			if (configurationFile != null) {
-
-				List<InputStream> configurations = loadResources(configurationFile, null);
-
-				if (configurations.size() == 1) {
-					objectMapper = new ObjectMapper();
-					ViewConfigurationInformation information = objectMapper.readValue(configurations.get(0),
-							ViewConfigurationInformation.class);
-					return information;
-				} else {
-					LOGGER.error("None or more than one ({}) configuraiton files named as ({}) found in the classpath ",
-							configurations.size(), configurationFile);
-				}
-
-			}
-
+			return this.getClass().getAnnotation(ViewConfiguration.class);
 		}
 
 		return null;
@@ -159,10 +137,10 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 	 * @param viewConfigurationInformation
 	 * 
 	 */
-	private void buildTitleLayout(ViewConfigurationInformation viewConfigurationInformation) {
+	private void buildTitleLayout(ViewConfiguration viewConfigurationInformation) {
 
 		//
-		Label titleLabel = new Label(viewConfigurationInformation.getTitle().getTitle());
+		Label titleLabel = new Label(viewConfigurationInformation.title());
 		titleLabel.addStyleName(ValoTheme.LABEL_H1);
 
 		buttonPanel = new HorizontalLayout();

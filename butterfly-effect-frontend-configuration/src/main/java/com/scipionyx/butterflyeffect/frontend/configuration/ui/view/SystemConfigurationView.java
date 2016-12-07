@@ -30,7 +30,7 @@ import com.vaadin.ui.VerticalLayout;
 @SpringComponent("SystemConfigurationView")
 @UIScope()
 
-@ViewConfiguration(configurationFile = "SystemConfigurationView.info")
+@ViewConfiguration(title = "System Configuration")
 public class SystemConfigurationView extends AbstractConfigurationView {
 
 	/**

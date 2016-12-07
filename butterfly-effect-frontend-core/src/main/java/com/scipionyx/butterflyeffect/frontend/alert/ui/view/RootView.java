@@ -23,7 +23,7 @@ import com.vaadin.ui.VerticalLayout;
 @SpringView(name = RootView.VIEW_NAME)
 @UIScope
 //
-@ViewConfiguration(configurationFile = "CheckFraudRootView.info")
+@ViewConfiguration(title = "Alert")
 @MenuConfiguration(position = Position.TOP_MAIN, label = "Alert", group = "", order = -99, font = FontAwesome.BELL)
 public class RootView extends AbstractView {
 

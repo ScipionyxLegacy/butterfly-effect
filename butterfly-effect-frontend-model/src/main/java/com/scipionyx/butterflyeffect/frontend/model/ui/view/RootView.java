@@ -22,7 +22,7 @@ import com.vaadin.ui.VerticalLayout;
 @SpringView(name = RootView.VIEW_NAME)
 @UIScope
 //
-@ViewConfiguration(configurationFile = "ConfigurationRootView.info")
+@ViewConfiguration(title = "Data Model")
 @MenuConfiguration(position = Position.TOP_RIGHT, label = "Data Model", group = "", order = 1, parent = com.scipionyx.butterflyeffect.frontend.configuration.ui.view.RootView.VIEW_NAME)
 public class RootView extends AbstractView {
 

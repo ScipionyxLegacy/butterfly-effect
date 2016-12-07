@@ -57,7 +57,7 @@ import com.vaadin.ui.themes.ValoTheme;
 // @Scope(scopeName = "session")
 
 //
-@ViewConfiguration(configurationFile = "CheckFraudLoadImagesView.info")
+@ViewConfiguration(title = "Check Fraud - Load Images")
 @MenuConfiguration(position = Position.TOP_MAIN, label = "Load Check Images", group = "", order = 1, parent = RootView.VIEW_NAME)
 public class LoadImagesView extends AbstractView {
 

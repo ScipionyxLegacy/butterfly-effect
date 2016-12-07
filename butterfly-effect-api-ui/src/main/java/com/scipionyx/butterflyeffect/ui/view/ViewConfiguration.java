@@ -5,7 +5,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.vaadin.teemu.VaadinIcons;
+
 /**
+ * 
+ * 
  * 
  * @author Renato Mendes
  *
@@ -14,6 +18,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface ViewConfiguration {
 
-	public String configurationFile();
+	public String title() default "<TITLE_NOT_PROVIDED>";
+
+	public String subTitle() default "<SUB_TITLE_NOT_PROVIDED>";
+
+	public VaadinIcons icon() default VaadinIcons.VAADIN_H;
 
 }

@@ -71,7 +71,7 @@ import com.vaadin.ui.themes.ValoTheme;
 @UIScope
 
 //
-@ViewConfiguration(configurationFile = "CheckFraudLoadImagesView.info")
+@ViewConfiguration(title = "Check Fraud - Train Neural Network")
 @MenuConfiguration(position = Position.TOP_MAIN, label = "Train Check Identifier", group = "", order = 1, parent = RootView.VIEW_NAME)
 public class TrainCheckIdentificationView extends AbstractView {
 

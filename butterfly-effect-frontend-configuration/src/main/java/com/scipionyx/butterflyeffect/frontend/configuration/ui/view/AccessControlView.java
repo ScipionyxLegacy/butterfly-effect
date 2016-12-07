@@ -56,7 +56,7 @@ import com.vaadin.ui.VerticalLayout;
 @SpringView(name = AccessControlView.VIEW_NAME)
 
 //
-@ViewConfiguration(configurationFile = "ConfigurationRootView.info")
+@ViewConfiguration(title = "Access Control")
 @MenuConfiguration(position = Position.TOP_RIGHT, label = "Access", group = "", order = 1, parent = RootView.VIEW_NAME)
 public class AccessControlView extends VerticalLayout implements View, ViewAccessControl {
 

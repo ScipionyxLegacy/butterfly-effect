@@ -46,7 +46,7 @@ import com.vaadin.ui.VerticalLayout;
 @SpringView(name = AboutView.VIEW_NAME)
 
 //
-@ViewConfiguration(configurationFile = "ConfigurationRootView.info")
+@ViewConfiguration(title = "About")
 @MenuConfiguration(position = Position.TOP_RIGHT, label = "About", group = "", order = 99, parent = RootView.VIEW_NAME)
 public class AboutView extends AbstractView {
 

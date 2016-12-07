@@ -24,7 +24,7 @@ import com.vaadin.ui.VerticalLayout;
 @SpringView(name = RootView.VIEW_NAME)
 @UIScope
 //
-@ViewConfiguration(configurationFile = "RootView.info")
+@ViewConfiguration(title = "Welcome")
 @MenuConfiguration(position = Position.TOP_MAIN, label = "Home", group = "", order = -1)
 public class RootView extends AbstractView {
 
