@@ -23,4 +23,19 @@
 	</repositories>
 
 	<name>Butterfly Effect - Frontend - Core</name>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.4.12</version>
+				<configuration>
+					<skipDocker>true</skipDocker>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

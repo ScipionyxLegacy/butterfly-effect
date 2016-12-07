@@ -64,7 +64,6 @@ public class CheckFraudServiceFactoryTest {
 	 * @throws IOException
 	 * 
 	 */
-	@Test
 	public void analyzeByteArray() throws IOException {
 		//
 		String fileName = "CHECK_01.png";

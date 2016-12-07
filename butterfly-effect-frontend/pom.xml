@@ -108,19 +108,64 @@
 			</plugin>
 
 			<plugin>
+
 				<groupId>com.spotify</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.4.13</version>
+				<version>0.4.12</version>
+
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+
 				<configuration>
-					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-					<dockerDirectory>src/main/docker</dockerDirectory>
+
+					<serverId>${docker.registry.server}</serverId>
+
+					<baseImage>openjdk:alpine</baseImage>
+
+					<maintainer>Renato Mendes (renato.mendes.1123@gmail.com)</maintainer>
+
 					<resources>
 						<resource>
+							<directory>../butterfly-effect-frontend-bootstrap/target</directory>
+							<filtering>true</filtering>
+							<includes>
+								<include>${project.artifactId}-bootstrap-${project.version}-exec.jar</include>
+							</includes>
 							<targetPath>/</targetPath>
-							<directory>${project.build.directory}</directory>
-							<include>${project.build.finalName}.jar</include>
 						</resource>
 					</resources>
+
+					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+
+					<exposes>
+						<expose>8080</expose>
+					</exposes>
+
+					<entryPoint>
+						["java", "-jar", "/${project.artifactId}-bootstrap-${project.version}-exec.jar"]
+					</entryPoint>
+
+					<forceTags>true</forceTags>
+
+					<imageTags>
+						<imageTag>${project.version}</imageTag>
+						<imageTag>latest</imageTag>
+					</imageTags>
+
+					<pushImage>true</pushImage>
+
+					<squashRunCommands>true</squashRunCommands>
+
+					<retryPushCount>1</retryPushCount>
+
+					<skipDocker>false</skipDocker>
+
 				</configuration>
 			</plugin>
 

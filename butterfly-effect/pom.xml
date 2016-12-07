@@ -35,6 +35,8 @@
 		<spring.cloud.version>Camden.SR3</spring.cloud.version>
 
 		<docker.image.prefix>scipionyx</docker.image.prefix>
+		<docker.registry>192.168.99.110:8081/repository/ScipionyxDocker/</docker.registry>
+		<docker.registry.server>docker.io</docker.registry.server>
 
 	</properties>
 
@@ -218,4 +220,5 @@
 	</modules>
 
 	<description>Butterfly Effect - Backend</description>
+	
 </project>
