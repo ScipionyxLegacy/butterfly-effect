@@ -131,6 +131,7 @@
 					<maintainer>Renato Mendes (renato.mendes.1123@gmail.com)</maintainer>
 
 					<resources>
+
 						<resource>
 							<directory>../butterfly-effect-frontend-bootstrap/target</directory>
 							<filtering>true</filtering>
@@ -139,6 +140,16 @@
 							</includes>
 							<targetPath>/</targetPath>
 						</resource>
+
+						<resource>
+							<directory>/docker</directory>
+							<filtering>true</filtering>
+							<includes>
+								<include>entrypoint.sh</include>
+							</includes>
+							<targetPath>/</targetPath>
+						</resource>
+
 					</resources>
 
 					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
@@ -147,8 +158,18 @@
 						<expose>8080</expose>
 					</exposes>
 
+					<env>
+						<VAADIN_SERVLET_PRODUCTIONMODE>true</VAADIN_SERVLET_PRODUCTIONMODE>
+						<PROJECT_VERSION>${project.version}</PROJECT_VERSION>
+						<PROJECT_ARTIFACTID>${project.artifactId}</PROJECT_ARTIFACTID>
+					</env>
+
+					<runs>
+						<run>chmod +x entrypoint.sh</run>
+					</runs>
+
 					<entryPoint>
-						["java", "-jar", "/${project.artifactId}-bootstrap-${project.version}-exec.jar"]
+						["entrypoint.sh"]
 					</entryPoint>
 
 					<forceTags>true</forceTags>
@@ -159,17 +180,17 @@
 					</imageTags>
 
 					<pushImage>true</pushImage>
-
-					<squashRunCommands>true</squashRunCommands>
-
 					<retryPushCount>1</retryPushCount>
 
+					<squashRunCommands>true</squashRunCommands>
 					<skipDocker>false</skipDocker>
 
 				</configuration>
+
 			</plugin>
 
 		</plugins>
+
 	</build>
 
 	<packaging>pom</packaging>
@@ -187,6 +208,5 @@
 	</modules>
 
 	<name>Butterfly Effect - Frontend</name>
-
 
 </project>
