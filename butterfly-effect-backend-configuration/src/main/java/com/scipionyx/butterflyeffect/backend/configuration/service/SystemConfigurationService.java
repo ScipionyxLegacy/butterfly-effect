@@ -8,7 +8,6 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.scipionyx.butterflyeffect.backend.configuration.api.IResponse;
@@ -32,7 +31,7 @@ public class SystemConfigurationService extends AbstractConfigurationService<Sys
 
 	private String configurationFileName;
 
-	@Value(value = "${bottoline.certmanager.basicfolder}")
+	// @Value(value = "${bottoline.certmanager.basicfolder}")
 	private String basicFolder;
 
 	/**

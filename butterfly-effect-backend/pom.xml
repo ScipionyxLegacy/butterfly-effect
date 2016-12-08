@@ -75,6 +75,7 @@
 					<maintainer>Renato Mendes (renato.mendes.1123@gmail.com)</maintainer>
 
 					<resources>
+
 						<resource>
 							<directory>../butterfly-effect-backend-bootstrap/target</directory>
 							<filtering>true</filtering>
@@ -83,14 +84,34 @@
 							</includes>
 							<targetPath>/</targetPath>
 						</resource>
+
+						<resource>
+							<directory>./docker</directory>
+							<filtering>true</filtering>
+							<includes>
+								<include>entrypoint.sh</include>
+							</includes>
+							<targetPath>/</targetPath>
+						</resource>
+
 					</resources>
+
+					<env>
+						<VAADIN_SERVLET_PRODUCTIONMODE>true</VAADIN_SERVLET_PRODUCTIONMODE>
+						<PROJECT_VERSION>${project.version}</PROJECT_VERSION>
+						<PROJECT_ARTIFACTID>${project.artifactId}</PROJECT_ARTIFACTID>
+					</env>
 
 					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
 
 					<forceTags>true</forceTags>
 
+					<runs>
+						<run>chmod +x entrypoint.sh</run>
+					</runs>
+
 					<entryPoint>
-						[ "java", "-jar", "/${project.artifactId}-bootstrap-${project.version}-exec.jar" ]
+						["./entrypoint.sh"]
 					</entryPoint>
 
 					<imageTags>
@@ -111,15 +132,14 @@
 					<skipDocker>false</skipDocker>
 
 				</configuration>
+
 			</plugin>
-
-
 
 		</plugins>
 
 	</build>
-	<packaging>pom</packaging>
 
+	<packaging>pom</packaging>
 
 	<name>Butterfly Effect - Backend</name>
 
@@ -134,4 +154,5 @@
 		<module>../butterfly-effect-backend-configuration</module>
 		<module>../butterfly-effect-backend-model</module>
 	</modules>
+
 </project>

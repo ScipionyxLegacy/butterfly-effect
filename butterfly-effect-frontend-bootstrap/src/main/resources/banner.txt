@@ -22,6 +22,5 @@
  |_|  |_|  \___/|_| |_|\__| |______|_| |_|\__,_|                       
                                                        
 Version		: ${application.version}
-Version		: ${application.formatted-version}
 Spring Boot	: ${spring-boot.version}         
                                                                        

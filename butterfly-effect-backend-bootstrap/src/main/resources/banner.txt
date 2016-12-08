@@ -20,5 +20,7 @@
  |  _ < / _` |/ __| |/ / _ \ '_ \ / _` |                               
  | |_) | (_| | (__|   <  __/ | | | (_| |                               
  |____/ \__,_|\___|_|\_\___|_| |_|\__,_|                               
-                                                                       
-                                                                       
+                                                                                                                    
+Version		: ${application.version}
+Spring Boot	: ${spring-boot.version}         
+                                                                                                 

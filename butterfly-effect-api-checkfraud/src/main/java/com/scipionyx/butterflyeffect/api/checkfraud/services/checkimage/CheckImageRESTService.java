@@ -29,9 +29,7 @@ public class CheckImageRESTService extends AbstractCheckFraudRESTService<CheckIm
 	 */
 	@Override
 	public CheckImage analyze(File file) {
-
 		FileSystemResource fileSystemResource = new FileSystemResource(file);
-
 		return analyzeDo(fileSystemResource);
 	}
 
@@ -87,8 +85,6 @@ public class CheckImageRESTService extends AbstractCheckFraudRESTService<CheckIm
 	 */
 	private CheckImage analyzeDo(AbstractResource resource) {
 
-		final String uri = baseUrl + ServiceConstants.REST_MAPPING_IMAGE_ANALYZE;
-
 		// MultipartRequest
 		MultiValueMap<String, Object> parts = new LinkedMultiValueMap<>();
 		parts.add("image", resource);
@@ -96,7 +92,8 @@ public class CheckImageRESTService extends AbstractCheckFraudRESTService<CheckIm
 		//
 		// CheckImage postForObject = restTemplate.postForObject(uri, parts,
 		// CheckImage.class);
-		ResponseEntity<CheckImage> postForEntity = restTemplate.postForEntity(uri, parts, CheckImage.class);
+		ResponseEntity<CheckImage> postForEntity = restTemplate
+				.postForEntity(calculateUrl(ServiceConstants.REST_MAPPING_IMAGE_ANALYZE), parts, CheckImage.class);
 
 		return postForEntity.getBody();
 
@@ -107,8 +104,7 @@ public class CheckImageRESTService extends AbstractCheckFraudRESTService<CheckIm
 	 */
 	@Override
 	public String ping() {
-		final String uri = baseUrl + ServiceConstants.REST_MAPPING_IMAGE_PING;
-		return restTemplate.getForObject(uri, String.class);
+		return restTemplate.getForObject(calculateUrl(ServiceConstants.REST_MAPPING_IMAGE_PING), String.class);
 	}
 
 	/**
@@ -119,13 +115,10 @@ public class CheckImageRESTService extends AbstractCheckFraudRESTService<CheckIm
 	 */
 	@Override
 	public TrainCheckImage trainPreview(TrainCheckImage trainCheckImage) throws IOException {
-
-		final String uri = baseUrl + ServiceConstants.REST_MAPPING_IMAGE_TRAIN_PREVIEW;
-		ResponseEntity<TrainCheckImage> postForEntity = restTemplate.postForEntity(uri, trainCheckImage,
+		ResponseEntity<TrainCheckImage> postForEntity = restTemplate.postForEntity(
+				calculateUrl(ServiceConstants.REST_MAPPING_IMAGE_TRAIN_PREVIEW), trainCheckImage,
 				TrainCheckImage.class);
-
 		return postForEntity.getBody();
-
 	}
 
 }

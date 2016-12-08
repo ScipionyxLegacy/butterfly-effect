@@ -3,21 +3,23 @@ package com.scipionyx.butterflyeffect.backend;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.config.server.EnableConfigServer;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
+ * 
+ * 
  * 
  * @author Renato Mendes
  *
  */
 @EnableAutoConfiguration
 @SpringBootApplication
-@ComponentScan(basePackages = "${butterflyeffect.system.componentscan.basepackages}", lazyInit = true)
+@ComponentScan(lazyInit = true)
 
-@EnableConfigServer
-@EnableEurekaServer
+// @EnableConfigServer
+
+@EnableEurekaServer()
 public class BackendApplication {
 
 	/**
