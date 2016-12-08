@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+
+  elasticsearch:
+    scale: 1
+
+  backend:
+    scale: 1
+
+  frontend:
+    scale: 1

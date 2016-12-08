@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+
+  elasticsearch:
+    image: elasticsearch:2.1
+  
+  frontend:
+    image: scipionyx/butterfly-effect-frontend:latest
+    ports:
+    - "8080:8080"
+    environment:
+      DB_URL:   'jdbc:mysql://db:3306/wfs?useOldAliasMetadataBehavior=true'
+      DB_JOBS_URL: 'jdbc:mysql://db:3306/wfs_ijm?useOldAliasMetadataBehavior=true'
+      DB_STAGING_URL: 'jdbc:mysql://db:3306/wfs?useOldAliasMetadataBehavior=true'
+      DB_CLOUD_URL: 'jdbc:mysql://db:3306/wfs?useOldAliasMetadataBehavior=true'
+      LDAP_URL: 'ldap://ldap:10389'
+      COM_INTELLINX_SOLUTIONS_ES_CLIENT_FACTORY_TRANSPORTURLS: 'elasticsearch:9300'
+    
+  backend:
+    image: scipionyx/butterfly-effect-backend:latest
