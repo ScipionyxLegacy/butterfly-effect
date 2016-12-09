@@ -2,9 +2,16 @@ version: '2'
 
 services:
 
-  elasticsearch:
-    image: elasticsearch:2.1
-  
+  consul:
+    image: consul:latest
+    ports:
+    - "8300:8300"
+    - "8301:8401/udp"
+    - "8302:8402/udp"
+    - "8400:8400"
+    - "8500:8500"
+    - "8600:8600"
+    
   frontend:
     image: scipionyx/butterfly-effect-frontend:latest
     ports:

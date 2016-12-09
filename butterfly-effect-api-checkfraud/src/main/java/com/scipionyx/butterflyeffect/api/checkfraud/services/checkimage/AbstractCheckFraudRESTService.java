@@ -1,11 +1,12 @@
 package com.scipionyx.butterflyeffect.api.checkfraud.services.checkimage;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.client.RestTemplate;
-
-import com.netflix.appinfo.InstanceInfo;
-import com.netflix.discovery.EurekaClient;
 
 /**
  * 
@@ -15,13 +16,13 @@ import com.netflix.discovery.EurekaClient;
  */
 public abstract class AbstractCheckFraudRESTService<T> {
 
-	@Autowired
-	private EurekaClient discoveryClient;
-
 	@Value("${butterflyeffect.secure.url:false}")
 	private boolean secureUrl;
 
 	protected RestTemplate restTemplate;
+
+	@Autowired
+	private DiscoveryClient discoveryClient;
 
 	/**
 	 * 
@@ -29,9 +30,8 @@ public abstract class AbstractCheckFraudRESTService<T> {
 	 * @return
 	 */
 	protected String calculateUrl(final String service) {
-		InstanceInfo nextServerFromEureka = discoveryClient.getNextServerFromEureka("BUTTERFLYEFFECT_BACKEND" + "",
-				secureUrl);
-		final String uri = nextServerFromEureka.getHomePageUrl() + service;
+		List<ServiceInstance> instances = discoveryClient.getInstances("butterflyeffect_backend");
+		final String uri = "http://" + instances.get(0).getHost() + ":" + instances.get(0).getPort() + service;
 		return uri;
 	}
 

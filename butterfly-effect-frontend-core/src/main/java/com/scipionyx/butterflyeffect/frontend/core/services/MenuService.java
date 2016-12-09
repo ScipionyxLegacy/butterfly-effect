@@ -12,11 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.context.WebApplicationContext;
-import org.vaadin.teemu.VaadinIcons;
 
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.vaadin.navigator.View;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 
@@ -100,7 +100,7 @@ public class MenuService implements Serializable {
 					menu.setOrder(annotation.order());
 					menu.setPosition(annotation.position());
 					menu.setParent(annotation.parent().equals("") ? null : annotation.parent());
-					menu.setIcon(annotation.icon().equals(VaadinIcons.VAADIN_H) ? null : annotation.icon());
+					menu.setIcon(annotation.icon().equals(FontAwesome._500PX) ? null : annotation.icon());
 					menus.add(menu);
 
 				} else {

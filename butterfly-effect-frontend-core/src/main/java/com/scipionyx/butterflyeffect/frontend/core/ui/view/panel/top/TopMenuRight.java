@@ -2,9 +2,8 @@ package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top;
 
 import java.util.List;
 
-import org.vaadin.teemu.VaadinIcons;
-
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.themes.ValoTheme;
@@ -58,7 +57,7 @@ public class TopMenuRight extends MenuBar {
 			};
 		}
 
-		Resource resource = VaadinIcons.ABACUS;
+		Resource resource = FontAwesome._500PX;
 
 		MenuItem root = this.addItem(menu.getLabel(), resource, command);
 
