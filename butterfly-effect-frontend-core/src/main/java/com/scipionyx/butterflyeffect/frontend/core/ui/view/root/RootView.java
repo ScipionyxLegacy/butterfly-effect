@@ -28,7 +28,7 @@ import com.vaadin.ui.VerticalLayout;
 @MenuConfiguration(position = Position.TOP_MAIN, label = "Home", group = "", order = -1)
 public class RootView extends AbstractView {
 
-	public static final String VIEW_NAME = "butterfly-effect-frontend-core:root";
+	public static final String VIEW_NAME = "";
 
 	/**
 	 * 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -41,8 +42,6 @@ class TopMenuBar extends MenuBar {
 
 			if (menu.getPosition() == Position.TOP_MAIN && menu.getParent() == null) {
 
-				String label = (menu.getLabel() != null) ? menu.getLabel() : "NO-LABEL";
-
 				boolean hasChildren = hasChildren(menu, list);
 
 				Command command = new Command() {
@@ -61,11 +60,11 @@ class TopMenuBar extends MenuBar {
 				MenuItem root = null;
 
 				if (hasChildren) {
-					root = this.addItem(label, null);
-					root.addItem("Overview", command);
+					root = this.addItem(menu.getLabel(), menu.getIcon(), null);
+					root.addItem("Overview", FontAwesome.ARROWS, command);
 					addChildren(root, menu, list);
 				} else {
-					root = this.addItem(label, command);
+					root = this.addItem(menu.getLabel(), menu.getIcon(), command);
 				}
 
 			}
@@ -132,9 +131,7 @@ class TopMenuBar extends MenuBar {
 				getUI().getNavigator().navigateTo(menu.getView());
 			}
 		};
-
-		return root.addItem(label, command);
-
+		return root.addItem(label, menu.getIcon(), command);
 	}
 
 }

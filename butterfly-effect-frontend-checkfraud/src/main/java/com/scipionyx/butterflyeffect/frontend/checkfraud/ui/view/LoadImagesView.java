@@ -23,6 +23,7 @@ import com.vaadin.event.dd.DropHandler;
 import com.vaadin.event.dd.acceptcriteria.AcceptAll;
 import com.vaadin.event.dd.acceptcriteria.AcceptCriterion;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.server.StreamResource;
 import com.vaadin.server.StreamResource.StreamSource;
 import com.vaadin.server.StreamVariable;
@@ -58,7 +59,7 @@ import com.vaadin.ui.themes.ValoTheme;
 
 //
 @ViewConfiguration(title = "Check Fraud - Load Images")
-@MenuConfiguration(position = Position.TOP_MAIN, label = "Load Check Images", group = "", order = 1, parent = RootView.VIEW_NAME)
+@MenuConfiguration(position = Position.TOP_MAIN, label = "Load Check Images", group = "", order = 1, parent = RootView.VIEW_NAME, icon = FontAwesome.CHECK)
 public class LoadImagesView extends AbstractView {
 
 	public static final String VIEW_NAME = "butterfly-effect-frontend-checkfraud:loadImagesView";

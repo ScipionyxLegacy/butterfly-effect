@@ -5,6 +5,7 @@ import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
@@ -23,7 +24,7 @@ import com.vaadin.ui.VerticalLayout;
 @UIScope()
 //
 @ViewConfiguration(title = "Help")
-@MenuConfiguration(position = Position.TOP_RIGHT, label = "Help", group = "", order = 10)
+@MenuConfiguration(position = Position.TOP_RIGHT, label = "Help", group = "", order = 10, icon = FontAwesome.ANCHOR)
 public class RootView extends AbstractView {
 
 	public static final String VIEW_NAME = "butterfly-effect-frontend-core-help:root";

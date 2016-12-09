@@ -5,8 +5,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.vaadin.teemu.VaadinIcons;
-
 import com.vaadin.server.FontAwesome;
 
 /**
@@ -75,12 +73,12 @@ public @interface MenuConfiguration {
 	 * 
 	 * @return
 	 */
-	public FontAwesome font() default FontAwesome.YELP;
+	public FontAwesome icon() default FontAwesome._500PX;
 
 	/**
 	 * 
 	 * @return
 	 */
-	public VaadinIcons icon() default VaadinIcons.VAADIN_H;
+	public boolean visible() default true;
 
 }

@@ -24,7 +24,7 @@ import com.vaadin.ui.VerticalLayout;
 @UIScope
 //
 @ViewConfiguration(title = "Alert")
-@MenuConfiguration(position = Position.TOP_MAIN, label = "Alert", group = "", order = -99, font = FontAwesome.BELL)
+@MenuConfiguration(position = Position.TOP_MAIN, label = "", group = "", order = -99, icon = FontAwesome.BELL)
 public class RootView extends AbstractView {
 
 	public static final String VIEW_NAME = "butterfly-effect-frontend-core-alert:root";
