@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +24,8 @@ import com.scipionyx.butterflyeffect.configuration.model.IConfiguration;
  */
 public abstract class AbstractClientRESTConfigurationService<T extends IConfiguration> {
 
-	@Value(value = "${butterflyeffect.system.rest.url}")
-	protected String baseUrl;
-
-	// private DiscoveryClient discoveryClient;
+	@Autowired
+	private DiscoveryClient discoveryClient;
 
 	private RestTemplate restTemplate;
 
@@ -48,6 +47,11 @@ public abstract class AbstractClientRESTConfigurationService<T extends IConfigur
 		restTemplate = new RestTemplate();
 	}
 
+	private String calculateBaseURL() {
+		discoveryClient.getInstances("butterflyeffect_backend");
+		return null;
+	}
+
 	/**
 	 * 
 	 * @return
@@ -55,7 +59,7 @@ public abstract class AbstractClientRESTConfigurationService<T extends IConfigur
 	 */
 	public List<T> getAll() throws Exception {
 
-		final String uri = baseUrl + getRequestMapping() + "/getAll/";
+		final String uri = calculateBaseURL() + getRequestMapping() + "/getAll/";
 
 		@SuppressWarnings("unchecked")
 		ResponseEntity<T[]> responseEntity = restTemplate.getForEntity(uri, getArrayClass());
@@ -82,7 +86,7 @@ public abstract class AbstractClientRESTConfigurationService<T extends IConfigur
 	 * @return
 	 */
 	public final T read(T t, String salt) {
-		final String uri = baseUrl + getRequestMapping() + "read/{id}/{salt}";
+		final String uri = calculateBaseURL() + getRequestMapping() + "read/{id}/{salt}";
 		Map<String, String> uriVariables = new HashMap<>();
 		uriVariables.put("id", t.getId());
 		uriVariables.put("salt", salt);
@@ -97,7 +101,7 @@ public abstract class AbstractClientRESTConfigurationService<T extends IConfigur
 	 * @return
 	 */
 	public final T put(T t) {
-		final String uri = baseUrl + normalizeRequestMapping() + "put/";
+		final String uri = calculateBaseURL() + normalizeRequestMapping() + "put/";
 		restTemplate.put(uri, t);
 		return null;
 	}
@@ -126,7 +130,7 @@ public abstract class AbstractClientRESTConfigurationService<T extends IConfigur
 	 * @return
 	 */
 	public final void delete(T t) {
-		final String uri = baseUrl + normalizeRequestMapping() + t.getId();
+		final String uri = calculateBaseURL() + normalizeRequestMapping() + t.getId();
 		restTemplate.delete(uri);
 	}
 
@@ -137,7 +141,7 @@ public abstract class AbstractClientRESTConfigurationService<T extends IConfigur
 	 * @return
 	 */
 	public final void deleteAll(T t) {
-		final String uri = baseUrl + normalizeRequestMapping() + "all";
+		final String uri = calculateBaseURL() + normalizeRequestMapping() + "all";
 		restTemplate.delete(uri);
 	}
 

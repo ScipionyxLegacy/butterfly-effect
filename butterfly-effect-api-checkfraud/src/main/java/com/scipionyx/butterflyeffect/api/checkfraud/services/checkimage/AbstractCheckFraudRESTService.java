@@ -30,7 +30,7 @@ public abstract class AbstractCheckFraudRESTService<T> {
 	 * @return
 	 */
 	protected String calculateUrl(final String service) {
-		List<ServiceInstance> instances = discoveryClient.getInstances("butterflyeffect_backend");
+		List<ServiceInstance> instances = discoveryClient.getInstances("butterflyeffect-backend");
 		final String uri = "http://" + instances.get(0).getHost() + ":" + instances.get(0).getPort() + service;
 		return uri;
 	}
