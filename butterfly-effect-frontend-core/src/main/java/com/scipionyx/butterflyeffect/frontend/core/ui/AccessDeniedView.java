@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.frontend.core.ui.view.templates;
+package com.scipionyx.butterflyeffect.frontend.core.ui;
 
 import javax.annotation.PostConstruct;
 
@@ -19,7 +19,6 @@ import com.vaadin.ui.themes.ValoTheme;
  * @author Petter Holmström (petter@vaadin.com)
  */
 @SpringComponent
-// @PrototypeScope
 @MenuConfiguration(group = "System", label = "Access Denied", position = Position.IGNORE)
 public class AccessDeniedView extends VerticalLayout implements View {
 

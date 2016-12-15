@@ -59,7 +59,8 @@ import com.vaadin.ui.themes.ValoTheme;
 
 //
 @ViewConfiguration(title = "Check Fraud - Load Images")
-@MenuConfiguration(position = Position.TOP_MAIN, label = "Load Check Images", group = "", order = 1, parent = RootView.VIEW_NAME, icon = FontAwesome.CHECK)
+@MenuConfiguration(position = Position.TOP_MAIN, label = "Load Check Images", group = "", order = 1, parent = RootView.VIEW_NAME, icon = FontAwesome.CHECK, roles = {
+		"CHECK_FRAUD" })
 public class LoadImagesView extends AbstractView {
 
 	public static final String VIEW_NAME = "butterfly-effect-frontend-checkfraud:loadImagesView";

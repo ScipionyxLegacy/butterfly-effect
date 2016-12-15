@@ -16,8 +16,12 @@
 package com.scipionyx.butterflyeffect.frontend.configuration.ui.view;
 
 import java.text.DecimalFormat;
+import java.util.Collection;
 
 import javax.annotation.PostConstruct;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractView;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
@@ -25,6 +29,7 @@ import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
 import com.vaadin.data.Item;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.Page;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
@@ -34,12 +39,9 @@ import com.vaadin.ui.Table.Align;
 import com.vaadin.ui.VerticalLayout;
 
 /**
- * A view that demonstrates how
- * {@link com.vaadin.spring.access.ViewAccessControl}s can be used to control
- * access to views. In this example, the access delegate is the UI scoped view,
- * but you can also use e.g. singleton access delegates.
- *
- * @author Petter Holmström (petter@vaadin.com)
+ * 
+ * 
+ * 
  */
 @UIScope
 @SpringComponent(value = AboutView.VIEW_NAME)
@@ -47,7 +49,8 @@ import com.vaadin.ui.VerticalLayout;
 
 //
 @ViewConfiguration(title = "About")
-@MenuConfiguration(position = Position.TOP_RIGHT, label = "About", group = "", order = 99, parent = RootView.VIEW_NAME)
+@MenuConfiguration(position = Position.TOP_RIGHT, label = "About", group = "", order = 99, parent = RootView.VIEW_NAME, roles = {
+		"USER", "ADMIN" })
 public class AboutView extends AbstractView {
 
 	/**
@@ -92,6 +95,21 @@ public class AboutView extends AbstractView {
 		addItem("Total Memory", Runtime.getRuntime().totalMemory(), "description", table);
 		// Server
 		addItem("Availabe Processors", Runtime.getRuntime().availableProcessors(), "description", table);
+
+		//
+		addItem("User", SecurityContextHolder.getContext().getAuthentication().getName(), "description", table);
+		Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication()
+				.getAuthorities();
+		String roles = null;
+		for (GrantedAuthority grantedAuthority : authorities) {
+			if (roles == null)
+				roles = grantedAuthority.getAuthority();
+			else
+				roles = roles + "," + grantedAuthority.getAuthority();
+		}
+		addItem("Roles", roles, "description", table);
+		addItem("Client Ip", Page.getCurrent().getWebBrowser().getAddress(), "description", table);
+		addItem("Browser", Page.getCurrent().getWebBrowser().getBrowserApplication(), "description", table);
 
 		workAreaPanel.addComponent(table);
 

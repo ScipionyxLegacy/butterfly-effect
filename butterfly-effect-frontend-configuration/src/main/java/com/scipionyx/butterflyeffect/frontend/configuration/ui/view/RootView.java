@@ -24,7 +24,8 @@ import com.vaadin.ui.VerticalLayout;
 @UIScope
 //
 @ViewConfiguration(title = "Configuration")
-@MenuConfiguration(position = Position.TOP_RIGHT, label = "Configuration", group = "", order = 1, icon = FontAwesome.GEARS)
+@MenuConfiguration(position = Position.TOP_RIGHT, label = "Configuration", group = "", order = 1, icon = FontAwesome.GEARS, roles = {
+		"ADMIN" })
 public class RootView extends AbstractView {
 
 	public static final String VIEW_NAME = "butterfly-effect-frontend-configuration:root";

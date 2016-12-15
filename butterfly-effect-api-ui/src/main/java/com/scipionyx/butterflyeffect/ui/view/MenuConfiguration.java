@@ -24,6 +24,10 @@ public @interface MenuConfiguration {
 		IGNORE, TOP_MAIN, TOP_RIGHT, LEFT_MAIN, LEFT_BOTTOM
 	}
 
+	public enum Target {
+		MAIN, DIALOG, DIALOG_EXCLUSIVE
+	}
+
 	/**
 	 * 
 	 * @return
@@ -34,7 +38,7 @@ public @interface MenuConfiguration {
 	 * 
 	 * @return
 	 */
-	public String toolTip() default "";
+	public String tooltip() default "";
 
 	/**
 	 * Defines the position for the menu defined on the View
@@ -80,5 +84,18 @@ public @interface MenuConfiguration {
 	 * @return
 	 */
 	public boolean visible() default true;
+
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
+	public String[] roles() default { "ALL" };
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Target target() default Target.MAIN;
 
 }

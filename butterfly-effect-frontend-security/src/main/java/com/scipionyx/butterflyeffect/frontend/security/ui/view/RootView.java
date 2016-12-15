@@ -1,10 +1,11 @@
-package com.scipionyx.butterflyeffect.frontend.checkfraud.ui.view;
+package com.scipionyx.butterflyeffect.frontend.security.ui.view;
 
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractView;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
@@ -22,12 +23,12 @@ import com.vaadin.ui.VerticalLayout;
 @SpringView(name = RootView.VIEW_NAME)
 @UIScope
 //
-@ViewConfiguration(title = "Check Fraud")
-@MenuConfiguration(position = Position.TOP_MAIN, label = "Check Fraud", group = "", order = 1, roles = {
-		"CHECK_FRAUD" })
+@ViewConfiguration(title = "User Management")
+@MenuConfiguration(position = Position.TOP_RIGHT, label = "User", group = "", order = 99, icon = FontAwesome.USER, roles = {
+		"USER", "ADMIN" })
 public class RootView extends AbstractView {
 
-	public static final String VIEW_NAME = "butterfly-effect-frontend-checkfraud:root";
+	public static final String VIEW_NAME = "butterfly-effect-frontend-security:root";
 
 	/**
 	 * 

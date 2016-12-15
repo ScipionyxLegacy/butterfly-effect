@@ -71,7 +71,7 @@ public class CheckImageRESTService extends AbstractCheckFraudRESTService<CheckIm
 
 		} finally {
 
-			FileUtils.forceDelete(tmpFile);
+			FileUtils.forceDeleteOnExit(tmpFile);
 
 		}
 

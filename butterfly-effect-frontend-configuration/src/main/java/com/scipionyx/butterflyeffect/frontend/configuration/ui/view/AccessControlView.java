@@ -57,7 +57,8 @@ import com.vaadin.ui.VerticalLayout;
 
 //
 @ViewConfiguration(title = "Access Control")
-@MenuConfiguration(position = Position.TOP_RIGHT, label = "Access", group = "", order = 1, parent = RootView.VIEW_NAME)
+@MenuConfiguration(position = Position.TOP_RIGHT, label = "Access", group = "", order = 1, parent = RootView.VIEW_NAME, roles = {
+		"ADMIN" })
 public class AccessControlView extends VerticalLayout implements View, ViewAccessControl {
 
 	/**

@@ -18,7 +18,6 @@ package com.scipionyx.butterflyeffect.frontend.core.ui;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top.TopFactory;
-import com.scipionyx.butterflyeffect.frontend.core.ui.view.templates.AccessDeniedView;
 import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
@@ -26,6 +25,7 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.spring.annotation.SpringUI;
+import com.vaadin.spring.annotation.SpringViewDisplay;
 import com.vaadin.spring.navigator.SpringViewProvider;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
@@ -42,6 +42,8 @@ import com.vaadin.ui.themes.ValoTheme;
  */
 @SpringUI
 @Theme(ValoTheme.THEME_NAME)
+// @Push(transport = Transport.WEBSOCKET_XHR)
+@SpringViewDisplay
 public class MainUI extends UI {
 
 	/**
@@ -60,6 +62,9 @@ public class MainUI extends UI {
 		this.viewProvider = viewProvider;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	protected void init(VaadinRequest request) {
 
@@ -90,6 +95,15 @@ public class MainUI extends UI {
 
 	}
 
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 * @author Renato Mendes - rmendes@bottomline.com /
+	 *         renato.mendes.1123@gmail.com
+	 *
+	 */
 	private class ErrorView extends VerticalLayout implements View {
 
 		/**

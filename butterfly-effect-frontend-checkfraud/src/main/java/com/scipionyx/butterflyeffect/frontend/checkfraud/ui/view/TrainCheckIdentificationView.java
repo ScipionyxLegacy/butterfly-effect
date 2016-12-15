@@ -72,7 +72,8 @@ import com.vaadin.ui.themes.ValoTheme;
 
 //
 @ViewConfiguration(title = "Check Fraud - Train Neural Network")
-@MenuConfiguration(position = Position.TOP_MAIN, label = "Train Check Identifier", group = "", order = 1, parent = RootView.VIEW_NAME)
+@MenuConfiguration(position = Position.TOP_MAIN, label = "Train Check Identifier", group = "", order = 1, parent = RootView.VIEW_NAME, roles = {
+		"CHECK_FRAUD" })
 public class TrainCheckIdentificationView extends AbstractView {
 
 	public static final String VIEW_NAME = "butterfly-effect-frontend-checkfraud:TrainCheckIdentifierView";

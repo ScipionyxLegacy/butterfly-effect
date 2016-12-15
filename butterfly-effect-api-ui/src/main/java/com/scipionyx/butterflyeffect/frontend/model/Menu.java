@@ -21,6 +21,8 @@ public class Menu implements Serializable {
 
 	private String label;
 
+	private String tooltip;
+
 	private String parent;
 
 	private String view;
@@ -34,6 +36,8 @@ public class Menu implements Serializable {
 	private MenuConfiguration.Position position;
 
 	private Resource icon;
+
+	private String[] roles;
 
 	@Override
 	public int hashCode() {
@@ -130,6 +134,22 @@ public class Menu implements Serializable {
 
 	public void setIcon(Resource icon) {
 		this.icon = icon;
+	}
+
+	public String[] getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String[] roles) {
+		this.roles = roles;
+	}
+
+	public String getTooltip() {
+		return tooltip;
+	}
+
+	public void setTooltip(String tooltip) {
+		this.tooltip = tooltip;
 	}
 
 }

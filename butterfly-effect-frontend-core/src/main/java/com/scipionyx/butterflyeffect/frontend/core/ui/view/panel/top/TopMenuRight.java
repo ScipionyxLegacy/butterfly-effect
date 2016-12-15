@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
 import com.vaadin.server.FontAwesome;
-import com.vaadin.server.Resource;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -57,9 +56,12 @@ public class TopMenuRight extends MenuBar {
 			};
 		}
 
-		Resource resource = FontAwesome._500PX;
-
-		MenuItem root = this.addItem(menu.getLabel(), resource, command);
+		MenuItem root = null;
+		if (menu.getIcon() == FontAwesome._500PX) {
+			root = this.addItem(menu.getLabel(), command);
+		} else {
+			root = this.addItem(menu.getLabel(), menu.getIcon(), command);
+		}
 
 		for (Menu menuL2 : list) {
 			if (menuL2.getParent() != null && menuL2.getParent().equals(menu.getId())) {
@@ -77,7 +79,7 @@ public class TopMenuRight extends MenuBar {
 	 */
 	private void addChildren(MenuItem root, Menu menu, List<Menu> list) {
 
-		MenuItem item = root.addItem(menu.getLabel(), new Command() {
+		Command command = new Command() {
 
 			/**
 			 * 
@@ -88,7 +90,14 @@ public class TopMenuRight extends MenuBar {
 			public void menuSelected(MenuItem selectedItem) {
 				getUI().getNavigator().navigateTo(menu.getView());
 			}
-		});
+		};
+
+		MenuItem item = null;
+
+		if (menu.getIcon() == FontAwesome._500PX)
+			item = root.addItem(menu.getLabel(), command);
+		else
+			item = root.addItem(menu.getLabel(), menu.getIcon(), command);
 
 		for (Menu menuL2 : list) {
 			if (menuL2.getParent() != null && menuL2.getParent().equals(menu.getId())) {
