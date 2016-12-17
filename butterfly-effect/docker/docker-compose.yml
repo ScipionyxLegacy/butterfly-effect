@@ -4,25 +4,13 @@ services:
 
   consul:
     image: consul:latest
-    ports:
-    - "8300:8300"
-    - "8301:8401/udp"
-    - "8302:8402/udp"
-    - "8400:8400"
-    - "8500:8500"
-    - "8600:8600"
     
   frontend:
     image: scipionyx/butterfly-effect-frontend:latest
-    ports:
-    - "8080:8080"
-    environment:
-      DB_URL:   'jdbc:mysql://db:3306/wfs?useOldAliasMetadataBehavior=true'
-      DB_JOBS_URL: 'jdbc:mysql://db:3306/wfs_ijm?useOldAliasMetadataBehavior=true'
-      DB_STAGING_URL: 'jdbc:mysql://db:3306/wfs?useOldAliasMetadataBehavior=true'
-      DB_CLOUD_URL: 'jdbc:mysql://db:3306/wfs?useOldAliasMetadataBehavior=true'
-      LDAP_URL: 'ldap://ldap:10389'
-      COM_INTELLINX_SOLUTIONS_ES_CLIENT_FACTORY_TRANSPORTURLS: 'elasticsearch:9300'
+    links: 
+      - consul
     
   backend:
     image: scipionyx/butterfly-effect-backend:latest
+    links: 
+      - consul

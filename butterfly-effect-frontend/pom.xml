@@ -43,6 +43,11 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.cloud</groupId> -->
+<!-- 			<artifactId>spring-cloud-starter-config</artifactId> -->
+<!-- 		</dependency> -->
+
 		<!-- Vaadin -->
 
 		<dependency>
@@ -55,7 +60,7 @@
 			<artifactId>confirmdialog</artifactId>
 		</dependency>
 
-		<!-- Vaadin Stuff -->
+		<!-- more Vaadin Stuff -->
 
 		<dependency>
 			<groupId>io.github.lukehutch</groupId>

@@ -12,9 +12,12 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Image;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 
 /**
  * 
@@ -29,7 +32,7 @@ import com.vaadin.ui.VerticalLayout;
 @UIScope
 //
 @ViewConfiguration(title = "Configure Authentication")
-@MenuConfiguration(position = Position.TOP_RIGHT, label = "Authentication", group = "", order = 99, icon = FontAwesome.SIGN_OUT, parent = com.scipionyx.butterflyeffect.frontend.configuration.ui.view.RootView.VIEW_NAME)
+@MenuConfiguration(position = Position.TOP_RIGHT, label = "Authentication", group = "", order = 99, icon = FontAwesome.USERS, parent = ConfigurationRootView.VIEW_NAME)
 public class ConfigureAuthenticationView extends AbstractView {
 
 	public static final String VIEW_NAME = "butterfly-effect-frontend-security:configureauthentication";
@@ -68,29 +71,117 @@ public class ConfigureAuthenticationView extends AbstractView {
 		// LDAP
 		// Active Directory
 
-		Image imageGit = new Image("Git");
+		Button imageGit = new Button("Git");
 		imageGit.setEnabled(false);
+		imageGit.setStyleName(ValoTheme.BUTTON_HUGE);
+		imageGit.addClickListener(new Command(imageGit, "git"));
 
-		Image imageInternal = new Image("Internal");
+		Button imageInternal = new Button("Internal");
+		imageInternal.setEnabled(true);
+		imageInternal.setStyleName(ValoTheme.BUTTON_HUGE);
+		imageInternal.addClickListener(new Command(imageInternal, "internal"));
 
-		Image imageLDAP = new Image("LDAP");
-		imageLDAP.setEnabled(false);
+		Button imageLDAP = new Button("ldap");
+		imageLDAP.setEnabled(true);
+		imageLDAP.setStyleName(ValoTheme.BUTTON_HUGE);
+		imageLDAP.addClickListener(new Command(imageLDAP, "ldap"));
 
-		Image imageAD = new Image("AD");
+		Button imageAD = new Button("AD");
 		imageAD.setEnabled(false);
+		imageAD.setStyleName(ValoTheme.BUTTON_HUGE);
+		imageAD.addClickListener(new Command(imageAD, "AD"));
 
 		HorizontalLayout layout = new HorizontalLayout(imageAD, imageGit, imageInternal, imageLDAP);
 		layout.setSpacing(true);
 		layout.setMargin(true);
 
+		workAreaPanel.addComponent(layout);
+		workAreaPanel.setComponentAlignment(layout, Alignment.TOP_CENTER);
+
 		//
 		addInternal(workAreaPanel);
+		addLdap(workAreaPanel);
 
-		workAreaPanel.addComponent(layout);
+		showPanel("internal");
 
 	}
 
+	/**
+	 * 
+	 * @author Renato Mendes - rmendes@bottomline.com /
+	 *         renato.mendes.1123@gmail.com
+	 *
+	 */
+	private class Command implements Button.ClickListener {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		private String name;
+
+		@SuppressWarnings("unused")
+		private Button imageGit;
+
+		public Command(Button imageGit, String name) {
+			this.name = name;
+			this.imageGit = imageGit;
+		}
+
+		@Override
+		public void buttonClick(com.vaadin.ui.Button.ClickEvent event) {
+			showPanel(name);
+
+		}
+
+	}
+
+	/**
+	 * 
+	 * @param name
+	 */
+	private void showPanel(String name) {
+		for (String key : panels.keySet()) {
+			if (key.equals(name)) {
+				panels.get(key).setVisible(true);
+			} else
+				panels.get(key).setVisible(false);
+		}
+	}
+
+	/**
+	 * 
+	 * @param workAreaPanel
+	 */
 	private void addInternal(VerticalLayout workAreaPanel) {
+
+		final Label label = new Label("Internal user databse.");
+
+		final Button button = new Button("Activate");
+		button.setStyleName(ValoTheme.BUTTON_FRIENDLY);
+
+		VerticalLayout layout = new VerticalLayout(label, button);
+		panels.put("internal", layout);
+
+		workAreaPanel.addComponent(layout);
+	}
+
+	/**
+	 * 
+	 * @param workAreaPanel
+	 */
+	private void addLdap(VerticalLayout workAreaPanel) {
+
+		Label label = new Label("LDAP user database.");
+
+		Button button = new Button("Activate");
+		button.setStyleName(ValoTheme.BUTTON_FRIENDLY);
+
+		VerticalLayout layout = new VerticalLayout(label, button);
+		panels.put("ldap", layout);
+
+		workAreaPanel.addComponent(layout);
 
 	}
 

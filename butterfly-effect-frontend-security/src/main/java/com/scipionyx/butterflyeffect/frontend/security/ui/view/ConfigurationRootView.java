@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.frontend.configuration.ui.view;
+package com.scipionyx.butterflyeffect.frontend.security.ui.view;
 
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractView;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
@@ -19,16 +19,15 @@ import com.vaadin.ui.VerticalLayout;
  * @author Renato Mendes
  *
  */
-@SpringComponent(value = RootView.VIEW_NAME)
-@SpringView(name = RootView.VIEW_NAME)
+@SpringComponent(value = ConfigurationRootView.VIEW_NAME)
+@SpringView(name = ConfigurationRootView.VIEW_NAME)
 @UIScope
 //
-@ViewConfiguration(title = "Configuration")
-@MenuConfiguration(position = Position.TOP_RIGHT, label = "Configuration", group = "", order = 1, icon = FontAwesome.GEAR, roles = {
-		"ADMIN" })
-public class RootView extends AbstractView {
+@ViewConfiguration(title = "Security Configuration")
+@MenuConfiguration(position = Position.TOP_RIGHT, label = "Security", group = "", order = 10, icon = FontAwesome.LOCK, parent = com.scipionyx.butterflyeffect.frontend.configuration.ui.view.RootView.VIEW_NAME)
+public class ConfigurationRootView extends AbstractView {
 
-	public static final String VIEW_NAME = "butterfly-effect-frontend-configuration:root";
+	public static final String VIEW_NAME = "butterfly-effect-frontend-security:configuration_root";
 
 	/**
 	 * 
@@ -54,6 +53,7 @@ public class RootView extends AbstractView {
 	 */
 	@Override
 	public void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception {
+
 	}
 
 }

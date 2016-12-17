@@ -42,7 +42,6 @@ import com.vaadin.ui.themes.ValoTheme;
  */
 @SpringUI
 @Theme(ValoTheme.THEME_NAME)
-// @Push(transport = Transport.WEBSOCKET_XHR)
 @SpringViewDisplay
 public class MainUI extends UI {
 
@@ -72,7 +71,7 @@ public class MainUI extends UI {
 
 		final VerticalLayout root = new VerticalLayout();
 		root.setSizeFull();
-		root.setMargin(new MarginInfo(false, true, true, true));
+		root.setMargin(new MarginInfo(false, false, false, false));
 		root.setSpacing(true);
 
 		root.addComponent(topFactory.instance());
@@ -80,6 +79,7 @@ public class MainUI extends UI {
 		setContent(root);
 
 		final Panel viewContainer = new Panel();
+		viewContainer.setStyleName(ValoTheme.PANEL_BORDERLESS);
 		viewContainer.setSizeFull();
 
 		root.addComponent(viewContainer);

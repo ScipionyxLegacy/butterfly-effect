@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 * @throws Exception
 	 */
 	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+	private void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
 		LOGGER.info("Security - Load Users");
 
