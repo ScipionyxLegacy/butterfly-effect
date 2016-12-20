@@ -34,9 +34,6 @@ import com.vaadin.ui.themes.ValoTheme;
  */
 public abstract class AbstractView extends VerticalLayout implements View, BeanNameAware, ButterflyView {
 
-	// private static final Logger LOGGER =
-	// LoggerFactory.getLogger(AbstractView.class);
-
 	/**
 	 * 
 	 */
@@ -48,8 +45,6 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 	private HorizontalLayout buttonPanel;
 
 	private String beanName;
-
-	// private ObjectMapper objectMapper;
 
 	public abstract void doBuildWorkArea(VerticalLayout workArea) throws Exception;
 

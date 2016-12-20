@@ -1,16 +1,33 @@
 version: '2'
-
 services:
-
   consul:
-    image: consul:latest
-    
+    restart:  always
+    image:    consul
   frontend:
-    image: scipionyx/butterfly-effect-frontend:latest
+    restart:  always  
+    image:    scipionyx/butterfly-effect-frontend
+    ports:
+      - 8080:8080/tcp
     links: 
       - consul
-    
+    environment:
+      - SPRING_CLOUD_CONSUL_HOST=consul
   backend:
-    image: scipionyx/butterfly-effect-backend:latest
+    restart:  always  
+    image:    scipionyx/butterfly-effect-backend
     links: 
       - consul
+    environment:
+      - SPRING_CLOUD_CONSUL_HOST=consul    
+  lb:
+    image: dockercloud/haproxy
+    links:
+      - frontend
+    ports:
+      - 8080:8080/tcp
+    environment:
+      - DOCKER_TLS_VERIFY
+      - DOCKER_HOST
+      - DOCKER_CERT_PATH
+    volumes:
+      - $DOCKER_CERT_PATH:$DOCKER_CERT_PATH

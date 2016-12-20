@@ -112,14 +112,6 @@ public class TrainCheckIdentificationView extends AbstractView {
 	 * 
 	 */
 	@Override
-	public void doBuild() {
-
-	}
-
-	/**
-	 * 
-	 */
-	@Override
 	public void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception {
 
 		//

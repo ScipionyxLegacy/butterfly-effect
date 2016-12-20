@@ -58,19 +58,10 @@ public class DataModelConfigurationView extends AbstractDataModelView {
 
 	private boolean editing;
 
-	// private VerticalLayout workAreaPanel;
-
 	private TabSheet sheet;
 
 	@Autowired
 	private EntityClientRESTConfigurationService service;
-
-	/**
-	 * 
-	 */
-	@Override
-	public void doBuild() {
-	}
 
 	/**
 	 * @throws Exception

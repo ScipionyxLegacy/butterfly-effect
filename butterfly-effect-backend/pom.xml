@@ -101,7 +101,7 @@
 					</resources>
 
 					<env>
-						<VAADIN_SERVLET_PRODUCTIONMODE>true</VAADIN_SERVLET_PRODUCTIONMODE>
+						<SPRING_CLOUD_CONSUL_HOST>consul</SPRING_CLOUD_CONSUL_HOST>
 						<PROJECT_VERSION>${project.version}</PROJECT_VERSION>
 						<PROJECT_ARTIFACTID>${project.artifactId}</PROJECT_ARTIFACTID>
 					</env>

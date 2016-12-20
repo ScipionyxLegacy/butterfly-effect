@@ -55,13 +55,6 @@ public class ConfigureAuthenticationView extends AbstractView {
 	 * 
 	 */
 	@Override
-	public void doBuild() {
-	}
-
-	/**
-	 * 
-	 */
-	@Override
 	public void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception {
 
 		panels = new HashMap<>();

@@ -66,13 +66,6 @@ public class DataSourceConfigurationView extends AbstractDataModelView {
 	private EntityClientRESTConfigurationService service;
 
 	/**
-	 * 
-	 */
-	@Override
-	public void doBuild() {
-	}
-
-	/**
 	 * @throws Exception
 	 * 
 	 */

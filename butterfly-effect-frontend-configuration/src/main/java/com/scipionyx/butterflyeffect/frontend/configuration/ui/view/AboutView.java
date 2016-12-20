@@ -15,11 +15,17 @@
  */
 package com.scipionyx.butterflyeffect.frontend.configuration.ui.view;
 
+import java.net.Inet4Address;
+import java.net.Inet6Address;
 import java.text.DecimalFormat;
 import java.util.Collection;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -34,9 +40,12 @@ import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.AbstractSelect;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.Align;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 
 /**
  * 
@@ -60,14 +69,11 @@ public class AboutView extends AbstractView {
 
 	public static final String VIEW_NAME = "butterfly-effect-frontend-system:about";
 
+	@Autowired
+	private DiscoveryClient discoveryClient;
+
 	@PostConstruct
 	private void init() {
-
-	}
-
-	@Override
-	public void doBuild() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -84,15 +90,16 @@ public class AboutView extends AbstractView {
 
 		// Add a row the hard way
 		// Server Ip Address
-		addItem("Server Ip Address", "T", "description", table);
+		addItem("Server Ip 4 Host Address", Inet4Address.getLocalHost().getHostAddress(), "", table);
+		addItem("Server Ip 6 Host Address", Inet6Address.getLocalHost().getHostAddress(), "", table);
 		// Server Port Number
 		addItem("Port Number", "T", "description", table);
 		// Server Id
 
 		// Server Memory
-		addItem("Free Memory", Runtime.getRuntime().freeMemory(), "description", table);
-		addItem("Max Memory", Runtime.getRuntime().maxMemory(), "description", table);
-		addItem("Total Memory", Runtime.getRuntime().totalMemory(), "description", table);
+		addItem("Free Memory", Runtime.getRuntime().freeMemory(), "", table);
+		addItem("Max Memory", Runtime.getRuntime().maxMemory(), "", table);
+		addItem("Total Memory", Runtime.getRuntime().totalMemory(), "", table);
 		// Server
 		addItem("Availabe Processors", Runtime.getRuntime().availableProcessors(), "description", table);
 
@@ -109,9 +116,57 @@ public class AboutView extends AbstractView {
 		}
 		addItem("Roles", roles, "description", table);
 		addItem("Client Ip", Page.getCurrent().getWebBrowser().getAddress(), "description", table);
-		addItem("Browser", Page.getCurrent().getWebBrowser().getBrowserApplication(), "description", table);
+		// addItem("Browser",
+		// Page.getCurrent().getWebBrowser().getBrowserApplication(),
+		// "description", table);
 
 		workAreaPanel.addComponent(table);
+
+		createClusterInformation("Backend", workAreaPanel, discoveryClient.getInstances("butterflyeffect-backend"));
+
+		createClusterInformation("Frontend", workAreaPanel, discoveryClient.getInstances("butterflyeffect-frontend"));
+
+	}
+
+	/**
+	 * 
+	 * @param workAreaPanel
+	 */
+	private void createClusterInformation(String type, VerticalLayout workAreaPanel,
+			List<ServiceInstance> instancesBackend) {
+
+		VerticalLayout layout = new VerticalLayout();
+		layout.setMargin(true);
+
+		Label label = new Label("Cluster Information - " + type);
+		label.setStyleName(ValoTheme.LABEL_H2);
+
+		int i = 0;
+		for (ServiceInstance instance : instancesBackend) {
+
+			Table tableCluster = new Table("Node [" + i + "]");
+
+			tableCluster.addContainerProperty("Property", String.class, null);
+			tableCluster.addContainerProperty("Value", String.class, null);
+			tableCluster.addContainerProperty("Description", String.class, null);
+
+			addItem("Host", instance.getHost(), "", tableCluster);
+			addItem("Service Id", instance.getServiceId(), "", tableCluster);
+			addItem("Port", instance.getPort(), "", tableCluster);
+			addItem("Uri", instance.getUri().toString(), "", tableCluster);
+
+			for (String key : instance.getMetadata().keySet()) {
+				addItem(key, instance.getMetadata().get(key), "", tableCluster);
+			}
+
+			layout.addComponent(tableCluster);
+
+		}
+
+		Panel panelClusterInformation = new Panel(layout);
+		panelClusterInformation.setStyleName(ValoTheme.PANEL_WELL);
+
+		workAreaPanel.addComponents(label, panelClusterInformation);
 
 	}
 

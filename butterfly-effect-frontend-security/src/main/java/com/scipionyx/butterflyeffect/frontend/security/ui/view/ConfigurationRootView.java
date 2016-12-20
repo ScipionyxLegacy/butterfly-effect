@@ -41,12 +41,7 @@ public class ConfigurationRootView extends AbstractView {
 	public void doEnter(ViewChangeEvent event) {
 	}
 
-	/**
-	 * 
-	 */
-	@Override
-	public void doBuild() {
-	}
+	
 
 	/**
 	 * 

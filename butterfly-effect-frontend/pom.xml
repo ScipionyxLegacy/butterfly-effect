@@ -152,11 +152,12 @@
 					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
 
 					<exposes>
-						<expose>8080</expose>
+						<expose>80</expose>
 					</exposes>
 
 					<env>
-						<VAADIN_SERVLET_PRODUCTIONMODE>true</VAADIN_SERVLET_PRODUCTIONMODE>
+						<SPRING_CLOUD_CONSUL_HOST>consul</SPRING_CLOUD_CONSUL_HOST>
+						<VAADIN_SERVLET_PRODUCTION_MODE>true</VAADIN_SERVLET_PRODUCTION_MODE>
 						<PROJECT_VERSION>${project.version}</PROJECT_VERSION>
 						<PROJECT_ARTIFACTID>${project.artifactId}</PROJECT_ARTIFACTID>
 					</env>
@@ -168,6 +169,10 @@
 					<entryPoint>
 						["./entrypoint.sh"]
 					</entryPoint>
+
+<!-- 					<entryPoint> -->
+<!-- 						["top"] -->
+<!-- 					</entryPoint> -->
 
 					<forceTags>true</forceTags>
 

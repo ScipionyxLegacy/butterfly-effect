@@ -90,14 +90,6 @@ public class LoadImagesView extends AbstractView {
 	 * 
 	 */
 	@Override
-	public void doBuild() {
-
-	}
-
-	/**
-	 * 
-	 */
-	@Override
 	public void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception {
 
 		this.workAreaPanel = workAreaPanel;

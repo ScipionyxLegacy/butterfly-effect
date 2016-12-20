@@ -51,13 +51,6 @@ public class LogoffView extends AbstractView {
 	 * 
 	 */
 	@Override
-	public void doBuild() {
-	}
-
-	/**
-	 * 
-	 */
-	@Override
 	public void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception {
 
 		Button button = new Button("Logoff");

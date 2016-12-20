@@ -42,13 +42,6 @@ public class SystemConfigurationView extends AbstractConfigurationView {
 	private SystemConfiguration systemConfiguration;
 
 	/**
-	 * 
-	 */
-	@Override
-	public void doBuild() {
-	}
-
-	/**
 	 * @throws Exception
 	 * 
 	 */
