@@ -219,6 +219,12 @@
 			<artifactId>jackson-core</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.vaadin</groupId>
+			<artifactId>spring-session-redis</artifactId>
+			<version>1.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<modules>

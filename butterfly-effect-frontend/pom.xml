@@ -43,10 +43,20 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.cloud</groupId> -->
-<!-- 			<artifactId>spring-cloud-starter-config</artifactId> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-redis</artifactId>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.cloud</groupId> -->
+		<!-- <artifactId>spring-cloud-starter-config</artifactId> -->
+		<!-- </dependency> -->
 
 		<!-- Vaadin -->
 
@@ -156,6 +166,7 @@
 					</exposes>
 
 					<env>
+						<SERVER_PORT>80</SERVER_PORT>
 						<SPRING_CLOUD_CONSUL_HOST>consul</SPRING_CLOUD_CONSUL_HOST>
 						<VAADIN_SERVLET_PRODUCTION_MODE>true</VAADIN_SERVLET_PRODUCTION_MODE>
 						<PROJECT_VERSION>${project.version}</PROJECT_VERSION>
@@ -170,9 +181,9 @@
 						["./entrypoint.sh"]
 					</entryPoint>
 
-<!-- 					<entryPoint> -->
-<!-- 						["top"] -->
-<!-- 					</entryPoint> -->
+					<!-- <entryPoint> -->
+					<!-- ["top"] -->
+					<!-- </entryPoint> -->
 
 					<forceTags>true</forceTags>
 
