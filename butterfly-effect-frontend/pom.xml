@@ -43,27 +43,7 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.session</groupId>
-			<artifactId>spring-session</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-redis</artifactId>
-		</dependency>
-
-		<!-- <dependency> -->
-		<!-- <groupId>org.springframework.cloud</groupId> -->
-		<!-- <artifactId>spring-cloud-starter-config</artifactId> -->
-		<!-- </dependency> -->
-
 		<!-- Vaadin -->
-
-		<dependency>
-			<groupId>org.vaadin.addons</groupId>
-			<artifactId>stackpanel-extension-for-vaadin</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.vaadin.addon</groupId>
@@ -86,10 +66,12 @@
 
 	</dependencies>
 
-
 	<build>
+	
 		<plugins>
+		
 			<plugin>
+			
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
@@ -106,12 +88,15 @@
 						</configuration>
 					</execution>
 				</executions>
+				
 			</plugin>
 
 			<plugin>
+			
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-maven-plugin</artifactId>
 				<version>${vaadin.version}</version>
+				
 			</plugin>
 
 			<plugin>
@@ -180,10 +165,6 @@
 					<entryPoint>
 						["./entrypoint.sh"]
 					</entryPoint>
-
-					<!-- <entryPoint> -->
-					<!-- ["top"] -->
-					<!-- </entryPoint> -->
 
 					<forceTags>true</forceTags>
 

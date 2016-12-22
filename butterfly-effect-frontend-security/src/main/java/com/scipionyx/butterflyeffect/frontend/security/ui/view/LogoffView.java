@@ -43,7 +43,7 @@ public class LogoffView extends AbstractView {
 	/**
 	 * 
 	 */
-	@Override
+	//@Override
 	public void doEnter(ViewChangeEvent event) {
 	}
 

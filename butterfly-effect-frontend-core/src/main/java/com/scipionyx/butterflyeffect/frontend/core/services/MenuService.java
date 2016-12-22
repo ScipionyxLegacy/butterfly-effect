@@ -132,7 +132,7 @@ public class MenuService implements Serializable {
 					menu.setOrder(annotation.order());
 					menu.setPosition(annotation.position());
 					menu.setParent(annotation.parent().equals("") ? null : annotation.parent());
-					menu.setIcon(annotation.icon().equals(FontAwesome._500PX) ? null : annotation.icon());
+					menu.setIcon(annotation.icon().equals(FontAwesome.YOUTUBE_SQUARE) ? null : annotation.icon());
 					menu.setRoles(annotation.roles());
 					menus.add(menu);
 

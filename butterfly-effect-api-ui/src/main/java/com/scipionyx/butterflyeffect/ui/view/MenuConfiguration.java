@@ -77,7 +77,7 @@ public @interface MenuConfiguration {
 	 * 
 	 * @return
 	 */
-	public FontAwesome icon() default FontAwesome._500PX;
+	public FontAwesome icon() default FontAwesome.YOUTUBE_SQUARE;
 
 	/**
 	 * 

@@ -40,6 +40,7 @@ import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.AbstractSelect;
+import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Table;
@@ -90,10 +91,10 @@ public class AboutView extends AbstractView {
 
 		// Add a row the hard way
 		// Server Ip Address
-		addItem("Server Ip 4 Host Address", Inet4Address.getLocalHost().getHostAddress(), "", table);
-		addItem("Server Ip 6 Host Address", Inet6Address.getLocalHost().getHostAddress(), "", table);
+		addItem("Server Ip 4 Host Address", Inet4Address.getLocalHost().getHostAddress(), table);
+		addItem("Server Ip 6 Host Address", Inet6Address.getLocalHost().getHostAddress(), table);
 		// Server Port Number
-		addItem("Port Number", "T", "description", table);
+		addItem("Port Number", "T", table);
 		// Server Id
 
 		// Server Memory
@@ -101,10 +102,10 @@ public class AboutView extends AbstractView {
 		addItem("Max Memory", Runtime.getRuntime().maxMemory(), "", table);
 		addItem("Total Memory", Runtime.getRuntime().totalMemory(), "", table);
 		// Server
-		addItem("Availabe Processors", Runtime.getRuntime().availableProcessors(), "description", table);
+		addItem("Availabe Processors", Runtime.getRuntime().availableProcessors() + "", table);
 
 		//
-		addItem("User", SecurityContextHolder.getContext().getAuthentication().getName(), "description", table);
+		addItem("User", SecurityContextHolder.getContext().getAuthentication().getName(), table);
 		Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication()
 				.getAuthorities();
 		String roles = null;
@@ -114,11 +115,8 @@ public class AboutView extends AbstractView {
 			else
 				roles = roles + "," + grantedAuthority.getAuthority();
 		}
-		addItem("Roles", roles, "description", table);
-		addItem("Client Ip", Page.getCurrent().getWebBrowser().getAddress(), "description", table);
-		// addItem("Browser",
-		// Page.getCurrent().getWebBrowser().getBrowserApplication(),
-		// "description", table);
+		addItem("Roles", roles, table);
+		addItem("Client Ip", Page.getCurrent().getWebBrowser().getAddress(), table);
 
 		workAreaPanel.addComponent(table);
 
@@ -135,8 +133,10 @@ public class AboutView extends AbstractView {
 	private void createClusterInformation(String type, VerticalLayout workAreaPanel,
 			List<ServiceInstance> instancesBackend) {
 
-		VerticalLayout layout = new VerticalLayout();
+		GridLayout layout = new GridLayout(4, 2);
+		layout.setSizeFull();
 		layout.setMargin(true);
+		layout.setSpacing(true);
 
 		Label label = new Label("Cluster Information - " + type);
 		label.setStyleName(ValoTheme.LABEL_H2);
@@ -145,21 +145,24 @@ public class AboutView extends AbstractView {
 		for (ServiceInstance instance : instancesBackend) {
 
 			Table tableCluster = new Table("Node [" + i + "]");
+			tableCluster.addStyleName(ValoTheme.TABLE_COMPACT);
+			tableCluster.setSizeFull();
 
 			tableCluster.addContainerProperty("Property", String.class, null);
 			tableCluster.addContainerProperty("Value", String.class, null);
-			tableCluster.addContainerProperty("Description", String.class, null);
 
-			addItem("Host", instance.getHost(), "", tableCluster);
-			addItem("Service Id", instance.getServiceId(), "", tableCluster);
-			addItem("Port", instance.getPort(), "", tableCluster);
-			addItem("Uri", instance.getUri().toString(), "", tableCluster);
+			addItem("Host", instance.getHost(), tableCluster);
+			addItem("Service Id", instance.getServiceId(), tableCluster);
+			addItem("Port", instance.getPort() + "", tableCluster);
+			addItem("Uri", instance.getUri().toString(), tableCluster);
 
 			for (String key : instance.getMetadata().keySet()) {
-				addItem(key, instance.getMetadata().get(key), "", tableCluster);
+				addItem(key, instance.getMetadata().get(key), tableCluster);
 			}
 
 			layout.addComponent(tableCluster);
+
+			i++;
 
 		}
 
@@ -171,23 +174,21 @@ public class AboutView extends AbstractView {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void addItem(String property, String value, String description, AbstractSelect table) {
+	private void addItem(String property, String value, AbstractSelect table) {
 		Object newItemId = table.addItem();
 		Item row1 = table.getItem(newItemId);
 		row1.getItemProperty("Property").setValue(property);
 		row1.getItemProperty("Value").setValue(value);
-		row1.getItemProperty("Description").setValue(description);
 	}
 
 	private void addItem(String property, long value, String description, AbstractSelect table) {
 		DecimalFormat format = new DecimalFormat("###,###.###");
-		addItem(property, format.format(value), description, table);
+		addItem(property, format.format(value), table);
 	}
 
 	@Override
 	public void doEnter(ViewChangeEvent event) {
-		// TODO Auto-generated method stub
-
+		//
 	}
 
 }

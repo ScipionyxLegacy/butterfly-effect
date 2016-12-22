@@ -57,7 +57,7 @@ public class TopMenuRight extends MenuBar {
 		}
 
 		MenuItem root = null;
-		if (menu.getIcon() == FontAwesome._500PX) {
+		if (menu.getIcon() == FontAwesome.YOUTUBE_SQUARE) {
 			root = this.addItem(menu.getLabel(), command);
 		} else {
 			root = this.addItem(menu.getLabel(), menu.getIcon(), command);
@@ -94,7 +94,7 @@ public class TopMenuRight extends MenuBar {
 
 		MenuItem item = null;
 
-		if (menu.getIcon() == FontAwesome._500PX)
+		if (menu.getIcon() == FontAwesome.YOUTUBE_SQUARE)
 			item = root.addItem(menu.getLabel(), command);
 		else
 			item = root.addItem(menu.getLabel(), menu.getIcon(), command);

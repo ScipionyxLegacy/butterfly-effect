@@ -42,7 +42,7 @@ import com.vaadin.ui.themes.ValoTheme;
  */
 @SpringUI
 @Theme(ValoTheme.THEME_NAME)
-@SpringViewDisplay
+//@SpringViewDisplay
 public class MainUI extends UI {
 
 	/**
@@ -90,8 +90,10 @@ public class MainUI extends UI {
 
 		// Defining Navigation Component
 		Navigator navigator = new Navigator(this, viewContainer);
+		// SpringNavigator navigator = new SpringNavigator();
 		navigator.setErrorView(new ErrorView());
 		navigator.addProvider(viewProvider);
+		//navigator.init(this, viewContainer);
 
 	}
 

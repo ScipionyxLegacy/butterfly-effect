@@ -22,6 +22,6 @@ public @interface ViewConfiguration {
 
 	public String subTitle() default "<SUB_TITLE_NOT_PROVIDED>";
 
-	public FontAwesome icon() default FontAwesome._500PX;
+	public FontAwesome icon() default FontAwesome.YOUTUBE_SQUARE;
 
 }
