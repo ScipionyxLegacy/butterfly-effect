@@ -36,6 +36,9 @@
 		<docker.registry>192.168.99.110:8081/repository/ScipionyxDocker/</docker.registry>
 		<docker.registry.server>docker.io</docker.registry.server>
 
+		<scipionyx.frontend.port>8080</scipionyx.frontend.port>
+		<scipionyx.backend.port>8888</scipionyx.backend.port>
+
 	</properties>
 
 	<organization>

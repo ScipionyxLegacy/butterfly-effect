@@ -12,7 +12,7 @@
 	<artifactId>butterfly-effect-frontend</artifactId>
 
 	<properties>
-		<startclass>com.scipionyx.butterflyeffect.frontend.FrontEndApplication</startclass>
+		<startclass>com.scipionyx.butterflyeffect.FrontEndApplication</startclass>
 	</properties>
 
 	<repositories>
@@ -67,11 +67,11 @@
 	</dependencies>
 
 	<build>
-	
+
 		<plugins>
-		
+
 			<plugin>
-			
+
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
@@ -88,15 +88,15 @@
 						</configuration>
 					</execution>
 				</executions>
-				
+
 			</plugin>
 
 			<plugin>
-			
+
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-maven-plugin</artifactId>
 				<version>${vaadin.version}</version>
-				
+
 			</plugin>
 
 			<plugin>
@@ -147,11 +147,11 @@
 					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
 
 					<exposes>
-						<expose>80</expose>
+						<expose>${scipionyx.frontend.port}</expose>
 					</exposes>
 
 					<env>
-						<SERVER_PORT>80</SERVER_PORT>
+						<SERVER_PORT>${scipionyx.frontend.port}</SERVER_PORT>
 						<SPRING_CLOUD_CONSUL_HOST>consul</SPRING_CLOUD_CONSUL_HOST>
 						<VAADIN_SERVLET_PRODUCTION_MODE>true</VAADIN_SERVLET_PRODUCTION_MODE>
 						<PROJECT_VERSION>${project.version}</PROJECT_VERSION>

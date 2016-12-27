@@ -25,7 +25,6 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.spring.annotation.SpringUI;
-import com.vaadin.spring.annotation.SpringViewDisplay;
 import com.vaadin.spring.navigator.SpringViewProvider;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
@@ -42,7 +41,6 @@ import com.vaadin.ui.themes.ValoTheme;
  */
 @SpringUI
 @Theme(ValoTheme.THEME_NAME)
-//@SpringViewDisplay
 public class MainUI extends UI {
 
 	/**
@@ -93,7 +91,7 @@ public class MainUI extends UI {
 		// SpringNavigator navigator = new SpringNavigator();
 		navigator.setErrorView(new ErrorView());
 		navigator.addProvider(viewProvider);
-		//navigator.init(this, viewContainer);
+		// navigator.init(this, viewContainer);
 
 	}
 
