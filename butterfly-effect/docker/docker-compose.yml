@@ -1,34 +1,32 @@
 version: '2'
 services:
-  redis:
-    image: redis
+
   consul:
-    restart: always
     image: consul
+
   frontend:
-    restart: always
     image: scipionyx/butterfly-effect-frontend
-    links:
+    links: 
       - consul
-      - redis
     environment:
       - SPRING_CLOUD_CONSUL_HOST=consul
+
   backend:
-    restart: always
     image: scipionyx/butterfly-effect-backend
-    links:
+    links: 
       - consul
     environment:
-      - SPRING_CLOUD_CONSUL_HOST=consul
-  lb:
+      - SPRING_CLOUD_CONSUL_HOST=consul    
+
+  lb-frontend:
     image: dockercloud/haproxy
     links:
       - frontend
-    ports:
-      - 80:80/tcp
     environment:
-      - DOCKER_TLS_VERIFY
-      - DOCKER_HOST
-      - DOCKER_CERT_PATH
-    volumes:
-      - $DOCKER_CERT_PATH:$DOCKER_CERT_PATH
+      - COOKIES_ENABLED=true
+      - BACKENDS_PORT=8080
+      - STATS_AUTH=admin:admin
+    ports:
+      - 80:80
+      - 1936:1936
+    

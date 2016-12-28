@@ -34,11 +34,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-consul-discovery</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
@@ -77,6 +72,7 @@
 				<configuration>
 					<mainClass>${startclass}</mainClass>
 					<layout>ZIP</layout>
+					<executable>true</executable>
 				</configuration>
 				<executions>
 					<execution>
@@ -96,6 +92,9 @@
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-maven-plugin</artifactId>
 				<version>${vaadin.version}</version>
+				<configuration>
+					<debugPort>8000</debugPort>
+				</configuration>
 
 			</plugin>
 
@@ -151,6 +150,7 @@
 					</exposes>
 
 					<env>
+						<SPRING_APPLICATION_NAME>butterflyeffect-frontend</SPRING_APPLICATION_NAME>
 						<SERVER_PORT>${scipionyx.frontend.port}</SERVER_PORT>
 						<SPRING_CLOUD_CONSUL_HOST>consul</SPRING_CLOUD_CONSUL_HOST>
 						<VAADIN_SERVLET_PRODUCTION_MODE>true</VAADIN_SERVLET_PRODUCTION_MODE>

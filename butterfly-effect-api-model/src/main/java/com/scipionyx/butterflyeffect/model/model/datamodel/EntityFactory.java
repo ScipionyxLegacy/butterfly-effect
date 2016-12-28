@@ -1,13 +1,8 @@
 package com.scipionyx.butterflyeffect.model.model.datamodel;
 
-import com.google.common.base.CaseFormat;
-
 import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
-import javassist.CtField;
-import javassist.CtMethod;
-import javassist.CtNewMethod;
 import javassist.NotFoundException;
 
 /**
@@ -73,24 +68,29 @@ public class EntityFactory {
 	private void buildField(Field field, CtClass clazz) throws NotFoundException, CannotCompileException {
 
 		// Prepare Field Name using Java Standards
-		String fieldName = field.getName().replace(" ", "_");
-		fieldName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, fieldName);
-
-		// Creating Method Name following Java standards
-		String methodName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, fieldName);
-
+		// String fieldName = field.getName().replace(" ", "_");
+		// fieldName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL,
+		// fieldName);
 		//
-		CtClass type = classPool.getCtClass(field.getType().getClazz().getName());
-		CtField ctField = new CtField(type, fieldName, clazz);
-
-		// creating getters and setters
-		CtMethod getterMethod = CtNewMethod.getter("get" + methodName, ctField);
-		CtMethod setterMethod = CtNewMethod.setter("set" + methodName, ctField);
-
-		// adding fields and methods to the class.
-		clazz.addField(ctField);
-		clazz.addMethod(setterMethod);
-		clazz.addMethod(getterMethod);
+		// // Creating Method Name following Java standards
+		// String methodName =
+		// CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, fieldName);
+		//
+		// //
+		// CtClass type =
+		// classPool.getCtClass(field.getType().getClazz().getName());
+		// CtField ctField = new CtField(type, fieldName, clazz);
+		//
+		// // creating getters and setters
+		// CtMethod getterMethod = CtNewMethod.getter("get" + methodName,
+		// ctField);
+		// CtMethod setterMethod = CtNewMethod.setter("set" + methodName,
+		// ctField);
+		//
+		// // adding fields and methods to the class.
+		// clazz.addField(ctField);
+		// clazz.addMethod(setterMethod);
+		// clazz.addMethod(getterMethod);
 	}
 
 }
