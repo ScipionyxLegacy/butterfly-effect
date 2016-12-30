@@ -24,7 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 import com.scipionyx.butterflyeffect.frontend.core.services.MenuService;
-import com.scipionyx.butterflyeffect.frontend.core.ui.view.templates.PrototypeScopedView;
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
@@ -77,7 +76,6 @@ public class AccessControlView extends VerticalLayout implements View, ViewAcces
 	private void init() {
 
 		allowedViews.add(VIEW_NAME);
-		allowedViews.add(PrototypeScopedView.VIEW_NAME);
 
 		setMargin(true);
 		setSpacing(true);
@@ -89,8 +87,6 @@ public class AccessControlView extends VerticalLayout implements View, ViewAcces
 			allowedViews.add(menu.getView());
 			addComponent(createViewCheckbox(menu.getLabel(), menu.getView()));
 		}
-
-		addComponent(createViewCheckbox("Allow access to the Prototype Scoped View", PrototypeScopedView.VIEW_NAME));
 
 	}
 

@@ -45,7 +45,7 @@ public @interface MenuConfiguration {
 	 * 
 	 * @return
 	 */
-	public Position position();
+	public Position position() default Position.IGNORE;
 
 	/**
 	 * 

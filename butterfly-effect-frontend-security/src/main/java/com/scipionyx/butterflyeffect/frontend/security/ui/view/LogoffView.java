@@ -43,13 +43,6 @@ public class LogoffView extends AbstractView {
 	/**
 	 * 
 	 */
-	//@Override
-	public void doEnter(ViewChangeEvent event) {
-	}
-
-	/**
-	 * 
-	 */
 	@Override
 	public void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception {
 
@@ -73,6 +66,13 @@ public class LogoffView extends AbstractView {
 
 		workAreaPanel.addComponent(button);
 
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public void doEnter(ViewChangeEvent event) {
 	}
 
 }

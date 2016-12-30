@@ -19,7 +19,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 
 //
-@EnableDiscoveryClient()
+@EnableDiscoveryClient
 
 //
 // @EnableRedisHttpSession

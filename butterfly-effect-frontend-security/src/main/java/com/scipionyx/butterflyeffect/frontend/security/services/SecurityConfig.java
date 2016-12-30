@@ -52,14 +52,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Order(2)
 	public static class VaadinWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
 
+		/**
+		 * 
+		 */
 		protected void configure(HttpSecurity http) throws Exception {
 
-			http.csrf().disable().authorizeRequests().anyRequest().authenticated();
+			//
+			http.csrf().disable();
 
+			//
+			http.authorizeRequests().antMatchers("/VAADIN/**").permitAll();
+			http.authorizeRequests().antMatchers("/#!butterfly-effect-frontend-security:login").permitAll();
+			http.authorizeRequests().anyRequest().authenticated();
+
+			// Login
 			http.formLogin().permitAll();
+			http.formLogin().defaultSuccessUrl("/", true);
+			// http.formLogin().loginPage("/#!" + LoginView.VIEW_NAME);
 
-			http.logout().logoutUrl("/logout").logoutSuccessUrl("/login?logged-out").permitAll();
+			//
+			http.logout().logoutUrl("/logout").logoutSuccessUrl("/logout?success").permitAll();
 
+			//
 			http.sessionManagement().sessionFixation().newSession();
 
 		}

@@ -93,8 +93,6 @@ public class AboutView extends AbstractView {
 		// Server Ip Address
 		addItem("Server Ip 4 Host Address", Inet4Address.getLocalHost().getHostAddress(), table);
 		addItem("Server Ip 6 Host Address", Inet6Address.getLocalHost().getHostAddress(), table);
-		// Server Port Number
-		addItem("Port Number", "T", table);
 		// Server Id
 
 		// Server Memory
@@ -105,18 +103,22 @@ public class AboutView extends AbstractView {
 		addItem("Availabe Processors", Runtime.getRuntime().availableProcessors() + "", table);
 
 		//
-		addItem("User", SecurityContextHolder.getContext().getAuthentication().getName(), table);
-		Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication()
-				.getAuthorities();
-		String roles = null;
-		for (GrantedAuthority grantedAuthority : authorities) {
-			if (roles == null)
-				roles = grantedAuthority.getAuthority();
-			else
-				roles = roles + "," + grantedAuthority.getAuthority();
+		try {
+			addItem("User", SecurityContextHolder.getContext().getAuthentication().getName(), table);
+			Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication()
+					.getAuthorities();
+			String roles = null;
+			for (GrantedAuthority grantedAuthority : authorities) {
+				if (roles == null)
+					roles = grantedAuthority.getAuthority();
+				else
+					roles = roles + "," + grantedAuthority.getAuthority();
+			}
+			addItem("Roles", roles, table);
+			addItem("Client Ip", Page.getCurrent().getWebBrowser().getAddress(), table);
+		} catch (Exception e) {
+
 		}
-		addItem("Roles", roles, table);
-		addItem("Client Ip", Page.getCurrent().getWebBrowser().getAddress(), table);
 
 		workAreaPanel.addComponent(table);
 

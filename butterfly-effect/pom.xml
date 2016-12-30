@@ -195,4 +195,9 @@
 
 	</pluginRepositories>
 
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/scipionyx/ButterflyEffect/issues</url>
+	</issueManagement>
+
 </project>

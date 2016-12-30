@@ -18,6 +18,7 @@ package com.scipionyx.butterflyeffect.frontend.core.ui;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top.TopFactory;
+import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewDisplay;
@@ -37,11 +38,14 @@ import com.vaadin.ui.themes.ValoTheme;
  * Main UI of the navigation sample UI. The UI contains three different views
  * with different scopes. The user can navigate between the views by clicking on
  * buttons on a navigation bar at the top of the window.
+ * 
  *
  */
 @SpringUI
 @Theme(ValoTheme.THEME_NAME)
 @SpringViewDisplay
+@PreserveOnRefresh
+// @Push
 public class MainUI extends UI implements ViewDisplay {
 
 	/**
