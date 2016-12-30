@@ -25,8 +25,6 @@ import org.springframework.context.ApplicationContext;
 
 import com.scipionyx.butterflyeffect.frontend.core.services.MenuService;
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.templates.PrototypeScopedView;
-import com.scipionyx.butterflyeffect.frontend.core.ui.view.templates.UIScopedView;
-import com.scipionyx.butterflyeffect.frontend.core.ui.view.templates.ViewScopedView;
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
@@ -80,8 +78,6 @@ public class AccessControlView extends VerticalLayout implements View, ViewAcces
 
 		allowedViews.add(VIEW_NAME);
 		allowedViews.add(PrototypeScopedView.VIEW_NAME);
-		allowedViews.add(UIScopedView.VIEW_NAME);
-		allowedViews.add(ViewScopedView.VIEW_NAME);
 
 		setMargin(true);
 		setSpacing(true);
@@ -95,8 +91,6 @@ public class AccessControlView extends VerticalLayout implements View, ViewAcces
 		}
 
 		addComponent(createViewCheckbox("Allow access to the Prototype Scoped View", PrototypeScopedView.VIEW_NAME));
-		addComponent(createViewCheckbox("Allow access to the UI Scoped View", UIScopedView.VIEW_NAME));
-		addComponent(createViewCheckbox("Allow access to the View Scoped View", ViewScopedView.VIEW_NAME));
 
 	}
 

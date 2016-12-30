@@ -36,7 +36,7 @@ class TopMenuPanel extends GridLayout {
 
 		// Left Component
 		HorizontalLayout layout = new HorizontalLayout();
-		layout.setSpacing(true);
+		layout.setSpacing(false);
 		this.addComponent(layout, 0, 0);
 		this.setComponentAlignment(layout, Alignment.MIDDLE_LEFT);
 

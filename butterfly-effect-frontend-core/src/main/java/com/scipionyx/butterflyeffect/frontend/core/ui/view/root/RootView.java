@@ -4,7 +4,6 @@ import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractView;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
-import com.vaadin.annotations.DesignRoot;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
@@ -19,7 +18,6 @@ import com.vaadin.ui.VerticalLayout;
  * @author Renato Mendes
  *
  */
-@DesignRoot()
 @SpringComponent(value = RootView.VIEW_NAME)
 @SpringView(name = RootView.VIEW_NAME)
 @UIScope

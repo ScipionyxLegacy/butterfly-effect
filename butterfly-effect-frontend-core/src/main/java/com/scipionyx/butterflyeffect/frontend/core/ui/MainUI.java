@@ -19,14 +19,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top.TopFactory;
 import com.vaadin.annotations.Theme;
-import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.navigator.ViewDisplay;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.spring.annotation.SpringUI;
+import com.vaadin.spring.annotation.SpringViewDisplay;
 import com.vaadin.spring.navigator.SpringViewProvider;
-import com.vaadin.ui.Label;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -41,7 +41,8 @@ import com.vaadin.ui.themes.ValoTheme;
  */
 @SpringUI
 @Theme(ValoTheme.THEME_NAME)
-public class MainUI extends UI {
+@SpringViewDisplay
+public class MainUI extends UI implements ViewDisplay {
 
 	/**
 	 * 
@@ -50,7 +51,8 @@ public class MainUI extends UI {
 
 	private final SpringViewProvider viewProvider;
 
-	// Main Panels
+	private Panel viewContainer;
+
 	@Autowired
 	protected TopFactory topFactory;
 
@@ -70,13 +72,13 @@ public class MainUI extends UI {
 		final VerticalLayout root = new VerticalLayout();
 		root.setSizeFull();
 		root.setMargin(new MarginInfo(false, false, false, false));
-		root.setSpacing(true);
+		root.setSpacing(false);
 
 		root.addComponent(topFactory.instance());
 
 		setContent(root);
 
-		final Panel viewContainer = new Panel();
+		viewContainer = new Panel();
 		viewContainer.setStyleName(ValoTheme.PANEL_BORDERLESS);
 		viewContainer.setSizeFull();
 
@@ -86,44 +88,11 @@ public class MainUI extends UI {
 		// Define the access denied view
 		viewProvider.setAccessDeniedViewClass(AccessDeniedView.class);
 
-		// Defining Navigation Component
-		Navigator navigator = new Navigator(this, viewContainer);
-		// SpringNavigator navigator = new SpringNavigator();
-		navigator.setErrorView(new ErrorView());
-		navigator.addProvider(viewProvider);
-		// navigator.init(this, viewContainer);
-
 	}
 
-	/**
-	 * 
-	 * 
-	 * 
-	 * 
-	 * @author Renato Mendes - rmendes@bottomline.com /
-	 *         renato.mendes.1123@gmail.com
-	 *
-	 */
-	private class ErrorView extends VerticalLayout implements View {
-
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		private Label message;
-
-		ErrorView() {
-			setMargin(true);
-			message = new Label("ErrorView");
-			message.addStyleName(ValoTheme.LABEL_COLORED);
-			addComponent(message);
-		}
-
-		@Override
-		public void enter(ViewChangeListener.ViewChangeEvent event) {
-			message.setCaption("Error:" + event.getViewName());
-
-		}
+	@Override
+	public void showView(View view) {
+		viewContainer.setContent((Component) view);
 	}
 
 }

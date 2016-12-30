@@ -7,15 +7,22 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * 
+ * 
+ * 
  * @author Renato Mendes
  *
  */
 
 //
+// @SpringBootApplication(exclude =
+// com.vaadin.spring.boot.VaadinAutoConfiguration.class)
 @SpringBootApplication
 
 //
 @EnableDiscoveryClient()
+
+//
+// @EnableRedisHttpSession
 public class FrontEndApplication {
 
 	/**

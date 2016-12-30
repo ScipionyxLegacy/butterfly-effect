@@ -67,7 +67,7 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 
 		this.setMargin(false);
 		this.setSizeFull();
-		this.setSpacing(true);
+		this.setSpacing(false);
 
 		//
 		ViewConfiguration viewConfigurationInformation = read();
@@ -136,7 +136,7 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 
 		//
 		Label titleLabel = new Label(viewConfigurationInformation.title());
-		titleLabel.addStyleName(ValoTheme.LABEL_H1);
+		titleLabel.addStyleName(ValoTheme.LABEL_H2);
 
 		buttonPanel = new HorizontalLayout();
 		buttonPanel.setSpacing(true);
@@ -146,7 +146,7 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 		HorizontalLayout titleLayout = new HorizontalLayout(titleLabel, buttonPanel);
 		titleLayout.setWidth(100, Unit.PERCENTAGE);
 		titleLayout.setMargin(new MarginInfo(false, true, false, true));
-		titleLayout.setSpacing(false);
+		titleLayout.setSpacing(true);
 		titleLayout.setComponentAlignment(buttonPanel, Alignment.MIDDLE_RIGHT);
 
 		this.addComponent(titleLayout);
