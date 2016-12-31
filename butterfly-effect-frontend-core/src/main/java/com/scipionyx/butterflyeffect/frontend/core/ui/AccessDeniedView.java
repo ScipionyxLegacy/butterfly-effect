@@ -9,12 +9,13 @@ import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
-//import org.vaadin.spring.annotation.PrototypeScope;
 
 /**
+ * 
+ * 
  * A view shown when access to another view is denied.
  *
- * @author Petter Holmström (petter@vaadin.com)
+ * 
  */
 @SpringComponent
 public class AccessDeniedView extends VerticalLayout implements View {
@@ -34,6 +35,9 @@ public class AccessDeniedView extends VerticalLayout implements View {
 		message.setContentMode(ContentMode.HTML);
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void enter(ViewChangeListener.ViewChangeEvent event) {
 		message.setValue(String.format("Sorry, but you don't have access to the view <b>%s</b>.", event.getViewName()));

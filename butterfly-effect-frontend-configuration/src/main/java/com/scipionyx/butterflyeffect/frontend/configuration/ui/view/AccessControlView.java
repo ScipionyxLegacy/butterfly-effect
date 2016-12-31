@@ -120,9 +120,14 @@ public class AccessControlView extends VerticalLayout implements View, ViewAcces
 	public void enter(ViewChangeListener.ViewChangeEvent event) {
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public boolean isAccessGranted(UI ui, String beanName) {
+		
 		final SpringView annotation = applicationContext.findAnnotationOnBean(beanName, SpringView.class);
+		
 		if (annotation != null) {
 			// return true;
 			return allowedViews.contains(annotation.name());

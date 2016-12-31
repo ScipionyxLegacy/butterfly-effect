@@ -13,8 +13,6 @@ import com.vaadin.server.Page;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.VerticalLayout;
 
 /**
@@ -45,27 +43,6 @@ public class LogoffView extends AbstractView {
 	 */
 	@Override
 	public void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception {
-
-		Button button = new Button("Logoff");
-
-		button.addClickListener(new Button.ClickListener() {
-
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void buttonClick(ClickEvent event) {
-
-				SecurityContextHolder.clearContext();
-				Page.getCurrent().open("", null);
-
-			}
-		});
-
-		workAreaPanel.addComponent(button);
-
 	}
 
 	/**
@@ -73,6 +50,8 @@ public class LogoffView extends AbstractView {
 	 */
 	@Override
 	public void doEnter(ViewChangeEvent event) {
+		SecurityContextHolder.clearContext();
+		Page.getCurrent().open("", null);
 	}
 
 }
