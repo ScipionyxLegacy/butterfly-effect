@@ -21,7 +21,7 @@
 
 		<dependency>
 			<groupId>com.scipionyx</groupId>
-			<artifactId>butterfly-effect-frontend-sessionmanagement-hazelcast</artifactId>
+			<artifactId>butterfly-effect-frontend-sessionmanagement</artifactId>
 			<version>0.1.0-SNAPSHOT</version>
 		</dependency>
 
