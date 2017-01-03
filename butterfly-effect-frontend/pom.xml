@@ -199,6 +199,9 @@
 		<module>../butterfly-effect-frontend-plugin</module>
 		<module>../butterfly-effect-frontend-security</module>
 		<module>../butterfly-effect-frontend-checkfraud</module>
+		<module>
+			../../../Documents/workspace/neon/butterfly-effect-fronted-sessionmanagement-hazelcast
+		</module>
 	</modules>
 
 	<name>Butterfly Effect - Frontend</name>

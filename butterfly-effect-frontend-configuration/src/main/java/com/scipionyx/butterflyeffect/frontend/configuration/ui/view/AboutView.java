@@ -19,6 +19,7 @@ import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.text.DecimalFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -36,6 +37,7 @@ import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
 import com.vaadin.data.Item;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Page;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
@@ -78,6 +80,7 @@ public class AboutView extends AbstractView {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception {
 
@@ -102,6 +105,16 @@ public class AboutView extends AbstractView {
 		// Server
 		addItem("Availabe Processors", Runtime.getRuntime().availableProcessors() + "", table);
 
+		// Session
+		addItem("Session Id", VaadinSession.getCurrent().getSession().getId(), table);
+		addItem("Session CreationTime",
+				(new Date(VaadinSession.getCurrent().getSession().getCreationTime()).toGMTString()), table);
+		addItem("Session Last Access Time",
+				(new Date(VaadinSession.getCurrent().getSession().getLastAccessedTime()).toGMTString()), table);
+
+		// All Session
+		///addItem("Session Id", VaadinSession.getAllSessions().getSession().getId(), table);
+		
 		//
 		try {
 			addItem("User", SecurityContextHolder.getContext().getAuthentication().getName(), table);

@@ -3,7 +3,11 @@ package com.scipionyx.butterflyeffect;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.session.SessionAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+
+import com.vaadin.annotations.Push;
+import com.vaadin.shared.communication.PushMode;
 
 /**
  * 
@@ -14,15 +18,14 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 
 //
-// @SpringBootApplication(exclude =
-// com.vaadin.spring.boot.VaadinAutoConfiguration.class)
-@SpringBootApplication
+@SpringBootApplication(exclude = { SessionAutoConfiguration.class })
 
 //
 @EnableDiscoveryClient
 
 //
-// @EnableRedisHttpSession
+
+@Push(value = PushMode.DISABLED)
 public class FrontEndApplication {
 
 	/**
