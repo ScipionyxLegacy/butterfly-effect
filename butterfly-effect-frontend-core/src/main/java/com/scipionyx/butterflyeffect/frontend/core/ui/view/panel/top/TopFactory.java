@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.scipionyx.butterflyeffect.frontend.core.services.MenuService;
 import com.vaadin.spring.annotation.SpringComponent;
-import com.vaadin.spring.annotation.VaadinSessionScope;
+import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Component;
 
 /**
@@ -18,8 +18,8 @@ import com.vaadin.ui.Component;
  * @author Renato Mendes
  *
  */
-@SpringComponent()
-@VaadinSessionScope
+@SpringComponent
+@UIScope
 public class TopFactory implements Serializable {
 
 	/**

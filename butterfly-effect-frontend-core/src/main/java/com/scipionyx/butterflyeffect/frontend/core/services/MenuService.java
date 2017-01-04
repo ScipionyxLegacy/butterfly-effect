@@ -11,10 +11,8 @@ import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.context.WebApplicationContext;
 
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
@@ -22,6 +20,7 @@ import com.vaadin.navigator.View;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
+import com.vaadin.spring.annotation.UIScope;
 
 import io.github.lukehutch.fastclasspathscanner.FastClasspathScanner;
 
@@ -34,7 +33,7 @@ import io.github.lukehutch.fastclasspathscanner.FastClasspathScanner;
  *
  */
 @SpringComponent("userMenuService")
-@Scope(scopeName = WebApplicationContext.SCOPE_SESSION)
+@UIScope
 public class MenuService implements Serializable {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(MenuService.class);

@@ -1,6 +1,6 @@
 package com.scipionyx.butterflyeffect.frontend.model.ui.view;
 
-import com.scipionyx.butterflyeffect.frontend.configuration.ui.view.AbstractConfigurationView;
+import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractView;
 
 /**
  * 
@@ -10,7 +10,7 @@ import com.scipionyx.butterflyeffect.frontend.configuration.ui.view.AbstractConf
  * @author Renato Mendes
  *
  */
-abstract class AbstractDataModelView extends AbstractConfigurationView {
+abstract class AbstractDataModelView extends AbstractView {
 
 	/**
 	 * 

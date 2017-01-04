@@ -55,7 +55,6 @@ import com.vaadin.ui.themes.ValoTheme;
 @SpringComponent(value = LoadImagesView.VIEW_NAME)
 @SpringView(name = LoadImagesView.VIEW_NAME)
 @UIScope
-// @Scope(scopeName = "session")
 
 //
 @ViewConfiguration(title = "Check Fraud - Load Images")

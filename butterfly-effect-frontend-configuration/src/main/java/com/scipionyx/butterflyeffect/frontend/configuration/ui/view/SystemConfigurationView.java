@@ -1,6 +1,7 @@
 package com.scipionyx.butterflyeffect.frontend.configuration.ui.view;
 
 import com.scipionyx.butterflyeffect.configuration.model.SystemConfiguration;
+import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractView;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
@@ -37,7 +38,7 @@ import com.vaadin.ui.VerticalLayout;
 @ViewConfiguration(title = "System Configuration")
 @MenuConfiguration(position = Position.TOP_RIGHT, label = "Access", group = "", order = 1, parent = SystemConfigurationView.VIEW_NAME, roles = {
 		"ADMIN" })
-public class SystemConfigurationView extends AbstractConfigurationView {
+public class SystemConfigurationView extends AbstractView {
 
 	public static final String VIEW_NAME = "butterfly-effect-frontend-configuration:config";
 

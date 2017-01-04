@@ -18,14 +18,12 @@ package com.scipionyx.butterflyeffect.frontend.core.ui;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top.TopFactory;
-import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewDisplay;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.spring.annotation.SpringUI;
-import com.vaadin.spring.annotation.SpringViewDisplay;
 import com.vaadin.spring.navigator.SpringViewProvider;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Panel;
@@ -43,8 +41,8 @@ import com.vaadin.ui.themes.ValoTheme;
  */
 @SpringUI
 @Theme(ValoTheme.THEME_NAME)
-@SpringViewDisplay
-@PreserveOnRefresh
+// @SpringViewDisplay
+// @PreserveOnRefresh
 // @Push
 public class MainUI extends UI implements ViewDisplay {
 
