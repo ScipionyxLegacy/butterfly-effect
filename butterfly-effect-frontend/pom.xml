@@ -137,6 +137,7 @@
 							<filtering>true</filtering>
 							<includes>
 								<include>entrypoint.sh</include>
+								<include>spring-instrument-3.0.4.RELEASE.jar</include>
 							</includes>
 							<targetPath>/</targetPath>
 						</resource>
@@ -199,9 +200,7 @@
 		<module>../butterfly-effect-frontend-plugin</module>
 		<module>../butterfly-effect-frontend-security</module>
 		<module>../butterfly-effect-frontend-checkfraud</module>
-		<module>
-			../../../Documents/workspace/neon/butterfly-effect-fronted-sessionmanagement-hazelcast
-		</module>
+		<module>../butterfly-effect-frontend-sessionmanagement</module>
 	</modules>
 
 	<name>Butterfly Effect - Frontend</name>

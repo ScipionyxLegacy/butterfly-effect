@@ -24,6 +24,7 @@ import com.vaadin.navigator.ViewDisplay;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.spring.annotation.SpringUI;
+import com.vaadin.spring.annotation.SpringViewDisplay;
 import com.vaadin.spring.navigator.SpringViewProvider;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Panel;
@@ -41,7 +42,7 @@ import com.vaadin.ui.themes.ValoTheme;
  */
 @SpringUI
 @Theme(ValoTheme.THEME_NAME)
-// @SpringViewDisplay
+@SpringViewDisplay
 // @PreserveOnRefresh
 // @Push
 public class MainUI extends UI implements ViewDisplay {
@@ -51,7 +52,7 @@ public class MainUI extends UI implements ViewDisplay {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private final SpringViewProvider viewProvider;
+	private transient final SpringViewProvider viewProvider;
 
 	private Panel viewContainer;
 

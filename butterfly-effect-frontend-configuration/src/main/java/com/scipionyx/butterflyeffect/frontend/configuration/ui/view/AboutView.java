@@ -73,11 +73,10 @@ public class AboutView extends AbstractView {
 	public static final String VIEW_NAME = "butterfly-effect-frontend-system:about";
 
 	@Autowired
-	private DiscoveryClient discoveryClient;
+	private transient DiscoveryClient discoveryClient;
 
 	@PostConstruct
 	private void init() {
-
 	}
 
 	@SuppressWarnings("deprecation")
@@ -113,8 +112,9 @@ public class AboutView extends AbstractView {
 				(new Date(VaadinSession.getCurrent().getSession().getLastAccessedTime()).toGMTString()), table);
 
 		// All Session
-		///addItem("Session Id", VaadinSession.getAllSessions().getSession().getId(), table);
-		
+		/// addItem("Session Id",
+		// VaadinSession.getAllSessions().getSession().getId(), table);
+
 		//
 		try {
 			addItem("User", SecurityContextHolder.getContext().getAuthentication().getName(), table);

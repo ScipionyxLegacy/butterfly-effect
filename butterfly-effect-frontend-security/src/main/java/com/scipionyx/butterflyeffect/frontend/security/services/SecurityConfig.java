@@ -67,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 			// Login
 			http.formLogin().permitAll();
-			http.formLogin().defaultSuccessUrl("/", true);
+			http.formLogin().defaultSuccessUrl("/#!butterfly-effect-frontend-core:home", true);
 			// http.formLogin().loginPage("/#!" + LoginView.VIEW_NAME);
 
 			//

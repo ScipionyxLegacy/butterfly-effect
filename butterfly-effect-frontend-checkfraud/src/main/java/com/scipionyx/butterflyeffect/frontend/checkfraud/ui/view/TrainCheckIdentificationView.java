@@ -83,7 +83,7 @@ public class TrainCheckIdentificationView extends AbstractView {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	ProgressBar progress;
+	private ProgressBar progress;
 
 	@Autowired
 	private CheckFraudServiceFactory checkFraudServiceFactory;

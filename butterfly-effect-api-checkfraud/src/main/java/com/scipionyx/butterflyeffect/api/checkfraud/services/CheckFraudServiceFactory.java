@@ -1,5 +1,7 @@
 package com.scipionyx.butterflyeffect.api.checkfraud.services;
 
+import java.io.Serializable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +14,14 @@ import com.scipionyx.butterflyeffect.api.checkfraud.services.checkimage.ICheckIm
  *
  */
 @Component
-public class CheckFraudServiceFactory {
+public class CheckFraudServiceFactory implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Autowired
-	private CheckImageRESTService checkImageRESTService;
+	private transient CheckImageRESTService checkImageRESTService;
 
 	/**
 	 * 

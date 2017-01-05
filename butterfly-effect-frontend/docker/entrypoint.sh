@@ -6,6 +6,7 @@
 ##
 
 exec java \
+	-javaagent:/spring-instrument-3.0.4.RELEASE.jar \
 	-Dspring.application.name=$SPRING_APPLICATION_NAME \
 	-Dspring.cloud.consul.discovery.healthCheckPath=/health \
 	-Dserver.port=$SERVER_PORT \

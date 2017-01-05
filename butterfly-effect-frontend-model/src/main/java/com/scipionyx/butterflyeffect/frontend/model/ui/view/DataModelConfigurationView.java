@@ -13,6 +13,7 @@ import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.shared.ui.window.WindowMode;
+import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Button;
@@ -40,7 +41,9 @@ import com.vaadin.ui.renderers.TextRenderer;
  * @author Renato Mendes
  *
  */
+@SpringComponent(value = DataModelConfigurationView.VIEW_NAME)
 @SpringView(name = DataModelConfigurationView.VIEW_NAME)
+
 @UIScope
 //
 @ViewConfiguration(title = "Data Model Configuration")
@@ -61,7 +64,7 @@ public class DataModelConfigurationView extends AbstractDataModelView {
 	private TabSheet sheet;
 
 	@Autowired
-	private EntityClientRESTConfigurationService service;
+	private transient EntityClientRESTConfigurationService service;
 
 	/**
 	 * @throws Exception

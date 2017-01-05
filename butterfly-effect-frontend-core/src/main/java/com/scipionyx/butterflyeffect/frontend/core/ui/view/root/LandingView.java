@@ -19,15 +19,15 @@ import com.vaadin.ui.VerticalLayout;
  * @author Renato Mendes
  *
  */
-@SpringComponent(value = RootView.VIEW_NAME)
-@SpringView(name = RootView.VIEW_NAME)
+@SpringComponent(value = LandingView.VIEW_NAME)
+@SpringView(name = LandingView.VIEW_NAME)
 @UIScope
 //
-@ViewConfiguration(title = "Home")
-@MenuConfiguration(position = Position.TOP_MAIN, label = "Home", group = "", order = -1)
-public class RootView extends AbstractView {
+@ViewConfiguration(title = "Home*")
+@MenuConfiguration(position = Position.IGNORE, label = "Home", group = "", order = -1)
+public class LandingView extends AbstractView {
 
-	public static final String VIEW_NAME = "butterfly-effect-frontend-core:home";
+	public static final String VIEW_NAME = "";
 
 	/**
 	 * 

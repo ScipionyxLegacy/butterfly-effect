@@ -19,10 +19,10 @@ public abstract class AbstractCheckFraudRESTService<T> {
 	@Value("${butterflyeffect.secure.url:false}")
 	private boolean secureUrl;
 
-	protected RestTemplate restTemplate;
+	protected transient RestTemplate restTemplate;
 
 	@Autowired
-	private DiscoveryClient discoveryClient;
+	private transient DiscoveryClient discoveryClient;
 
 	/**
 	 * 

@@ -20,8 +20,10 @@ import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import org.springframework.beans.factory.annotation.Configurable;
 
 import com.scipionyx.butterflyeffect.frontend.core.services.MenuService;
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
@@ -56,6 +58,7 @@ import com.vaadin.ui.VerticalLayout;
 @ViewConfiguration(title = "Access Control")
 @MenuConfiguration(position = Position.TOP_RIGHT, label = "Access", group = "", order = 1, parent = RootView.VIEW_NAME, roles = {
 		"ADMIN" })
+@Configurable
 public class AccessControlView extends VerticalLayout implements View, ViewAccessControl {
 
 	/**
@@ -65,9 +68,9 @@ public class AccessControlView extends VerticalLayout implements View, ViewAcces
 
 	public static final String VIEW_NAME = "butterfly-effect-frontend-configuration:access-control";
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(AccessControlView.class);
+
 	private final Set<String> allowedViews = new HashSet<>();
-	@Autowired
-	ApplicationContext applicationContext;
 
 	@Autowired
 	private MenuService userMenuService;
@@ -83,8 +86,11 @@ public class AccessControlView extends VerticalLayout implements View, ViewAcces
 				"Here you can control the access to the different views within this particular UI. Uncheck a few boxes and try to navigate to their corresponding views. "
 						+ "In a real application, you would probably base the access decision on the current user's role or something similar."));
 
+		//
+		LOGGER.info("Loading list");
 		for (Menu menu : userMenuService.getMenus()) {
 			allowedViews.add(menu.getView());
+			LOGGER.debug("Loading list item {}", menu.getView());
 			addComponent(createViewCheckbox(menu.getLabel(), menu.getView()));
 		}
 
@@ -125,14 +131,9 @@ public class AccessControlView extends VerticalLayout implements View, ViewAcces
 	 */
 	@Override
 	public boolean isAccessGranted(UI ui, String beanName) {
-		
-		final SpringView annotation = applicationContext.findAnnotationOnBean(beanName, SpringView.class);
-		
-		if (annotation != null) {
-			// return true;
-			return allowedViews.contains(annotation.name());
-		} else {
-			return false;
-		}
+
+		return allowedViews.contains(beanName);
+
 	}
+
 }
