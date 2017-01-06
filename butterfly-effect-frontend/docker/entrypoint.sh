@@ -7,6 +7,8 @@
 
 exec java \
 	-javaagent:/spring-instrument-3.0.4.RELEASE.jar \
+	-Dspring.redis.host=$SPRING_REDIS_HOST \
+	-Dspring.redis.port=$SPRING_REDIS_PORT \
 	-Dspring.application.name=$SPRING_APPLICATION_NAME \
 	-Dspring.cloud.consul.discovery.healthCheckPath=/health \
 	-Dserver.port=$SERVER_PORT \
