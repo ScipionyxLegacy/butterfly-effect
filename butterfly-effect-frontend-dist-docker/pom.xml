@@ -51,7 +51,7 @@
 						</resource>
 
 						<resource>
-							<directory>./docker</directory>
+							<directory>../butterfly-effect-frontend-dist-docker/docker</directory>
 							<filtering>true</filtering>
 							<includes>
 								<include>entrypoint.sh</include>
