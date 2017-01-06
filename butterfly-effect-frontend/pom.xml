@@ -94,6 +94,7 @@
 				<version>${vaadin.version}</version>
 				<configuration>
 					<debugPort>8000</debugPort>
+					<compressTheme>true</compressTheme>
 				</configuration>
 
 			</plugin>

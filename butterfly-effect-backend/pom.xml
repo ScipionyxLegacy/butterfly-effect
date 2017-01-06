@@ -32,117 +32,6 @@
 
 	</dependencies>
 
-	<build>
-
-		<plugins>
-
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<mainClass>${startclass}</mainClass>
-					<layout>ZIP</layout>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-						<configuration>
-							<classifier>exec</classifier>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-
-				<groupId>com.spotify</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.4.12</version>
-
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>build</goal>
-						</goals>
-					</execution>
-				</executions>
-
-				<configuration>
-
-					<serverId>${docker.registry.server}</serverId>
-
-					<baseImage>openjdk:alpine</baseImage>
-
-					<maintainer>Renato Mendes (renato.mendes.1123@gmail.com)</maintainer>
-
-					<resources>
-
-						<resource>
-							<directory>../butterfly-effect-backend-bootstrap/target</directory>
-							<filtering>true</filtering>
-							<includes>
-								<include>${project.artifactId}-bootstrap-${project.version}-exec.jar</include>
-							</includes>
-							<targetPath>/</targetPath>
-						</resource>
-
-						<resource>
-							<directory>./docker</directory>
-							<filtering>true</filtering>
-							<includes>
-								<include>entrypoint.sh</include>
-							</includes>
-							<targetPath>/</targetPath>
-						</resource>
-
-					</resources>
-
-					<env>
-						<SPRING_CLOUD_CONSUL_HOST>consul</SPRING_CLOUD_CONSUL_HOST>
-						<PROJECT_VERSION>${project.version}</PROJECT_VERSION>
-						<PROJECT_ARTIFACTID>${project.artifactId}</PROJECT_ARTIFACTID>
-					</env>
-
-					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-
-					<forceTags>true</forceTags>
-
-					<runs>
-						<run>chmod +x entrypoint.sh</run>
-					</runs>
-
-					<entryPoint>
-						["./entrypoint.sh"]
-					</entryPoint>
-
-					<imageTags>
-						<imageTag>${project.version}</imageTag>
-						<imageTag>latest</imageTag>
-					</imageTags>
-
-					<exposes>
-						<expose>8888</expose>
-					</exposes>
-
-					<pushImage>true</pushImage>
-
-					<squashRunCommands>true</squashRunCommands>
-
-					<retryPushCount>1</retryPushCount>
-
-					<skipDocker>false</skipDocker>
-
-				</configuration>
-
-			</plugin>
-
-		</plugins>
-
-	</build>
-
 	<packaging>pom</packaging>
 
 	<name>Butterfly Effect - Backend</name>
@@ -152,11 +41,12 @@
 	</organization>
 
 	<modules>
-		<module>../butterfly-effect-backend-bootstrap</module>
 		<module>../butterfly-effect-backend-checkfraud</module>
 		<module>../butterfly-effect-backend-communication</module>
 		<module>../butterfly-effect-backend-configuration</module>
 		<module>../butterfly-effect-backend-model</module>
+		<module>../butterfly-effect-backend-bootstrap</module>
+		<module>../butterfly-effect-backend-dist-docker</module>
 	</modules>
 
 </project>
