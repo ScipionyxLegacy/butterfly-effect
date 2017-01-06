@@ -63,7 +63,7 @@
 							<directory>../butterfly-effect-backend-bootstrap/target</directory>
 							<filtering>true</filtering>
 							<includes>
-								<include>${project.artifactId}-bootstrap-${project.version}-exec.jar</include>
+								<include>butterfly-effect-backend-bootstrap-${project.version}-exec.jar</include>
 							</includes>
 							<targetPath>/</targetPath>
 						</resource>
@@ -85,7 +85,7 @@
 						<PROJECT_ARTIFACTID>${project.artifactId}</PROJECT_ARTIFACTID>
 					</env>
 
-					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+					<imageName>${docker.image.prefix}/butterfly-effect-backend</imageName>
 
 					<forceTags>true</forceTags>
 

@@ -2,6 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<name>Butterfly Effect - Frontend - Distribuition - Docker</name>
+
 	<artifactId>butterfly-effect-frontend-dist-docker</artifactId>
 
 	<parent>
@@ -43,7 +45,7 @@
 							<directory>../butterfly-effect-frontend-bootstrap/target</directory>
 							<filtering>true</filtering>
 							<includes>
-								<include>${project.artifactId}-bootstrap-${project.version}-exec.jar</include>
+								<include>butterfly-effect-frontend-bootstrap-${project.version}-exec.jar</include>
 							</includes>
 							<targetPath>/</targetPath>
 						</resource>
@@ -60,7 +62,7 @@
 
 					</resources>
 
-					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+					<imageName>${docker.image.prefix}/butterfly-effect-frontend</imageName>
 
 					<exposes>
 						<expose>${scipionyx.frontend.port}</expose>
@@ -93,9 +95,11 @@
 					</imageTags>
 
 					<pushImage>true</pushImage>
+
 					<retryPushCount>1</retryPushCount>
 
 					<squashRunCommands>true</squashRunCommands>
+
 					<skipDocker>false</skipDocker>
 
 				</configuration>
@@ -106,5 +110,4 @@
 
 	</build>
 
-	<name>Butterfly Effect - Frontend - Distribuition - Docker</name>
 </project>
