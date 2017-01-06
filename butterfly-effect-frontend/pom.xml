@@ -16,12 +16,10 @@
 	</properties>
 
 	<repositories>
-
 		<repository>
 			<id>vaadin-addons</id>
 			<url>http://maven.vaadin.com/vaadin-addons</url>
 		</repository>
-
 	</repositories>
 
 	<dependencies>
@@ -99,94 +97,6 @@
 
 			</plugin>
 
-			<plugin>
-
-				<groupId>com.spotify</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.4.12</version>
-
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>build</goal>
-						</goals>
-					</execution>
-				</executions>
-
-				<configuration>
-
-					<serverId>${docker.registry.server}</serverId>
-
-					<baseImage>openjdk:alpine</baseImage>
-
-					<maintainer>Renato Mendes (renato.mendes.1123@gmail.com)</maintainer>
-
-					<resources>
-
-						<resource>
-							<directory>../butterfly-effect-frontend-bootstrap/target</directory>
-							<filtering>true</filtering>
-							<includes>
-								<include>${project.artifactId}-bootstrap-${project.version}-exec.jar</include>
-							</includes>
-							<targetPath>/</targetPath>
-						</resource>
-
-						<resource>
-							<directory>./docker</directory>
-							<filtering>true</filtering>
-							<includes>
-								<include>entrypoint.sh</include>
-								<include>spring-instrument-3.0.4.RELEASE.jar</include>
-							</includes>
-							<targetPath>/</targetPath>
-						</resource>
-
-					</resources>
-
-					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-
-					<exposes>
-						<expose>${scipionyx.frontend.port}</expose>
-					</exposes>
-
-					<env>
-						<SPRING_APPLICATION_NAME>butterflyeffect-frontend</SPRING_APPLICATION_NAME>
-						<SERVER_PORT>${scipionyx.frontend.port}</SERVER_PORT>
-						<SPRING_CLOUD_CONSUL_HOST>consul</SPRING_CLOUD_CONSUL_HOST>
-						<VAADIN_SERVLET_PRODUCTION_MODE>true</VAADIN_SERVLET_PRODUCTION_MODE>
-						<PROJECT_VERSION>${project.version}</PROJECT_VERSION>
-						<PROJECT_ARTIFACTID>${project.artifactId}</PROJECT_ARTIFACTID>
-						<SPRING_REDIS_HOST>redis</SPRING_REDIS_HOST>
-						<SPRING_REDIS_PORT>6379</SPRING_REDIS_PORT>
-					</env>
-
-					<runs>
-						<run>chmod +x entrypoint.sh</run>
-					</runs>
-
-					<entryPoint>
-						["./entrypoint.sh"]
-					</entryPoint>
-
-					<forceTags>true</forceTags>
-
-					<imageTags>
-						<imageTag>${project.version}</imageTag>
-						<imageTag>latest</imageTag>
-					</imageTags>
-
-					<pushImage>true</pushImage>
-					<retryPushCount>1</retryPushCount>
-
-					<squashRunCommands>true</squashRunCommands>
-					<skipDocker>false</skipDocker>
-
-				</configuration>
-
-			</plugin>
-
 		</plugins>
 
 	</build>
@@ -194,8 +104,6 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>../butterfly-effect-frontend-bootstrap</module>
-		
 		<module>../butterfly-effect-frontend-core</module>
 		<module>../butterfly-effect-frontend-cluster</module>
 		<module>../butterfly-effect-frontend-configuration</module>
@@ -204,6 +112,8 @@
 		<module>../butterfly-effect-frontend-security</module>
 		<module>../butterfly-effect-frontend-checkfraud</module>
 		<module>../butterfly-effect-frontend-sessionmanagement</module>
+		<module>../butterfly-effect-frontend-bootstrap</module>
+		<module>../butterfly-effect-frontend-dist-docker</module>
 	</modules>
 
 	<name>Butterfly Effect - Frontend</name>
