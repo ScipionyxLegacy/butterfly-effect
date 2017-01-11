@@ -2,14 +2,13 @@ package com.scipionyx.butterflyeffect.frontend.core.ui.view.common;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-
-import org.springframework.beans.factory.BeanNameAware;
 
 import com.scipionyx.butterflyeffect.ui.model.ButterflyView;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
@@ -32,7 +31,7 @@ import com.vaadin.ui.themes.ValoTheme;
  * @author Renato Mendes
  *
  */
-public abstract class AbstractView extends VerticalLayout implements View, BeanNameAware, ButterflyView {
+public abstract class AbstractView extends VerticalLayout implements View, ButterflyView, Serializable {
 
 	/**
 	 * 
@@ -44,7 +43,7 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 
 	private HorizontalLayout buttonPanel;
 
-	private String beanName;
+	private boolean built;
 
 	public abstract void doBuildWorkArea(VerticalLayout workArea) throws Exception;
 
@@ -64,6 +63,12 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 	 */
 	@PostConstruct
 	private void init() throws Exception {
+
+		// After deserialization...
+		if (built)
+			return;
+
+		built = true;
 
 		this.setMargin(false);
 		this.setSizeFull();
@@ -162,14 +167,6 @@ public abstract class AbstractView extends VerticalLayout implements View, BeanN
 		component.setStyleName(theme);
 		buttonPanel.addComponent(component);
 		return component;
-	}
-
-	public String getBeanName() {
-		return beanName;
-	}
-
-	public void setBeanName(String beanName) {
-		this.beanName = beanName;
 	}
 
 }

@@ -18,18 +18,15 @@ import org.springframework.context.annotation.aspectj.EnableSpringConfigured;
  */
 
 //
-@SpringBootApplication // (exclude = { SessionAutoConfiguration.class })
+@SpringBootApplication
 
 //
 @EnableDiscoveryClient
 
 //
 @EnableSpringConfigured
-
 @EnableLoadTimeWeaving(aspectjWeaving = AspectJWeaving.ENABLED)
-
-@EnableAspectJAutoProxy()
-
+@EnableAspectJAutoProxy(exposeProxy = true)
 public class FrontEndApplication {
 
 	/**

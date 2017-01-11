@@ -23,7 +23,6 @@ import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 
 import com.scipionyx.butterflyeffect.frontend.core.services.MenuService;
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
@@ -58,7 +57,6 @@ import com.vaadin.ui.VerticalLayout;
 @ViewConfiguration(title = "Access Control")
 @MenuConfiguration(position = Position.TOP_RIGHT, label = "Access", group = "", order = 1, parent = RootView.VIEW_NAME, roles = {
 		"ADMIN" })
-@Configurable
 public class AccessControlView extends VerticalLayout implements View, ViewAccessControl {
 
 	/**

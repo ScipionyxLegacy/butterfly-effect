@@ -17,14 +17,14 @@ package com.scipionyx.butterflyeffect.frontend.configuration.ui.view;
 
 import java.net.Inet4Address;
 import java.net.Inet6Address;
+import java.net.UnknownHostException;
 import java.text.DecimalFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.security.core.GrantedAuthority;
@@ -42,8 +42,11 @@ import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.AbstractSelect;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.Align;
@@ -55,7 +58,7 @@ import com.vaadin.ui.themes.ValoTheme;
  * 
  * 
  */
-@UIScope
+@UIScope()
 @SpringComponent(value = AboutView.VIEW_NAME)
 @SpringView(name = AboutView.VIEW_NAME)
 
@@ -63,6 +66,8 @@ import com.vaadin.ui.themes.ValoTheme;
 @ViewConfiguration(title = "About")
 @MenuConfiguration(position = Position.TOP_RIGHT, label = "About", group = "", order = 99, parent = RootView.VIEW_NAME, roles = {
 		"USER", "ADMIN" })
+//
+@Configurable(value = AboutView.VIEW_NAME)
 public class AboutView extends AbstractView {
 
 	/**
@@ -72,72 +77,101 @@ public class AboutView extends AbstractView {
 
 	public static final String VIEW_NAME = "butterfly-effect-frontend-system:about";
 
+	private Table tableFrontEndInformation;
+
+	private GridLayout backendLayout;
+
+	private GridLayout frontendLayout;
+
 	@Autowired
 	private transient DiscoveryClient discoveryClient;
 
-	@PostConstruct
-	private void init() {
+	/**
+	 * 
+	 */
+	@Override
+	public void doEnter(ViewChangeEvent event) {
+
+		try {
+			loadFrontEndInformation(true);
+			loadClusterInformation(discoveryClient.getInstances("butterflyeffect-frontend"), frontendLayout, false);
+			loadClusterInformation(discoveryClient.getInstances("butterflyeffect-backend"), backendLayout, false);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Notification.show("The requested function was not executed correctly - " + e.getMessage()
+					+ "\n the informaiton displayed is incomplete.", Type.TRAY_NOTIFICATION);
+		}
+
 	}
 
-	@SuppressWarnings("deprecation")
+	/**
+	 * 
+	 */
 	@Override
 	public void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception {
 
-		Table table = new Table("Frontend Information");
+		//
+		tableFrontEndInformation = new Table("Frontend Information");
+		tableFrontEndInformation.addContainerProperty("Property", String.class, null);
+		tableFrontEndInformation.addContainerProperty("Value", String.class, null);
+		tableFrontEndInformation.addContainerProperty("Description", String.class, null);
+		tableFrontEndInformation.setColumnAlignment("Value", Align.RIGHT);
+		workAreaPanel.addComponent(tableFrontEndInformation);
 
-		table.addContainerProperty("Property", String.class, null);
-		table.addContainerProperty("Value", String.class, null);
-		table.addContainerProperty("Description", String.class, null);
+		//
+		backendLayout = createClusterInformation("Backend", workAreaPanel);
+		frontendLayout = createClusterInformation("Frontend", workAreaPanel);
 
-		table.setColumnAlignment("Value", Align.RIGHT);
+		addButton(ValoTheme.BUTTON_FRIENDLY, new Button("Refresh", event -> doEnter(null)));
 
-		// Add a row the hard way
+	}
+
+	/**
+	 * 
+	 * @param justclean
+	 * @throws UnknownHostException
+	 */
+	@SuppressWarnings("deprecation")
+	private void loadFrontEndInformation(boolean loadData) throws UnknownHostException {
+
+		tableFrontEndInformation.removeAllItems();
+
+		if (!loadData)
+			return;
+
 		// Server Ip Address
-		addItem("Server Ip 4 Host Address", Inet4Address.getLocalHost().getHostAddress(), table);
-		addItem("Server Ip 6 Host Address", Inet6Address.getLocalHost().getHostAddress(), table);
+		addItem("Server Ip 4 Host Address", Inet4Address.getLocalHost().getHostAddress(), tableFrontEndInformation);
+		addItem("Server Ip 6 Host Address", Inet6Address.getLocalHost().getHostAddress(), tableFrontEndInformation);
 		// Server Id
 
 		// Server Memory
-		addItem("Free Memory", Runtime.getRuntime().freeMemory(), "", table);
-		addItem("Max Memory", Runtime.getRuntime().maxMemory(), "", table);
-		addItem("Total Memory", Runtime.getRuntime().totalMemory(), "", table);
+		addItem("Free Memory", Runtime.getRuntime().freeMemory(), "", tableFrontEndInformation);
+		addItem("Max Memory", Runtime.getRuntime().maxMemory(), "", tableFrontEndInformation);
+		addItem("Total Memory", Runtime.getRuntime().totalMemory(), "", tableFrontEndInformation);
 		// Server
-		addItem("Availabe Processors", Runtime.getRuntime().availableProcessors() + "", table);
+		addItem("Availabe Processors", Runtime.getRuntime().availableProcessors() + "", tableFrontEndInformation);
 
 		// Session
-		addItem("Session Id", VaadinSession.getCurrent().getSession().getId(), table);
+		addItem("Session Id", VaadinSession.getCurrent().getSession().getId(), tableFrontEndInformation);
 		addItem("Session CreationTime",
-				(new Date(VaadinSession.getCurrent().getSession().getCreationTime()).toGMTString()), table);
+				(new Date(VaadinSession.getCurrent().getSession().getCreationTime()).toGMTString()),
+				tableFrontEndInformation);
 		addItem("Session Last Access Time",
-				(new Date(VaadinSession.getCurrent().getSession().getLastAccessedTime()).toGMTString()), table);
+				(new Date(VaadinSession.getCurrent().getSession().getLastAccessedTime()).toGMTString()),
+				tableFrontEndInformation);
 
-		// All Session
-		/// addItem("Session Id",
-		// VaadinSession.getAllSessions().getSession().getId(), table);
-
-		//
-		try {
-			addItem("User", SecurityContextHolder.getContext().getAuthentication().getName(), table);
-			Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication()
-					.getAuthorities();
-			String roles = null;
-			for (GrantedAuthority grantedAuthority : authorities) {
-				if (roles == null)
-					roles = grantedAuthority.getAuthority();
-				else
-					roles = roles + "," + grantedAuthority.getAuthority();
-			}
-			addItem("Roles", roles, table);
-			addItem("Client Ip", Page.getCurrent().getWebBrowser().getAddress(), table);
-		} catch (Exception e) {
-
+		addItem("User", SecurityContextHolder.getContext().getAuthentication().getName(), tableFrontEndInformation);
+		Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication()
+				.getAuthorities();
+		String roles = null;
+		for (GrantedAuthority grantedAuthority : authorities) {
+			if (roles == null)
+				roles = grantedAuthority.getAuthority();
+			else
+				roles = roles + "," + grantedAuthority.getAuthority();
 		}
-
-		workAreaPanel.addComponent(table);
-
-		createClusterInformation("Backend", workAreaPanel, discoveryClient.getInstances("butterflyeffect-backend"));
-
-		createClusterInformation("Frontend", workAreaPanel, discoveryClient.getInstances("butterflyeffect-frontend"));
+		addItem("Roles", roles, tableFrontEndInformation);
+		addItem("Client Ip", Page.getCurrent().getWebBrowser().getAddress(), tableFrontEndInformation);
 
 	}
 
@@ -145,8 +179,7 @@ public class AboutView extends AbstractView {
 	 * 
 	 * @param workAreaPanel
 	 */
-	private void createClusterInformation(String type, VerticalLayout workAreaPanel,
-			List<ServiceInstance> instancesBackend) {
+	private GridLayout createClusterInformation(String type, VerticalLayout workAreaPanel) {
 
 		GridLayout layout = new GridLayout(4, 2);
 		layout.setSizeFull();
@@ -155,6 +188,27 @@ public class AboutView extends AbstractView {
 
 		Label label = new Label("Cluster Information - " + type);
 		label.setStyleName(ValoTheme.LABEL_H2);
+
+		Panel panelClusterInformation = new Panel(layout);
+		panelClusterInformation.setStyleName(ValoTheme.PANEL_WELL);
+
+		workAreaPanel.addComponents(label, panelClusterInformation);
+
+		return layout;
+
+	}
+
+	/**
+	 * 
+	 * @param instancesBackend
+	 * @param justclean
+	 */
+	private void loadClusterInformation(List<ServiceInstance> instancesBackend, GridLayout layout, boolean justclean) {
+
+		layout.removeAllComponents();
+
+		if (justclean)
+			return;
 
 		int i = 0;
 		for (ServiceInstance instance : instancesBackend) {
@@ -181,13 +235,14 @@ public class AboutView extends AbstractView {
 
 		}
 
-		Panel panelClusterInformation = new Panel(layout);
-		panelClusterInformation.setStyleName(ValoTheme.PANEL_WELL);
-
-		workAreaPanel.addComponents(label, panelClusterInformation);
-
 	}
 
+	/**
+	 * 
+	 * @param property
+	 * @param value
+	 * @param table
+	 */
 	@SuppressWarnings("unchecked")
 	private void addItem(String property, String value, AbstractSelect table) {
 		Object newItemId = table.addItem();
@@ -196,14 +251,16 @@ public class AboutView extends AbstractView {
 		row1.getItemProperty("Value").setValue(value);
 	}
 
+	/**
+	 * 
+	 * @param property
+	 * @param value
+	 * @param description
+	 * @param table
+	 */
 	private void addItem(String property, long value, String description, AbstractSelect table) {
 		DecimalFormat format = new DecimalFormat("###,###.###");
 		addItem(property, format.format(value), table);
-	}
-
-	@Override
-	public void doEnter(ViewChangeEvent event) {
-		//
 	}
 
 }
