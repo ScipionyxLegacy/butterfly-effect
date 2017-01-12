@@ -34,7 +34,7 @@
 		<docker.image.prefix>scipionyx</docker.image.prefix>
 		<docker.registry.server>docker.io</docker.registry.server>
 
-		<scipionyx.frontend.port>8080</scipionyx.frontend.port>
+		<scipionyx.frontend.port>80</scipionyx.frontend.port>
 		<scipionyx.backend.port>8888</scipionyx.backend.port>
 
 	</properties>

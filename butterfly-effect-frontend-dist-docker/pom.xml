@@ -55,7 +55,8 @@
 							<filtering>true</filtering>
 							<includes>
 								<include>entrypoint.sh</include>
-								<include>spring-instrument-3.0.4.RELEASE.jar</include>
+								<include>aspectjweaver-1.8.9.jar</include>
+								<include>spring-instrument-4.3.5.RELEASE.jar</include>
 							</includes>
 							<targetPath>/</targetPath>
 						</resource>

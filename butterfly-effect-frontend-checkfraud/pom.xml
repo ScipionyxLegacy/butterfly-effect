@@ -3,6 +3,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
+	<name>Butterfly Effect - Frontend - Check Fraud</name>
 
 	<artifactId>butterfly-effect-frontend-checkfraud</artifactId>
 
@@ -28,8 +29,6 @@
 		</dependency>
 
 	</dependencies>
-
-	<name>Butterfly Effect - Frontend - Check Fraud</name>
 
 	<build>
 		<plugins>
