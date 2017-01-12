@@ -41,6 +41,7 @@
 		<module>../butterfly-effect-api-plugin</module>
 		<module>../butterfly-effect-api-service</module>
 		<module>../butterfly-effect-api-ui</module>
+		<module>../butterfly-effect-api-jobmanagement</module>
 	</modules>
 
 	<name>Butterfly Effect - API</name>

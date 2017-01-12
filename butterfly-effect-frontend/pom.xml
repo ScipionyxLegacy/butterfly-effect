@@ -128,6 +128,7 @@
 		<module>../butterfly-effect-frontend-checkfraud</module>
 		<module>../butterfly-effect-frontend-sessionmanagement</module>
 		<module>../butterfly-effect-frontend-bootstrap</module>
+		<module>../butterfly-effect-frontend-jobmanager</module>
 		<module>../butterfly-effect-frontend-dist-docker</module>
 	</modules>
 
