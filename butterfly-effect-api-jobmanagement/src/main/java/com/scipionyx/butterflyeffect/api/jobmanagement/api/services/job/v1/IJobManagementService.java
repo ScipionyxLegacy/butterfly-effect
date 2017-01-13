@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.api.jobmanagement.api.services.worker.v1;
+package com.scipionyx.butterflyeffect.api.jobmanagement.api.services.job.v1;
 
 import java.util.List;
 
