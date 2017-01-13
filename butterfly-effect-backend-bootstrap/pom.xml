@@ -15,12 +15,6 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>com.scipionyx</groupId>
-			<artifactId>butterfly-effect-backend-checkfraud</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
@@ -30,6 +24,19 @@
 			<artifactId>spring-cloud-config-server</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.scipionyx</groupId>
+			<artifactId>butterfly-effect-backend-checkfraud</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.scipionyx</groupId>
+			<artifactId>
+				butterfly-effect-backend-jobmanagement
+			</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<name>Butterfly Effect - Backend - Bootstrap</name>

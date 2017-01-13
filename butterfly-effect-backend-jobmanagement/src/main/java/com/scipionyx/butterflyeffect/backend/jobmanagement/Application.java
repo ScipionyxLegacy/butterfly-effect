@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.backent.jobmanagement;
+package com.scipionyx.butterflyeffect.backend.jobmanagement;
 
 import javax.jms.ConnectionFactory;
 

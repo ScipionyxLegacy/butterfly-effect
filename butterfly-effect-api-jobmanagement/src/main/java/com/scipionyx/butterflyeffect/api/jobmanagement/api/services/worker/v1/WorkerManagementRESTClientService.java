@@ -6,7 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 
-import com.scipionyx.butterflyeffect.api.infrastructure.services.AbstractRESTService;
+import com.scipionyx.butterflyeffect.api.infrastructure.services.AbstractRESTClientService;
+import com.scipionyx.butterflyeffect.api.infrastructure.services.RESTService;
 import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.Worker;
 
 /**
@@ -15,7 +16,8 @@ import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.Worker;
  *
  */
 @Component
-public class WorkerManagementRESTService extends AbstractRESTService implements IWorkerManagementService {
+@RESTService(module = "jobmanagement", subModule = "worker", version = "v1.0")
+public class WorkerManagementRESTClientService extends AbstractRESTClientService implements IWorkerManagementService {
 
 	/**
 	 * @throws Exception
@@ -24,8 +26,7 @@ public class WorkerManagementRESTService extends AbstractRESTService implements 
 	 */
 	@Override
 	public String ping() throws RestClientException, Exception {
-		ResponseEntity<String> postForEntity = restTemplate.postForEntity(calculateUrl(""), null, String.class);
-		return postForEntity.getBody();
+		return restTemplate.getForObject(calculateURI("ping"), String.class);
 	}
 
 	/**
@@ -36,7 +37,7 @@ public class WorkerManagementRESTService extends AbstractRESTService implements 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public List<Worker> getAll() throws RestClientException, Exception {
-		ResponseEntity<List> postForEntity = restTemplate.postForEntity(calculateUrl(""), null, List.class);
+		ResponseEntity<List> postForEntity = restTemplate.postForEntity(calculateURI("getAll"), null, List.class);
 		return postForEntity.getBody();
 	}
 
