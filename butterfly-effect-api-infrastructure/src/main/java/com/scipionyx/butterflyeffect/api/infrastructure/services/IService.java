@@ -4,11 +4,14 @@ import org.springframework.web.client.RestClientException;
 
 /**
  * 
- * @author rmendes
+ * 
+ * @author Renato Mendes
  *
  */
 public interface IService {
 
 	public String ping() throws RestClientException, Exception;
+
+	public String health() throws RestClientException, Exception;
 
 }

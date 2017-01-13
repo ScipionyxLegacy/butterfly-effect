@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -18,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
  * @author Renato Mendes
  *
  */
-public abstract class AbstractRESTClientService {
+public abstract class AbstractRESTClientService implements IService {
 
 	/**
 	 * TODO - Is this need to be configurable ?
@@ -80,6 +81,24 @@ public abstract class AbstractRESTClientService {
 		URI resolve = instances.get(index).getUri().resolve(service);
 		return resolve;
 
+	}
+
+	/**
+	 * @throws Exception
+	 * @throws RestClientException
+	 * 
+	 */
+	@Override
+	public final String ping() throws RestClientException, Exception {
+		return restTemplate.getForObject(calculateURI("ping"), String.class);
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public final String health() throws RestClientException, Exception {
+		return restTemplate.getForObject(calculateURI("health"), String.class);
 	}
 
 }

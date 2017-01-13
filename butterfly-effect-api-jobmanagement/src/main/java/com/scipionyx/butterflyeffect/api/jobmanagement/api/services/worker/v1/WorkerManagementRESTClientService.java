@@ -24,16 +24,6 @@ public class WorkerManagementRESTClientService extends AbstractRESTClientService
 	 * @throws RestClientException
 	 * 
 	 */
-	@Override
-	public String ping() throws RestClientException, Exception {
-		return restTemplate.getForObject(calculateURI("ping"), String.class);
-	}
-
-	/**
-	 * @throws Exception
-	 * @throws RestClientException
-	 * 
-	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public List<Worker> getAll() throws RestClientException, Exception {
