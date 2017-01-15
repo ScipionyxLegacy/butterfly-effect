@@ -2,6 +2,9 @@ package com.scipionyx.butterflyeffect.api.jobmanagement.api.services.job.v1;
 
 import java.util.List;
 
+import org.springframework.web.client.RestClientException;
+
+import com.scipionyx.butterflyeffect.api.infrastructure.services.IService;
 import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.Job;
 import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.Priority;
 
@@ -12,17 +15,22 @@ import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.Priority;
  * @author Renato Mendes
  *
  */
-public interface IJobManagementService {
+public interface IJobManagementService extends IService {
 
 	/**
+	 * @return
+	 * @throws Exception
+	 * @throws RestClientException
 	 * 
 	 */
-	public void postJob(Job job);
+	public Job post(Job job) throws RestClientException, Exception;
 
-	public List<Job> getAll();
+	public Job next();
 
-	public List<Job> getAll(Object status);
+	public List<Job> listAll();
 
-	public void getAllActive(Priority priority);
+	public List<Job> listAll(Object status);
+
+	public void listAllActive(Priority priority);
 
 }

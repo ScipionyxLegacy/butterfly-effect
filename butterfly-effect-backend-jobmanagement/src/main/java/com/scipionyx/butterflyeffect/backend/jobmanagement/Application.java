@@ -23,6 +23,8 @@ public class Application {
 
 	/**
 	 * 
+	 * TODO - this connection to Jms must have its own component, as many other
+	 * modules might utilize it.
 	 * 
 	 * @param connectionFactory
 	 * @param configurer

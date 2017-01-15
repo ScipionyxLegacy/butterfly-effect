@@ -5,7 +5,7 @@ package com.scipionyx.butterflyeffect.api.jobmanagement.api.model;
  * @author Renato Mendes
  *
  */
-public enum Status {
+public enum JobStatus {
 
 	/**
 	 * This job is waiting on the queue

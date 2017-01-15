@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestClientException;
 
 import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.Worker;
 import com.scipionyx.butterflyeffect.api.jobmanagement.api.services.worker.v1.IWorkerManagementService;
@@ -17,11 +19,12 @@ import com.scipionyx.butterflyeffect.api.jobmanagement.api.services.worker.v1.IW
  * @author Renato Mendes
  *
  */
+@Component
 public class WorkerManagementService implements IWorkerManagementService {
 
 	private static final String SERVICE_DISCOVERY_NAME = "butterflyeffect-backend";
 
-	@Autowired
+	@Autowired(required = true)
 	private transient DiscoveryClient discoveryClient;
 
 	/**
@@ -46,7 +49,13 @@ public class WorkerManagementService implements IWorkerManagementService {
 
 	@Override
 	public String ping() {
-		// TODO Auto-generated method stub
+		List<ServiceInstance> instances = discoveryClient.getInstances(SERVICE_DISCOVERY_NAME);
+		String message = "Server up, [" + instances.size() + "] servers available";
+		return message;
+	}
+
+	@Override
+	public String health() throws RestClientException, Exception {
 		return null;
 	}
 

@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.api.infrastructure.services;
+package com.scipionyx.butterflyeffect.api.infrastructure.services.client;
 
 import java.net.URI;
 import java.util.List;
@@ -14,6 +14,9 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import com.scipionyx.butterflyeffect.api.infrastructure.services.IService;
+import com.scipionyx.butterflyeffect.api.infrastructure.services.RESTService;
+
 /**
  * 
  * @author Renato Mendes
@@ -22,13 +25,13 @@ import org.springframework.web.client.RestTemplate;
 public abstract class AbstractRESTClientService implements IService {
 
 	/**
-	 * TODO - Is this need to be configurable ?
+	 * TODO - does it need to be configurable ?
 	 */
 	private static final String SERVICE_DISCOVERY_NAME = "butterflyeffect-backend";
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractRESTClientService.class);
 
-	public final static String REST_BASE = "/REST_SERVICES/#vendor#/#module#/#sub-module#/#function#/#version#";
+	public final static String REST_BASE = "/REST_SERVICES/#vendor#/#module#/#sub-module#/#version#/#function#";
 
 	@Autowired
 	protected transient RestTemplate restTemplate;
@@ -76,10 +79,10 @@ public abstract class AbstractRESTClientService implements IService {
 
 		// Calculate Service
 		String service = url.replaceAll("#function#", function);
+		LOGGER.debug("Service URL: {}", service);
 
 		//
-		URI resolve = instances.get(index).getUri().resolve(service);
-		return resolve;
+		return instances.get(index).getUri().resolve(service);
 
 	}
 

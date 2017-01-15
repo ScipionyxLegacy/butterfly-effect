@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+import javax.validation.constraints.NotNull;
+
 /**
  * 
  * @author Renato Mendes
@@ -16,11 +19,30 @@ public class Job implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@NotNull
+	private String id;
+
+	@Nullable
+	private String description;
+
+	@NotNull
+	private Service service;
+
+	/**
+	 * When defined, only workers belonging to this workgroup will be
+	 * considerate as candidates to execute this Job. If null, any workgroup
+	 * will be entitled for executing the job
+	 */
+	@Nullable
+	private WorkerGroup workerGroup;
+
+	@NotNull
 	private Date submitted;
 
-	private Map<String, Object> parameters;
+	@Nullable
+	private Date dueDate;
 
-	private String description;
+	private Map<String, Object> parameters;
 
 	private Priority priority;
 
@@ -54,6 +76,30 @@ public class Job implements Serializable {
 
 	public void setPriority(Priority priority) {
 		this.priority = priority;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Service getService() {
+		return service;
+	}
+
+	public void setService(Service service) {
+		this.service = service;
+	}
+
+	public WorkerGroup getWorkerGroup() {
+		return workerGroup;
+	}
+
+	public void setWorkerGroup(WorkerGroup workerGroup) {
+		this.workerGroup = workerGroup;
 	}
 
 }
