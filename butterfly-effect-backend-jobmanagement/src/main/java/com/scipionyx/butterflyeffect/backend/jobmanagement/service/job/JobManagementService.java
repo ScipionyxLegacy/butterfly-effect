@@ -2,9 +2,15 @@ package com.scipionyx.butterflyeffect.backend.jobmanagement.service.job;
 
 import java.util.List;
 
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 
@@ -27,6 +33,9 @@ public class JobManagementService implements IJobManagementService {
 	@Autowired(required = true)
 	private transient DiscoveryClient discoveryClient;
 
+	@Autowired(required = true)
+	private JmsTemplate jmsTemplate;
+
 	@Override
 	public String ping() {
 		List<ServiceInstance> instances = discoveryClient.getInstances(SERVICE_DISCOVERY_NAME);
@@ -48,6 +57,15 @@ public class JobManagementService implements IJobManagementService {
 		// TODO - Check Conditions
 		// TODO - Post Job on ActiveMQ
 		// TODO - Return the Job with remaining information
+		MessageCreator messageCreator = new MessageCreator() {
+
+			@Override
+			public Message createMessage(Session session) throws JMSException {
+				Message message = session.createObjectMessage(job);
+				return message;
+			}
+		};
+		jmsTemplate.send("jobs-queue", messageCreator);
 		return job;
 	}
 

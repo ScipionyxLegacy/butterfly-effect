@@ -26,7 +26,7 @@ public class JobManagementRESTClientService extends AbstractRESTClientService im
 	 */
 	@Override
 	public Job post(Job job) throws RestClientException, Exception {
-		return restTemplate.getForObject(calculateURI("postJob"), Job.class);
+		return restTemplate.getForObject(calculateURI("post"), Job.class);
 	}
 
 	@Override
