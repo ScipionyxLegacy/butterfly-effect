@@ -98,6 +98,7 @@ public class MenuService implements Serializable {
 		menus = new ArrayList<>();
 
 		for (Class<? extends View> clazz : views) {
+
 			if (!Modifier.isAbstract(clazz.getModifiers())) {
 
 				if (clazz.isAnnotationPresent(MenuConfiguration.class) && (clazz.isAnnotationPresent(SpringView.class)
@@ -116,8 +117,9 @@ public class MenuService implements Serializable {
 							break;
 						}
 					}
-					if (skip)
+					if (skip) {
 						continue;
+					}
 
 					String beanName = springView != null ? springView.name() : springComponent.value();
 
@@ -138,9 +140,10 @@ public class MenuService implements Serializable {
 				} else {
 
 					LOGGER.error(
-							"Menu configuration could not be read from the class's[{}] annotations: @SpringComponent present[{}], @MenuConfiguration present[{}]",
+							"Menu configuration could not be read from the class's[{}] annotations: @SpringComponent present[{}], @MenuConfiguration present[{}], @SpringComponent[{}]",
 							clazz.getName(), clazz.isAnnotationPresent(SpringComponent.class),
-							clazz.isAnnotationPresent(MenuConfiguration.class));
+							clazz.isAnnotationPresent(MenuConfiguration.class),
+							clazz.isAnnotationPresent(SpringComponent.class));
 
 				}
 			}
