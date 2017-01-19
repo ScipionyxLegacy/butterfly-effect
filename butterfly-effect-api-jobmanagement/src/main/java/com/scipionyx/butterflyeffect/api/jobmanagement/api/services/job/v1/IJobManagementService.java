@@ -25,12 +25,26 @@ public interface IJobManagementService extends IService {
 	 */
 	public Job post(Job job) throws RestClientException, Exception;
 
-	public Job next();
+	/**
+	 * Get the next job to be processed.
+	 * 
+	 * @return
+	 * @throws RestClientException
+	 * @throws Exception
+	 */
+	public Job next() throws RestClientException, Exception;
 
-	public List<Job> listAll();
+	/**
+	 * List of all jobs waiting on the queue.
+	 * 
+	 * @return
+	 * @throws RestClientException
+	 * @throws Exception
+	 */
+	public List<Job> get() throws RestClientException, Exception;
 
-	public List<Job> listAll(Object status);
+	public List<Job> get(Object status) throws RestClientException, Exception;
 
-	public void listAllActive(Priority priority);
+	public List<Job> get(Object status, Priority priority);
 
 }

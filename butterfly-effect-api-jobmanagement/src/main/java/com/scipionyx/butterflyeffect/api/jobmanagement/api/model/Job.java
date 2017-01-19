@@ -9,6 +9,9 @@ import javax.validation.constraints.NotNull;
 
 /**
  * 
+ * 
+ * 
+ * 
  * @author Renato Mendes
  *
  */
@@ -39,12 +42,19 @@ public class Job implements Serializable {
 	@NotNull
 	private Date submitted;
 
+	@NotNull
+	private long timeToLive;
+
 	@Nullable
 	private Date dueDate;
 
 	private Map<String, Object> parameters;
 
 	private Priority priority;
+
+	private int requiredCPUCount;
+
+	private int requiredFreeMemory;
 
 	public Date getSubmitted() {
 		return submitted;
@@ -100,6 +110,38 @@ public class Job implements Serializable {
 
 	public void setWorkerGroup(WorkerGroup workerGroup) {
 		this.workerGroup = workerGroup;
+	}
+
+	public long getTimeToLive() {
+		return timeToLive;
+	}
+
+	public void setTimeToLive(long timeToLive) {
+		this.timeToLive = timeToLive;
+	}
+
+	public Date getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
+	}
+
+	public int getRequiredCPUCount() {
+		return requiredCPUCount;
+	}
+
+	public void setRequiredCPUCount(int requiredCPUCount) {
+		this.requiredCPUCount = requiredCPUCount;
+	}
+
+	public int getRequiredFreeMemory() {
+		return requiredFreeMemory;
+	}
+
+	public void setRequiredFreeMemory(int requiredFreeMemory) {
+		this.requiredFreeMemory = requiredFreeMemory;
 	}
 
 }

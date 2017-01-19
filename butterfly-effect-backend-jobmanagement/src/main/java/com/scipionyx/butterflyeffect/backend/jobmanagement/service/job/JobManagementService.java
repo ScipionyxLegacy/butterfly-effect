@@ -1,16 +1,13 @@
 package com.scipionyx.butterflyeffect.backend.jobmanagement.service.job;
 
+import java.util.Calendar;
 import java.util.List;
-
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.Session;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 
@@ -34,8 +31,11 @@ public class JobManagementService implements IJobManagementService {
 	private transient DiscoveryClient discoveryClient;
 
 	@Autowired(required = true)
-	private JmsTemplate jmsTemplate;
+	private transient JmsTemplate jmsTemplate;
 
+	/**
+	 * 
+	 */
 	@Override
 	public String ping() {
 		List<ServiceInstance> instances = discoveryClient.getInstances(SERVICE_DISCOVERY_NAME);
@@ -43,6 +43,9 @@ public class JobManagementService implements IJobManagementService {
 		return message;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public String health() throws RestClientException, Exception {
 		return null;
@@ -53,44 +56,53 @@ public class JobManagementService implements IJobManagementService {
 	 */
 	@Override
 	public Job post(Job job) throws RestClientException, Exception {
-		// TODO Auto-generated method stub
-		// TODO - Check Conditions
-		// TODO - Post Job on ActiveMQ
-		// TODO - Return the Job with remaining information
-		MessageCreator messageCreator = new MessageCreator() {
 
-			@Override
-			public Message createMessage(Session session) throws JMSException {
-				Message message = session.createObjectMessage(job);
-				return message;
-			}
-		};
-		jmsTemplate.send("jobs-queue", messageCreator);
+		// TODO - Check Conditions
+
+		job.setId(UUID.randomUUID().toString());
+		job.setSubmitted(Calendar.getInstance().getTime());
+
+		if (job.getPriority() == null) {
+			job.setPriority(Priority.NORMAL);
+		}
+
+		if (job.getTimeToLive() == 0) {
+			job.setTimeToLive(Long.MAX_VALUE);
+		}
+
+		//
+		jmsTemplate.setExplicitQosEnabled(true);
+		jmsTemplate.setTimeToLive(job.getTimeToLive());
+		jmsTemplate.setPriority(job.getPriority().getValue());
+
+		//
+		jmsTemplate.setDefaultDestinationName("jobs-queue");
+		jmsTemplate.convertAndSend(job);
+
 		return job;
 	}
 
 	@Override
 	public Job next() {
+		return null;
+	}
+
+	@Override
+	public List<Job> get() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Job> listAll() {
+	public List<Job> get(Object status) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Job> listAll(Object status) {
+	public List<Job> get(Object status, Priority priority) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public void listAllActive(Priority priority) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

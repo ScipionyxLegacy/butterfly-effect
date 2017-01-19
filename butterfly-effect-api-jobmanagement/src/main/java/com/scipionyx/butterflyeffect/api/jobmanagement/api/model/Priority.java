@@ -8,7 +8,7 @@ package com.scipionyx.butterflyeffect.api.jobmanagement.api.model;
  */
 public enum Priority {
 
-	LOW(1), NORMAL(2), HIGH(3), URGENT(4);
+	LOW(1), NORMAL(3), HIGH(5), URGENT(7), EXTREME(9);
 
 	private final int value;
 

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,11 +34,22 @@ public class JobManagementRESTService extends AbstractRESTServerService<JobManag
 	 * @throws Exception
 	 * @throws RestClientException
 	 */
-	@RequestMapping(path = "/post", method = { RequestMethod.POST, RequestMethod.POST })
-	public ResponseEntity<String> post(Job job) throws RestClientException, Exception {
-		LOGGER.debug("getAll");
-		service.post(job);
-		return (new ResponseEntity<>(HttpStatus.OK));
+	@RequestMapping(path = "/post", method = { RequestMethod.POST, RequestMethod.PUT })
+	public ResponseEntity<Job> post(final @RequestBody(required = true) Job job) throws RestClientException, Exception {
+		LOGGER.debug("post");
+		return (new ResponseEntity<>(service.post(job), HttpStatus.OK));
+	}
+
+	/**
+	 * 
+	 * @return
+	 * @throws RestClientException
+	 * @throws Exception
+	 */
+	@RequestMapping(path = "/next", method = { RequestMethod.POST, RequestMethod.PUT })
+	public ResponseEntity<Job> next() throws RestClientException, Exception {
+		LOGGER.debug("next");
+		return (new ResponseEntity<>(service.next(), HttpStatus.OK));
 	}
 
 }

@@ -26,31 +26,41 @@ public class JobManagementRESTClientService extends AbstractRESTClientService im
 	 */
 	@Override
 	public Job post(Job job) throws RestClientException, Exception {
-		return restTemplate.getForObject(calculateURI("post"), Job.class);
+		return restTemplate.postForObject(calculateURI("post"), job, Job.class);
+	}
+
+	/**
+	 * @throws Exception
+	 * @throws RestClientException
+	 * 
+	 */
+	@Override
+	public Job next() throws RestClientException, Exception {
+		return restTemplate.postForObject(calculateURI("next"), null, Job.class);
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Job> get() throws RestClientException, Exception {
+		return restTemplate.postForObject(calculateURI("get"), null, List.class);
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Job> get(Object status) throws RestClientException, Exception {
+		return restTemplate.postForObject(calculateURI("get"), null, List.class);
 	}
 
 	@Override
-	public Job next() {
+	public List<Job> get(Object status, Priority priority) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public List<Job> listAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Job> listAll(Object status) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void listAllActive(Priority priority) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
