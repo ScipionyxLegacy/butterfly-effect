@@ -42,7 +42,9 @@
 	<name>Butterfly Effect - Backend - Bootstrap</name>
 
 	<build>
+
 		<plugins>
+
 			<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
@@ -51,7 +53,29 @@
 					<skipDocker>true</skipDocker>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>${startclass}</mainClass>
+					<layout>ZIP</layout>
+					<executable>true</executable>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<classifier>exec</classifier>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
+		
 	</build>
 
 </project>

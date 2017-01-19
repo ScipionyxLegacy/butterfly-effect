@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
-import javax.annotation.Nullable;
-import javax.validation.constraints.NotNull;
-
 /**
  * 
  * 
@@ -22,13 +19,13 @@ public class Job implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@NotNull
+	// @NotNull
 	private String id;
 
-	@Nullable
+	// @Nullable
 	private String description;
 
-	@NotNull
+	// @NotNull
 	private Service service;
 
 	/**
@@ -36,16 +33,16 @@ public class Job implements Serializable {
 	 * considerate as candidates to execute this Job. If null, any workgroup
 	 * will be entitled for executing the job
 	 */
-	@Nullable
+	// @Nullable
 	private WorkerGroup workerGroup;
 
-	@NotNull
+	// @NotNull
 	private Date submitted;
 
-	@NotNull
+	// @NotNull
 	private long timeToLive;
 
-	@Nullable
+	// @Nullable
 	private Date dueDate;
 
 	private Map<String, Object> parameters;

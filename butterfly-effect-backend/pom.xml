@@ -43,7 +43,7 @@
 	<modules>
 
 		<module>../butterfly-effect-backend-configuration</module>
-		
+
 		<module>../butterfly-effect-backend-model</module>
 		<module>../butterfly-effect-backend-checkfraud</module>
 		<module>../butterfly-effect-backend-communication</module>
