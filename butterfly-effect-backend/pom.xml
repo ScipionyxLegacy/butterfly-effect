@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>butterfly-effect-backend</artifactId>
+
+	<parent>
+		<groupId>com.scipionyx</groupId>
+		<artifactId>butterfly-effect</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<startclass>com.scipionyx.butterflyeffect.backend.BackendApplication</startclass>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-consul-discovery</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<packaging>pom</packaging>
+
+	<name>Butterfly Effect - Backend</name>
+
+	<organization>
+		<name>Scipionyx Software</name>
+	</organization>
+
+	<modules>
+
+		<module>../butterfly-effect-backend-configuration</module>
+
+		<module>../butterfly-effect-backend-model</module>
+		<module>../butterfly-effect-backend-checkfraud</module>
+		<module>../butterfly-effect-backend-communication</module>
+		<module>../butterfly-effect-backend-jobmanagement</module>
+		<module>../butterfly-effect-backend-stocks</module>
+
+		<module>../butterfly-effect-backend-bootstrap</module>
+		<module>../butterfly-effect-backend-dist-docker</module>
+
+	</modules>
+
+</project>

@@ -1,0 +1,32 @@
+version: '2'
+services:
+
+  consul:
+    image: consul
+
+  frontend:
+    image: scipionyx/butterfly-effect-frontend
+    links: 
+      - consul
+    environment:
+      - SPRING_CLOUD_CONSUL_HOST=consul
+
+  backend:
+    image: scipionyx/butterfly-effect-backend
+    links: 
+      - consul
+    environment:
+      - SPRING_CLOUD_CONSUL_HOST=consul    
+
+  lb-frontend:
+    image: dockercloud/haproxy
+    links:
+      - frontend
+    environment:
+      - COOKIES_ENABLED=true
+      - BACKENDS_PORT=8080
+      - STATS_AUTH=admin:admin
+    ports:
+      - 80:80
+      - 1936:1936
+    

@@ -1,0 +1,124 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.scipionyx</groupId>
+		<artifactId>butterfly-effect</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>butterfly-effect-frontend</artifactId>
+
+	<properties>
+		<startclass>com.scipionyx.butterflyeffect.FrontEndApplication</startclass>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>vaadin-addons</id>
+			<url>http://maven.vaadin.com/vaadin-addons</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+
+		<!-- Spring Boot -->
+
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-instrument</artifactId>
+		</dependency>
+
+		<!-- Vaadin -->
+
+		<dependency>
+			<groupId>org.vaadin.addon</groupId>
+			<artifactId>confirmdialog</artifactId>
+		</dependency>
+
+		<!-- more Vaadin Stuff -->
+
+		<dependency>
+			<groupId>io.github.lukehutch</groupId>
+			<artifactId>fast-classpath-scanner</artifactId>
+			<version>LATEST</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.scipionyx</groupId>
+			<artifactId>butterfly-effect-api-ui</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+
+		<plugins>
+
+			<plugin>
+
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-maven-plugin</artifactId>
+				<version>${vaadin.version}</version>
+				<configuration>
+					<debugPort>8000</debugPort>
+					<compressTheme>true</compressTheme>
+				</configuration>
+
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>../butterfly-effect-frontend-core</module>
+		<module>../butterfly-effect-frontend-cluster</module>
+		<module>../butterfly-effect-frontend-configuration</module>
+		<module>../butterfly-effect-frontend-model</module>
+		<module>../butterfly-effect-frontend-plugin</module>
+		<module>../butterfly-effect-frontend-security</module>
+		<module>../butterfly-effect-frontend-checkfraud</module>
+		<module>../butterfly-effect-frontend-sessionmanagement</module>
+		<module>../butterfly-effect-frontend-bootstrap</module>
+		<module>../butterfly-effect-frontend-jobmanager</module>
+		<module>../butterfly-effect-frontend-dist-docker</module>
+	</modules>
+
+	<name>Butterfly Effect - Frontend</name>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-spring</artifactId>
+				<version>1.1-SNAPSHOT</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>

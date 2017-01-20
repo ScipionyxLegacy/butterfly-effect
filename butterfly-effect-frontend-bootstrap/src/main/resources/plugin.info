@@ -1,0 +1,13 @@
+{
+	"name":"Butterfly Effect - Front-end",
+	"release":
+		{	
+			"date":"10/10/10",
+			"version":"0.1.0"
+		},
+	"vendor":
+		{
+			"name":"Scipionyx Software",
+			"url":"www.ScipionyxSoft.com"
+		}
+}

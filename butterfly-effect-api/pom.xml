@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>butterfly-effect-api</artifactId>
+
+	<parent>
+		<groupId>com.scipionyx</groupId>
+		<artifactId>butterfly-effect</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-consul-discovery</artifactId>
+		</dependency>
+
+		<!-- Vaadin Stuff -->
+
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-spring-boot-starter</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>../butterfly-effect-api-checkfraud</module>
+		<module>../butterfly-effect-api-configuration</module>
+		<module>../butterfly-effect-api-model</module>
+		<module>../butterfly-effect-api-plugin</module>
+		<module>../butterfly-effect-api-service</module>
+		<module>../butterfly-effect-api-ui</module>
+		<module>../butterfly-effect-api-infrastructure</module>
+		<module>../butterfly-effect-api-jobmanagement</module>
+	</modules>
+
+	<name>Butterfly Effect - API</name>
+
+</project>
