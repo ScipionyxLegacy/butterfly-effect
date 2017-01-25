@@ -12,7 +12,6 @@ import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.aop.support.AopUtils;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -106,16 +105,20 @@ public class MenuService implements Serializable {
 
 				Set<SpringView> springViews = AnnotationUtils.getDeclaredRepeatableAnnotations(clazz, SpringView.class);
 				SpringView springView = (springViews.iterator().hasNext()) ? springViews.iterator().next() : null;
-				LOGGER.info(
-						"SpringView, isNull: {}, # of Annotations: {}, isAopProxy: {}, isCglibProxy: {}, isJdkDynamicProxy: {} ",
-						springView == null, springViews.size(), AopUtils.isAopProxy(springView),
-						AopUtils.isCglibProxy(springView), AopUtils.isJdkDynamicProxy(springView));
+				// LOGGER.info(
+				// "SpringView, isNull: {}, # of Annotations: {}, isAopProxy:
+				// {}, isCglibProxy: {}, isJdkDynamicProxy: {} ",
+				// springView == null, springViews.size(),
+				// AopUtils.isAopProxy(springView),
+				// AopUtils.isCglibProxy(springView),
+				// AopUtils.isJdkDynamicProxy(springView));
 
 				Set<SpringComponent> springComponents = AnnotationUtils.getDeclaredRepeatableAnnotations(clazz,
 						SpringComponent.class);
 				SpringComponent springComponent = (springComponents.iterator().hasNext())
 						? springComponents.iterator().next() : null;
-				LOGGER.info("SpringComponent, Name: {}", springComponent.value());
+				// LOGGER.info("SpringComponent, Name: {}",
+				// springComponent.value());
 
 				Set<MenuConfiguration> menuConfigurations = AnnotationUtils.getDeclaredRepeatableAnnotations(clazz,
 						MenuConfiguration.class);
