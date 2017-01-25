@@ -4,8 +4,7 @@
 ##
 
 exec java \
-	-javaagent:/aspectjweaver-1.8.9.jar \
-	-javaagent:/spring-instrument-4.3.5.RELEASE.jar \
+	-javaagent:/spring-instrument-3.0.4.RELEASE.jar \
 	-Dspring.redis.host=$SPRING_REDIS_HOST \
 	-Dspring.redis.port=$SPRING_REDIS_PORT \
 	-Dspring.application.name=$SPRING_APPLICATION_NAME \

@@ -6,11 +6,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.aop.support.AopUtils;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -101,51 +104,68 @@ public class MenuService implements Serializable {
 
 			if (!Modifier.isAbstract(clazz.getModifiers())) {
 
-				if (clazz.isAnnotationPresent(MenuConfiguration.class) && (clazz.isAnnotationPresent(SpringView.class)
-						|| clazz.isAnnotationPresent(SpringComponent.class))) {
+				Set<SpringView> springViews = AnnotationUtils.getDeclaredRepeatableAnnotations(clazz, SpringView.class);
+				SpringView springView = (springViews.iterator().hasNext()) ? springViews.iterator().next() : null;
+				LOGGER.info(
+						"SpringView, isNull: {}, # of Annotations: {}, isAopProxy: {}, isCglibProxy: {}, isJdkDynamicProxy: {} ",
+						springView == null, springViews.size(), AopUtils.isAopProxy(springView),
+						AopUtils.isCglibProxy(springView), AopUtils.isJdkDynamicProxy(springView));
 
-					SpringView springView = clazz.getAnnotation(SpringView.class);
-					SpringComponent springComponent = clazz.getAnnotation(SpringComponent.class);
-					MenuConfiguration annotation = clazz.getAnnotation(MenuConfiguration.class);
+				Set<SpringComponent> springComponents = AnnotationUtils.getDeclaredRepeatableAnnotations(clazz,
+						SpringComponent.class);
+				SpringComponent springComponent = (springComponents.iterator().hasNext())
+						? springComponents.iterator().next() : null;
+				LOGGER.info("SpringComponent, Name: {}", springComponent.value());
 
-					// any of the menu roles is present on the user roles
-					boolean skip = true;
-					for (String menuRole : annotation.roles()) {
-						String role = "ROLE_" + menuRole;
-						if (roles.contains(role) || menuRole.equals("ALL")) {
-							skip = false;
-							break;
-						}
-					}
-					if (skip) {
-						continue;
-					}
+				Set<MenuConfiguration> menuConfigurations = AnnotationUtils.getDeclaredRepeatableAnnotations(clazz,
+						MenuConfiguration.class);
+				MenuConfiguration menuConfiguration = (menuConfigurations.iterator().hasNext())
+						? menuConfigurations.iterator().next() : null;
+				// LOGGER.info("MenuConfiguration, Parent: {}",
+				// menuConfiguration.parent());
 
-					String beanName = springView != null ? springView.name() : springComponent.value();
-
-					Menu menu = new Menu();
-					menu.setId(beanName);
-					menu.setLabel(annotation.label());
-					menu.setTooltip(annotation.tooltip());
-					menu.setView(beanName);
-					menu.setVisible(true);
-					menu.setSeparator(false);
-					menu.setOrder(annotation.order());
-					menu.setPosition(annotation.position());
-					menu.setParent(annotation.parent().equals("") ? null : annotation.parent());
-					menu.setIcon(annotation.icon().equals(FontAwesome.YOUTUBE_SQUARE) ? null : annotation.icon());
-					menu.setRoles(annotation.roles());
-					menus.add(menu);
-
-				} else {
-
-					LOGGER.error(
-							"Menu configuration could not be read from the class's[{}] annotations: @SpringComponent present[{}], @MenuConfiguration present[{}], @SpringComponent[{}]",
-							clazz.getName(), clazz.isAnnotationPresent(SpringComponent.class),
-							clazz.isAnnotationPresent(MenuConfiguration.class),
-							clazz.isAnnotationPresent(SpringComponent.class));
-
+				if (menuConfiguration == null) {
+					continue;
 				}
+
+				// any of the menu roles is present on the user roles
+				boolean skip = true;
+				for (String menuRole : menuConfiguration.roles()) {
+					String role = "ROLE_" + menuRole;
+					if (roles.contains(role) || menuRole.equals("ALL")) {
+						skip = false;
+						break;
+					}
+				}
+				if (skip) {
+					continue;
+				}
+
+				String beanName = springView != null ? springView.name() : springComponent.value();
+
+				Menu menu = new Menu();
+				menu.setId(beanName);
+				menu.setLabel(menuConfiguration.label());
+				menu.setTooltip(menuConfiguration.tooltip());
+				menu.setView(beanName);
+				menu.setVisible(true);
+				menu.setSeparator(false);
+				menu.setOrder(menuConfiguration.order());
+				menu.setPosition(menuConfiguration.position());
+				menu.setParent(menuConfiguration.parent().equals("") ? null : menuConfiguration.parent());
+				menu.setIcon(
+						menuConfiguration.icon().equals(FontAwesome.YOUTUBE_SQUARE) ? null : menuConfiguration.icon());
+				menu.setRoles(menuConfiguration.roles());
+				menus.add(menu);
+
+			} else {
+
+				LOGGER.error(
+						"Menu configuration could not be read from the class's[{}] annotations: @SpringView present[{}], @MenuConfiguration present[{}], @SpringComponent[{}]",
+						clazz.getName(), AnnotationUtils.getAnnotation(clazz, SpringView.class),
+						AnnotationUtils.getAnnotation(clazz, MenuConfiguration.class),
+						AnnotationUtils.getAnnotation(clazz, SpringComponent.class));
+
 			}
 		}
 

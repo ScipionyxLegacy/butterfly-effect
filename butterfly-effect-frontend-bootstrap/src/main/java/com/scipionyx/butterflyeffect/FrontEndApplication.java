@@ -26,7 +26,7 @@ import org.springframework.context.annotation.aspectj.EnableSpringConfigured;
 //
 @EnableSpringConfigured
 @EnableLoadTimeWeaving(aspectjWeaving = AspectJWeaving.ENABLED)
-@EnableAspectJAutoProxy(exposeProxy = true)
+@EnableAspectJAutoProxy(exposeProxy = true, proxyTargetClass = true)
 public class FrontEndApplication {
 
 	/**

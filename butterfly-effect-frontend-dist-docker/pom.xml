@@ -35,6 +35,7 @@
 
 					<serverId>${docker.registry.server}</serverId>
 
+<!-- 					<baseImage>anapsix/alpine-java:8_jdk</baseImage> -->
 					<baseImage>openjdk:alpine</baseImage>
 
 					<maintainer>Renato Mendes (renato.mendes.1123@gmail.com)</maintainer>
