@@ -41,7 +41,8 @@ import com.vaadin.ui.themes.ValoTheme;
  *
  */
 @SpringUI
-@Theme(ValoTheme.THEME_NAME)
+// @Theme(ValoTheme.THEME_NAME)
+@Theme("scipionyx")
 @SpringViewDisplay
 // @PreserveOnRefresh
 // @Push
