@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
 /**
  * 
@@ -61,17 +62,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			http.csrf().disable();
 
 			//
-			http.authorizeRequests().antMatchers("/VAADIN/**").permitAll();
-			http.authorizeRequests().antMatchers("/#!butterfly-effect-frontend-security:login").permitAll();
-			http.authorizeRequests().anyRequest().authenticated();
-
-			// Login
-			http.formLogin().permitAll();
-			http.formLogin().defaultSuccessUrl("/#!butterfly-effect-frontend-core:home", true);
-			// http.formLogin().loginPage("/#!" + LoginView.VIEW_NAME);
-
-			//
-			http.logout().logoutUrl("/logout").logoutSuccessUrl("/logout?success").permitAll();
+			http.exceptionHandling()
+					.authenticationEntryPoint(
+							new LoginUrlAuthenticationEntryPoint("/login/#!butterfly-effect-frontend-security:login"))
+					.accessDeniedPage("/accessDenied").and().authorizeRequests()
+					.antMatchers("/VAADIN/**", "/PUSH/**", "/UIDL/**", "/login", "/login/**", "/error/**",
+							"/accessDenied/**", "/vaadinServlet/**")
+					.permitAll().antMatchers("/authorized", "/**").fullyAuthenticated();
 
 			//
 			http.sessionManagement().sessionFixation().newSession();

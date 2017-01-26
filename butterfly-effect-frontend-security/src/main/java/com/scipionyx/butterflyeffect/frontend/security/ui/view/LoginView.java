@@ -2,15 +2,15 @@ package com.scipionyx.butterflyeffect.frontend.security.ui.view;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
-import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.PasswordField;
-import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
 /**
@@ -30,6 +30,8 @@ public class LoginView extends VerticalLayout implements View {
 
 	public final static String VIEW_NAME = "butterfly-effect-frontend-security:login";
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(LoginView.class);
+
 	/**
 	 * 
 	 */
@@ -41,15 +43,6 @@ public class LoginView extends VerticalLayout implements View {
 	 */
 	@PostConstruct
 	public void init() throws Exception {
-
-		FormLayout content = new FormLayout();
-		TextField username = new TextField("Username");
-		content.addComponent(username);
-		PasswordField password = new PasswordField("Password");
-		content.addComponent(password);
-
-		this.addComponents(content);
-
 	}
 
 	/**
@@ -57,6 +50,7 @@ public class LoginView extends VerticalLayout implements View {
 	 */
 	@Override
 	public void enter(ViewChangeEvent event) {
+		LOGGER.debug("Enter");
 	}
 
 }

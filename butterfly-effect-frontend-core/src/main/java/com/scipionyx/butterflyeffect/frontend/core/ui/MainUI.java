@@ -40,8 +40,7 @@ import com.vaadin.ui.themes.ValoTheme;
  * 
  *
  */
-@SpringUI
-// @Theme(ValoTheme.THEME_NAME)
+@SpringUI(path = "/main")
 @Theme("scipionyx")
 @SpringViewDisplay
 // @PreserveOnRefresh
@@ -96,7 +95,11 @@ public class MainUI extends UI implements ViewDisplay {
 
 	@Override
 	public void showView(View view) {
-		viewContainer.setContent((Component) view);
+		if (viewContainer != null) {
+			viewContainer.setContent((Component) view);
+		} else {
+			setContent((Component) view);
+		}
 	}
 
 }
