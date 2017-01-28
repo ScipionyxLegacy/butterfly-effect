@@ -1,0 +1,7 @@
+
+description = 'Butterfly Effect - Frontend - Security'
+dependencies {
+  compile project(':butterfly-effect-api:butterfly-effect-api-checkfraud')
+  compile project(':butterfly-effect-frontend:butterfly-effect-frontend-core')
+  compile project(':butterfly-effect-frontend:butterfly-effect-frontend-configuration')
+}

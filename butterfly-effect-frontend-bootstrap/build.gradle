@@ -1,0 +1,10 @@
+
+description = 'Butterfly Effect - Frontend - Bootstrap'
+dependencies {
+  compile project(':butterfly-effect-frontend:butterfly-effect-frontend-core')
+  compile project(':butterfly-effect-frontend:butterfly-effect-frontend-checkfraud')
+  compile project(':butterfly-effect-frontend:butterfly-effect-frontend-model')
+  compile project(':butterfly-effect-frontend:butterfly-effect-frontend-security')
+  compile project(':butterfly-effect-frontend:butterfly-effect-frontend-sessionmanagement')
+  compile project(':butterfly-effect-frontend:butterfly-effect-frontend-jobmanager')
+}

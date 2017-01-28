@@ -1,0 +1,60 @@
+rootProject.name = 'butterfly-effect'
+include ':butterfly-effect-api:butterfly-effect-api-checkfraud'
+include ':butterfly-effect-api:butterfly-effect-api-configuration'
+include ':butterfly-effect-api:butterfly-effect-api-model'
+include ':butterfly-effect-api:butterfly-effect-api-plugin'
+include ':butterfly-effect-api:butterfly-effect-api-service'
+include ':butterfly-effect-api:butterfly-effect-api-ui'
+include ':butterfly-effect-api:butterfly-effect-api-infrastructure'
+include ':butterfly-effect-api:butterfly-effect-api-jobmanagement'
+include ':butterfly-effect-api'
+include ':butterfly-effect-backend:butterfly-effect-backend-configuration'
+include ':butterfly-effect-backend:butterfly-effect-backend-model'
+include ':butterfly-effect-backend:butterfly-effect-backend-checkfraud'
+include ':butterfly-effect-backend:butterfly-effect-backend-communication'
+include ':butterfly-effect-backend:butterfly-effect-backend-jobmanagement'
+include ':butterfly-effect-backend:butterfly-effect-backend-bootstrap'
+include ':butterfly-effect-backend:butterfly-effect-backend-dist-docker'
+include ':butterfly-effect-backend'
+include ':butterfly-effect-frontend:butterfly-effect-frontend-core'
+include ':butterfly-effect-frontend:butterfly-effect-frontend-cluster'
+include ':butterfly-effect-frontend:butterfly-effect-frontend-configuration'
+include ':butterfly-effect-frontend:butterfly-effect-frontend-model'
+include ':butterfly-effect-frontend:butterfly-effect-frontend-plugin'
+include ':butterfly-effect-frontend:butterfly-effect-frontend-security'
+include ':butterfly-effect-frontend:butterfly-effect-frontend-checkfraud'
+include ':butterfly-effect-frontend:butterfly-effect-frontend-sessionmanagement'
+include ':butterfly-effect-frontend:butterfly-effect-frontend-bootstrap'
+include ':butterfly-effect-frontend:butterfly-effect-frontend-jobmanager'
+include ':butterfly-effect-frontend:butterfly-effect-frontend-dist-docker'
+include ':butterfly-effect-frontend'
+
+project(':butterfly-effect-api:butterfly-effect-api-checkfraud').projectDir = "$rootDir/../butterfly-effect-api-checkfraud" as File
+project(':butterfly-effect-api:butterfly-effect-api-configuration').projectDir = "$rootDir/../butterfly-effect-api-configuration" as File
+project(':butterfly-effect-api:butterfly-effect-api-model').projectDir = "$rootDir/../butterfly-effect-api-model" as File
+project(':butterfly-effect-api:butterfly-effect-api-plugin').projectDir = "$rootDir/../butterfly-effect-api-plugin" as File
+project(':butterfly-effect-api:butterfly-effect-api-service').projectDir = "$rootDir/../butterfly-effect-api-service" as File
+project(':butterfly-effect-api:butterfly-effect-api-ui').projectDir = "$rootDir/../butterfly-effect-api-ui" as File
+project(':butterfly-effect-api:butterfly-effect-api-infrastructure').projectDir = "$rootDir/../butterfly-effect-api-infrastructure" as File
+project(':butterfly-effect-api:butterfly-effect-api-jobmanagement').projectDir = "$rootDir/../butterfly-effect-api-jobmanagement" as File
+project(':butterfly-effect-api').projectDir = "$rootDir/../butterfly-effect-api" as File
+project(':butterfly-effect-backend:butterfly-effect-backend-configuration').projectDir = "$rootDir/../butterfly-effect-backend-configuration" as File
+project(':butterfly-effect-backend:butterfly-effect-backend-model').projectDir = "$rootDir/../butterfly-effect-backend-model" as File
+project(':butterfly-effect-backend:butterfly-effect-backend-checkfraud').projectDir = "$rootDir/../butterfly-effect-backend-checkfraud" as File
+project(':butterfly-effect-backend:butterfly-effect-backend-communication').projectDir = "$rootDir/../butterfly-effect-backend-communication" as File
+project(':butterfly-effect-backend:butterfly-effect-backend-jobmanagement').projectDir = "$rootDir/../butterfly-effect-backend-jobmanagement" as File
+project(':butterfly-effect-backend:butterfly-effect-backend-bootstrap').projectDir = "$rootDir/../butterfly-effect-backend-bootstrap" as File
+project(':butterfly-effect-backend:butterfly-effect-backend-dist-docker').projectDir = "$rootDir/../butterfly-effect-backend-dist-docker" as File
+project(':butterfly-effect-backend').projectDir = "$rootDir/../butterfly-effect-backend" as File
+project(':butterfly-effect-frontend:butterfly-effect-frontend-core').projectDir = "$rootDir/../butterfly-effect-frontend-core" as File
+project(':butterfly-effect-frontend:butterfly-effect-frontend-cluster').projectDir = "$rootDir/../butterfly-effect-frontend-cluster" as File
+project(':butterfly-effect-frontend:butterfly-effect-frontend-configuration').projectDir = "$rootDir/../butterfly-effect-frontend-configuration" as File
+project(':butterfly-effect-frontend:butterfly-effect-frontend-model').projectDir = "$rootDir/../butterfly-effect-frontend-model" as File
+project(':butterfly-effect-frontend:butterfly-effect-frontend-plugin').projectDir = "$rootDir/../butterfly-effect-frontend-plugin" as File
+project(':butterfly-effect-frontend:butterfly-effect-frontend-security').projectDir = "$rootDir/../butterfly-effect-frontend-security" as File
+project(':butterfly-effect-frontend:butterfly-effect-frontend-checkfraud').projectDir = "$rootDir/../butterfly-effect-frontend-checkfraud" as File
+project(':butterfly-effect-frontend:butterfly-effect-frontend-sessionmanagement').projectDir = "$rootDir/../butterfly-effect-frontend-sessionmanagement" as File
+project(':butterfly-effect-frontend:butterfly-effect-frontend-bootstrap').projectDir = "$rootDir/../butterfly-effect-frontend-bootstrap" as File
+project(':butterfly-effect-frontend:butterfly-effect-frontend-jobmanager').projectDir = "$rootDir/../butterfly-effect-frontend-jobmanager" as File
+project(':butterfly-effect-frontend:butterfly-effect-frontend-dist-docker').projectDir = "$rootDir/../butterfly-effect-frontend-dist-docker" as File
+project(':butterfly-effect-frontend').projectDir = "$rootDir/../butterfly-effect-frontend" as File

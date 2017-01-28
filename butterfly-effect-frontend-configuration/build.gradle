@@ -1,0 +1,6 @@
+
+description = 'Butterfly Effect - Frontend - Configuration'
+dependencies {
+  compile project(':butterfly-effect-api:butterfly-effect-api-configuration')
+  compile project(':butterfly-effect-frontend:butterfly-effect-frontend-core')
+}

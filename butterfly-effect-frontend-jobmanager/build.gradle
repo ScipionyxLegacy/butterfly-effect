@@ -1,0 +1,6 @@
+
+description = 'Butterfly Effect - Frontend - Job Manager'
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-activemq', version:'1.4.3.RELEASE'
+  compile project(':butterfly-effect-frontend:butterfly-effect-frontend-configuration')
+}

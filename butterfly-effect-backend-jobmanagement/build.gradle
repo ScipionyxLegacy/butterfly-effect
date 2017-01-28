@@ -1,0 +1,8 @@
+
+description = 'Butterfly Effect - Backend - Configuration'
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-integration', version:'1.4.3.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-activemq', version:'1.4.3.RELEASE'
+    compile group: 'org.apache.activemq', name: 'activemq-broker', version:'5.13.4'
+  compile project(':butterfly-effect-api:butterfly-effect-api-jobmanagement')
+}
