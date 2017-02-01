@@ -68,8 +68,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.accessDeniedPage("/accessDenied").and().authorizeRequests()
 					.antMatchers("/VAADIN/**", "/PUSH/**", "/UIDL/**", "/login", "/login/**", "/error/**",
 							"/accessDenied/**", "/vaadinServlet/**")
-					.permitAll().antMatchers("/beans", "/metrics", "/trace", "/pause", "/restart").hasAuthority("ADMIN")
-					.antMatchers("/authorized", "/**").fullyAuthenticated();
+					.permitAll().antMatchers("/authorized", "/**").fullyAuthenticated();
+
+			// http.exceptionHandling().antMatchers("/beans", "/metrics",
+			// "/trace", "/pause",
+			// "/restart").hasRole("ADMIN").and().formLogin();
+
+			// http.exceptionHandling().defaultAuthenticationEntryPointFor(entryPoint,
+			// preferredMatcher)
 
 			//
 			http.sessionManagement().sessionFixation().newSession();
