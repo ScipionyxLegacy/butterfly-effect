@@ -1,6 +1,0 @@
-
-description = 'Butterfly Effect - Backend - Check Fraud'
-dependencies {
-  compile project(':butterfly-effect-api:butterfly-effect-api-checkfraud')
-    compile group: 'org.openimaj', name: 'image-processing', version:'1.3.5'
-}

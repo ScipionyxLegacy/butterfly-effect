@@ -1,7 +1,0 @@
-
-description = 'Butterfly Effect - Backend - Bootstrap'
-dependencies {
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-config-server', version:'1.2.2.RELEASE'
-  compile project(':butterfly-effect-backend:butterfly-effect-backend-checkfraud')
-  compile project(':butterfly-effect-backend:butterfly-effect-backend-jobmanagement')
-}
