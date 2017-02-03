@@ -175,11 +175,6 @@
 
 	</dependencies>
 
-	<modules>
-		<module>../butterfly-effect-api</module>
-		<module>../butterfly-effect-backend</module>
-		<module>../butterfly-effect-frontend</module>
-	</modules>
 
 	<description>Butterfly Effect - Backend</description>
 
@@ -200,4 +195,9 @@
 		<url>https://github.com/scipionyx/ButterflyEffect/issues</url>
 	</issueManagement>
 
+	<modules>
+		<module>../butterfly-effect-api</module>
+		<module>../butterfly-effect-backend</module>
+		<module>../butterfly-effect-frontend</module>
+	</modules>
 </project>

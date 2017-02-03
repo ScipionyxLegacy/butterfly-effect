@@ -9,6 +9,7 @@
 		<groupId>com.scipionyx</groupId>
 		<artifactId>butterfly-effect</artifactId>
 		<version>0.1.0-SNAPSHOT</version>
+		<relativePath>../butterfly-effect</relativePath>
 	</parent>
 
 	<dependencies>
@@ -34,17 +35,17 @@
 
 	<packaging>pom</packaging>
 
+
+	<name>Butterfly Effect - API</name>
+
 	<modules>
 		<module>../butterfly-effect-api-checkfraud</module>
 		<module>../butterfly-effect-api-configuration</module>
+		<module>../butterfly-effect-api-infrastructure</module>
+		<module>../butterfly-effect-api-jobmanagement</module>
 		<module>../butterfly-effect-api-model</module>
 		<module>../butterfly-effect-api-plugin</module>
 		<module>../butterfly-effect-api-service</module>
 		<module>../butterfly-effect-api-ui</module>
-		<module>../butterfly-effect-api-infrastructure</module>
-		<module>../butterfly-effect-api-jobmanagement</module>
 	</modules>
-
-	<name>Butterfly Effect - API</name>
-
 </project>

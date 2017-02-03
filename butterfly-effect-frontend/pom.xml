@@ -7,6 +7,7 @@
 		<groupId>com.scipionyx</groupId>
 		<artifactId>butterfly-effect</artifactId>
 		<version>0.1.0-SNAPSHOT</version>
+		<relativePath>../butterfly-effect</relativePath>
 	</parent>
 
 	<artifactId>butterfly-effect-frontend</artifactId>
@@ -113,24 +114,21 @@
 
 	<packaging>pom</packaging>
 
-	<modules>
-		<module>../butterfly-effect-frontend-core</module>
-		<module>../butterfly-effect-frontend-cluster</module>
-		<module>../butterfly-effect-frontend-configuration</module>
-		<module>../butterfly-effect-frontend-model</module>
-		<module>../butterfly-effect-frontend-plugin</module>
-		<module>../butterfly-effect-frontend-security</module>
-		<module>../butterfly-effect-frontend-checkfraud</module>
-		<module>../butterfly-effect-frontend-sessionmanagement</module>
-		<module>../butterfly-effect-frontend-bootstrap</module>
-		<module>../butterfly-effect-frontend-jobmanager</module>
-		<module>
-			../../butterfly-effect-monitoring/butterfly-effect-frontend-monitoring
-		</module>
-		<module>../butterfly-effect-frontend-dist-docker</module>
-
-	</modules>
 
 	<name>Butterfly Effect - Frontend</name>
 
+	<modules>
+		<module>../butterfly-effect-frontend-bootstrap</module>
+		<module>../butterfly-effect-frontend-checkfraud</module>
+		<module>../butterfly-effect-frontend-cluster</module>
+		<module>../butterfly-effect-frontend-configuration</module>
+		<module>../butterfly-effect-frontend-core</module>
+		<module>../butterfly-effect-frontend-dist-docker</module>
+		<module>../butterfly-effect-frontend-jobmanager</module>
+		<module>../butterfly-effect-frontend-model</module>
+		<module>../butterfly-effect-frontend-plugin</module>
+		<module>../butterfly-effect-frontend-security</module>
+		<module>../butterfly-effect-frontend-servicemanager</module>
+		<module>../butterfly-effect-frontend-sessionmanagement</module>
+	</modules>
 </project>
