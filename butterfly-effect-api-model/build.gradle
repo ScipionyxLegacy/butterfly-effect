@@ -1,5 +1,0 @@
-
-description = 'Butterfly Effect - API - Model'
-dependencies {
-  compile project(':butterfly-effect-api:butterfly-effect-api-configuration')
-}
