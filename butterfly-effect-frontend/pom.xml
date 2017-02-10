@@ -118,17 +118,17 @@
 	<name>Butterfly Effect - Frontend</name>
 
 	<modules>
-		<module>../butterfly-effect-frontend-bootstrap</module>
 		<module>../butterfly-effect-frontend-checkfraud</module>
 		<module>../butterfly-effect-frontend-cluster</module>
 		<module>../butterfly-effect-frontend-configuration</module>
 		<module>../butterfly-effect-frontend-core</module>
-		<module>../butterfly-effect-frontend-dist-docker</module>
 		<module>../butterfly-effect-frontend-jobmanager</module>
 		<module>../butterfly-effect-frontend-model</module>
 		<module>../butterfly-effect-frontend-plugin</module>
 		<module>../butterfly-effect-frontend-security</module>
 		<module>../butterfly-effect-frontend-servicemanager</module>
 		<module>../butterfly-effect-frontend-sessionmanagement</module>
+		<module>../butterfly-effect-frontend-bootstrap</module>
+		<module>../butterfly-effect-frontend-dist-docker</module>
 	</modules>
 </project>

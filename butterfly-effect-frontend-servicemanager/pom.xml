@@ -11,4 +11,5 @@
 		<relativePath>../butterfly-effect-frontend</relativePath>
 	</parent>
 
+	<name>Butterfly Effect - Frontend Service Manager</name>
 </project>
