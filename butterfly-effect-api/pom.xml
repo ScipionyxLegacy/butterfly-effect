@@ -12,26 +12,6 @@
 		<relativePath>../butterfly-effect</relativePath>
 	</parent>
 
-	<dependencies>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-consul-discovery</artifactId>
-		</dependency>
-
-		<!-- Vaadin Stuff -->
-
-		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-spring-boot-starter</artifactId>
-		</dependency>
-
-	</dependencies>
 
 	<packaging>pom</packaging>
 
@@ -39,13 +19,37 @@
 	<name>Butterfly Effect - API</name>
 
 	<modules>
-		<module>../butterfly-effect-api-checkfraud</module>
+		
 		<module>../butterfly-effect-api-configuration</module>
 		<module>../butterfly-effect-api-infrastructure</module>
 		<module>../butterfly-effect-api-jobmanagement</module>
-		<module>../butterfly-effect-api-model</module>
+		
 		<module>../butterfly-effect-api-plugin</module>
 		<module>../butterfly-effect-api-service</module>
 		<module>../butterfly-effect-api-ui</module>
 	</modules>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-spring-boot-starter</artifactId>
+		</dependency>
+	</dependencies>
+	
 </project>

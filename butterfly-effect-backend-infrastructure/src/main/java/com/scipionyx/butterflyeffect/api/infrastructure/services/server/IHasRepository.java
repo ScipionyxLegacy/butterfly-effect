@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.api.infrastructure.services;
+package com.scipionyx.butterflyeffect.api.infrastructure.services.server;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -12,6 +12,6 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface IHasRepository<T> {
 
-	public CrudRepository<T, Long> getRepository();
+	CrudRepository<T, Long> getRepository();
 
 }

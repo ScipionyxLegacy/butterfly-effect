@@ -22,6 +22,11 @@ import com.scipionyx.butterflyeffect.api.jobmanagement.api.services.worker.v1.IW
 @Component
 public class WorkerManagementService implements IWorkerManagementService {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final String SERVICE_DISCOVERY_NAME = "butterflyeffect-backend";
 
 	@Autowired(required = true)

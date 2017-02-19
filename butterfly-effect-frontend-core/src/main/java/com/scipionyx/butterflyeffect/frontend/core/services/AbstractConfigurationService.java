@@ -9,16 +9,12 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 /**
  * 
  * @author Renato Mendes
  *
  */
 public abstract class AbstractConfigurationService<T> {
-
-	private ObjectMapper objectMapper;
 
 	private List<T> configurations;
 
@@ -29,7 +25,7 @@ public abstract class AbstractConfigurationService<T> {
 	@PostConstruct
 	public void init() throws IOException {
 		//
-		objectMapper = new ObjectMapper();
+		// objectMapper = new ObjectMapper();
 		//
 		if (configurations == null) {
 			configurations = new ArrayList<>();
@@ -63,14 +59,6 @@ public abstract class AbstractConfigurationService<T> {
 			list.add(systemResources.nextElement().openStream());
 		}
 		return list;
-	}
-
-	public ObjectMapper getObjectMapper() {
-		return objectMapper;
-	}
-
-	public void setObjectMapper(ObjectMapper objectMapper) {
-		this.objectMapper = objectMapper;
 	}
 
 	public List<T> getConfigurations() {

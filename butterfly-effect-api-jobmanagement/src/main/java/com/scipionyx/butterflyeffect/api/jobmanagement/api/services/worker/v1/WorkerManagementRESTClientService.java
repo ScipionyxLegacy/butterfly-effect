@@ -20,6 +20,11 @@ import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Work
 public class WorkerManagementRESTClientService extends AbstractRESTClientService implements IWorkerManagementService {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * @throws Exception
 	 * @throws RestClientException
 	 * 

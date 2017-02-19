@@ -1,16 +1,15 @@
 package com.scipionyx.butterflyeffect.frontend.configuration.services;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
 import com.scipionyx.butterflyeffect.configuration.model.IConfiguration;
@@ -69,12 +68,10 @@ public abstract class AbstractClientRESTConfigurationService<T extends IConfigur
 		}
 
 		//
-		List<T> response = new ArrayList<>();
+		// List<T> response = new ArrayList<>();
 		T[] array = responseEntity.getBody();
-		if (array != null) {
-			CollectionUtils.addAll(response, array);
-		}
-
+		@SuppressWarnings("unchecked")
+		List<T> response = CollectionUtils.arrayToList(array);
 		//
 		return response;
 	}

@@ -31,11 +31,6 @@
 			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.boot</groupId> -->
-<!-- 			<artifactId>spring-boot-starter-data-jpa</artifactId> -->
-<!-- 		</dependency> -->
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -46,7 +41,20 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
-
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
 
 	</dependencies>
 
@@ -68,5 +76,6 @@
 		<module>../butterfly-effect-backend-jobmanagement</module>
 		<module>../butterfly-effect-backend-model</module>
 		<module>../butterfly-effect-backend-stocks</module>
+		<module>../butterfly-effect-backend-infrastructure</module>
 	</modules>
 </project>

@@ -25,6 +25,11 @@ import com.scipionyx.butterflyeffect.api.infrastructure.services.RESTService;
 public abstract class AbstractRESTClientService implements IService {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * TODO - does it need to be configurable ?
 	 */
 	private static final String SERVICE_DISCOVERY_NAME = "butterflyeffect-backend";
@@ -33,10 +38,10 @@ public abstract class AbstractRESTClientService implements IService {
 
 	public final static String REST_BASE = "/REST_SERVICES/#vendor#/#module#/#sub-module#/#version#/#function#";
 
-	@Autowired
+	@Autowired(required = true)
 	protected transient RestTemplate restTemplate;
 
-	@Autowired
+	@Autowired(required = true)
 	protected transient DiscoveryClient discoveryClient;
 
 	private String url;

@@ -1,6 +1,5 @@
 package com.scipionyx.butterflyeffect.frontend.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.vaadin.server.Resource;
 
 /**
@@ -10,7 +9,7 @@ import com.vaadin.server.Resource;
  * @author Renato Mendes
  *
  */
-@JsonDeserialize(using = TitleDeserializer.class)
+// @JsonDeserialize(using = TitleDeserializer.class)
 public class Title {
 
 	private Resource icon;

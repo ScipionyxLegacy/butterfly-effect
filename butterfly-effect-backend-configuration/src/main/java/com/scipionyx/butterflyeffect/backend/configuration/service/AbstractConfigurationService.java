@@ -13,7 +13,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +22,7 @@ import org.springframework.core.GenericTypeResolver;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.databind.JsonMappingException;
 import com.scipionyx.butterflyeffect.backend.configuration.api.IReadService;
 import com.scipionyx.butterflyeffect.backend.configuration.api.IResponse;
 import com.scipionyx.butterflyeffect.backend.configuration.api.IVerifyService;
@@ -62,7 +62,7 @@ public abstract class AbstractConfigurationService<T extends IConfiguration>
 		super();
 		this.genericType = (Class<T>) GenericTypeResolver.resolveTypeArgument(getClass(),
 				AbstractConfigurationService.class);
-		mapper = new ObjectMapper();
+		// mapper = new ObjectMapper();
 	}
 
 	/**
@@ -186,7 +186,7 @@ public abstract class AbstractConfigurationService<T extends IConfiguration>
 
 			response = new Response<>("New entity created");
 
-		} catch (IOException | InvocationTargetException | NoSuchMethodException e) {
+		} catch (InvocationTargetException | NoSuchMethodException e) {
 			response = new Response<>(e);
 		}
 
@@ -240,19 +240,24 @@ public abstract class AbstractConfigurationService<T extends IConfiguration>
 						if (field.isAnnotationPresent(EncryptField.class)) {
 							EncryptField encryptFieldAnnotation = field.getAnnotation(EncryptField.class);
 							if (encryptFieldAnnotation.value()) {
-								Object simpleProperty = PropertyUtils.getSimpleProperty(t, field.getName());
-								if (simpleProperty != null) {
-									String encryptString = null;
-									// if (encrypt_)
-									// encryptString =
-									// createBasicTextEncrptor(salt).encrypt((String)
-									// simpleProperty);
-									// else
-									// encryptString =
-									// createBasicTextEncrptor(salt).decrypt((String)
-									// simpleProperty);
-									PropertyUtils.setSimpleProperty(t, field.getName(), encryptString);
-								}
+								// Object simpleProperty =
+								// PropertyUtils.getSimpleProperty(t,
+								// field.getName());
+								// if (simpleProperty != null) {
+								// String encryptString = null;
+								// // if (encrypt_)
+								// // encryptString =
+								// //
+								// createBasicTextEncrptor(salt).encrypt((String)
+								// // simpleProperty);
+								// // else
+								// // encryptString =
+								// //
+								// createBasicTextEncrptor(salt).decrypt((String)
+								// // simpleProperty);
+								// PropertyUtils.setSimpleProperty(t,
+								// field.getName(), encryptString);
+								// }
 
 							}
 						}
@@ -262,9 +267,10 @@ public abstract class AbstractConfigurationService<T extends IConfiguration>
 					} else if (field.getType().equals(Date.class)) {
 						continue;
 					} else {
-						Object simpleProperty = PropertyUtils.getSimpleProperty(t, field.getName());
-						Class<?> fieldType = field.getType();
-						encrypt(simpleProperty, salt, fieldType, encrypt_);
+						// Object simpleProperty =
+						// PropertyUtils.getSimpleProperty(t, field.getName());
+						// Class<?> fieldType = field.getType();
+						// encrypt(simpleProperty, salt, fieldType, encrypt_);
 					}
 				}
 			}
@@ -318,9 +324,8 @@ public abstract class AbstractConfigurationService<T extends IConfiguration>
 	 * @throws IllegalAccessException
 	 * @throws IllegalArgumentException
 	 */
-	public final IResponse<T> read(String id, final String salt)
-			throws JsonParseException, JsonMappingException, IOException, IllegalArgumentException,
-			IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+	public final IResponse<T> read(String id, final String salt) throws JsonParseException, IOException,
+			IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		LOGGER.debug("READ function executed for the class: {}", genericType.getName());
 
 		String calculateEntityFolderName = calculateEntityFolderName();
@@ -342,17 +347,16 @@ public abstract class AbstractConfigurationService<T extends IConfiguration>
 	 * @throws IllegalAccessException
 	 * @throws IllegalArgumentException
 	 */
-	public final IResponse<T> read(File file, final String salt)
-			throws JsonParseException, JsonMappingException, IOException, IllegalArgumentException,
-			IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+	public final IResponse<T> read(File file, final String salt) throws JsonParseException, IOException,
+			IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		LOGGER.debug("READ function executed for the class: {}", genericType.getName());
-		T t = (T) mapper.readValue(file, this.genericType);
-		t.setFile(file);
+		// T t = (T) mapper.readValue(file, this.genericType);
+		// t.setFile(file);
 		// remove encryption it
-		encrypt(t, salt, genericType, false);
+		// encrypt(t, salt, genericType, false);
 
-		IResponse<T> response = new Response<>(t);
-		return response;
+		// IResponse<T> response = new Response<>(t);
+		return null;// response;
 	}
 
 	/**

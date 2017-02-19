@@ -24,6 +24,11 @@ public class JobManagementRESTClientService extends AbstractRESTClientService im
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
 	@Override
 	public Job post(Job job) throws RestClientException, Exception {
 		return restTemplate.postForObject(calculateURI("post"), job, Job.class);

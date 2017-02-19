@@ -25,6 +25,11 @@ import com.scipionyx.butterflyeffect.api.jobmanagement.api.services.job.v1.IJobM
 @Component
 public class JobManagementService implements IJobManagementService {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final String SERVICE_DISCOVERY_NAME = "butterflyeffect-backend";
 
 	@Autowired(required = true)

@@ -71,6 +71,11 @@ public class MenuService implements Serializable {
 		sortMenus();
 
 		LOGGER.info("Number of menus read: [{}]", menus.size());
+		if (LOGGER.isDebugEnabled()) {
+			for (Menu menu : menus) {
+				LOGGER.debug("menu {}", menu.getLabel());
+			}
+		}
 
 	}
 
