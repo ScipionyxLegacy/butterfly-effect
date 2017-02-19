@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.api.jobmanagement.api.model;
+package com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -24,6 +24,8 @@ public class Job implements Serializable {
 
 	// @Nullable
 	private String description;
+
+	private String instructions;
 
 	// @NotNull
 	private Service service;
@@ -83,6 +85,14 @@ public class Job implements Serializable {
 
 	public void setPriority(Priority priority) {
 		this.priority = priority;
+	}
+
+	public String getInstructions() {
+		return instructions;
+	}
+
+	public void setInstructions(String instructions) {
+		this.instructions = instructions;
 	}
 
 	public String getId() {

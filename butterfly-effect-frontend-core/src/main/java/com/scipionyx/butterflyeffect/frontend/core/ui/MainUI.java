@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top.TopFactory;
 import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.Title;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewDisplay;
 import com.vaadin.server.VaadinRequest;
@@ -45,6 +46,7 @@ import com.vaadin.ui.themes.ValoTheme;
 @SpringViewDisplay
 // @PreserveOnRefresh
 // @Push
+@Title("Butterfly Effect")
 public class MainUI extends UI implements ViewDisplay {
 
 	/**

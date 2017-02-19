@@ -11,8 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestClientException;
 
-import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.Job;
-import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.Priority;
+import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Job;
+import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Priority;
 import com.scipionyx.butterflyeffect.api.jobmanagement.api.services.job.v1.JobManagementRESTClientService;
 
 /**

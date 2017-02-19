@@ -2,18 +2,16 @@ package com.scipionyx.butterflyeffect.backend.jobmanagement;
 
 import javax.jms.ConnectionFactory;
 
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
-import org.springframework.integration.annotation.IntegrationComponentScan;
-import org.springframework.integration.config.EnableIntegration;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.config.JmsListenerContainerFactory;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
 import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * 
@@ -22,11 +20,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @author Renato Mendes
  *
  */
-@EnableDiscoveryClient
-@EnableAsync
-//
-@EnableIntegration
-@IntegrationComponentScan()
+@Configuration
+@EnableBatchProcessing
 public class Application extends AsyncConfigurerSupport {
 
 	/**
@@ -48,7 +43,7 @@ public class Application extends AsyncConfigurerSupport {
 		// message converter
 
 		configurer.configure(factory, connectionFactory);
-		
+
 		factory.setMessageConverter(messageConverter());
 		// You could still override some of Boot's default if necessary.
 		return factory;

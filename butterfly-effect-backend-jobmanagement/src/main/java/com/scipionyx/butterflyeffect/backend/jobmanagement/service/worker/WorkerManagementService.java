@@ -9,7 +9,7 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 
-import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.Worker;
+import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Worker;
 import com.scipionyx.butterflyeffect.api.jobmanagement.api.services.worker.v1.IWorkerManagementService;
 
 /**

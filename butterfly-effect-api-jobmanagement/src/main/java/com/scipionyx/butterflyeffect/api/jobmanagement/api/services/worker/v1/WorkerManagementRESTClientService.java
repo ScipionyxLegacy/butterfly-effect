@@ -8,7 +8,7 @@ import org.springframework.web.client.RestClientException;
 
 import com.scipionyx.butterflyeffect.api.infrastructure.services.RESTService;
 import com.scipionyx.butterflyeffect.api.infrastructure.services.client.AbstractRESTClientService;
-import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.Worker;
+import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Worker;
 
 /**
  * 

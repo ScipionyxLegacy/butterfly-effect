@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.config.server.EnableConfigServer;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * 
@@ -19,6 +20,7 @@ import org.springframework.context.annotation.ComponentScan;
 //
 @EnableConfigServer
 @EnableDiscoveryClient
+@EnableJpaRepositories
 public class BackendApplication {
 
 	/**

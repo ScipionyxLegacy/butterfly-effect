@@ -85,7 +85,15 @@
 		<plugins>
 
 			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.4.12</version>
+				<configuration>
+					<skipDocker>true</skipDocker>
+				</configuration>
+			</plugin>
 
+			<plugin>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-maven-plugin</artifactId>
 				<version>${vaadin.version}</version>
@@ -93,20 +101,19 @@
 					<debugPort>8000</debugPort>
 					<compressTheme>true</compressTheme>
 				</configuration>
-
 			</plugin>
 
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>aspectj-maven-plugin</artifactId>
-				<version>1.9</version>
-				<configuration>
-					<complianceLevel>1.8</complianceLevel>
-					<source>1.8</source>
-					<target>1.8</target>
-					<forceAjcCompile>true</forceAjcCompile>
-				</configuration>
-			</plugin>
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.codehaus.mojo</groupId> -->
+<!-- 				<artifactId>aspectj-maven-plugin</artifactId> -->
+<!-- 				<version>1.9</version> -->
+<!-- 				<configuration> -->
+<!-- 					<complianceLevel>1.8</complianceLevel> -->
+<!-- 					<source>1.8</source> -->
+<!-- 					<target>1.8</target> -->
+<!-- 					<forceAjcCompile>true</forceAjcCompile> -->
+<!-- 				</configuration> -->
+<!-- 			</plugin> -->
 
 		</plugins>
 
@@ -118,7 +125,7 @@
 	<name>Butterfly Effect - Frontend</name>
 
 	<modules>
-		<module>../butterfly-effect-frontend-checkfraud</module>
+		<!-- <module>../butterfly-effect-frontend-checkfraud</module> -->
 		<module>../butterfly-effect-frontend-cluster</module>
 		<module>../butterfly-effect-frontend-configuration</module>
 		<module>../butterfly-effect-frontend-core</module>
@@ -128,7 +135,7 @@
 		<module>../butterfly-effect-frontend-security</module>
 		<module>../butterfly-effect-frontend-servicemanager</module>
 		<module>../butterfly-effect-frontend-sessionmanagement</module>
-		<module>../butterfly-effect-frontend-bootstrap</module>
-		<module>../butterfly-effect-frontend-dist-docker</module>
+		<!-- <module>../butterfly-effect-frontend-bootstrap</module> -->
+		<!-- <module>../butterfly-effect-frontend-dist-docker</module> -->
 	</modules>
 </project>

@@ -11,8 +11,8 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 
-import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.Job;
-import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.Priority;
+import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Job;
+import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Priority;
 import com.scipionyx.butterflyeffect.api.jobmanagement.api.services.job.v1.IJobManagementService;
 
 /**

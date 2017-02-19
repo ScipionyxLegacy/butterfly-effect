@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.web.client.RestClientException;
 
 import com.scipionyx.butterflyeffect.api.infrastructure.services.IService;
-import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.Worker;
+import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Worker;
 
 /**
  * 

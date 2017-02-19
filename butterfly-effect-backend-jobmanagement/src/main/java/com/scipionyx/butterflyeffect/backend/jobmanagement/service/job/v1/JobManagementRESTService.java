@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
 
 import com.scipionyx.butterflyeffect.api.infrastructure.services.server.AbstractRESTServerService;
-import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.Job;
+import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Job;
 import com.scipionyx.butterflyeffect.backend.jobmanagement.service.job.JobManagementService;
 
 /**
