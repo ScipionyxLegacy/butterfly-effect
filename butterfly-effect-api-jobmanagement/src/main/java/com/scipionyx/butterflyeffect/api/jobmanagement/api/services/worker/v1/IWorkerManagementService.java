@@ -14,7 +14,7 @@ import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Work
  * @author Renato Mendes
  *
  */
-public interface IWorkerManagementService extends IService {
+public interface IWorkerManagementService extends IService<Worker> {
 
 	public List<Worker> getAll() throws RestClientException, Exception;
 

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
 
-import com.scipionyx.butterflyeffect.api.infrastructure.services.server.AbstractRESTServerService;
+import com.scipionyx.butterflyeffect.api.infrastructure.services.server.controller.AbstractRestController;
 import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Job;
 import com.scipionyx.butterflyeffect.backend.jobmanagement.service.job.JobManagementService;
 
@@ -23,9 +23,9 @@ import com.scipionyx.butterflyeffect.backend.jobmanagement.service.job.JobManage
  */
 @RestController
 @RequestMapping("REST_SERVICES/scipionyx/jobmanagement/job/v1.0")
-public class JobManagementRESTService extends AbstractRESTServerService<JobManagementService> {
+public class JobController extends AbstractRestController<JobManagementService, Job> {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(JobManagementRESTService.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(JobController.class);
 
 	/**
 	 * 

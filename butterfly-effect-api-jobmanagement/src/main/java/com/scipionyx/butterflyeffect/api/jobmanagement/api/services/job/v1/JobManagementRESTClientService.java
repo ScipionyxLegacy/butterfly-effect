@@ -19,7 +19,7 @@ import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Prio
  */
 @Component
 @RESTService(module = "jobmanagement", subModule = "job", version = "v1.0")
-public class JobManagementRESTClientService extends AbstractRESTClientService implements IJobManagementService {
+public class JobManagementRESTClientService extends AbstractRESTClientService<Job> implements IJobManagementService {
 
 	/**
 	 * 
@@ -64,7 +64,6 @@ public class JobManagementRESTClientService extends AbstractRESTClientService im
 
 	@Override
 	public List<Job> get(Object status, Priority priority) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

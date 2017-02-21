@@ -1,5 +1,7 @@
 package com.scipionyx.butterflyeffect.api.infrastructure.services.client;
 
+import java.lang.reflect.Array;
+import java.lang.reflect.ParameterizedType;
 import java.net.URI;
 import java.util.List;
 import java.util.Random;
@@ -22,7 +24,7 @@ import com.scipionyx.butterflyeffect.api.infrastructure.services.RESTService;
  * @author Renato Mendes
  *
  */
-public abstract class AbstractRESTClientService implements IService {
+public abstract class AbstractRESTClientService<ENTITY> implements IService<ENTITY> {
 
 	/**
 	 * 
@@ -46,18 +48,33 @@ public abstract class AbstractRESTClientService implements IService {
 
 	private String url;
 
+	protected Class<ENTITY> clazz;
+	protected Class<ENTITY[]> arrayClazz;
+
 	/**
 	 * @throws Exception
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	@PostConstruct
 	private final void init() throws Exception {
+
 		RESTService annotation = this.getClass().getAnnotation(RESTService.class);
+
 		if (annotation == null) {
 			throw new Exception("The class [" + this.getClass().getName() + "] should be annotated with RESTService");
 		}
+
 		url = REST_BASE.replaceAll("#module#", annotation.module()).replaceAll("#sub-module#", annotation.subModule())
 				.replaceAll("#version#", annotation.version()).replaceAll("#vendor#", annotation.vendor());
+
+		// This code obtains what is the class that was provided as generic
+		// parameter
+		clazz = (Class<ENTITY>) ((ParameterizedType) this.getClass().getGenericSuperclass())
+				.getActualTypeArguments()[0];
+		// clazz.getComponentType().getArr
+		arrayClazz = (Class<ENTITY[]>) Array.newInstance(clazz, 0).getClass();
+
 	}
 
 	/**

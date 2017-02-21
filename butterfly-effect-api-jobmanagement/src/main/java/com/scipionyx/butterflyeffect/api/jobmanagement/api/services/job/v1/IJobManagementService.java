@@ -15,7 +15,7 @@ import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Prio
  * @author Renato Mendes
  *
  */
-public interface IJobManagementService extends IService {
+public interface IJobManagementService extends IService<Job> {
 
 	/**
 	 * @return

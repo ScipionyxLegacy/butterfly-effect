@@ -15,4 +15,8 @@ public @interface Definition {
 
 	String category();
 
+	String name();
+
+	Class<?> restController();
+
 }

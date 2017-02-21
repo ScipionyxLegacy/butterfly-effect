@@ -10,7 +10,7 @@ import org.springframework.web.client.RestClientException;
  * @author Renato Mendes
  *
  */
-public interface IService extends Serializable {
+public interface IService<ENTITY> extends Serializable {
 
 	public String ping() throws RestClientException, Exception;
 
