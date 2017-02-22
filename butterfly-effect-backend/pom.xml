@@ -66,16 +66,15 @@
 		<name>Scipionyx Software</name>
 	</organization>
 
-
 	<modules>
-		<module>../butterfly-effect-backend-bootstrap</module>
-		<module>../butterfly-effect-backend-checkfraud</module>
+		<module>../butterfly-effect-backend-infrastructure</module>
 		<module>../butterfly-effect-backend-communication</module>
 		<module>../butterfly-effect-backend-configuration</module>
-		<module>../butterfly-effect-backend-dist-docker</module>
 		<module>../butterfly-effect-backend-jobmanagement</module>
 		<module>../butterfly-effect-backend-model</module>
-		<module>../butterfly-effect-backend-stocks</module>
-		<module>../butterfly-effect-backend-infrastructure</module>
+		<module>../butterfly-effect-backend-checkfraud</module>
+		<module>../butterfly-effect-backend-bootstrap</module>
+		<module>../butterfly-effect-backend-dist-docker</module>
 	</modules>
+	
 </project>

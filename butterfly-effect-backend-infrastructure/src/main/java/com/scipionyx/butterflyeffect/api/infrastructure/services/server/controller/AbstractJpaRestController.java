@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestClientException;
@@ -68,13 +69,10 @@ public abstract class AbstractJpaRestController<T extends IService<ENTITY>, ENTI
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(path = "/findAll", method = { RequestMethod.GET, RequestMethod.POST })
-	public final ResponseEntity<Iterable<T>> findAll() throws RestClientException, Exception {
+	public final ResponseEntity<Iterable<ENTITY>> findAll() throws RestClientException, Exception {
 		LOGGER.debug("Health request");
-		if (service instanceof IHasRepository) {
-			CrudRepository<T, Long> repository = ((IHasRepository<T, ENTITY>) service).getRepository();
-			return (new ResponseEntity<>(repository.findAll(), HttpStatus.OK));
-		}
-		return (new ResponseEntity<>(null, HttpStatus.BAD_REQUEST));
+		CrudRepository<ENTITY, Long> repository = ((IHasRepository<ENTITY, ENTITY>) service).getRepository();
+		return (new ResponseEntity<>(repository.findAll(), HttpStatus.OK));
 	}
 
 	/**
@@ -87,29 +85,44 @@ public abstract class AbstractJpaRestController<T extends IService<ENTITY>, ENTI
 	@RequestMapping(path = "/findAllOrderBy", method = { RequestMethod.GET })
 	public final ResponseEntity<List<ENTITY>> findAllOrderBy(String orderBy) throws RestClientException, Exception {
 		LOGGER.debug("findAllOrderBy");
-		if (service instanceof IHasRepository) {
 
-			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 
-			//
-			CriteriaQuery<ENTITY> criteria = criteriaBuilder.createQuery(entityClazz);
+		//
+		CriteriaQuery<ENTITY> criteria = criteriaBuilder.createQuery(entityClazz);
 
-			// define the main class for the criteria
-			Root<ENTITY> from = criteria.from(entityClazz);
+		// define the main class for the criteria
+		Root<ENTITY> from = criteria.from(entityClazz);
 
-			// create the order by - asc
-			Order asc = criteriaBuilder.asc(from.get(orderBy));
+		// create the order by - asc
+		Order asc = criteriaBuilder.asc(from.get(orderBy));
 
-			// Create the query
-			TypedQuery<ENTITY> query = entityManager.createQuery(criteria.select(from).orderBy(asc));
-			query.setHint(QueryHints.READ_ONLY, Boolean.TRUE);
+		// Create the query
+		TypedQuery<ENTITY> query = entityManager.createQuery(criteria.select(from).orderBy(asc));
+		query.setHint(QueryHints.READ_ONLY, Boolean.TRUE);
 
-			// Execute Query
-			List<ENTITY> resultList = query.getResultList();
+		// Execute Query
+		List<ENTITY> resultList = query.getResultList();
 
-			return (new ResponseEntity<>(resultList, HttpStatus.OK));
-		}
-		return (new ResponseEntity<>(null, HttpStatus.BAD_REQUEST));
+		return (new ResponseEntity<>(resultList, HttpStatus.OK));
+
+	}
+
+	/**
+	 * 
+	 * 
+	 * @return
+	 * @throws Exception
+	 * @throws RestClientException
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(path = "/save", method = { RequestMethod.PUT })
+	public final ResponseEntity<ENTITY> save(@RequestBody(required = true) ENTITY entity)
+			throws RestClientException, Exception {
+		LOGGER.debug("save");
+		CrudRepository<ENTITY, Long> repository = ((IHasRepository<ENTITY, ENTITY>) service).getRepository();
+		repository.save(entity);
+		return (new ResponseEntity<>(entity, HttpStatus.OK));
 	}
 
 }
