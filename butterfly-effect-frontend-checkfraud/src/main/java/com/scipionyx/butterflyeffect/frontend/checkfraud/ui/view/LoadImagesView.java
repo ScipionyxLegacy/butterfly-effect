@@ -22,6 +22,7 @@ import com.vaadin.event.dd.DragAndDropEvent;
 import com.vaadin.event.dd.DropHandler;
 import com.vaadin.event.dd.acceptcriteria.AcceptAll;
 import com.vaadin.event.dd.acceptcriteria.AcceptCriterion;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.StreamResource;
@@ -34,6 +35,7 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DragAndDropWrapper;
 import com.vaadin.ui.Embedded;
+import com.vaadin.ui.Grid;
 import com.vaadin.ui.Html5File;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
@@ -58,7 +60,7 @@ import com.vaadin.ui.themes.ValoTheme;
 
 //
 @ViewConfiguration(title = "Check Fraud - Load Images")
-@MenuConfiguration(position = Position.TOP_MAIN, label = "Load Check Images", group = "", order = 1, parent = RootView.VIEW_NAME, icon = FontAwesome.CHECK, roles = {
+@MenuConfiguration(position = Position.TOP_MAIN, label = "Load Check Images", group = "", order = 1, parent = RootView.VIEW_NAME, icon = VaadinIcons.CHECK, roles = {
 		"CHECK_FRAUD" })
 public class LoadImagesView extends AbstractView {
 
@@ -71,7 +73,7 @@ public class LoadImagesView extends AbstractView {
 
 	ProgressBar progress;
 
-	Table resultTable;
+	Grid<?> resultTable;
 
 	VerticalLayout workAreaPanel;
 

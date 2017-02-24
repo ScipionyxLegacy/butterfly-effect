@@ -7,8 +7,8 @@ import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Target;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Page;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
@@ -28,7 +28,7 @@ import com.vaadin.ui.VerticalLayout;
 @UIScope
 //
 @ViewConfiguration(title = "Logoff")
-@MenuConfiguration(position = Position.TOP_RIGHT, label = "Logoff", group = "", order = 99, icon = FontAwesome.SIGN_OUT, parent = RootView.VIEW_NAME, target = Target.DIALOG)
+@MenuConfiguration(position = Position.TOP_RIGHT, label = "Logoff", group = "", order = 99, icon = VaadinIcons.SIGN_OUT, parent = RootView.VIEW_NAME, target = Target.DIALOG)
 public class LogoffView extends AbstractView {
 
 	public static final String VIEW_NAME = "butterfly-effect-frontend-security:logoff";

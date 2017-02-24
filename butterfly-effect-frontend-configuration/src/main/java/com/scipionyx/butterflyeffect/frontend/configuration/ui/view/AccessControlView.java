@@ -29,7 +29,7 @@ import com.scipionyx.butterflyeffect.frontend.model.Menu;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
-import com.vaadin.data.Property;
+import com.vaadin.data.HasValue.ValueChangeEvent;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.spring.access.ViewAccessControl;
@@ -102,22 +102,16 @@ public class AccessControlView extends VerticalLayout implements View, ViewAcces
 	 */
 	private CheckBox createViewCheckbox(String caption, final String viewName) {
 		final CheckBox checkBox = new CheckBox(caption, allowedViews.contains(viewName));
-		checkBox.addValueChangeListener(new Property.ValueChangeListener() {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void valueChange(Property.ValueChangeEvent event) {
-				if (checkBox.getValue()) {
-					allowedViews.add(viewName);
-				} else {
-					allowedViews.remove(viewName);
-				}
-			}
-		});
+		checkBox.addValueChangeListener(event -> changeValue(event, viewName));
 		return checkBox;
+	}
+
+	private void changeValue(ValueChangeEvent<Boolean> event, String viewName) {
+		if (event.getValue()) {
+			allowedViews.add(viewName);
+		} else {
+			allowedViews.remove(viewName);
+		}
 	}
 
 	@Override

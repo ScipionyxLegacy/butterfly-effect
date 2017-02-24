@@ -59,10 +59,6 @@
 
 		<!-- Vaadin -->
 
-		<dependency>
-			<groupId>org.vaadin.addon</groupId>
-			<artifactId>confirmdialog</artifactId>
-		</dependency>
 
 		<!-- more Vaadin Stuff -->
 

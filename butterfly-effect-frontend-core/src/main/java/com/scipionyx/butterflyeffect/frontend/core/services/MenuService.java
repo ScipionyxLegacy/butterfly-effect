@@ -18,8 +18,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
@@ -162,7 +162,7 @@ public class MenuService implements Serializable {
 				menu.setPosition(menuConfiguration.position());
 				menu.setParent(menuConfiguration.parent().equals("") ? null : menuConfiguration.parent());
 				menu.setIcon(
-						menuConfiguration.icon().equals(FontAwesome.YOUTUBE_SQUARE) ? null : menuConfiguration.icon());
+						menuConfiguration.icon().equals(VaadinIcons.YOUTUBE_SQUARE) ? null : menuConfiguration.icon());
 				menu.setRoles(menuConfiguration.roles());
 				menus.add(menu);
 

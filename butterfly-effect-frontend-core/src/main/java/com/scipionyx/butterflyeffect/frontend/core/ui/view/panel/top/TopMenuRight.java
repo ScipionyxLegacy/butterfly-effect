@@ -3,7 +3,7 @@ package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top;
 import java.util.List;
 
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
-import com.vaadin.server.FontAwesome;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -57,7 +57,7 @@ public class TopMenuRight extends MenuBar {
 		}
 
 		MenuItem root = null;
-		if (menu.getIcon() == FontAwesome.YOUTUBE_SQUARE) {
+		if (menu.getIcon() == VaadinIcons.YOUTUBE_SQUARE) {
 			root = this.addItem(menu.getLabel(), command);
 		} else {
 			root = this.addItem(menu.getLabel(), menu.getIcon(), command);
@@ -94,7 +94,7 @@ public class TopMenuRight extends MenuBar {
 
 		MenuItem item = null;
 
-		if (menu.getIcon() == FontAwesome.YOUTUBE_SQUARE)
+		if (menu.getIcon() == VaadinIcons.YOUTUBE_SQUARE)
 			item = root.addItem(menu.getLabel(), command);
 		else
 			item = root.addItem(menu.getLabel(), menu.getIcon(), command);

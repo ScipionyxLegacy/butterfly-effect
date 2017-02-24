@@ -1,6 +1,6 @@
 package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.top;
 
-import com.vaadin.server.FontAwesome;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
@@ -32,7 +32,7 @@ class TopMenuSearch extends HorizontalLayout {
 		//
 		Button searchButton = new Button();
 		searchButton.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-		searchButton.setIcon(FontAwesome.SEARCH);
+		searchButton.setIcon(VaadinIcons.SEARCH);
 
 		this.addComponent(search);
 		this.setComponentAlignment(search, Alignment.MIDDLE_LEFT);

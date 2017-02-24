@@ -43,9 +43,9 @@ public class LoginUI extends UI implements ViewDisplay {
 
 		//
 		TextField userName = new TextField("Username");
-		userName.setRequired(true);
+		userName.setRequiredIndicatorVisible(true);
 		PasswordField password = new PasswordField("Password");
-		password.setRequired(true);
+		password.setRequiredIndicatorVisible(true);
 
 		Button buttonLogin = new Button("Login", new Button.ClickListener() {
 

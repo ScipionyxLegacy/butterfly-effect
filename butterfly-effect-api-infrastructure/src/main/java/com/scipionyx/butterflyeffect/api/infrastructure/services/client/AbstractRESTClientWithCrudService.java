@@ -43,17 +43,20 @@ public abstract class AbstractRESTClientWithCrudService<ENTITY> extends Abstract
 	 * 
 	 * @param id
 	 * @return
+	 * @throws Exception 
 	 */
-	public List<ENTITY> findAllByOrderBy(List<CrudParameter> paramters, String orderBy) {
+	public List<ENTITY> findAllByOrderBy(List<CrudParameter> paramters, String orderBy) throws Exception {
 		HttpEntity<?> entity = new HttpEntity<>(paramters, new HttpHeaders());
 		try {
-			ENTITY[] body = restTemplate.exchange(calculateURI("findAllByOrderBy"), HttpMethod.GET, entity, arrayClazz)
+			UriComponentsBuilder builder = UriComponentsBuilder.fromUri(calculateURI("findAllByOrderBy"))
+					.queryParam("orderBy", orderBy);
+			ENTITY[] body = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, entity, arrayClazz)
 					.getBody();
 			return Arrays.asList(body);
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
-		return null;
 	}
 
 	/**
@@ -94,7 +97,7 @@ public abstract class AbstractRESTClientWithCrudService<ENTITY> extends Abstract
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
 
@@ -109,7 +112,8 @@ public abstract class AbstractRESTClientWithCrudService<ENTITY> extends Abstract
 		HttpEntity<?> entity = new HttpEntity<>(entities, headers);
 
 		try {
-			ENTITY[] body = restTemplate.exchange(calculateURI("saveAll"), HttpMethod.PUT, entity, arrayClazz).getBody();
+			ENTITY[] body = restTemplate.exchange(calculateURI("saveAll"), HttpMethod.PUT, entity, arrayClazz)
+					.getBody();
 			return (Iterable<S>) Arrays.asList(body);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -4,8 +4,8 @@ import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractView;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
@@ -24,7 +24,7 @@ import com.vaadin.ui.VerticalLayout;
 @UIScope
 //
 @ViewConfiguration(title = "Security Configuration")
-@MenuConfiguration(position = Position.TOP_RIGHT, label = "Security", group = "", order = 10, icon = FontAwesome.LOCK, parent = com.scipionyx.butterflyeffect.frontend.configuration.ui.view.RootView.VIEW_NAME)
+@MenuConfiguration(position = Position.TOP_RIGHT, label = "Security", group = "", order = 10, icon = VaadinIcons.LOCK, parent = com.scipionyx.butterflyeffect.frontend.configuration.ui.view.RootView.VIEW_NAME)
 public class ConfigurationRootView extends AbstractView {
 
 	public static final String VIEW_NAME = "butterfly-effect-frontend-security:configuration_root";
@@ -40,8 +40,6 @@ public class ConfigurationRootView extends AbstractView {
 	@Override
 	public void doEnter(ViewChangeEvent event) {
 	}
-
-	
 
 	/**
 	 * 

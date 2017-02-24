@@ -9,8 +9,7 @@ import com.scipionyx.butterflyeffect.model.model.datamodel.Entity;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
-import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
+import com.vaadin.data.Binder;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.shared.ui.window.WindowMode;
 import com.vaadin.spring.annotation.SpringComponent;
@@ -19,19 +18,15 @@ import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TabSheet;
-import com.vaadin.ui.TextArea;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
-import com.vaadin.ui.renderers.NumberRenderer;
-import com.vaadin.ui.renderers.TextRenderer;
 
 /**
  * 
@@ -145,9 +140,9 @@ public class DataSourceConfigurationView extends AbstractDataModelView {
 	 * 
 	 * @param layout
 	 */
-	private Grid doBuildTab(VerticalLayout layout) {
+	private Grid<?> doBuildTab(VerticalLayout layout) {
 		// layout.setMargin(new MarginInfo(true, false, false, false));
-		Grid grid = new Grid();
+		Grid<?> grid = new Grid<>();
 		layout.addComponent(grid);
 		return grid;
 	}
@@ -182,29 +177,30 @@ public class DataSourceConfigurationView extends AbstractDataModelView {
 		FormLayout formLayout = new FormLayout();
 		formLayout.setCaption("Entity Information");
 
-		BeanFieldGroup<Entity> binder = new BeanFieldGroup<>(Entity.class);
-		binder.setItemDataSource(entity);
+		Binder<Entity> binder = new Binder<>(Entity.class);
+		binder.setBean(entity);
 
 		// Name
-		formLayout.addComponent(binder.buildAndBind("Name", "name"));
+		// formLayout.addComponent(binder.buildAndBind("Name", "name"));
 
 		// Description
 		// layout.addComponent(binder.buildAndBind("Description",
 		// "description"));
 
 		// Description
-		formLayout.addComponent(binder.buildAndBind("Description", "description", TextArea.class));
+		// formLayout.addComponent(binder.buildAndBind("Description",
+		// "description", TextArea.class));
 
 		// Label
-		formLayout.addComponent(binder.buildAndBind("Label", "label"));
+		// formLayout.addComponent(binder.buildAndBind("Label", "label"));
 
 		// Class
 
 		// Type
-		formLayout.addComponent(binder.buildAndBind("Type", "type", ComboBox.class));
+		// formLayout.addComponent(binder.buildAndBind("Type", "type",
+		// ComboBox.class));
 
 		// Buffer the form content
-		binder.setBuffered(true);
 
 		//
 		formLayout.addComponent(new Button("Save", new ClickListener() {
@@ -216,12 +212,11 @@ public class DataSourceConfigurationView extends AbstractDataModelView {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				try {
-					binder.commit();
-					Entity entity = binder.getItemDataSource().getBean();
-					// service.put(entity);
+					binder.validate();
+					Entity entity = binder.getBean();
 					Notification.show("Entity Saved", Notification.Type.HUMANIZED_MESSAGE);
 					editEntityDialog.close();
-				} catch (CommitException e) {
+				} catch (Exception e) {
 					if (binder.isValid()) {
 						Notification.show(e.getMessage(), Notification.Type.HUMANIZED_MESSAGE);
 					} else {
@@ -241,19 +236,23 @@ public class DataSourceConfigurationView extends AbstractDataModelView {
 
 		Button addFieldButton = new Button("Add Field");
 
-		Grid grid = new Grid();
+		Grid<?> grid = new Grid<>();
 		grid.setWidthUndefined();
 		grid.setCaption("Fields");
 		grid.setColumnReorderingAllowed(true);
 		grid.setHeightByRows(5);
 
-		grid.setEditorEnabled(true);
+		// grid.setEditorEnabled(true);
 		grid.setSelectionMode(SelectionMode.NONE);
 
-		grid.addColumn("Name", String.class).setRenderer(new TextRenderer()).setExpandRatio(2);
-		grid.addColumn("Description", String.class).setRenderer(new TextRenderer()).setExpandRatio(2);
-		grid.addColumn("Type", String.class).setRenderer(new TextRenderer()).setExpandRatio(2);
-		grid.addColumn("Size", Integer.class).setRenderer(new NumberRenderer()).setExpandRatio(2);
+		// grid.addColumn("Name", String.class).setRenderer(new
+		// TextRenderer()).setExpandRatio(2);
+		// grid.addColumn("Description", String.class).setRenderer(new
+		// TextRenderer()).setExpandRatio(2);
+		// grid.addColumn("Type", String.class).setRenderer(new
+		// TextRenderer()).setExpandRatio(2);
+		// grid.addColumn("Size", Integer.class).setRenderer(new
+		// NumberRenderer()).setExpandRatio(2);
 
 		addFieldButton.addClickListener(new ClickListener() {
 
@@ -264,7 +263,8 @@ public class DataSourceConfigurationView extends AbstractDataModelView {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				grid.addRow("<field name>", "<field description>", "<field type>", 0);
+				// grid.addRow("<field name>", "<field description>", "<field
+				// type>", 0);
 			}
 		});
 

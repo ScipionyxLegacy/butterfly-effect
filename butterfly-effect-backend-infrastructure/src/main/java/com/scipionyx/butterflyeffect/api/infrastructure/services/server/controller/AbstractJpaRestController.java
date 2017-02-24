@@ -22,10 +22,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestClientException;
 
 import com.scipionyx.butterflyeffect.api.infrastructure.services.IHasRepository;
 import com.scipionyx.butterflyeffect.api.infrastructure.services.IService;
+import com.scipionyx.butterflyeffect.api.infrastructure.services.client.CrudParameter;
 
 /**
  * 
@@ -93,6 +95,45 @@ public abstract class AbstractJpaRestController<T extends IService<ENTITY>, ENTI
 
 		// define the main class for the criteria
 		Root<ENTITY> from = criteria.from(entityClazz);
+
+		// create the order by - asc
+		Order asc = criteriaBuilder.asc(from.get(orderBy));
+
+		// Create the query
+		TypedQuery<ENTITY> query = entityManager.createQuery(criteria.select(from).orderBy(asc));
+		query.setHint(QueryHints.READ_ONLY, Boolean.TRUE);
+
+		// Execute Query
+		List<ENTITY> resultList = query.getResultList();
+
+		return (new ResponseEntity<>(resultList, HttpStatus.OK));
+
+	}
+
+	/**
+	 * 
+	 * 
+	 * @return
+	 * @throws Exception
+	 * @throws RestClientException
+	 */
+	@RequestMapping(path = "/findAllByOrderBy", method = { RequestMethod.GET })
+	public final ResponseEntity<List<ENTITY>> findAllByOrderBy(
+			@RequestBody(required = false) List<CrudParameter> paramters, @RequestParam(required = false) String orderBy)
+			throws RestClientException, Exception {
+
+		LOGGER.debug("findAllByOrderBy");
+
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+
+		//
+		CriteriaQuery<ENTITY> criteria = criteriaBuilder.createQuery(entityClazz);
+
+		// define the main class for the criteria
+		Root<ENTITY> from = criteria.from(entityClazz);
+
+		//
+		// Predicate predicate = criteriaBuilder.and(restrictions)
 
 		// create the order by - asc
 		Order asc = criteriaBuilder.asc(from.get(orderBy));

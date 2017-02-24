@@ -6,7 +6,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.vaadin.server.FontAwesome;
+import com.vaadin.icons.VaadinIcons;
 
 /**
  * 
@@ -79,7 +79,7 @@ public @interface MenuConfiguration {
 	 * 
 	 * @return
 	 */
-	public FontAwesome icon() default FontAwesome.YOUTUBE_SQUARE;
+	public VaadinIcons icon() default VaadinIcons.YOUTUBE_SQUARE;
 
 	/**
 	 * 

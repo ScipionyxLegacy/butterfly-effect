@@ -4,8 +4,8 @@ import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractView;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
@@ -25,7 +25,7 @@ import com.vaadin.ui.VerticalLayout;
 @UIScope
 //
 @ViewConfiguration(title = "Job Management")
-@MenuConfiguration(position = Position.TOP_RIGHT, label = "Job Management", group = "", order = 1, parent = com.scipionyx.butterflyeffect.frontend.configuration.ui.view.RootView.VIEW_NAME, icon = FontAwesome.BRIEFCASE, roles = {
+@MenuConfiguration(position = Position.TOP_RIGHT, label = "Job Management", group = "", order = 1, parent = com.scipionyx.butterflyeffect.frontend.configuration.ui.view.RootView.VIEW_NAME, icon = VaadinIcons.BRIEFCASE, roles = {
 		"ADMIN" })
 public class RootView extends AbstractView {
 

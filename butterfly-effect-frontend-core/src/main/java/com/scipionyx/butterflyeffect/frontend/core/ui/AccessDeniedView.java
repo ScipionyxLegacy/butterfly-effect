@@ -4,7 +4,6 @@ import javax.annotation.PostConstruct;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
@@ -32,7 +31,7 @@ public class AccessDeniedView extends VerticalLayout implements View {
 		message = new Label();
 		addComponent(message);
 		message.addStyleName(ValoTheme.LABEL_FAILURE);
-		message.setContentMode(ContentMode.HTML);
+		message.setContentMode(com.vaadin.shared.ui.ContentMode.HTML);
 	}
 
 	/**

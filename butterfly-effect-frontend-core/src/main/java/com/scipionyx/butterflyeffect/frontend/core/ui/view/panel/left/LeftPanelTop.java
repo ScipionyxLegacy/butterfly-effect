@@ -2,7 +2,7 @@ package com.scipionyx.butterflyeffect.frontend.core.ui.view.panel.left;
 
 import com.scipionyx.butterflyeffect.frontend.model.Title;
 import com.scipionyx.butterflyeffect.frontend.model.ViewConfigurationInformation;
-import com.vaadin.server.FontAwesome;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -54,9 +54,9 @@ class LeftPanelTop extends VerticalLayout {
 		image = new Label();
 		// image.setContentMode(ContentMode.HTML);
 		if (information.getLeftTitle() != null && information.getLeftTitle().getIcon() != null) {
-			image.setValue(((FontAwesome) information.getLeftTitle().getIcon()).getHtml());
+			image.setValue(((VaadinIcons) information.getLeftTitle().getIcon()).getHtml());
 		} else {
-			image.setValue(FontAwesome.QUESTION_CIRCLE.getHtml());
+			image.setValue(VaadinIcons.QUESTION_CIRCLE.getHtml());
 		}
 		wrapper.addComponent(image);
 		wrapper.setComponentAlignment(image, Alignment.TOP_CENTER);

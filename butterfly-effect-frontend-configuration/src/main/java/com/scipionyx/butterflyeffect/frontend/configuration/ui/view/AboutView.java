@@ -15,10 +15,11 @@
  */
 package com.scipionyx.butterflyeffect.frontend.configuration.ui.view;
 
+import java.io.Serializable;
 import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.UnknownHostException;
-import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -34,22 +35,19 @@ import com.scipionyx.butterflyeffect.frontend.core.ui.view.common.AbstractView;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
-import com.vaadin.data.Item;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
-import com.vaadin.ui.AbstractSelect;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Grid;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.Panel;
-import com.vaadin.ui.Table;
-import com.vaadin.ui.Table.Align;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -77,7 +75,7 @@ public class AboutView extends AbstractView {
 
 	public static final String VIEW_NAME = "butterfly-effect-frontend-system:about";
 
-	private Table tableFrontEndInformation;
+	private Grid<GridProperty<?>> tableFrontEndInformation;
 
 	private GridLayout backendLayout;
 
@@ -111,11 +109,11 @@ public class AboutView extends AbstractView {
 	public void doBuildWorkArea(VerticalLayout workAreaPanel) throws Exception {
 
 		//
-		tableFrontEndInformation = new Table("Frontend Information");
-		tableFrontEndInformation.addContainerProperty("Property", String.class, null);
-		tableFrontEndInformation.addContainerProperty("Value", String.class, null);
-		tableFrontEndInformation.addContainerProperty("Description", String.class, null);
-		tableFrontEndInformation.setColumnAlignment("Value", Align.RIGHT);
+		tableFrontEndInformation = new Grid<>("Frontend Information");
+		tableFrontEndInformation.addColumn(GridProperty::getName).setCaption("Property");
+		tableFrontEndInformation.addColumn(GridProperty::getValue).setCaption("Value");
+		tableFrontEndInformation.addColumn(GridProperty::getDescription).setCaption("Description");
+
 		workAreaPanel.addComponent(tableFrontEndInformation);
 
 		//
@@ -134,33 +132,37 @@ public class AboutView extends AbstractView {
 	@SuppressWarnings("deprecation")
 	private void loadFrontEndInformation(boolean loadData) throws UnknownHostException {
 
-		tableFrontEndInformation.removeAllItems();
+		// Remove all before adding
+		tableFrontEndInformation.setItems(new ArrayList<>());
 
 		if (!loadData)
 			return;
 
+		List<GridProperty<?>> items = new ArrayList<>();
+
 		// Server Ip Address
-		addItem("Server Ip 4 Host Address", Inet4Address.getLocalHost().getHostAddress(), tableFrontEndInformation);
-		addItem("Server Ip 6 Host Address", Inet6Address.getLocalHost().getHostAddress(), tableFrontEndInformation);
+		items.add(
+				new GridProperty<String>("Server Ip 4 Host Address", Inet4Address.getLocalHost().getHostAddress(), ""));
+		items.add(
+				new GridProperty<String>("Server Ip 6 Host Address", Inet6Address.getLocalHost().getHostAddress(), ""));
 		// Server Id
 
 		// Server Memory
-		addItem("Free Memory", Runtime.getRuntime().freeMemory(), "", tableFrontEndInformation);
-		addItem("Max Memory", Runtime.getRuntime().maxMemory(), "", tableFrontEndInformation);
-		addItem("Total Memory", Runtime.getRuntime().totalMemory(), "", tableFrontEndInformation);
+		items.add(new GridProperty<Long>("Free Memory", Runtime.getRuntime().freeMemory(), ""));
+		items.add(new GridProperty<Long>("Max Memory", Runtime.getRuntime().maxMemory(), ""));
+		items.add(new GridProperty<Long>("Total Memory", Runtime.getRuntime().totalMemory(), ""));
 		// Server
-		addItem("Availabe Processors", Runtime.getRuntime().availableProcessors() + "", tableFrontEndInformation);
+		items.add(new GridProperty<String>("Availabe Processors", Runtime.getRuntime().availableProcessors() + "", ""));
 
 		// Session
-		addItem("Session Id", VaadinSession.getCurrent().getSession().getId(), tableFrontEndInformation);
-		addItem("Session CreationTime",
-				(new Date(VaadinSession.getCurrent().getSession().getCreationTime()).toGMTString()),
-				tableFrontEndInformation);
-		addItem("Session Last Access Time",
-				(new Date(VaadinSession.getCurrent().getSession().getLastAccessedTime()).toGMTString()),
-				tableFrontEndInformation);
+		items.add(new GridProperty<String>("Session Id", VaadinSession.getCurrent().getSession().getId(), ""));
+		items.add(new GridProperty<String>("Session CreationTime",
+				(new Date(VaadinSession.getCurrent().getSession().getCreationTime()).toGMTString()), ""));
+		items.add(new GridProperty<String>("Session Last Access Time",
+				(new Date(VaadinSession.getCurrent().getSession().getLastAccessedTime()).toGMTString()), ""));
 
-		addItem("User", SecurityContextHolder.getContext().getAuthentication().getName(), tableFrontEndInformation);
+		items.add(
+				new GridProperty<String>("User", SecurityContextHolder.getContext().getAuthentication().getName(), ""));
 		Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication()
 				.getAuthorities();
 		String roles = null;
@@ -170,8 +172,10 @@ public class AboutView extends AbstractView {
 			else
 				roles = roles + "," + grantedAuthority.getAuthority();
 		}
-		addItem("Roles", roles, tableFrontEndInformation);
-		addItem("Client Ip", Page.getCurrent().getWebBrowser().getAddress(), tableFrontEndInformation);
+		items.add(new GridProperty<String>("Roles", roles, ""));
+		items.add(new GridProperty<String>("Client Ip", Page.getCurrent().getWebBrowser().getAddress(), ""));
+
+		tableFrontEndInformation.setItems(items);
 
 	}
 
@@ -207,27 +211,27 @@ public class AboutView extends AbstractView {
 
 		layout.removeAllComponents();
 
-		if (justclean)
-			return;
-
 		int i = 0;
 		for (ServiceInstance instance : instancesBackend) {
 
-			Table tableCluster = new Table("Node [" + i + "]");
+			Grid<GridProperty<?>> tableCluster = new Grid<>("Node [" + i + "]");
 			tableCluster.addStyleName(ValoTheme.TABLE_COMPACT);
 			tableCluster.setSizeFull();
 
-			tableCluster.addContainerProperty("Property", String.class, null);
-			tableCluster.addContainerProperty("Value", String.class, null);
+			tableCluster.addColumn(GridProperty::getName).setCaption("Property");
+			tableCluster.addColumn(GridProperty::getValue).setCaption("Value");
 
-			addItem("Host", instance.getHost(), tableCluster);
-			addItem("Service Id", instance.getServiceId(), tableCluster);
-			addItem("Port", instance.getPort() + "", tableCluster);
-			addItem("Uri", instance.getUri().toString(), tableCluster);
+			List<GridProperty<?>> list = new ArrayList<>();
+			list.add(new GridProperty<>("Host", instance.getHost()));
+			list.add(new GridProperty<>("Service Id", instance.getServiceId()));
+			list.add(new GridProperty<>("Port", instance.getPort()));
+			list.add(new GridProperty<>("Uri", instance.getUri()));
 
 			for (String key : instance.getMetadata().keySet()) {
-				addItem(key, instance.getMetadata().get(key), tableCluster);
+				list.add(new GridProperty<>("Metadata[" + key + "]", instance.getMetadata().get(key)));
 			}
+			
+			tableCluster.setItems(list);
 
 			layout.addComponent(tableCluster);
 
@@ -239,28 +243,62 @@ public class AboutView extends AbstractView {
 
 	/**
 	 * 
-	 * @param property
-	 * @param value
-	 * @param table
+	 * @author Renato Mendes
+	 *
 	 */
-	@SuppressWarnings("unchecked")
-	private void addItem(String property, String value, AbstractSelect table) {
-		Object newItemId = table.addItem();
-		Item row1 = table.getItem(newItemId);
-		row1.getItemProperty("Property").setValue(property);
-		row1.getItemProperty("Value").setValue(value);
-	}
+	public class GridProperty<TYPE> implements Serializable {
 
-	/**
-	 * 
-	 * @param property
-	 * @param value
-	 * @param description
-	 * @param table
-	 */
-	private void addItem(String property, long value, String description, AbstractSelect table) {
-		DecimalFormat format = new DecimalFormat("###,###.###");
-		addItem(property, format.format(value), table);
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		private String name;
+		private TYPE value;
+		private String description;
+
+		public GridProperty() {
+			super();
+		}
+
+		public GridProperty(String name, TYPE value) {
+			super();
+			this.name = name;
+			this.value = value;
+			this.description = "";
+		}
+
+		public GridProperty(String name, TYPE value, String description) {
+			super();
+			this.name = name;
+			this.value = value;
+			this.description = description;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public TYPE getValue() {
+			return value;
+		}
+
+		public void setValue(TYPE value) {
+			this.value = value;
+		}
+
+		public String getDescription() {
+			return description;
+		}
+
+		public void setDescription(String description) {
+			this.description = description;
+		}
+
 	}
 
 }

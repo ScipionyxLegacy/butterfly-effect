@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.scipionyx.butterflyeffect.frontend.model.Menu;
 import com.scipionyx.butterflyeffect.ui.view.MenuConfiguration.Position;
-import com.vaadin.server.FontAwesome;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -61,7 +61,7 @@ class TopMenuBar extends MenuBar {
 
 				if (hasChildren) {
 					root = this.addItem(menu.getLabel(), menu.getIcon(), null);
-					root.addItem("Overview", FontAwesome.ARROWS, command);
+					root.addItem("Overview", VaadinIcons.ARROWS, command);
 					addChildren(root, menu, list);
 				} else {
 					root = this.addItem(menu.getLabel(), menu.getIcon(), command);
