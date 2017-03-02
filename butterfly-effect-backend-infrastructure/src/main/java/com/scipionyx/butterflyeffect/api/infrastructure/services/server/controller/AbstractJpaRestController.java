@@ -11,8 +11,10 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.collections.map.MultiValueMap;
 import org.hibernate.annotations.QueryHints;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +29,6 @@ import org.springframework.web.client.RestClientException;
 
 import com.scipionyx.butterflyeffect.api.infrastructure.services.IHasRepository;
 import com.scipionyx.butterflyeffect.api.infrastructure.services.IService;
-import com.scipionyx.butterflyeffect.api.infrastructure.services.client.CrudParameter;
 
 /**
  * 
@@ -117,9 +118,9 @@ public abstract class AbstractJpaRestController<T extends IService<ENTITY>, ENTI
 	 * @throws Exception
 	 * @throws RestClientException
 	 */
-	@RequestMapping(path = "/findAllByOrderBy", method = { RequestMethod.GET })
+	@RequestMapping(path = "/findAllByOrderBy", method = { RequestMethod.POST, RequestMethod.GET })
 	public final ResponseEntity<List<ENTITY>> findAllByOrderBy(
-			@RequestBody(required = false) List<CrudParameter> paramters, @RequestParam(required = false) String orderBy)
+			@RequestBody(required = true) org.springframework.util.MultiValueMap<String, Object> parameters)
 			throws RestClientException, Exception {
 
 		LOGGER.debug("findAllByOrderBy");
@@ -132,14 +133,28 @@ public abstract class AbstractJpaRestController<T extends IService<ENTITY>, ENTI
 		// define the main class for the criteria
 		Root<ENTITY> from = criteria.from(entityClazz);
 
-		//
-		// Predicate predicate = criteriaBuilder.and(restrictions)
+		// Parameters
+		CriteriaQuery<ENTITY> select = criteria.select(from);
 
-		// create the order by - asc
-		Order asc = criteriaBuilder.asc(from.get(orderBy));
+		// Order By
+		if (parameters.containsKey("orderBy")) {
+			// create the order by - asc
+			Object orderBy = parameters.remove("orderBy").get(0);
+			Order asc = criteriaBuilder.asc(from.get((String) orderBy));
+			select = select.orderBy(asc);
+		}
+
+		// Parameters
+		if (parameters.size() > 0) {
+			for (String key : parameters.keySet()) {
+				Object value = parameters.remove(key).get(0);
+				Predicate equal = criteriaBuilder.equal(from.get(key), value);
+				select = select.where(equal);
+			}
+		}
 
 		// Create the query
-		TypedQuery<ENTITY> query = entityManager.createQuery(criteria.select(from).orderBy(asc));
+		TypedQuery<ENTITY> query = entityManager.createQuery(select);
 		query.setHint(QueryHints.READ_ONLY, Boolean.TRUE);
 
 		// Execute Query
@@ -162,8 +177,39 @@ public abstract class AbstractJpaRestController<T extends IService<ENTITY>, ENTI
 			throws RestClientException, Exception {
 		LOGGER.debug("save");
 		CrudRepository<ENTITY, Long> repository = ((IHasRepository<ENTITY, ENTITY>) service).getRepository();
-		repository.save(entity);
-		return (new ResponseEntity<>(entity, HttpStatus.OK));
+		ENTITY persisted;
+		try {
+			persisted = repository.save(entity);
+			return (new ResponseEntity<>(persisted, HttpStatus.OK));
+		} catch (Exception e) {
+			e.printStackTrace();
+			MultiValueMap errors = new MultiValueMap();
+			errors.put("ERROR", e.getMessage());
+			return (new ResponseEntity<>(null, HttpStatus.BAD_REQUEST));
+		}
+
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 * @throws RestClientException
+	 * @throws Exception
+	 */
+	@RequestMapping(path = "/delete", method = { RequestMethod.DELETE })
+	public final ResponseEntity<String> delete(@RequestParam(required = true) Long id)
+			throws RestClientException, Exception {
+		LOGGER.debug("delete, paramId=", id);
+		@SuppressWarnings("unchecked")
+		CrudRepository<ENTITY, Long> repository = ((IHasRepository<ENTITY, ENTITY>) service).getRepository();
+		try {
+			repository.delete(id);
+			return (new ResponseEntity<>("Ok", HttpStatus.OK));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return (new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST));
+		}
 	}
 
 }

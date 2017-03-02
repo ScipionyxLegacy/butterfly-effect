@@ -8,6 +8,8 @@ import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /**
@@ -43,16 +45,23 @@ public abstract class AbstractRESTClientWithCrudService<ENTITY> extends Abstract
 	 * 
 	 * @param id
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	public List<ENTITY> findAllByOrderBy(List<CrudParameter> paramters, String orderBy) throws Exception {
-		HttpEntity<?> entity = new HttpEntity<>(paramters, new HttpHeaders());
+	public List<ENTITY> findAllByOrderBy(MultiValueMap<String, Object> map, String orderBy) throws Exception {
 		try {
-			UriComponentsBuilder builder = UriComponentsBuilder.fromUri(calculateURI("findAllByOrderBy"))
-					.queryParam("orderBy", orderBy);
-			ENTITY[] body = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, entity, arrayClazz)
+
+			map.add("orderBy", orderBy);
+
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+			final HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(map, headers);
+
+			ENTITY[] body = restTemplate.exchange(calculateURI("findAllByOrderBy"), HttpMethod.POST, entity, arrayClazz)
 					.getBody();
+
 			return Arrays.asList(body);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -185,8 +194,12 @@ public abstract class AbstractRESTClientWithCrudService<ENTITY> extends Abstract
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-
+		try {
+			UriComponentsBuilder builder = UriComponentsBuilder.fromUri(calculateURI("delete")).queryParam("id", id);
+			restTemplate.delete(builder.build().toUriString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
