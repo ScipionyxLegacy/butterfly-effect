@@ -6,7 +6,10 @@ import java.io.Serializable;
  * 
  * @author rmendes
  *
+ * @deprecated - use maps
+ *
  */
+@Deprecated
 public class CrudParameter implements Serializable {
 
 	/**

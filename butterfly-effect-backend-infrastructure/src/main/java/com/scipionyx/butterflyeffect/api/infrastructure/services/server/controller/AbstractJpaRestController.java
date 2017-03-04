@@ -3,6 +3,7 @@ package com.scipionyx.butterflyeffect.api.infrastructure.services.server.control
 import java.lang.reflect.Array;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
@@ -13,20 +14,22 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.collections.map.MultiValueMap;
 import org.hibernate.annotations.QueryHints;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestClientException;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scipionyx.butterflyeffect.api.infrastructure.services.IHasRepository;
 import com.scipionyx.butterflyeffect.api.infrastructure.services.IService;
 
@@ -118,12 +121,14 @@ public abstract class AbstractJpaRestController<T extends IService<ENTITY>, ENTI
 	 * @throws Exception
 	 * @throws RestClientException
 	 */
-	@RequestMapping(path = "/findAllByOrderBy", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(path = "/findAllByOrderBy", method = { RequestMethod.PUT })
 	public final ResponseEntity<List<ENTITY>> findAllByOrderBy(
-			@RequestBody(required = true) org.springframework.util.MultiValueMap<String, Object> parameters)
+			@RequestBody(required = true) Map<String, Object> parameters, HttpServletRequest request)
 			throws RestClientException, Exception {
 
 		LOGGER.debug("findAllByOrderBy");
+
+		// = (LinkedMultiValueMap<String, Object>) object;
 
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 
@@ -139,17 +144,32 @@ public abstract class AbstractJpaRestController<T extends IService<ENTITY>, ENTI
 		// Order By
 		if (parameters.containsKey("orderBy")) {
 			// create the order by - asc
-			Object orderBy = parameters.remove("orderBy").get(0);
+			Object orderBy = parameters.remove("orderBy");
 			Order asc = criteriaBuilder.asc(from.get((String) orderBy));
 			select = select.orderBy(asc);
 		}
 
+		//
+		ObjectMapper mapper = new ObjectMapper();
+
 		// Parameters
 		if (parameters.size() > 0) {
 			for (String key : parameters.keySet()) {
-				Object value = parameters.remove(key).get(0);
-				Predicate equal = criteriaBuilder.equal(from.get(key), value);
+
+				Object readValue = null;
+
+				Class<?> clazzName = Class.forName(request.getHeader(key));
+
+				if (clazzName.equals(String.class)) {
+					readValue = parameters.get(key);
+				} else {
+					readValue = mapper.convertValue(parameters.remove(key), clazzName);
+				}
+
+				Predicate equal = criteriaBuilder.equal(from.get(key), readValue);
+
 				select = select.where(equal);
+
 			}
 		}
 
@@ -183,8 +203,6 @@ public abstract class AbstractJpaRestController<T extends IService<ENTITY>, ENTI
 			return (new ResponseEntity<>(persisted, HttpStatus.OK));
 		} catch (Exception e) {
 			e.printStackTrace();
-			MultiValueMap errors = new MultiValueMap();
-			errors.put("ERROR", e.getMessage());
 			return (new ResponseEntity<>(null, HttpStatus.BAD_REQUEST));
 		}
 
@@ -209,6 +227,26 @@ public abstract class AbstractJpaRestController<T extends IService<ENTITY>, ENTI
 		} catch (Exception e) {
 			e.printStackTrace();
 			return (new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST));
+		}
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 * @throws RestClientException
+	 * @throws Exception
+	 */
+	@RequestMapping(path = "/findOne/{id}", method = { RequestMethod.GET })
+	public final ResponseEntity<ENTITY> findOne(@PathVariable Long id) throws RestClientException, Exception {
+		LOGGER.debug("findOne, paramId=", id);
+		@SuppressWarnings("unchecked")
+		CrudRepository<ENTITY, Long> repository = ((IHasRepository<ENTITY, ENTITY>) service).getRepository();
+		try {
+			return (new ResponseEntity<>(repository.findOne(id), HttpStatus.OK));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return (new ResponseEntity<>(null, HttpStatus.BAD_REQUEST));
 		}
 	}
 

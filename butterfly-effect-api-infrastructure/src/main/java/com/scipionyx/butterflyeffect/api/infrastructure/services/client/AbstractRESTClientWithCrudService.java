@@ -1,15 +1,20 @@
 package com.scipionyx.butterflyeffect.api.infrastructure.services.client;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.util.MultiValueMap;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /**
@@ -43,21 +48,72 @@ public abstract class AbstractRESTClientWithCrudService<ENTITY> extends Abstract
 
 	/**
 	 * 
+	 * @param filter
+	 * @return
+	 * @throws Exception
+	 */
+	public ENTITY findOne(Optional<ENTITY> filter) throws Exception {
+
+		if (!filter.isPresent()) {
+			List<ENTITY> findAll = findAll();
+			return findAll.get(0);
+		}
+
+		ENTITY entity = filter.get();
+		Map<String, Object> map = new HashMap<>();
+		map.put("", entity);
+		findOneBy(map);
+
+		return null;
+	}
+
+	/**
+	 * 
 	 * @param id
 	 * @return
 	 * @throws Exception
 	 */
-	public List<ENTITY> findAllByOrderBy(MultiValueMap<String, Object> map, String orderBy) throws Exception {
+	public ENTITY findOneBy(Map<String, Object> map) throws Exception {
 		try {
 
-			map.add("orderBy", orderBy);
+			HttpHeaders headers = new HttpHeaders();
+
+			for (Entry<String, Object> entry : map.entrySet()) {
+				headers.add(entry.getKey(), entry.getValue().getClass().getName());
+			}
+
+			final HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map, headers);
+
+			ENTITY body = restTemplate.exchange(calculateURI("findOne"), HttpMethod.PUT, entity, clazz).getBody();
+
+			return body;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public List<ENTITY> findAllByOrderBy(Map<String, Object> map, String orderBy) throws Exception {
+		try {
 
 			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-			final HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(map, headers);
+			for (Entry<String, Object> entry : map.entrySet()) {
+				headers.add(entry.getKey(), entry.getValue().getClass().getName());
+			}
 
-			ENTITY[] body = restTemplate.exchange(calculateURI("findAllByOrderBy"), HttpMethod.POST, entity, arrayClazz)
+			headers.add("orderBy", orderBy);
+
+			final HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map, headers);
+
+			ENTITY[] body = restTemplate.exchange(calculateURI("findAllByOrderBy"), HttpMethod.PUT, entity, arrayClazz)
 					.getBody();
 
 			return Arrays.asList(body);
@@ -135,12 +191,29 @@ public abstract class AbstractRESTClientWithCrudService<ENTITY> extends Abstract
 	 */
 	@Override
 	public ENTITY findOne(Long id) {
-		HttpEntity<?> entity = new HttpEntity<>(id, new HttpHeaders());
+
+		//
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+
+		//
+		HttpEntity<?> entity = new HttpEntity<>(id, headers);
+
 		try {
-			return restTemplate.exchange(calculateURI("findOne"), HttpMethod.GET, entity, clazz).getBody();
+
+			ResponseEntity<ENTITY> exchange = restTemplate.exchange(calculateURI("findOne").toString() + "/{id}",
+					HttpMethod.GET, entity, clazz, id);
+
+			if (exchange.getStatusCode().equals(HttpStatus.OK)) {
+				return exchange.getBody();
+			} else {
+				return null;
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		return null;
 	}
 
@@ -149,6 +222,7 @@ public abstract class AbstractRESTClientWithCrudService<ENTITY> extends Abstract
 	 * @param id
 	 * @return
 	 */
+	@Deprecated
 	public ENTITY findOneBy(CrudParameter parameter) {
 		HttpEntity<?> entity = new HttpEntity<>(parameter, new HttpHeaders());
 		try {
@@ -164,6 +238,7 @@ public abstract class AbstractRESTClientWithCrudService<ENTITY> extends Abstract
 	 * @param id
 	 * @return
 	 */
+	@Deprecated
 	public ENTITY findOneBy(List<CrudParameter> parameter) {
 		HttpEntity<?> entity = new HttpEntity<>(parameter, new HttpHeaders());
 		try {
