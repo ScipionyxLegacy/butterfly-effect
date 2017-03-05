@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 
-import com.scipionyx.butterflyeffect.api.infrastructure.services.RESTService;
 import com.scipionyx.butterflyeffect.api.infrastructure.services.client.AbstractRESTClientService;
+import com.scipionyx.butterflyeffect.api.infrastructure.services.server.RESTService;
 import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Job;
 import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Priority;
 

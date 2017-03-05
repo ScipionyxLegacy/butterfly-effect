@@ -16,8 +16,8 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import com.scipionyx.butterflyeffect.api.infrastructure.services.IService;
-import com.scipionyx.butterflyeffect.api.infrastructure.services.RESTService;
+import com.scipionyx.butterflyeffect.api.infrastructure.services.server.IService;
+import com.scipionyx.butterflyeffect.api.infrastructure.services.server.RESTService;
 
 /**
  * 

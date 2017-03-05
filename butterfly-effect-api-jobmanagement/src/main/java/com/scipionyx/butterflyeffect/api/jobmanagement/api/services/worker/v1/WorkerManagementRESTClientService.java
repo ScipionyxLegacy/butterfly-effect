@@ -2,8 +2,8 @@ package com.scipionyx.butterflyeffect.api.jobmanagement.api.services.worker.v1;
 
 import org.springframework.stereotype.Component;
 
-import com.scipionyx.butterflyeffect.api.infrastructure.services.RESTService;
 import com.scipionyx.butterflyeffect.api.infrastructure.services.client.AbstractRESTClientWithCrudService;
+import com.scipionyx.butterflyeffect.api.infrastructure.services.server.RESTService;
 import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Worker;
 
 /**

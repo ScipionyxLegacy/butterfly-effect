@@ -7,10 +7,12 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 
+import com.scipionyx.butterflyeffect.api.infrastructure.services.server.IRepositoryService;
 import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Job;
 import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Priority;
 import com.scipionyx.butterflyeffect.api.jobmanagement.api.services.job.v1.IJobManagementService;
@@ -23,7 +25,7 @@ import com.scipionyx.butterflyeffect.api.jobmanagement.api.services.job.v1.IJobM
  *
  */
 @Component
-public class JobManagementService implements IJobManagementService {
+public class JobManagementService implements IJobManagementService, IRepositoryService<Job> {
 
 	/**
 	 * 
@@ -106,6 +108,12 @@ public class JobManagementService implements IJobManagementService {
 
 	@Override
 	public List<Job> get(Object status, Priority priority) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CrudRepository<Job, Long> getRepository() {
 		// TODO Auto-generated method stub
 		return null;
 	}

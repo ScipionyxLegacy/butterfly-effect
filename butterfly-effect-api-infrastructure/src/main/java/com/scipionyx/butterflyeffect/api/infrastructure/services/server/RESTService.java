@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.api.infrastructure.services;
+package com.scipionyx.butterflyeffect.api.infrastructure.services.server;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestClientException;
 
-import com.scipionyx.butterflyeffect.api.infrastructure.services.IService;
+import com.scipionyx.butterflyeffect.api.infrastructure.services.server.IRepositoryService;
 
 /**
  * 
@@ -20,7 +20,7 @@ import com.scipionyx.butterflyeffect.api.infrastructure.services.IService;
  * @param <E>
  *            Entity
  */
-public abstract class AbstractRestController<T extends IService<ENTITY>, ENTITY> {
+public abstract class AbstractRestController<T extends IRepositoryService<ENTITY>, ENTITY> {
 
 	protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractRestController.class);
 

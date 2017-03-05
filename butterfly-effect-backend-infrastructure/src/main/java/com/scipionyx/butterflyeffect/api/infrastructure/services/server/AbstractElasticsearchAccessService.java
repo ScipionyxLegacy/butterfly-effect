@@ -1,7 +1,7 @@
 package com.scipionyx.butterflyeffect.api.infrastructure.services.server;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.web.client.RestClientException;
 
 /**
@@ -14,7 +14,8 @@ import org.springframework.web.client.RestClientException;
  * @param <ENTITY>
  * @param <REPOSITORY>
  */
-public abstract class AbstractDataAccessService<ENTITY, REPOSITORY> extends AbstractAccessService<ENTITY, REPOSITORY> {
+public abstract class AbstractElasticsearchAccessService<ENTITY, REPOSITORY>
+		implements IService<ENTITY>, IRepositoryService<ENTITY> {
 
 	/**
 	 * 
@@ -22,20 +23,28 @@ public abstract class AbstractDataAccessService<ENTITY, REPOSITORY> extends Abst
 	private static final long serialVersionUID = 1L;
 
 	@Autowired(required = true)
-	private CrudRepository<ENTITY, Long> repository;
+	private ElasticsearchRepository<ENTITY, Long> repository;
 
 	/**
 	 * 
 	 */
 	@Override
-	public String doPing() throws RestClientException, Exception {
+	public String ping() throws RestClientException, Exception {
 		return "I'm good, and what about u ? " + (repository != null);
 	}
 
 	/**
 	 * 
 	 */
-	public CrudRepository<ENTITY, Long> getRepository() {
+	@Override
+	public String health() throws RestClientException, Exception {
+		return "ok";
+	}
+
+	/**
+	 * 
+	 */
+	public ElasticsearchRepository<ENTITY, Long> getRepository() {
 		return repository;
 	}
 

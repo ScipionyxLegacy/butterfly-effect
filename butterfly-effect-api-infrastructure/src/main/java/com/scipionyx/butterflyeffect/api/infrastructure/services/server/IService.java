@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.api.infrastructure.services;
+package com.scipionyx.butterflyeffect.api.infrastructure.services.server;
 
 import java.io.Serializable;
 

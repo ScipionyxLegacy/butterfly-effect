@@ -2,21 +2,13 @@ package com.scipionyx.butterflyeffect.api.infrastructure.services.server.control
 
 import java.lang.reflect.Array;
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Order;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.annotations.QueryHints;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.repository.CrudRepository;
@@ -29,26 +21,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestClientException;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scipionyx.butterflyeffect.api.infrastructure.services.server.IRepositoryService;
-import com.scipionyx.butterflyeffect.api.infrastructure.services.server.IService;
 
 /**
  * 
- * @author rmendes
+ * @author Renato Mendes
  *
  * @param <T>
  *            Service
  * @param <E>
  *            Entity
  */
-public abstract class AbstractJpaRestController<T extends IService<ENTITY>, ENTITY>
+public abstract class AbstractElasticsearchRestController<T extends IRepositoryService<ENTITY>, ENTITY>
 		extends AbstractRestController<IRepositoryService<ENTITY>, ENTITY> {
 
-	protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractJpaRestController.class);
-
-	@PersistenceContext()
-	protected EntityManager entityManager;
+	protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractElasticsearchRestController.class);
 
 	private Class<ENTITY> entityClazz;
 
@@ -90,26 +77,7 @@ public abstract class AbstractJpaRestController<T extends IService<ENTITY>, ENTI
 	@RequestMapping(path = "/findAllOrderBy", method = { RequestMethod.GET })
 	public final ResponseEntity<List<ENTITY>> findAllOrderBy(String orderBy) throws RestClientException, Exception {
 		LOGGER.debug("findAllOrderBy");
-
-		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-
-		//
-		CriteriaQuery<ENTITY> criteria = criteriaBuilder.createQuery(entityClazz);
-
-		// define the main class for the criteria
-		Root<ENTITY> from = criteria.from(entityClazz);
-
-		// create the order by - asc
-		Order asc = criteriaBuilder.asc(from.get(orderBy));
-
-		// Create the query
-		TypedQuery<ENTITY> query = entityManager.createQuery(criteria.select(from).orderBy(asc));
-		query.setHint(QueryHints.READ_ONLY, Boolean.TRUE);
-
-		// Execute Query
-		List<ENTITY> resultList = query.getResultList();
-
-		return (new ResponseEntity<>(resultList, HttpStatus.OK));
+		return (new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK));
 
 	}
 
@@ -124,63 +92,8 @@ public abstract class AbstractJpaRestController<T extends IService<ENTITY>, ENTI
 	public final ResponseEntity<List<ENTITY>> findAllByOrderBy(
 			@RequestBody(required = true) Map<String, Object> parameters, HttpServletRequest request)
 			throws RestClientException, Exception {
-
 		LOGGER.debug("findAllByOrderBy");
-
-		// = (LinkedMultiValueMap<String, Object>) object;
-
-		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-
-		//
-		CriteriaQuery<ENTITY> criteria = criteriaBuilder.createQuery(entityClazz);
-
-		// define the main class for the criteria
-		Root<ENTITY> from = criteria.from(entityClazz);
-
-		// Parameters
-		CriteriaQuery<ENTITY> select = criteria.select(from);
-
-		// Order By
-		if (parameters.containsKey("orderBy")) {
-			// create the order by - asc
-			Object orderBy = parameters.remove("orderBy");
-			Order asc = criteriaBuilder.asc(from.get((String) orderBy));
-			select = select.orderBy(asc);
-		}
-
-		//
-		ObjectMapper mapper = new ObjectMapper();
-
-		// Parameters
-		if (parameters.size() > 0) {
-			for (String key : parameters.keySet()) {
-
-				Object readValue = null;
-
-				Class<?> clazzName = Class.forName(request.getHeader(key));
-
-				if (clazzName.equals(String.class)) {
-					readValue = parameters.get(key);
-				} else {
-					readValue = mapper.convertValue(parameters.remove(key), clazzName);
-				}
-
-				Predicate equal = criteriaBuilder.equal(from.get(key), readValue);
-
-				select = select.where(equal);
-
-			}
-		}
-
-		// Create the query
-		TypedQuery<ENTITY> query = entityManager.createQuery(select);
-		query.setHint(QueryHints.READ_ONLY, Boolean.TRUE);
-
-		// Execute Query
-		List<ENTITY> resultList = query.getResultList();
-
-		return (new ResponseEntity<>(resultList, HttpStatus.OK));
-
+		return (new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK));
 	}
 
 	/**

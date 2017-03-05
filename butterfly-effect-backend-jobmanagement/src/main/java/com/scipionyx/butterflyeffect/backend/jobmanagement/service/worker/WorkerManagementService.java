@@ -6,9 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 
+import com.scipionyx.butterflyeffect.api.infrastructure.services.server.IRepositoryService;
 import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Worker;
 import com.scipionyx.butterflyeffect.api.jobmanagement.api.services.worker.v1.IWorkerManagementService;
 
@@ -20,7 +22,7 @@ import com.scipionyx.butterflyeffect.api.jobmanagement.api.services.worker.v1.IW
  *
  */
 @Component
-public class WorkerManagementService implements IWorkerManagementService {
+public class WorkerManagementService implements IWorkerManagementService, IRepositoryService<Worker> {
 
 	/**
 	 * 
@@ -61,6 +63,12 @@ public class WorkerManagementService implements IWorkerManagementService {
 
 	@Override
 	public String health() throws RestClientException, Exception {
+		return null;
+	}
+
+	@Override
+	public CrudRepository<Worker, Long> getRepository() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
