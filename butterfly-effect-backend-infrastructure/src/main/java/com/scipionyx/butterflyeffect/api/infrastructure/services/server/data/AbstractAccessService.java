@@ -1,6 +1,8 @@
-package com.scipionyx.butterflyeffect.api.infrastructure.services.server;
+package com.scipionyx.butterflyeffect.api.infrastructure.services.server.data;
 
 import org.springframework.web.client.RestClientException;
+
+import com.scipionyx.butterflyeffect.api.infrastructure.services.server.IRepositoryService;
 
 /**
  * 

@@ -1,8 +1,11 @@
-package com.scipionyx.butterflyeffect.api.infrastructure.services.server;
+package com.scipionyx.butterflyeffect.api.infrastructure.services.server.data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.web.client.RestClientException;
+
+import com.scipionyx.butterflyeffect.api.infrastructure.services.server.IRepositoryService;
+import com.scipionyx.butterflyeffect.api.infrastructure.services.server.IService;
 
 /**
  * 
