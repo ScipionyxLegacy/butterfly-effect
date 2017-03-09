@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.1.RELEASE</version>
+		<version>1.5.2.RELEASE</version>
 	</parent>
 
 	<properties>
@@ -23,7 +23,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<vaadin.version>8.0.0</vaadin.version>
+		<vaadin.version>8.0.1</vaadin.version>
 		<vaadin.spring>2.0.0</vaadin.spring>
 
 
@@ -68,7 +68,7 @@
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<scriptSourceDirectory>src/main/scripts</scriptSourceDirectory>
 		<testSourceDirectory>src/test/java</testSourceDirectory>
-		
+
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -138,6 +138,12 @@
 			</dependency>
 
 			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-devtools</artifactId>
+				<optional>true</optional>
+			</dependency>
+
+			<dependency>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-spring</artifactId>
 				<version>2.0-PATCH</version>
@@ -148,20 +154,20 @@
 
 	<dependencies>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.fasterxml.jackson.core</groupId> -->
-<!-- 			<artifactId>jackson-databind</artifactId> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.fasterxml.jackson.core</groupId> -->
+		<!-- <artifactId>jackson-databind</artifactId> -->
+		<!-- </dependency> -->
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.fasterxml.jackson.core</groupId> -->
-<!-- 			<artifactId>jackson-annotations</artifactId> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.fasterxml.jackson.core</groupId> -->
+		<!-- <artifactId>jackson-annotations</artifactId> -->
+		<!-- </dependency> -->
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.fasterxml.jackson.core</groupId> -->
-<!-- 			<artifactId>jackson-core</artifactId> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.fasterxml.jackson.core</groupId> -->
+		<!-- <artifactId>jackson-core</artifactId> -->
+		<!-- </dependency> -->
 
 	</dependencies>
 
