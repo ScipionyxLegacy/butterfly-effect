@@ -5,7 +5,7 @@ import java.util.concurrent.Future;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
 
-import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management.Job;
+import com.scipionyx.butterflyeffect.api.jobmanagement.api.model.Job;
 
 /**
  * 

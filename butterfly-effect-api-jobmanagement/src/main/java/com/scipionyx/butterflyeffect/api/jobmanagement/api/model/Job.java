@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management;
+package com.scipionyx.butterflyeffect.api.jobmanagement.api.model;
 
 import java.io.Serializable;
 import java.util.Date;

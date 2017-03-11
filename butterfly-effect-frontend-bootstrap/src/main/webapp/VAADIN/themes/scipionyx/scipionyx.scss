@@ -31,6 +31,8 @@
 
 $v-app-loading-text: "Please Wait";
 
+$v-app-loading-text: "Metro Valo";
+
 $v-font-family: "Source Sans Pro", sans-serif;
 $v-app-background-color: #fff;
 $v-background-color: #eee;
@@ -54,8 +56,7 @@ $v-selection-overlay-padding-horizontal: 0;
 $v-selection-overlay-padding-vertical: 6px;
 $v-panel-border: 2px solid v-shade;
 
-@import "../valo/valo.scss";
-
+@import "../valo/valo";
 @mixin scipionyx {
   @include valo;
 

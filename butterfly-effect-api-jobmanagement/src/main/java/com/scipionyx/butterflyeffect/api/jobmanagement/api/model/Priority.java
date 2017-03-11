@@ -1,4 +1,4 @@
-package com.scipionyx.butterflyeffect.api.jobmanagement.api.model.management;
+package com.scipionyx.butterflyeffect.api.jobmanagement.api.model;
 
 /**
  * 
