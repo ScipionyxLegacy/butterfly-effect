@@ -23,8 +23,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<vaadin.version>8.0.3</vaadin.version>
-		<vaadin.spring>2.0.0</vaadin.spring>
+		<vaadin.version>8.0.5</vaadin.version>
+		<vaadin.spring>2.0.1</vaadin.spring>
 
 
 		<java.version>1.8</java.version>
@@ -143,11 +143,11 @@
 				<optional>true</optional>
 			</dependency>
 
-			<dependency>
-				<groupId>com.vaadin</groupId>
-				<artifactId>vaadin-spring</artifactId>
-				<version>2.0-PATCH</version>
-			</dependency>
+<!-- 			<dependency> -->
+<!-- 				<groupId>com.vaadin</groupId> -->
+<!-- 				<artifactId>vaadin-spring</artifactId> -->
+<!-- 				<version>2.0-PATCH</version> -->
+<!-- 			</dependency> -->
 		</dependencies>
 
 	</dependencyManagement>
