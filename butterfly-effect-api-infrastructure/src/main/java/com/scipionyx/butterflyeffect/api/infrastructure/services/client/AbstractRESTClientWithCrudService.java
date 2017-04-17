@@ -261,32 +261,59 @@ public abstract class AbstractRESTClientWithCrudService<ENTITY> extends Abstract
 		return null;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public long count() {
-		// TODO Auto-generated method stub
+		try {
+			UriComponentsBuilder builder = UriComponentsBuilder.fromUri(calculateURI("count")).queryParam("all",
+					"true");
+			return restTemplate.getForObject(builder.build().toUriString(), Long.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void delete(Long id) {
 		try {
-			UriComponentsBuilder builder = UriComponentsBuilder.fromUri(calculateURI("delete")).queryParam("id", id);
+			UriComponentsBuilder builder = UriComponentsBuilder.fromUri(calculateURI("deleteById")).queryParam("id", id);
 			restTemplate.delete(builder.build().toUriString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void delete(ENTITY entity) {
-		// TODO Auto-generated method stub
+		try {
+			HttpEntity<?> httpEntity = new HttpEntity<>(entity, new HttpHeaders());
+			restTemplate.exchange(calculateURI("deleteEntity"), HttpMethod.DELETE, httpEntity, String.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void delete(Iterable<? extends ENTITY> entities) {
-		// TODO Auto-generated method stub
-
+		try {
+			HttpEntity<?> entity = new HttpEntity<>(entities, new HttpHeaders());
+			restTemplate.exchange(calculateURI("deleteList"), HttpMethod.DELETE, entity, String.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

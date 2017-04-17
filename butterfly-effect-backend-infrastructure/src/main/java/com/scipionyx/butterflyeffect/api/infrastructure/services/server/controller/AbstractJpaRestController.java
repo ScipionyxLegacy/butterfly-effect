@@ -74,8 +74,8 @@ public abstract class AbstractJpaRestController<T extends IService<ENTITY>, ENTI
 	 * @throws RestClientException
 	 */
 	@RequestMapping(path = "/findAll", method = { RequestMethod.GET, RequestMethod.POST })
-	public final ResponseEntity<Iterable<ENTITY>> findAll() throws RestClientException, Exception {
-		LOGGER.debug("Health request");
+	public final ResponseEntity<Iterable<? extends ENTITY>> findAll() throws RestClientException, Exception {
+		LOGGER.debug("findAll");
 		CrudRepository<ENTITY, Long> repository = service.getRepository();
 		return (new ResponseEntity<>(repository.findAll(), HttpStatus.OK));
 	}
@@ -213,7 +213,7 @@ public abstract class AbstractJpaRestController<T extends IService<ENTITY>, ENTI
 	 * @throws RestClientException
 	 * @throws Exception
 	 */
-	@RequestMapping(path = "/delete", method = { RequestMethod.DELETE })
+	@RequestMapping(path = "/deleteById", method = { RequestMethod.DELETE })
 	public final ResponseEntity<String> delete(@RequestParam(required = true) Long id)
 			throws RestClientException, Exception {
 		LOGGER.debug("delete, paramId=", id);
@@ -224,6 +224,68 @@ public abstract class AbstractJpaRestController<T extends IService<ENTITY>, ENTI
 		} catch (Exception e) {
 			e.printStackTrace();
 			return (new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST));
+		}
+	}
+
+	/**
+	 * 
+	 * @param entity
+	 * @return
+	 * @throws RestClientException
+	 * @throws Exception
+	 */
+	@RequestMapping(path = "/deleteEntity", method = { RequestMethod.DELETE })
+	public final ResponseEntity<String> delete(@RequestBody(required = true) ENTITY entity)
+			throws RestClientException, Exception {
+		LOGGER.debug("delete, entity=", entity);
+		CrudRepository<ENTITY, Long> repository = service.getRepository();
+		try {
+			repository.delete(entity);
+			return (new ResponseEntity<>("Ok", HttpStatus.OK));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return (new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST));
+		}
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 * @throws RestClientException
+	 * @throws Exception
+	 */
+	@RequestMapping(path = "/deleteList", method = { RequestMethod.DELETE })
+	public final ResponseEntity<String> delete(@RequestBody Iterable<ENTITY> entities)
+			throws RestClientException, Exception {
+		LOGGER.debug("delete, paramId=");
+		CrudRepository<ENTITY, Long> repository = service.getRepository();
+		try {
+			repository.delete(entities);
+			return new ResponseEntity<>("Ok", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 * @throws RestClientException
+	 * @throws Exception
+	 */
+	@RequestMapping(path = "/count", method = { RequestMethod.GET })
+	public final ResponseEntity<Long> count(@RequestParam(required = true) String all)
+			throws RestClientException, Exception {
+		LOGGER.debug("count, all=", all);
+		CrudRepository<ENTITY, Long> repository = service.getRepository();
+		try {
+			return (new ResponseEntity<>(repository.count(), HttpStatus.OK));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return (new ResponseEntity<>(-1l, HttpStatus.BAD_REQUEST));
 		}
 	}
 

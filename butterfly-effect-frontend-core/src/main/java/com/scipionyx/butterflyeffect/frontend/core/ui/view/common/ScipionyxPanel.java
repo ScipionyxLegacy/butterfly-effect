@@ -85,6 +85,14 @@ public abstract class ScipionyxPanel extends CssLayout {
 
 	/**
 	 * 
+	 * @param component
+	 */
+	public void clearBodyComponents() {
+		this.content.removeAllComponents();
+	}
+
+	/**
+	 * 
 	 * @param icon
 	 * @param button
 	 */

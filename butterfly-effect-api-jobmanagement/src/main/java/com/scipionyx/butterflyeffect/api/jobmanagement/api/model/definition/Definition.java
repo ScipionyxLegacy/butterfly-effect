@@ -37,6 +37,8 @@ public @interface Definition {
 
 		Class<?> type();
 
+		String description();
+
 	}
 
 }
