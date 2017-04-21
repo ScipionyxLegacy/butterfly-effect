@@ -122,6 +122,7 @@ public abstract class AbstractConfigurationService<T extends IConfiguration>
 		// get all files from the EntityFolder
 		File folder = calculateEntityFolder();
 		String[] fileTypes = { "json" };
+		@SuppressWarnings("unchecked")
 		Collection<File> listFiles = FileUtils.listFiles(folder, fileTypes, true);
 		for (File file : listFiles) {
 			T t = mapper.readValue(new FileInputStream(file), genericType);

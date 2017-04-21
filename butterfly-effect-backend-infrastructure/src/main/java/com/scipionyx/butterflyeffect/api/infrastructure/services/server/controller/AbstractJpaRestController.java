@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestClientException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.scipionyx.butterflyeffect.api.infrastructure.services.client.Value;
 import com.scipionyx.butterflyeffect.api.infrastructure.services.server.IRepositoryService;
 import com.scipionyx.butterflyeffect.api.infrastructure.services.server.IService;
 
@@ -127,48 +128,34 @@ public abstract class AbstractJpaRestController<T extends IService<ENTITY>, ENTI
 
 		LOGGER.debug("findAllByOrderBy");
 
-		// = (LinkedMultiValueMap<String, Object>) object;
-
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-
-		//
 		CriteriaQuery<ENTITY> criteria = criteriaBuilder.createQuery(entityClazz);
-
 		// define the main class for the criteria
 		Root<ENTITY> from = criteria.from(entityClazz);
-
 		// Parameters
 		CriteriaQuery<ENTITY> select = criteria.select(from);
 
 		// Order By
-		if (parameters.containsKey("orderBy")) {
-			// create the order by - asc
-			Object orderBy = parameters.remove("orderBy");
-			Order asc = criteriaBuilder.asc(from.get((String) orderBy));
+		String orderBy = request.getHeader("orderBy");
+		if (orderBy != null) {
+			Order asc = criteriaBuilder.asc(from.get(orderBy));
 			select = select.orderBy(asc);
 		}
 
-		//
-		ObjectMapper mapper = new ObjectMapper();
-
 		// Parameters
+		ObjectMapper mapper = new ObjectMapper();
 		if (parameters.size() > 0) {
 			for (String key : parameters.keySet()) {
-
-				Object readValue = null;
-
-				Class<?> clazzName = Class.forName(request.getHeader(key));
-
-				if (clazzName.equals(String.class)) {
-					readValue = parameters.get(key);
-				} else {
-					readValue = mapper.convertValue(parameters.remove(key), clazzName);
+				Value readValue = mapper.convertValue(parameters.remove(key), Value.class);
+				switch (readValue.getOperation()) {
+				case EQUALS:
+					Predicate equal = criteriaBuilder.equal(from.get(key), readValue.getValue());
+					select = select.where(equal);	
+					break;
+				default:
+					break;
 				}
-
-				Predicate equal = criteriaBuilder.equal(from.get(key), readValue);
-
-				select = select.where(equal);
-
+				
 			}
 		}
 

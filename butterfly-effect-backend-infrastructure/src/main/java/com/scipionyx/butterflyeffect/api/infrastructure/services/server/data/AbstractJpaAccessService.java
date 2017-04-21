@@ -14,7 +14,7 @@ import org.springframework.web.client.RestClientException;
  * @param <ENTITY>
  * @param <REPOSITORY>
  */
-public abstract class AbstractDataAccessService<ENTITY, REPOSITORY> extends AbstractAccessService<ENTITY, REPOSITORY> {
+public abstract class AbstractJpaAccessService<ENTITY, REPOSITORY> extends AbstractAccessService<ENTITY, REPOSITORY> {
 
 	/**
 	 * 

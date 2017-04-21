@@ -1,5 +1,6 @@
 package com.scipionyx.butterflyeffect.frontend.core.ui.view.common;
 
+import com.vaadin.data.HasValue.ValueChangeListener;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Alignment;
@@ -9,6 +10,8 @@ import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.MenuBar;
+import com.vaadin.ui.Slider;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -25,12 +28,13 @@ public abstract class ScipionyxPanel extends CssLayout {
 	private final VerticalLayout content = new VerticalLayout();
 	private Image iconContainer;
 
-	public abstract void doBuild();
+	public abstract void doBuild() throws Exception;
 
 	/**
+	 * @throws Exception 
 	 * 
 	 */
-	public ScipionyxPanel build() {
+	public ScipionyxPanel build() throws Exception {
 
 		setSizeFull();
 		addStyleName(ValoTheme.LAYOUT_CARD);
@@ -97,10 +101,38 @@ public abstract class ScipionyxPanel extends CssLayout {
 	 * @param button
 	 */
 	public void addButton(VaadinIcons icon, Button button) {
-		buttonLayout.addComponent(button);
+		buttonLayout.addComponentAsFirst(button);
 		button.setIcon(icon);
 		button.setStyleName(ValoTheme.BUTTON_BORDERLESS);
 		button.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
+	}
+
+	/**
+	 * 
+	 * @param icon
+	 * @param button
+	 */
+	public void addMenuBar(MenuBar menuBar) {
+		buttonLayout.addComponentAsFirst(menuBar);
+		
+		menuBar.getItems().forEach(i -> i.setCheckable(true));
+		
+		menuBar.setStyleName(ValoTheme.MENUBAR_SMALL);
+		menuBar.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
+		
+	}
+
+	/**
+	 * 
+	 * @param icon
+	 * @param slider
+	 */
+	public void addSlider(VaadinIcons icon, Slider slider, ValueChangeListener<Double> changeListener) {
+		buttonLayout.addComponentAsFirst(slider);
+		if (icon != null) {
+			slider.setIcon(icon);
+		}
+		slider.addValueChangeListener(changeListener);
 	}
 
 }

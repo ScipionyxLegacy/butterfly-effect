@@ -100,18 +100,24 @@ public abstract class AbstractRESTClientWithCrudService<ENTITY> extends Abstract
 	 * @return
 	 * @throws Exception
 	 */
-	public List<ENTITY> findAllByOrderBy(Map<String, Object> map, String orderBy) throws Exception {
+	public List<ENTITY> findAllByOrderBy(Map<String, Value> map, String orderBy) throws Exception {
+		return findAllByOrderBy(map, orderBy, true);
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public List<ENTITY> findAllByOrderBy(Map<String, Value> map, String orderBy, boolean asc) throws Exception {
 		try {
 
 			HttpHeaders headers = new HttpHeaders();
-
-			for (Entry<String, Object> entry : map.entrySet()) {
-				headers.add(entry.getKey(), entry.getValue().getClass().getName());
-			}
-
 			headers.add("orderBy", orderBy);
+			headers.add("orderByAsc", asc ? "ASC" : "DES");
 
-			final HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map, headers);
+			final HttpEntity<Map<String, Value>> entity = new HttpEntity<>(map, headers);
 
 			ENTITY[] body = restTemplate.exchange(calculateURI("findAllByOrderBy"), HttpMethod.PUT, entity, arrayClazz)
 					.getBody();
@@ -282,7 +288,8 @@ public abstract class AbstractRESTClientWithCrudService<ENTITY> extends Abstract
 	@Override
 	public void delete(Long id) {
 		try {
-			UriComponentsBuilder builder = UriComponentsBuilder.fromUri(calculateURI("deleteById")).queryParam("id", id);
+			UriComponentsBuilder builder = UriComponentsBuilder.fromUri(calculateURI("deleteById")).queryParam("id",
+					id);
 			restTemplate.delete(builder.build().toUriString());
 		} catch (Exception e) {
 			e.printStackTrace();

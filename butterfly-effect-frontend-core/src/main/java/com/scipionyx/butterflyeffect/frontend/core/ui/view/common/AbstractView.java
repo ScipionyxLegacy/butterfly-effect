@@ -10,6 +10,9 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+
 import com.scipionyx.butterflyeffect.ui.model.ButterflyView;
 import com.scipionyx.butterflyeffect.ui.view.ViewConfiguration;
 import com.vaadin.navigator.View;
@@ -49,6 +52,8 @@ public abstract class AbstractView extends VerticalLayout implements View, Butte
 
 	public abstract void doEnter(ViewChangeEvent event);
 
+	protected String username;
+
 	/**
 	 * 
 	 */
@@ -63,6 +68,9 @@ public abstract class AbstractView extends VerticalLayout implements View, Butte
 	 */
 	@PostConstruct
 	private void init() throws Exception {
+
+		if (SecurityContextHolder.getContext().getAuthentication() != null)
+			username = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
 
 		// After deserialization...
 		if (built)
