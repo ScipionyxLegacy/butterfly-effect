@@ -1,2 +1,6 @@
 
 language: java
+
+script:
+- cd butterfly-effect/
+- mvn install
