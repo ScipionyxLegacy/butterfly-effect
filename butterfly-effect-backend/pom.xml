@@ -73,8 +73,8 @@
 		<module>../butterfly-effect-backend-jobmanagement</module>
 		<module>../butterfly-effect-backend-model</module>
 		
-		<module>../butterfly-effect-backend-bootstrap</module>
-		<module>../butterfly-effect-backend-dist-docker</module>
+		
+		
 	</modules>
 	
 </project>
