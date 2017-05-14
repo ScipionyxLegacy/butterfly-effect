@@ -27,6 +27,7 @@
 		<module>../butterfly-effect-api-plugin</module>
 		<module>../butterfly-effect-api-service</module>
 		<module>../butterfly-effect-api-ui</module>
+		<module>../butterfly-effect-api-model</module>
 	</modules>
 	
 	<dependencies>
