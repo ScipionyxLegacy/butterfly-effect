@@ -1,5 +1,5 @@
 
-https://travis-ci.org/scipionyx/butterfly-effect.svg?branch=master
+= ButterFly Effect image:https://travis-ci.org/scipionyx/butterfly-effect.svg?branch=master
 
 # ButterflyEffect
 
