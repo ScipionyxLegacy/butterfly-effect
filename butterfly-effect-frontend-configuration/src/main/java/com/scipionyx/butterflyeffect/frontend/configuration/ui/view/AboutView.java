@@ -246,7 +246,7 @@ public class AboutView extends AbstractView {
 	 * @author Renato Mendes
 	 *
 	 */
-	public class GridProperty<TYPE> implements Serializable {
+	public class GridProperty<TYPE extends Object> implements Serializable {
 
 		/**
 		 * 
