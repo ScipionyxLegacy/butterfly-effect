@@ -6,4 +6,4 @@ jdk:
 
 script:
   - cd butterfly-effect/
-  - mvn install
+  - mvn install -X
